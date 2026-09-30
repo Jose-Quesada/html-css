@@ -1,0 +1,2328 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Vídeo y audio nativos: atributos de video y audio, formatos y compatibilidad, subtítulos con track y ficheros VTT, incrustación externa y accesibilidad.">
+      
+      
+        <meta name="author" content="Jose Quesada">
+      
+      
+      
+        <link rel="prev" href="../03-enlaces-y-recursos/">
+      
+      
+        <link rel="next" href="../05-tablas/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.66">
+    
+    
+      
+        <title>HTML 04 - Multimedia en HTML5 - HTML y CSS — Apuntes de interfaces</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.1502b751.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.812a03bb.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navegación"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#html-04-multimedia-en-html5" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="HTML y CSS — Apuntes de interfaces" class="md-header__button md-logo" aria-label="HTML y CSS — Apuntes de interfaces" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navegación">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HTML y CSS — Apuntes de interfaces
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              HTML 04 - Multimedia en HTML5
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Buscar">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Buscar">
+  <button type="button" class="md-search__button">
+    Buscar
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="HTML y CSS — Apuntes de interfaces" class="md-nav__button md-logo" aria-label="HTML y CSS — Apuntes de interfaces" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    HTML y CSS — Apuntes de interfaces
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-rocket" viewBox="0 0 24 24"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"/><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Inicio
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  HTML5
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+            <label class="md-nav__title" for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  HTML5
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-introduccion-html5/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-code-xml" viewBox="0 0 24 24"><path d="m18 16 4-4-4-4M6 8l-4 4 4 4M14.5 4l-5 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  01. Introducción a HTML5
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-texto-y-semantica/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-type" viewBox="0 0 24 24"><path d="M12 4v16M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2M9 20h6"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  02. Texto y semántica
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-enlaces-y-recursos/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  03. Enlaces y recursos
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-film" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18M3 7.5h4M3 12h18M3 16.5h4M17 3v18M17 7.5h4M17 16.5h4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  04. Multimedia
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-film" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18M3 7.5h4M3 12h18M3 16.5h4M17 3v18M17 7.5h4M17 16.5h4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  04. Multimedia
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-de-los-plugins-a-la-reproduccion-nativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1. De los plugins a la reproducción nativa
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. De los plugins a la reproducción nativa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-el-problema-de-los-plugins" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1.1 El problema de los plugins
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-ventajas-de-html5" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1.2 Ventajas de HTML5
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-el-elemento-video" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2. El elemento <code>&lt;video&gt;</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. El elemento &lt;video&gt;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-atributos-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.1 Atributos principales
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-src-frente-a-source-multiple-y-contenido-de-respaldo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.2 <code>src</code> frente a <code>&lt;source&gt;</code> múltiple y contenido de respaldo
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-reproduccion-automatica-autoplay-muted-loop-y-playsinline" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.3 Reproducción automática: <code>autoplay</code>, <code>muted</code>, <code>loop</code> y <code>playsinline</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-formatos-y-compatibilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3. Formatos y compatibilidad
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-el-elemento-audio" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4. El elemento <code>&lt;audio&gt;</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. El elemento &lt;audio&gt;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-atributos-y-ejemplo-con-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.1 Atributos y ejemplo con <code>&lt;source&gt;</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-listas-de-reproduccion-playlists" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.2 Listas de reproducción (playlists)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-accesibilidad-subtitulos-descripciones-y-transcripcion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5. Accesibilidad: subtítulos, descripciones y transcripción
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Accesibilidad: subtítulos, descripciones y transcripción">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-el-elemento-track" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.1 El elemento <code>&lt;track&gt;</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-fichero-vtt-de-ejemplo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.2 Fichero <code>.vtt</code> de ejemplo
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-transcripcion-en-la-pagina-y-wcag" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.3 Transcripción en la página y WCAG
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-incrustar-video-externo-con-iframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6. Incrustar vídeo externo con <code>&lt;iframe&gt;</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-ejemplo-practico-noticia-con-video-y-podcast-con-transcripcion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        7. Ejemplo práctico: noticia con vídeo y podcast con transcripción
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-errores-frecuentes-y-claves-del-examen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8. Errores frecuentes y claves del examen
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Errores frecuentes y claves del examen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-error-comun" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8.1 Error común
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-claves-para-el-examen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8.2 Claves para el examen
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-tablas/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-table" viewBox="0 0 24 24"><path d="M12 3v18"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M3 15h18"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  05. Tablas de datos
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-formularios-html5/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-clipboard-list" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2M12 11h4M12 16h4M8 11h.01M8 16h.01"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  06. Formularios HTML5
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-estructura-semantica-y-aria/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  07. Estructura semántica y ARIA
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-apis-html5/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-braces" viewBox="0 0 24 24"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  08. APIs y funcionalidades nativas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-ejercicios/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-pencil" viewBox="0 0 24 24"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497zM15 5l4 4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  09. Ejercicios
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-ejercicios-soluciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  10. Ejercicios: soluciones
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  CSS
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  CSS
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/00-normativa-y-marco-curricular/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  00. Normativa y marco curricular
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/01-fundamentos-de-css/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  01. Fundamentos de CSS
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/02-selectores/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-crosshair" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M22 12h-4M6 12H2M12 6V2M12 22v-4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  02. Selectores
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/03-modelo-de-caja/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-box" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  03. Modelo de caja
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/04-posicionamiento-y-z-index/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-move" viewBox="0 0 24 24"><path d="M12 2v20M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M5 9l-3 3 3 3M9 5l3-3 3 3"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  04. Posicionamiento y z-index
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/05-flexbox/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-move-horizontal" viewBox="0 0 24 24"><path d="m18 8 4 4-4 4M2 12h20M6 8l-4 4 4 4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  05. Flexbox
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/06-grid/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-layout-grid" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  06. Grid
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/07-flujo-multicolumna-tablas-display/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-columns-3" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18M15 3v18"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  07. Flujo, multicolumna, tablas y display
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/08-unidades-tipografia-colores/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-palette" viewBox="0 0 24 24"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  08. Unidades, tipografía y colores
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/09-fondos-imagenes-decoracion/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-image" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  09. Fondos, imágenes y decoración
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/10-diseno-responsivo/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  10. Diseño responsivo
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/11-transiciones-animaciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-zap" viewBox="0 0 24 24"><path d="M15.914 4a1.5 1.5 0 0 0-2.474-1.561l-9 9A1.5 1.5 0 0 0 5.5 14h4.002a.5.5 0 0 1 .471.666L8.086 20a1.5 1.5 0 0 0 2.475 1.56l9-9A1.5 1.5 0 0 0 18.5 10h-3.997a.5.5 0 0 1-.472-.667z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  11. Transiciones y animaciones
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/12-css-moderno-arquitectura/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-blocks" viewBox="0 0 24 24"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2"/><rect width="8" height="8" x="14" y="2" rx="1"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  12. CSS moderno y arquitectura
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/13-accesibilidad-usabilidad/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-accessibility" viewBox="0 0 24 24"><circle cx="16" cy="4" r="1"/><path d="m18 19 1-7-6 1M5 8l3-3 5.5 3-2.36 3.5M4.24 14.5a5 5 0 0 0 6.88 6"/><path d="M13.76 17.5a5 5 0 0 0-6.88-6"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  13. Accesibilidad y usabilidad
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/14-rendimiento-buenas-practicas/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-gauge" viewBox="0 0 24 24"><path d="m12 14 4-4M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  14. Rendimiento y buenas prácticas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/15-ejercicios-glosario-recursos/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-list-checks" viewBox="0 0 24 24"><path d="M13 5h8M13 12h8M13 19h8M3 17l2 2 4-4M3 7l2 2 4-4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  15. Ejercicios, glosario y recursos
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-de-los-plugins-a-la-reproduccion-nativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1. De los plugins a la reproducción nativa
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. De los plugins a la reproducción nativa">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-el-problema-de-los-plugins" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1.1 El problema de los plugins
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-ventajas-de-html5" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1.2 Ventajas de HTML5
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-el-elemento-video" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2. El elemento <code>&lt;video&gt;</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. El elemento &lt;video&gt;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-atributos-principales" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.1 Atributos principales
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-src-frente-a-source-multiple-y-contenido-de-respaldo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.2 <code>src</code> frente a <code>&lt;source&gt;</code> múltiple y contenido de respaldo
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-reproduccion-automatica-autoplay-muted-loop-y-playsinline" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.3 Reproducción automática: <code>autoplay</code>, <code>muted</code>, <code>loop</code> y <code>playsinline</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-formatos-y-compatibilidad" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3. Formatos y compatibilidad
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-el-elemento-audio" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4. El elemento <code>&lt;audio&gt;</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. El elemento &lt;audio&gt;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-atributos-y-ejemplo-con-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.1 Atributos y ejemplo con <code>&lt;source&gt;</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-listas-de-reproduccion-playlists" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.2 Listas de reproducción (playlists)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-accesibilidad-subtitulos-descripciones-y-transcripcion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5. Accesibilidad: subtítulos, descripciones y transcripción
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Accesibilidad: subtítulos, descripciones y transcripción">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-el-elemento-track" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.1 El elemento <code>&lt;track&gt;</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-fichero-vtt-de-ejemplo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.2 Fichero <code>.vtt</code> de ejemplo
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-transcripcion-en-la-pagina-y-wcag" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.3 Transcripción en la página y WCAG
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-incrustar-video-externo-con-iframe" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6. Incrustar vídeo externo con <code>&lt;iframe&gt;</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-ejemplo-practico-noticia-con-video-y-podcast-con-transcripcion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        7. Ejemplo práctico: noticia con vídeo y podcast con transcripción
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-errores-frecuentes-y-claves-del-examen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8. Errores frecuentes y claves del examen
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Errores frecuentes y claves del examen">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-error-comun" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8.1 Error común
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-claves-para-el-examen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8.2 Claves para el examen
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../01-introduccion-html5/" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    HTML5
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+<h1 id="html-04-multimedia-en-html5">HTML 04 — Multimedia en HTML5</h1>
+<p>Antes de HTML5 la reproducción dependía de plugins externos (el difunto Adobe Flash); hoy el navegador gestiona el contenido multimedia de forma <strong>nativa</strong>. En esta unidad vemos <code>&lt;video&gt;</code> y <code>&lt;audio&gt;</code> con todos sus atributos, los formatos reales que puedes servir, los subtítulos accesibles con <code>&lt;track&gt;</code> y los ficheros <code>.vtt</code>, e incrustación de vídeo externo.</p>
+<div class="admonition note">
+<p class="admonition-title">Conocimientos previos</p>
+<ul>
+<li>Estructura del documento HTML y uso de atributos (<code>src</code>, <code>controls</code>, <code>width</code>, <code>height</code>).</li>
+<li>Resolver rutas relativas y absolutas para localizar ficheros dentro del proyecto.</li>
+<li>Diferenciar contenido informativo de contenido decorativo (idea básica de accesibilidad).</li>
+</ul>
+</div>
+<h2 id="1-de-los-plugins-a-la-reproduccion-nativa">1. De los plugins a la reproducción nativa</h2>
+<h3 id="11-el-problema-de-los-plugins">1.1 El problema de los plugins</h3>
+<p>Flash, Silverlight o QuickTime exigían instalar un componente aparte, actualizaciones constantes y <strong>vulnerabilidades conocidas</strong>; no funcionaban en los iPhone y los buscadores <strong>no podían leer ni indexar</strong> nada de lo que mostraban. Además consumían mucha batería y el desarrollador <strong>no controlaba</strong> ni el reproductor ni la accesibilidad. Hoy esa tarea la asume la <mark>reproducción nativa</mark> del navegador.</p>
+<h3 id="12-ventajas-de-html5">1.2 Ventajas de HTML5</h3>
+<ul>
+<li><strong>Sin instalaciones</strong>: <code>&lt;video&gt;</code> y <code>&lt;audio&gt;</code> se reproducen en cualquier navegador moderno y en móvil.</li>
+<li><strong>Semántica y accesibilidad</strong>: son elementos del documento, se pueden enfocar con teclado, llevar subtítulos (<code>&lt;track&gt;</code>) y describir con ARIA.</li>
+<li><strong>SEO y rendimiento</strong>: el navegador descarga solo lo necesario (<code>preload</code>) y los buscadores entienden el contexto del contenido.</li>
+<li><strong>Coste cero</strong>: no hay licencias de reproductor; el control lo da el navegador o un <em>skin</em> en CSS/JS.</li>
+<li><strong>Fallback declarativo</strong>: si el navegador no entiende el elemento, se muestra contenido de respaldo dentro de la etiqueta.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Antes y después de HTML5</p>
+<p>Los plugins eran <strong>cajas negras</strong>: nada legible para buscadores ni para lectores de pantalla. Con <code>&lt;video&gt;</code> y <code>&lt;audio&gt;</code> el contenido pasa a ser <strong>parte del documento</strong>, con foco, subtítulos y estilos propios.</p>
+</div>
+<h2 id="2-el-elemento-video">2. El elemento <code>&lt;video&gt;</code></h2>
+<h3 id="21-atributos-principales">2.1 Atributos principales</h3>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>controls</code></td>
+<td>Muestra la barra de reproducción (play, tiempo, volumen, pantalla completa).</td>
+</tr>
+<tr>
+<td><code>src</code></td>
+<td>Ruta directa al fichero; atajo cuando solo sirves un formato.</td>
+</tr>
+<tr>
+<td><code>poster</code></td>
+<td>Imagen que se ve mientras carga el vídeo o hasta que se pulsa play.</td>
+</tr>
+<tr>
+<td><code>width</code> / <code>height</code></td>
+<td>Reservan el espacio en píxeles y evitan saltos de diseño (<abbr title="Cumulative Layout Shift">CLS</abbr>).</td>
+</tr>
+<tr>
+<td><code>preload</code></td>
+<td><code>none</code> (no descarga nada), <code>metadata</code> (duración y pistas), <code>auto</code> (todo el fichero).</td>
+</tr>
+<tr>
+<td><code>autoplay</code></td>
+<td>Inicia solo; los navegadores <strong>solo lo permiten con <code>muted</code></strong>.</td>
+</tr>
+<tr>
+<td><code>loop</code></td>
+<td>Reinicia el vídeo al finalizar.</td>
+</tr>
+<tr>
+<td><code>muted</code></td>
+<td>Silencia el audio por defecto.</td>
+</tr>
+<tr>
+<td><code>playsinline</code></td>
+<td>En iOS reproduce dentro de la página en vez de a pantalla completa.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">El atributo imprescindible: controls</p>
+<p>Un <code>&lt;video&gt;</code> sin <mark>controls</mark> es <strong>solo una caja</strong>: no hay barra, ni atajos de teclado, ni control de volumen. Es lo primero que se revisa en examen (y el error más frecuente).</p>
+</div>
+<h3 id="22-src-frente-a-source-multiple-y-contenido-de-respaldo">2.2 <code>src</code> frente a <code>&lt;source&gt;</code> múltiple y contenido de respaldo</h3>
+<div class="language-html highlight"><span class="filename">video-multipista.html</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">video</span> <span class="na">controls</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>       <span class="na">poster</span><span class="o">=</span><span class="s">"img/noticia-portada.jpg"</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>       <span class="na">width</span><span class="o">=</span><span class="s">"640"</span> <span class="na">height</span><span class="o">=</span><span class="s">"360"</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>       <span class="na">preload</span><span class="o">=</span><span class="s">"metadata"</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>       <span class="na">playsinline</span><span class="p">&gt;</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>  <span class="cm">&lt;!-- El navegador recorre los &lt;source&gt; de arriba abajo y carga el primero que entienda --&gt;</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  <span class="p">&lt;</span><span class="nt">source</span> <span class="na">src</span><span class="o">=</span><span class="s">"video/noticia.mp4"</span> <span class="na">type</span><span class="o">=</span><span class="s">"video/mp4"</span><span class="p">&gt;</span> <span class="cm">&lt;!-- (1)! --&gt;</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  <span class="p">&lt;</span><span class="nt">source</span> <span class="na">src</span><span class="o">=</span><span class="s">"video/noticia.webm"</span> <span class="na">type</span><span class="o">=</span><span class="s">"video/webm"</span><span class="p">&gt;</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  <span class="p">&lt;</span><span class="nt">source</span> <span class="na">src</span><span class="o">=</span><span class="s">"video/noticia.ogv"</span> <span class="na">type</span><span class="o">=</span><span class="s">"video/ogg"</span><span class="p">&gt;</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  <span class="cm">&lt;!-- Fallback interno: solo se ve si el navegador no reconoce &lt;video&gt; --&gt;</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Tu navegador no reproduce vídeo HTML5. <span class="cm">&lt;!-- (2)! --&gt;</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>     <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"video/noticia.mp4"</span><span class="p">&gt;</span>Descarga el clip (MP4)<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="p">&lt;/</span><span class="nt">video</span><span class="p">&gt;</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="cm">&lt;!-- Atajo con src directo: un único formato, sin &lt;source&gt; --&gt;</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="p">&lt;</span><span class="nt">video</span> <span class="na">controls</span> <span class="na">src</span><span class="o">=</span><span class="s">"video/noticia.mp4"</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>       <span class="na">poster</span><span class="o">=</span><span class="s">"img/noticia-portada.jpg"</span> <span class="na">width</span><span class="o">=</span><span class="s">"640"</span> <span class="na">height</span><span class="o">=</span><span class="s">"360"</span><span class="p">&gt;&lt;/</span><span class="nt">video</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<ol>
+<li>El orden importa: el navegador se queda con el <strong>primer <code>type</code> que entiende</strong>.</li>
+<li>El texto de respaldo se ve <strong>solo si el navegador no reconoce</strong> el elemento <code>&lt;video&gt;</code>.</li>
+</ol>
+<p>Cuando usas varios <code>&lt;source&gt;</code>, <strong>no</strong> repitas la ruta en <code>src</code> del <code>&lt;video&gt;</code>: el navegador tendría dos declaraciones del mismo recurso. El texto de respaldo va siempre <strong>dentro</strong>, después de las pistas.</p>
+<h3 id="23-reproduccion-automatica-autoplay-muted-loop-y-playsinline">2.3 Reproducción automática: <code>autoplay</code>, <code>muted</code>, <code>loop</code> y <code>playsinline</code></h3>
+<div class="language-html highlight"><span class="filename">autoplay.html</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cm">&lt;!-- Cabecera decorativa: autoplay SOLO es aceptado con el sonido silenciado --&gt;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="hll"><span class="p">&lt;</span><span class="nt">video</span> <span class="na">autoplay</span> <span class="na">muted</span> <span class="na">loop</span> <span class="na">playsinline</span>
+</span></span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>       <span class="na">src</span><span class="o">=</span><span class="s">"video/banner-tienda.webm"</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>       <span class="na">width</span><span class="o">=</span><span class="s">"960"</span> <span class="na">height</span><span class="o">=</span><span class="s">"400"</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>       <span class="na">aria-hidden</span><span class="o">=</span><span class="s">"true"</span><span class="p">&gt;&lt;/</span><span class="nt">video</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<p>Los navegadores bloquean el <code>autoplay</code> con sonido porque molesta al usuario y consume datos sin permiso. La <strong>fórmula válida</strong> es <code>autoplay muted playsinline</code>; si además quieres sonido, debe activarlo la persona usuaria con su interacción. Un vídeo decorativo como este se oculta a los lectores de pantalla con <code>aria-hidden="true"</code> (más detalle en <a href="../07-estructura-semantica-y-aria/">07-estructura-semantica-y-aria.md</a>).</p>
+<h2 id="3-formatos-y-compatibilidad">3. Formatos y compatibilidad</h2>
+<table>
+<thead>
+<tr>
+<th>Contenido</th>
+<th>Formato</th>
+<th>Códec</th>
+<th>Comentario</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vídeo</td>
+<td><strong>MP4</strong></td>
+<td>H.264 + <abbr title="Advanced Audio Coding">AAC</abbr></td>
+<td>El más compatible: todos los navegadores y móviles.</td>
+</tr>
+<tr>
+<td>Vídeo</td>
+<td><strong>WebM</strong></td>
+<td>VP9 o AV1 + Opus</td>
+<td>Abierto, ligero y muy soportado; ideal como segunda pista.</td>
+</tr>
+<tr>
+<td>Vídeo</td>
+<td><strong>Ogg</strong></td>
+<td>Theora + Vorbis</td>
+<td>Respaldo antiguo, hoy apenas necesario.</td>
+</tr>
+<tr>
+<td>Audio</td>
+<td><strong>MP3</strong></td>
+<td>MPEG-1 Layer 3</td>
+<td>Universal en cualquier navegador y reproductor.</td>
+</tr>
+<tr>
+<td>Audio</td>
+<td><strong>MP4 / M4A</strong></td>
+<td><abbr title="Advanced Audio Coding">AAC</abbr></td>
+<td>Calidad superior al MP3, muy soportado.</td>
+</tr>
+<tr>
+<td>Audio</td>
+<td><strong>WebM / Ogg</strong></td>
+<td>Opus</td>
+<td>Mejor relación calidad/tamaño; estándar abierto.</td>
+</tr>
+</tbody>
+</table>
+<p>Nota: la compatibilidad cambia con cada versión de navegador, así que <strong>verifica en <code>caniuse.com</code></strong> el soporte real de <code>video/mp4</code>, <code>video/webm</code> o <code>audio/ogg</code> antes de publicar. La regla práctica es servir <strong>siempre dos formatos</strong> con <code>&lt;source&gt;</code>: el códec universal primero y el abierto como alternativa. Sirve siempre <mark>MP4</mark> y, como segunda pista, WebM.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">MP4</label><label for="__tabbed_1_2">WebM</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Códec H.264 + <abbr title="Advanced Audio Coding">AAC</abbr>: lo reproduce <strong>cualquier navegador y móvil</strong>; va primero en el listado de <code>&lt;source&gt;</code>.</p>
+</div>
+<div class="tabbed-block">
+<p>Códec VP9 o AV1 + Opus: estándar <strong>abierto y ligero</strong>; va después como segunda pista.</p>
+</div>
+</div>
+</div>
+<h2 id="4-el-elemento-audio">4. El elemento <code>&lt;audio&gt;</code></h2>
+<h3 id="41-atributos-y-ejemplo-con-source">4.1 Atributos y ejemplo con <code>&lt;source&gt;</code></h3>
+<div class="language-html highlight"><span class="filename">podcast.html</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cm">&lt;!-- Podcast: varios formatos y descarga de respaldo --&gt;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="hll"><span class="p">&lt;</span><span class="nt">audio</span> <span class="na">controls</span> <span class="na">preload</span><span class="o">=</span><span class="s">"none"</span><span class="p">&gt;</span>
+</span></span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  <span class="p">&lt;</span><span class="nt">source</span> <span class="na">src</span><span class="o">=</span><span class="s">"audio/podcast-clase.mp3"</span> <span class="na">type</span><span class="o">=</span><span class="s">"audio/mpeg"</span><span class="p">&gt;</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  <span class="p">&lt;</span><span class="nt">source</span> <span class="na">src</span><span class="o">=</span><span class="s">"audio/podcast-clase.ogg"</span> <span class="na">type</span><span class="o">=</span><span class="s">"audio/ogg"</span><span class="p">&gt;</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Tu navegador no soporta el elemento de audio.
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>     <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"audio/podcast-clase.mp3"</span><span class="p">&gt;</span>Descarga el episodio<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="p">&lt;/</span><span class="nt">audio</span><span class="p">&gt;</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="cm">&lt;!-- Atajo con src directo --&gt;</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="p">&lt;</span><span class="nt">audio</span> <span class="na">controls</span> <span class="na">src</span><span class="o">=</span><span class="s">"audio/podcast-clase.mp3"</span><span class="p">&gt;&lt;/</span><span class="nt">audio</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<p><code>&lt;audio&gt;</code> admite los mismos atributos de reproducción que <code>&lt;video&gt;</code> (<code>controls</code>, <code>autoplay</code>, <code>loop</code>, <code>muted</code>, <code>preload</code>), pero no tiene <code>poster</code> ni <code>playsinline</code>. El atributo <mark>preload</mark> es el que decide <strong>cuánto se descarga</strong> antes de pulsar play: con <code>none</code> el navegador no baja nada hasta que se pulsa play, lo recomendable si tienes <strong>varios audios</strong> en la misma página.</p>
+<h3 id="42-listas-de-reproduccion-playlists">4.2 Listas de reproducción (playlists)</h3>
+<p><code>&lt;audio&gt;</code> reproduce <strong>un solo fichero</strong>: no existe un atributo que apunte a varias pistas. Una <em>playlist</em> se construye con JavaScript, cambiando el valor de <code>src</code> (o del <code>&lt;source&gt;</code>) y llamando a <code>play()</code>, por ejemplo al pulsar el botón "Siguiente". Conviene usar <strong><code>&lt;button&gt;</code></strong> para esos controles y mantener siempre disponible un enlace de descarga, por si el script no carga.</p>
+<h2 id="5-accesibilidad-subtitulos-descripciones-y-transcripcion">5. Accesibilidad: subtítulos, descripciones y transcripción</h2>
+<h3 id="51-el-elemento-track">5.1 El elemento <code>&lt;track&gt;</code></h3>
+<div class="language-html highlight"><span class="filename">subtitulos.html</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">&lt;</span><span class="nt">video</span> <span class="na">controls</span> <span class="na">poster</span><span class="o">=</span><span class="s">"img/noticia-portada.jpg"</span> <span class="na">width</span><span class="o">=</span><span class="s">"640"</span> <span class="na">height</span><span class="o">=</span><span class="s">"360"</span> <span class="na">preload</span><span class="o">=</span><span class="s">"metadata"</span><span class="p">&gt;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  <span class="p">&lt;</span><span class="nt">source</span> <span class="na">src</span><span class="o">=</span><span class="s">"video/noticia.mp4"</span> <span class="na">type</span><span class="o">=</span><span class="s">"video/mp4"</span><span class="p">&gt;</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  <span class="p">&lt;</span><span class="nt">source</span> <span class="na">src</span><span class="o">=</span><span class="s">"video/noticia.webm"</span> <span class="na">type</span><span class="o">=</span><span class="s">"video/webm"</span><span class="p">&gt;</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  <span class="cm">&lt;!-- Subtítulos en español, activados por defecto --&gt;</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="hll">  <span class="p">&lt;</span><span class="nt">track</span> <span class="na">kind</span><span class="o">=</span><span class="s">"subtitles"</span> <span class="na">src</span><span class="o">=</span><span class="s">"video/noticia-es.vtt"</span> <span class="na">srclang</span><span class="o">=</span><span class="s">"es"</span> <span class="na">label</span><span class="o">=</span><span class="s">"Español"</span> <span class="na">default</span><span class="p">&gt;</span> <span class="cm">&lt;!-- (1)! --&gt;</span>
+</span></span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>  <span class="cm">&lt;!-- Descripción hablada de lo que ocurre en pantalla --&gt;</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>  <span class="p">&lt;</span><span class="nt">track</span> <span class="na">kind</span><span class="o">=</span><span class="s">"descriptions"</span> <span class="na">src</span><span class="o">=</span><span class="s">"video/noticia-es-desc.vtt"</span> <span class="na">srclang</span><span class="o">=</span><span class="s">"es"</span> <span class="na">label</span><span class="o">=</span><span class="s">"Descripción de audio"</span><span class="p">&gt;</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Tu navegador no reproduce vídeo HTML5.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="p">&lt;/</span><span class="nt">video</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<ol>
+<li><code>default</code> deja esa pista <strong>activada al empezar</strong>, sin que nadie abra el menú.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th><code>kind</code></th>
+<th>Qué muestra</th>
+<th>Para quién</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>subtitles</code></td>
+<td>Diálogo traducido o en otro idioma</td>
+<td>Personas que no hablan el idioma del vídeo</td>
+</tr>
+<tr>
+<td><code>captions</code></td>
+<td>Diálogo + efectos sonoros ((pasos), música)</td>
+<td>Personas sordas o sin sonido</td>
+</tr>
+<tr>
+<td><code>descriptions</code></td>
+<td>Descripción hablada de la acción en pantalla</td>
+<td>Personas con baja visión</td>
+</tr>
+<tr>
+<td><code>chapters</code></td>
+<td>Puntos de navegación por secciones</td>
+<td>Navegación rápida</td>
+</tr>
+<tr>
+<td><code>metadata</code></td>
+<td>Datos para scripts</td>
+<td>Procesado con JavaScript</td>
+</tr>
+</tbody>
+</table>
+<p>Toda pista se declara con <mark>\&lt;track&gt;</mark> <strong>dentro</strong> de <code>&lt;video&gt;</code> o <code>&lt;audio&gt;</code>. Obligatorio en toda pista: <code>srclang</code> (idioma) y <code>label</code> (nombre visible en el menú de subtítulos); <code>default</code> marca la pista activada al empezar. Las pistas deben subirse al <strong>mismo origen</strong> que la página (o con cabeceras CORS correctas).</p>
+<div class="admonition question">
+<p class="admonition-title">Autoevaluación: ¿qué tipo de pista?</p>
+<p>Un vídeo muda en el que solo se oyen pasos, música y ruido de fondo, dirigido a <strong>personas sordas</strong>. ¿Qué <code>kind</code> eliges y por qué no basta <code>subtitles</code>?</p>
+<details class="success">
+<summary>Respuesta</summary>
+<p><code>kind="captions"</code>: recoge <strong>diálogo y efectos sonoros</strong> ((pasos), música). <code>subtitles</code> solo <strong>traduce la habla</strong>; el sonido ambiente quedaría fuera.</p>
+</details>
+</div>
+<h3 id="52-fichero-vtt-de-ejemplo">5.2 Fichero <code>.vtt</code> de ejemplo</h3>
+<div class="language-text highlight"><span class="filename">noticia-es.vtt</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>WEBVTT
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>1
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>00:00:00.000 --&gt; 00:00:04.500
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>Hoy se publica la nueva convocatoria de becas.
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>2
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>00:00:04.500 --&gt; 00:00:09.200
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>El plazo de solicitud permanece abierto hasta el 30 de octubre.
+</span></code></pre></div>
+<p>El formato WebVTT es <strong>texto plano</strong>: empieza con la cabecera <strong><code>WEBVTT</code></strong>, después se numeran los bloques con sus tiempos en <code>HH:MM:SS.mmm --&gt; HH:MM:SS.mmm</code> y el texto del subtítulo. Se guarda con extensión <code>.vtt</code> y se enlaza desde <code>&lt;track&gt;</code>.</p>
+<h3 id="53-transcripcion-en-la-pagina-y-wcag">5.3 Transcripción en la página y <abbr title="Web Content Accessibility Guidelines">WCAG</abbr></h3>
+<p>La transcripción completa del audio o del diálogo se publica como texto dentro de la propia página (por ejemplo, en un <code>&lt;details&gt;</code> o en una sección con su <code>&lt;h2&gt;</code>). Además de cumplir las pautas de accesibilidad, aporta texto indexable para buscadores y permite leer el contenido sin consumir datos ni sonido. En una frase: una <mark>transcripción</mark> en página cumple la <strong><abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 1.2.1</strong>, que exige una alternativa para el contenido exclusivamente audio o vídeo, y la <strong><abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 1.2.2</strong> exige subtítulos sincronizados en todo el contenido pregrabado con audio. La estructura semántica de esas secciones está en <a href="../07-estructura-semantica-y-aria/">07-estructura-semantica-y-aria.md</a>.</p>
+<div class="admonition quote">
+<p class="admonition-title">Criterios <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 1.2.1 y 1.2.2 (nivel A)</p>
+<p><strong>1.2.1 — Alternativas para audio y vídeo:</strong> toda información presentada solo en audio o vídeo debe tener una <strong>alternativa textual equivalente</strong>, salvo que sea un medio de reemplazo y el contenido ya esté descrito.</p>
+<p><strong>1.2.2 — Solo texto (subtítulos):</strong> todo contenido de audio pregrabado <strong>sincronizado</strong> necesita una alternativa basada en texto, salvo que el audio sea un medio de reemplazo para el texto de la página.</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">Comprueba que tu vídeo es accesible</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Todo contenido con audio tiene pista de <strong>subtítulos</strong> (<code>subtitles</code> o <code>captions</code>).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Cada <code>&lt;track&gt;</code> lleva <strong><code>srclang</code></strong> y <strong><code>label</code></strong> (y <code>default</code> si va activada).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> El fichero <code>.vtt</code> empieza por <strong><code>WEBVTT</code></strong> y usa tiempos <code>HH:MM:SS.mmm --&gt; HH:MM:SS.mmm</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Hay <strong>transcripción completa</strong> en texto dentro de la propia página.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Revisa los criterios <abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 1.2.1 y 1.2.2 antes de publicar.</li>
+</ul>
+</div>
+<h2 id="6-incrustar-video-externo-con-iframe">6. Incrustar vídeo externo con <code>&lt;iframe&gt;</code></h2>
+<div class="language-html highlight"><span class="filename">youtube-incrustado.html</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">&lt;</span><span class="nt">iframe</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  <span class="na">width</span><span class="o">=</span><span class="s">"560"</span> <span class="na">height</span><span class="o">=</span><span class="s">"315"</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>  <span class="na">src</span><span class="o">=</span><span class="s">"https://www.youtube-nocookie.com/embed/AbC123XyZ"</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>  <span class="na">title</span><span class="o">=</span><span class="s">"Vídeo: presentación del ciclo de Desarrollo de Aplicaciones Web"</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>  <span class="na">loading</span><span class="o">=</span><span class="s">"lazy"</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>  <span class="na">allow</span><span class="o">=</span><span class="s">"accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture"</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>  <span class="na">allowfullscreen</span><span class="p">&gt;</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="p">&lt;/</span><span class="nt">iframe</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<p><code>title</code> es <strong>obligatorio</strong> para accesibilidad, <code>loading="lazy"</code> evita cargar el reproductor hasta que aparece en pantalla y <code>allowfullscreen</code> habilita el botón de pantalla completa (en los navegadores actuales basta con <code>allow="fullscreen"</code>). YouTube y Vimeo ofrecen además versiones sin cookies (<code>youtube-nocookie.com</code>) que respetan mejor la privacidad.</p>
+<p>El nativo es preferible <strong>si controlas los ficheros</strong>: <code>&lt;video&gt;</code> no arrastra cookies ni scripts de terceros, es más ligero, permite tus propios subtítulos <code>&lt;track&gt;</code>, tu marca y tus controles, y no muestra vídeos recomendados de la competencia. Usa el <code>&lt;iframe&gt;</code> solo cuando el contenido vive en una plataforma externa (clase grabada, conferencia publicada en YouTube): el <mark>iframe</mark> es la vía de la <strong>incrustación externa</strong>.</p>
+<h2 id="7-ejemplo-practico-noticia-con-video-y-podcast-con-transcripcion">7. Ejemplo práctico: noticia con vídeo y podcast con transcripción</h2>
+<div class="language-html highlight"><span class="filename">noticia-completa.html</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">"es"</span><span class="p">&gt;</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">"UTF-8"</span><span class="p">&gt;</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>  <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">"viewport"</span> <span class="na">content</span><span class="o">=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="p">&gt;</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>  <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Nueva convocatoria de becas · IES Marítimo<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>  <span class="p">&lt;</span><span class="nt">main</span><span class="p">&gt;</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>    <span class="p">&lt;</span><span class="nt">article</span><span class="p">&gt;</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Nueva convocatoria de becas 2026<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>La consejería abre hoy el plazo para solicitar las becas de transporte y material.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>      <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Vídeo informativo<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>      <span class="p">&lt;</span><span class="nt">video</span> <span class="na">controls</span> <span class="na">poster</span><span class="o">=</span><span class="s">"img/becas-portada.jpg"</span> <span class="na">width</span><span class="o">=</span><span class="s">"640"</span> <span class="na">height</span><span class="o">=</span><span class="s">"360"</span> <span class="na">preload</span><span class="o">=</span><span class="s">"metadata"</span><span class="p">&gt;</span>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>        <span class="p">&lt;</span><span class="nt">source</span> <span class="na">src</span><span class="o">=</span><span class="s">"video/becas.mp4"</span> <span class="na">type</span><span class="o">=</span><span class="s">"video/mp4"</span><span class="p">&gt;</span>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>        <span class="p">&lt;</span><span class="nt">source</span> <span class="na">src</span><span class="o">=</span><span class="s">"video/becas.webm"</span> <span class="na">type</span><span class="o">=</span><span class="s">"video/webm"</span><span class="p">&gt;</span>
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>        <span class="p">&lt;</span><span class="nt">track</span> <span class="na">kind</span><span class="o">=</span><span class="s">"subtitles"</span> <span class="na">src</span><span class="o">=</span><span class="s">"video/becas-es.vtt"</span> <span class="na">srclang</span><span class="o">=</span><span class="s">"es"</span> <span class="na">label</span><span class="o">=</span><span class="s">"Español"</span> <span class="na">default</span><span class="p">&gt;</span>
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Tu navegador no reproduce vídeo HTML5.
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>           <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"video/becas.mp4"</span><span class="p">&gt;</span>Descarga el clip<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>      <span class="p">&lt;/</span><span class="nt">video</span><span class="p">&gt;</span>
+</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"video/becas-es.vtt"</span><span class="p">&gt;</span>Descargar los subtítulos (VTT)<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>    <span class="p">&lt;/</span><span class="nt">article</span><span class="p">&gt;</span>
+</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>
+</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>    <span class="p">&lt;</span><span class="nt">article</span><span class="p">&gt;</span>
+</span><span id="__span-6-26"><a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>      <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Podcast: la beca en 5 minutos<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+</span><span id="__span-6-27"><a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>      <span class="p">&lt;</span><span class="nt">audio</span> <span class="na">controls</span> <span class="na">preload</span><span class="o">=</span><span class="s">"none"</span><span class="p">&gt;</span>
+</span><span id="__span-6-28"><a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>        <span class="p">&lt;</span><span class="nt">source</span> <span class="na">src</span><span class="o">=</span><span class="s">"audio/becas-ep07.mp3"</span> <span class="na">type</span><span class="o">=</span><span class="s">"audio/mpeg"</span><span class="p">&gt;</span>
+</span><span id="__span-6-29"><a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>        <span class="p">&lt;</span><span class="nt">source</span> <span class="na">src</span><span class="o">=</span><span class="s">"audio/becas-ep07.ogg"</span> <span class="na">type</span><span class="o">=</span><span class="s">"audio/ogg"</span><span class="p">&gt;</span>
+</span><span id="__span-6-30"><a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Tu navegador no reproduce audio.
+</span><span id="__span-6-31"><a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>           <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"audio/becas-ep07.mp3"</span><span class="p">&gt;</span>Descarga el episodio<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-6-32"><a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a>      <span class="p">&lt;/</span><span class="nt">audio</span><span class="p">&gt;</span>
+</span><span id="__span-6-33"><a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a>
+</span><span id="__span-6-34"><a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a>      <span class="p">&lt;</span><span class="nt">details</span><span class="p">&gt;</span>
+</span><span id="__span-6-35"><a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a>        <span class="p">&lt;</span><span class="nt">summary</span><span class="p">&gt;</span>Transcripción completa del episodio<span class="p">&lt;/</span><span class="nt">summary</span><span class="p">&gt;</span> <span class="cm">&lt;!-- (1)! --&gt;</span>
+</span><span id="__span-6-36"><a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a>        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>00:00<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span> — Buenas tardes, hoy explicamos los requisitos de la beca.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-6-37"><a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a>        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>01:15<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span> — El plazo finaliza el 30 de octubre y la solicitud es en línea.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-6-38"><a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a>        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>03:40<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;</span> — Dudas frecuentes: renta, convivencia y documentación.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-6-39"><a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a>      <span class="p">&lt;/</span><span class="nt">details</span><span class="p">&gt;</span>
+</span><span id="__span-6-40"><a id="__codelineno-6-40" name="__codelineno-6-40" href="#__codelineno-6-40"></a>    <span class="p">&lt;/</span><span class="nt">article</span><span class="p">&gt;</span>
+</span><span id="__span-6-41"><a id="__codelineno-6-41" name="__codelineno-6-41" href="#__codelineno-6-41"></a>
+</span><span id="__span-6-42"><a id="__codelineno-6-42" name="__codelineno-6-42" href="#__codelineno-6-42"></a>    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Amplía la práctica con [09-ejercicios.md](09-ejercicios.md).<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-6-43"><a id="__codelineno-6-43" name="__codelineno-6-43" href="#__codelineno-6-43"></a>  <span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+</span><span id="__span-6-44"><a id="__codelineno-6-44" name="__codelineno-6-44" href="#__codelineno-6-44"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span><span id="__span-6-45"><a id="__codelineno-6-45" name="__codelineno-6-45" href="#__codelineno-6-45"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<ol>
+<li>El <code>&lt;details&gt;</code> guarda la transcripción completa: <strong>texto legible</strong> sin reproducir nada (<abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 1.2.1).</li>
+</ol>
+<h2 id="8-errores-frecuentes-y-claves-del-examen">8. Errores frecuentes y claves del examen</h2>
+<h3 id="81-error-comun">8.1 Error común</h3>
+<div class="admonition warning">
+<p class="admonition-title">Error común</p>
+<ul>
+<li><strong>Olvidar <code>controls</code></strong>: sin él no aparece ningún reproductor y el vídeo o el audio no se puede reproducir (salvo que lo manejes con JavaScript).</li>
+<li><strong><code>autoplay</code> con sonido</strong>: los navegadores lo bloquean o molestan al usuario; solo se admite junto a <code>muted</code> (y en iOS además <code>playsinline</code>).</li>
+<li><strong><code>&lt;source&gt;</code> sin <code>type</code></strong>: el navegador no sabe qué códec probar y puede saltarse un formato que sí entendería; escribe siempre <code>type="video/mp4"</code>, <code>type="video/webm"</code>, etc.</li>
+</ul>
+</div>
+<h3 id="82-claves-para-el-examen">8.2 Claves para el examen</h3>
+<div class="admonition tip">
+<p class="admonition-title">Claves para el examen</p>
+<ul>
+<li><code>&lt;video&gt;</code> y <code>&lt;audio&gt;</code> son nativos: sin plugins y con <code>controls</code> imprescindible para que el usuario pueda reproducir.</li>
+<li>Varios <code>&lt;source&gt;</code> se comprueban de arriba abajo y se usa el primero con <code>type</code> compatible; no combines <code>src</code> en el elemento con <code>&lt;source&gt;</code>.</li>
+<li><code>preload</code>: <code>none</code> ahorra datos, <code>metadata</code> trae duración, <code>auto</code> descarga todo; <code>poster</code> muestra la imagen previa del vídeo.</li>
+<li><code>autoplay</code> solo con <code>muted</code> (+ <code>playsinline</code> en iOS); <code>loop</code> repite y el contenido decorativo se oculta con <code>aria-hidden</code>.</li>
+<li>Formatos: MP4/H.264 el seguro, WebM el abierto; audio MP3, <abbr title="Advanced Audio Coding">AAC</abbr> y Opus. Sirve dos pistas y verifica en <code>caniuse.com</code>.</li>
+<li>Accesibilidad: <code>&lt;track&gt;</code> con <code>kind</code>, <code>srclang</code>, <code>label</code> y opcional <code>default</code>, fichero <code>.vtt</code> y transcripción en la página (<abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 1.2.1 y 1.2.2).</li>
+<li><code>&lt;iframe&gt;</code> externo con <code>title</code>, <code>loading="lazy"</code> y <code>allowfullscreen</code>; si tienes el fichero, el reproductor nativo es mejor.</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../03-enlaces-y-recursos/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 03. Enlaces y recursos">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                03. Enlaces y recursos
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../05-tablas/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 05. Tablas de datos">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                05. Tablas de datos
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 The authors
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      
+      
+        
+        
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.top","navigation.tracking","search.highlight"],"redirect":null,"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copiado al portapapeles","clipboard.copy":"Copiar al portapapeles","search.result.more.one":"1 más en esta página","search.result.more.other":"# más en esta página","search.result.none":"No se encontraron documentos","search.result.one":"1 documento encontrado","search.result.other":"# documentos encontrados","search.result.placeholder":"Teclee para comenzar búsqueda","search.result.term.missing":"Falta","select.version":"Seleccionar versión"},"version":null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b7d3f789.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2507 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Estructura semántica: elementos de sección, landmarks, skip link, jerarquía de encabezados y uso correcto de ARIA.">
+      
+      
+        <meta name="author" content="Jose Quesada">
+      
+      
+      
+        <link rel="prev" href="../06-formularios-html5/">
+      
+      
+        <link rel="next" href="../08-apis-html5/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.66">
+    
+    
+      
+        <title>HTML 07 - Estructura semántica y ARIA - HTML y CSS — Apuntes de interfaces</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.1502b751.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.812a03bb.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navegación"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#html-07-estructura-semantica-y-aria" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="HTML y CSS — Apuntes de interfaces" class="md-header__button md-logo" aria-label="HTML y CSS — Apuntes de interfaces" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navegación">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HTML y CSS — Apuntes de interfaces
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              HTML 07 - Estructura semántica y ARIA
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Buscar">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Buscar">
+  <button type="button" class="md-search__button">
+    Buscar
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="HTML y CSS — Apuntes de interfaces" class="md-nav__button md-logo" aria-label="HTML y CSS — Apuntes de interfaces" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    HTML y CSS — Apuntes de interfaces
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-rocket" viewBox="0 0 24 24"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"/><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Inicio
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  HTML5
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+            <label class="md-nav__title" for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  HTML5
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-introduccion-html5/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-code-xml" viewBox="0 0 24 24"><path d="m18 16 4-4-4-4M6 8l-4 4 4 4M14.5 4l-5 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  01. Introducción a HTML5
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-texto-y-semantica/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-type" viewBox="0 0 24 24"><path d="M12 4v16M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2M9 20h6"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  02. Texto y semántica
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-enlaces-y-recursos/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  03. Enlaces y recursos
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-multimedia/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-film" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18M3 7.5h4M3 12h18M3 16.5h4M17 3v18M17 7.5h4M17 16.5h4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  04. Multimedia
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-tablas/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-table" viewBox="0 0 24 24"><path d="M12 3v18"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M3 15h18"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  05. Tablas de datos
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-formularios-html5/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-clipboard-list" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2M12 11h4M12 16h4M8 11h.01M8 16h.01"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  06. Formularios HTML5
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  07. Estructura semántica y ARIA
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  07. Estructura semántica y ARIA
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-por-que-la-semantica" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1. Por qué la semántica
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Por qué la semántica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-tres-lectores-del-mismo-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1.1 Tres lectores del mismo HTML
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-el-coste-de-la-divitis" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1.2 El coste de la "divitis"
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-elementos-de-seccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2. Elementos de sección
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Elementos de sección">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-los-siete-elementos-y-su-significado" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.1 Los siete elementos y su significado
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-section-vs-div-el-criterio" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.2 <code>section</code> vs <code>div</code>: el criterio
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-esqueleto-de-pagina-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3. Esqueleto de página completo
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Esqueleto de página completo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-blog-con-cabecera-menu-articulo-barra-lateral-y-pie" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.1 Blog con cabecera, menú, artículo, barra lateral y pie
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-el-skip-link" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4. El <em>skip link</em>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. El skip link">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-que-es-y-como-se-escribe" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.1 Qué es y cómo se escribe
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-como-probarlo-con-teclado" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.2 Cómo probarlo con teclado
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-jerarquia-de-encabezados-y-outline" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5. Jerarquía de encabezados y <em>outline</em>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Jerarquía de encabezados y outline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-reglas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.1 Reglas
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-aria-lo-minimo-que-funciona" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6. ARIA: lo mínimo que funciona
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. ARIA: lo mínimo que funciona">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-regla-de-oro-primero-el-elemento-html-nativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.1 Regla de oro: primero el elemento HTML nativo
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-roles-utiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.2 Roles útiles
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-aria-label-vs-aria-labelledby-vs-aria-describedby" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.3 <code>aria-label</code> vs <code>aria-labelledby</code> vs <code>aria-describedby</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-aria-expanded-aria-hidden-y-aria-current" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.4 <code>aria-expanded</code>, <code>aria-hidden</code> y <code>aria-current</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-aria-live-regiones-que-anuncian-cambios" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.5 <code>aria-live</code>: regiones que anuncian cambios
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-cuando-no-usar-aria-anti-patrones" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        7. Cuándo NO usar ARIA (anti-patrones)
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-practica-como-comprobarlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8. Práctica: cómo comprobarlo
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Práctica: cómo comprobarlo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-el-arbol-de-accesibilidad-de-devtools" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8.1 El árbol de accesibilidad de DevTools
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-lector-de-pantalla-y-teclado" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8.2 Lector de pantalla y teclado
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-relacion-con-la-clase-de-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        9. Relación con la clase de interfaces
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-errores-frecuentes-y-claves-para-el-examen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        10. Errores frecuentes y claves para el examen
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-apis-html5/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-braces" viewBox="0 0 24 24"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  08. APIs y funcionalidades nativas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-ejercicios/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-pencil" viewBox="0 0 24 24"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497zM15 5l4 4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  09. Ejercicios
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-ejercicios-soluciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  10. Ejercicios: soluciones
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  CSS
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  CSS
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/00-normativa-y-marco-curricular/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  00. Normativa y marco curricular
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/01-fundamentos-de-css/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  01. Fundamentos de CSS
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/02-selectores/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-crosshair" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M22 12h-4M6 12H2M12 6V2M12 22v-4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  02. Selectores
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/03-modelo-de-caja/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-box" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  03. Modelo de caja
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/04-posicionamiento-y-z-index/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-move" viewBox="0 0 24 24"><path d="M12 2v20M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M5 9l-3 3 3 3M9 5l3-3 3 3"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  04. Posicionamiento y z-index
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/05-flexbox/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-move-horizontal" viewBox="0 0 24 24"><path d="m18 8 4 4-4 4M2 12h20M6 8l-4 4 4 4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  05. Flexbox
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/06-grid/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-layout-grid" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  06. Grid
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/07-flujo-multicolumna-tablas-display/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-columns-3" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18M15 3v18"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  07. Flujo, multicolumna, tablas y display
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/08-unidades-tipografia-colores/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-palette" viewBox="0 0 24 24"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  08. Unidades, tipografía y colores
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/09-fondos-imagenes-decoracion/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-image" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  09. Fondos, imágenes y decoración
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/10-diseno-responsivo/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  10. Diseño responsivo
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/11-transiciones-animaciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-zap" viewBox="0 0 24 24"><path d="M15.914 4a1.5 1.5 0 0 0-2.474-1.561l-9 9A1.5 1.5 0 0 0 5.5 14h4.002a.5.5 0 0 1 .471.666L8.086 20a1.5 1.5 0 0 0 2.475 1.56l9-9A1.5 1.5 0 0 0 18.5 10h-3.997a.5.5 0 0 1-.472-.667z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  11. Transiciones y animaciones
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/12-css-moderno-arquitectura/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-blocks" viewBox="0 0 24 24"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2"/><rect width="8" height="8" x="14" y="2" rx="1"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  12. CSS moderno y arquitectura
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/13-accesibilidad-usabilidad/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-accessibility" viewBox="0 0 24 24"><circle cx="16" cy="4" r="1"/><path d="m18 19 1-7-6 1M5 8l3-3 5.5 3-2.36 3.5M4.24 14.5a5 5 0 0 0 6.88 6"/><path d="M13.76 17.5a5 5 0 0 0-6.88-6"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  13. Accesibilidad y usabilidad
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/14-rendimiento-buenas-practicas/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-gauge" viewBox="0 0 24 24"><path d="m12 14 4-4M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  14. Rendimiento y buenas prácticas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/15-ejercicios-glosario-recursos/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-list-checks" viewBox="0 0 24 24"><path d="M13 5h8M13 12h8M13 19h8M3 17l2 2 4-4M3 7l2 2 4-4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  15. Ejercicios, glosario y recursos
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-por-que-la-semantica" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1. Por qué la semántica
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Por qué la semántica">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-tres-lectores-del-mismo-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1.1 Tres lectores del mismo HTML
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-el-coste-de-la-divitis" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1.2 El coste de la "divitis"
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-elementos-de-seccion" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2. Elementos de sección
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Elementos de sección">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-los-siete-elementos-y-su-significado" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.1 Los siete elementos y su significado
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-section-vs-div-el-criterio" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.2 <code>section</code> vs <code>div</code>: el criterio
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-esqueleto-de-pagina-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3. Esqueleto de página completo
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Esqueleto de página completo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-blog-con-cabecera-menu-articulo-barra-lateral-y-pie" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3.1 Blog con cabecera, menú, artículo, barra lateral y pie
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-el-skip-link" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4. El <em>skip link</em>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. El skip link">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-que-es-y-como-se-escribe" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.1 Qué es y cómo se escribe
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-como-probarlo-con-teclado" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.2 Cómo probarlo con teclado
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-jerarquia-de-encabezados-y-outline" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5. Jerarquía de encabezados y <em>outline</em>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Jerarquía de encabezados y outline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-reglas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.1 Reglas
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-aria-lo-minimo-que-funciona" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6. ARIA: lo mínimo que funciona
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. ARIA: lo mínimo que funciona">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-regla-de-oro-primero-el-elemento-html-nativo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.1 Regla de oro: primero el elemento HTML nativo
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-roles-utiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.2 Roles útiles
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-aria-label-vs-aria-labelledby-vs-aria-describedby" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.3 <code>aria-label</code> vs <code>aria-labelledby</code> vs <code>aria-describedby</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-aria-expanded-aria-hidden-y-aria-current" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.4 <code>aria-expanded</code>, <code>aria-hidden</code> y <code>aria-current</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-aria-live-regiones-que-anuncian-cambios" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.5 <code>aria-live</code>: regiones que anuncian cambios
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-cuando-no-usar-aria-anti-patrones" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        7. Cuándo NO usar ARIA (anti-patrones)
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-practica-como-comprobarlo" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8. Práctica: cómo comprobarlo
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Práctica: cómo comprobarlo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-el-arbol-de-accesibilidad-de-devtools" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8.1 El árbol de accesibilidad de DevTools
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-lector-de-pantalla-y-teclado" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8.2 Lector de pantalla y teclado
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-relacion-con-la-clase-de-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        9. Relación con la clase de interfaces
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-errores-frecuentes-y-claves-para-el-examen" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        10. Errores frecuentes y claves para el examen
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../01-introduccion-html5/" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    HTML5
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+<h1 id="html-07-estructura-semantica-y-aria">HTML 07 — Estructura semántica y <abbr title="Accessible Rich Internet Applications — roles y atributos que describen interfaces cuando el HTML nativo no llega.">ARIA</abbr></h1>
+<p>Una página tiene cabecera, menú, contenido principal, barra lateral y pie; si esa organización solo existe en CSS y <code>&lt;div&gt;</code>, el navegador, el buscador y el lector de pantalla la ignoran. Aquí lo construimos: esqueleto, <em>skip link</em>, encabezados y <abbr title="Accessible Rich Internet Applications — roles y atributos que describen interfaces cuando el HTML nativo no llega.">ARIA</abbr> <strong>justo y necesario</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Conocimientos previos</p>
+<ul>
+<li>Estructura del documento: <a href="../01-introduccion-html5/">01-introduccion-html5.md</a>. Enlaces y anclas: <a href="../03-enlaces-y-recursos/">03-enlaces-y-recursos.md</a>.</li>
+<li>Qué es un <abbr title="región navegable de la página (banner, navigation, main, complementary, contentinfo) que el lector de pantalla puede listar y saltar.">landmark</abbr> (clase de interfaces → <a href="../../css/13-accesibilidad-usabilidad/">../css/13-accesibilidad-usabilidad.md</a>).</li>
+<li>Formularios, si tu práctica los incluye: <a href="../06-formularios-html5/">06-formularios-html5.md</a>.</li>
+</ul>
+</div>
+<h2 id="1-por-que-la-semantica">1. Por qué la semántica</h2>
+<h3 id="11-tres-lectores-del-mismo-html">1.1 Tres lectores del mismo HTML</h3>
+<ul>
+<li><strong>Máquina</strong> (buscadores): busca la estructura; con una sopa de <code>&lt;div&gt;</code> no distingue el artículo de un anuncio.</li>
+<li><strong>Accesibilidad</strong> (lectores de pantalla y teclado): busca landmarks y orden de lectura; sin ellos la navegación es "ciega".</li>
+<li><strong>Mantenimiento</strong> (tú, en unos meses): con <code>&lt;div&gt;</code> solo queda adivinar la intención por las clases.</li>
+</ul>
+<p>La semántica es <mark>información que ya viaja en el HTML</mark>: sirve para SEO, accesibilidad y legibilidad del código.</p>
+<h3 id="12-el-coste-de-la-divitis">1.2 El coste de la "divitis"</h3>
+<div class="language-html highlight"><span class="filename">divitis.html</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cm">&lt;!-- ❌ Cuatro divs: la máquina solo ve cajas --&gt;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="hll"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"cabecera"</span><span class="p">&gt;&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"menu"</span><span class="p">&gt;&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"titulo"</span><span class="p">&gt;</span>DAW<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="cm">&lt;!-- ✅ mismo aspecto, significado explícito --&gt;</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="hll"><span class="p">&lt;</span><span class="nt">header</span> <span class="na">class</span><span class="o">=</span><span class="s">"cabecera"</span><span class="p">&gt;&lt;</span><span class="nt">nav</span> <span class="na">class</span><span class="o">=</span><span class="s">"menu"</span><span class="p">&gt;&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>DAW<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;&lt;/</span><span class="nt">nav</span><span class="p">&gt;&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+</span></span></code></pre></div>
+<p>Con <code>&lt;div&gt;</code> hay que añadir a mano <code>role</code>, <code>tabindex</code> y JavaScript: <strong>reescribir lo que el HTML ya regala</strong> (ejercicio "Desmontando el <em>divitis</em>" → <a href="../09-ejercicios/">09-ejercicios.md</a>).</p>
+<h2 id="2-elementos-de-seccion">2. Elementos de sección</h2>
+<h3 id="21-los-siete-elementos-y-su-significado">2.1 Los siete elementos y su significado</h3>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Significado</th>
+<th>Landmark implícito</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;header&gt;</code></td>
+<td>Cabecera de la página <strong>o de un bloque</strong></td>
+<td><code>banner</code> <strong>solo</strong> si es hijo directo de <code>&lt;body&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;nav&gt;</code></td>
+<td>Bloque de navegación</td>
+<td><code>navigation</code></td>
+</tr>
+<tr>
+<td><code>&lt;main&gt;</code></td>
+<td>Contenido <strong>único y principal</strong></td>
+<td><code>main</code></td>
+</tr>
+<tr>
+<td><code>&lt;article&gt;</code></td>
+<td>Contenido independiente (entrada, ficha, comentario)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>&lt;section&gt;</code></td>
+<td>Agrupación <strong>temática</strong>, normalmente con encabezado</td>
+<td>— (con nombre accesible → <code>region</code>)</td>
+</tr>
+<tr>
+<td><code>&lt;aside&gt;</code></td>
+<td>Contenido complementario o tangencial</td>
+<td><code>complementary</code></td>
+</tr>
+<tr>
+<td><code>&lt;footer&gt;</code></td>
+<td>Pie de la página <strong>o de un bloque</strong></td>
+<td><code>contentinfo</code> <strong>solo</strong> si es hijo directo de <code>&lt;body&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>Matices de examen: <strong><code>&lt;main&gt;</code> es único</strong>; <strong><code>header</code>/<code>footer</code> anidados</strong> en <code>article</code> o <code>section</code> <strong>no</strong> son <code>banner</code>/<code>contentinfo</code>; <strong><code>nav</code></strong> solo para navegación real.</p>
+<div class="admonition info">
+<p class="admonition-title">Qué es un <abbr title="región navegable de la página (banner, navigation, main, complementary, contentinfo) que el lector de pantalla puede listar y saltar.">landmark</abbr></p>
+<p>Región de la página que el lector de pantalla puede <strong>listar y saltar</strong> con un atajo (<code>D</code> → <em>main</em>, <code>M</code> → <em>navigation</em>). No se crea con CSS: lo define el <strong>elemento</strong> y su <strong>posición</strong> en el árbol. De la tabla, cinco elementos lo traen implícito; <code>article</code> no, y <code>section</code> solo si recibe un nombre accesible → <code>region</code>.</p>
+</div>
+<h3 id="22-section-vs-div-el-criterio">2.2 <code>section</code> vs <code>div</code>: el criterio</h3>
+<p>Bloque con <mark>tema propio y encabezado propio</mark> (suena a "sección de…") → <code>&lt;section&gt;</code>; bloque que existe <strong>solo por la maquetación</strong> (suena a "caja de…") → <code>&lt;div&gt;</code>.</p>
+<div class="language-html highlight"><span class="filename">seccion-vs-div.html</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cm">&lt;!-- ✅ section: tema + encabezado propio --&gt;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">&lt;</span><span class="nt">section</span> <span class="na">aria-labelledby</span><span class="o">=</span><span class="s">"horario"</span><span class="p">&gt;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  <span class="p">&lt;</span><span class="nt">h2</span> <span class="na">id</span><span class="o">=</span><span class="s">"horario"</span><span class="p">&gt;</span>Horario de módulos<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  <span class="p">&lt;</span><span class="nt">table</span><span class="p">&gt;</span>...<span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="cm">&lt;!-- ❌ puro estilo, sin tema ni encabezado --&gt;</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"contenedor-tarjetas"</span><span class="p">&gt;&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"tarjeta"</span><span class="p">&gt;</span>...<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<h2 id="3-esqueleto-de-pagina-completo">3. Esqueleto de página completo</h2>
+<h3 id="31-blog-con-cabecera-menu-articulo-barra-lateral-y-pie">3.1 Blog con cabecera, menú, artículo, barra lateral y pie</h3>
+<div class="language-html highlight"><span class="filename">estructura.html</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  <span class="cm">&lt;!-- Primer elemento del DOM: salta al contenido con Tab --&gt;</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">"skip-link"</span> <span class="na">href</span><span class="o">=</span><span class="s">"#contenido"</span><span class="p">&gt;</span>Saltar al contenido principal<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> <span class="cm">&lt;!-- (1)! --&gt;</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>  <span class="cm">&lt;!-- header hijo directo de body =&gt; landmark "banner" --&gt;</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>  <span class="p">&lt;</span><span class="nt">header</span> <span class="na">class</span><span class="o">=</span><span class="s">"cabecera"</span><span class="p">&gt;</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">"logo"</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/"</span><span class="p">&gt;</span>El Cuaderno de Apuntes<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="p">&lt;</span><span class="nt">nav</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">"Principal"</span><span class="p">&gt;</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>      <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/"</span> <span class="na">aria-current</span><span class="o">=</span><span class="s">"page"</span><span class="p">&gt;</span>Inicio<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/lenguajes-de-marcas"</span><span class="p">&gt;</span>Lenguajes de marcas<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/contacto"</span><span class="p">&gt;</span>Contacto<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>      <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="p">&lt;/</span><span class="nt">nav</span><span class="p">&gt;</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>  <span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"rejilla"</span><span class="p">&gt;</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>    <span class="cm">&lt;!-- main =&gt; landmark "main"; SOLO UNO por página --&gt;</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>    <span class="p">&lt;</span><span class="nt">main</span> <span class="na">id</span><span class="o">=</span><span class="s">"contenido"</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">"-1"</span><span class="p">&gt;</span> <span class="cm">&lt;!-- (2)! --&gt;</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>      <span class="p">&lt;</span><span class="nt">article</span><span class="p">&gt;</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>        <span class="p">&lt;</span><span class="nt">header</span><span class="p">&gt;</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>          <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Por qué escribimos HTML semántico<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>          <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">time</span> <span class="na">datetime</span><span class="o">=</span><span class="s">"2026-09-29"</span><span class="p">&gt;</span>29 de septiembre de 2026<span class="p">&lt;/</span><span class="nt">time</span><span class="p">&gt;</span> — Marta Ruiz<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>        <span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>        <span class="cm">&lt;!-- section con encabezado propio --&gt;</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>        <span class="p">&lt;</span><span class="nt">section</span> <span class="na">aria-labelledby</span><span class="o">=</span><span class="s">"ejemplos"</span><span class="p">&gt;</span>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>          <span class="p">&lt;</span><span class="nt">h3</span> <span class="na">id</span><span class="o">=</span><span class="s">"ejemplos"</span><span class="p">&gt;</span>Ejemplos de etiquetas<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>          <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">code</span><span class="p">&gt;</span>header<span class="p">&lt;/</span><span class="nt">code</span><span class="p">&gt;</span>, <span class="p">&lt;</span><span class="nt">code</span><span class="p">&gt;</span>nav<span class="p">&lt;/</span><span class="nt">code</span><span class="p">&gt;</span>, <span class="p">&lt;</span><span class="nt">code</span><span class="p">&gt;</span>main<span class="p">&lt;/</span><span class="nt">code</span><span class="p">&gt;</span>…<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>        <span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>        <span class="p">&lt;</span><span class="nt">footer</span><span class="p">&gt;</span>
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a>          <span class="cm">&lt;!-- pie del artículo: NO es landmark contentinfo --&gt;</span>
+</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>          <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Etiquetas: <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/temas/html"</span><span class="p">&gt;</span>HTML<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>        <span class="p">&lt;/</span><span class="nt">footer</span><span class="p">&gt;</span>
+</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>      <span class="p">&lt;/</span><span class="nt">article</span><span class="p">&gt;</span>
+</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>    <span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>
+</span><span id="__span-2-37"><a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>    <span class="cm">&lt;!-- aside =&gt; landmark "complementary" --&gt;</span>
+</span><span id="__span-2-38"><a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>    <span class="p">&lt;</span><span class="nt">aside</span> <span class="na">class</span><span class="o">=</span><span class="s">"barra-lateral"</span><span class="p">&gt;</span>
+</span><span id="__span-2-39"><a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>      <span class="p">&lt;</span><span class="nt">section</span><span class="p">&gt;</span>
+</span><span id="__span-2-40"><a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>        <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Entradas relacionadas<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+</span><span id="__span-2-41"><a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>        <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/entrada/landmarks"</span><span class="p">&gt;</span>Landmarks en 5 minutos<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span><span id="__span-2-42"><a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a>      <span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+</span><span id="__span-2-43"><a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a>    <span class="p">&lt;/</span><span class="nt">aside</span><span class="p">&gt;</span>
+</span><span id="__span-2-44"><a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a>  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span><span id="__span-2-45"><a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a>
+</span><span id="__span-2-46"><a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>  <span class="cm">&lt;!-- footer hijo directo de body =&gt; landmark "contentinfo" --&gt;</span>
+</span><span id="__span-2-47"><a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>  <span class="p">&lt;</span><span class="nt">footer</span> <span class="na">class</span><span class="o">=</span><span class="s">"pie"</span><span class="p">&gt;</span>
+</span><span id="__span-2-48"><a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="ni">&amp;copy;</span> 2026 El Cuaderno de Apuntes · <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/aviso-legal"</span><span class="p">&gt;</span>Aviso legal<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-2-49"><a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a>  <span class="p">&lt;/</span><span class="nt">footer</span><span class="p">&gt;</span>
+</span><span id="__span-2-50"><a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<ol>
+<li>
+<p>El <em>skip link</em> es el <strong>primer elemento enfocable</strong>: con la primera <strong>Tab</strong> aparece y con <strong>Intro</strong> deja el foco dentro del contenido.</p>
+</li>
+<li>
+<p><code>tabindex="-1"</code> enfoca <code>&lt;main&gt;</code> <strong>sin</strong> añadirlo al recorrido del Tab, que es justo lo que necesita el saltador.</p>
+</li>
+</ol>
+<p>Los landmarks quedan así: <code>header</code> → <code>banner</code>, <code>nav</code> → <code>navigation</code>, <code>main</code> → <code>main</code>, <code>aside</code> → <code>complementary</code>, <code>footer</code> final → <code>contentinfo</code>; el <code>div.rejilla</code> es <mark>solo maquetación</mark> (→ <a href="../../css/06-grid/">../css/06-grid.md</a>). Es el esqueleto del ejercicio del <strong>portafolio semántico</strong> (→ <a href="../09-ejercicios/">09-ejercicios.md</a>).</p>
+<h2 id="4-el-skip-link">4. El <em>skip link</em></h2>
+<h3 id="41-que-es-y-como-se-escribe">4.1 Qué es y cómo se escribe</h3>
+<p>Es el <mark>primer elemento enfocable</mark> de la página: permite saltarse la cabecera y el menú sin tabular por 30 enlaces.</p>
+<div class="language-html highlight"><span class="filename">skip-link.html</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  <span class="cm">&lt;!-- Debe ser el PRIMER enlace del DOM --&gt;</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="hll">  <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">"skip-link"</span> <span class="na">href</span><span class="o">=</span><span class="s">"#contenido"</span><span class="p">&gt;</span>Saltar al contenido principal<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span></span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  <span class="p">&lt;</span><span class="nt">header</span><span class="p">&gt;</span> ... menú con 12 enlaces ... <span class="p">&lt;/</span><span class="nt">header</span><span class="p">&gt;</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  <span class="cm">&lt;!-- destino: el id de &lt;main&gt;; tabindex="-1" lo enfoca sin entrar en el Tab --&gt;</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="hll">  <span class="p">&lt;</span><span class="nt">main</span> <span class="na">id</span><span class="o">=</span><span class="s">"contenido"</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">"-1"</span><span class="p">&gt;</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>...<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span> <span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+</span></span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<div class="language-css highlight"><span class="filename">skip-link.css</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">.</span><span class="nc">skip-link</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">absolute</span><span class="p">;</span><span class="w"> </span><span class="k">left</span><span class="p">:</span><span class="w"> </span><span class="mi">-9999</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#fff</span><span class="p">;</span><span class="w"> </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mf">.6</span><span class="kt">rem</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="p">.</span><span class="nc">skip-link</span><span class="p">:</span><span class="nd">focus</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">left</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">top</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">z-index</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="p">:</span><span class="nd">focus-visible</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">outline</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="mh">#0b5fff</span><span class="p">;</span><span class="w"> </span><span class="k">outline-offset</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c">/* nunca borres el foco */</span>
+</span></code></pre></div>
+<h3 id="42-como-probarlo-con-teclado">4.2 Cómo probarlo con teclado</h3>
+<ol>
+<li><strong>Tab</strong> una vez: aparece "Saltar al contenido principal".</li>
+<li><strong>Intro</strong>: el foco salta a <code>&lt;main&gt;</code>; el siguiente <strong>Tab</strong> va al primer enlace <em>dentro</em> del contenido, no al menú (y <strong>Shift + Tab</strong> vuelve hacia atrás).</li>
+<li>En DevTools → <em>Elements</em> → <em>Accessibility</em>, el nombre accesible del enlace debe ser su texto visible.</li>
+</ol>
+<p>Si no lo ves, casi siempre es <mark><code>display: none</code></mark> (<strong>tampoco sería enfocable</strong>), que está <strong>después</strong> del menú, o un <code>href</code> sin <code>id</code> coincidente.</p>
+<div class="admonition success">
+<p class="admonition-title">Comprueba con teclado</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Con la primera <strong>Tab</strong> aparece el enlace de salto.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Con <strong>Intro</strong> el foco queda en <code>&lt;main&gt;</code> (ver <em>Elements</em> → nodo seleccionado).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> El siguiente <strong>Tab</strong> entra en el contenido, <strong>no</strong> en el menú.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> El foco es <strong>visible</strong>: <code>outline</code> aplicado, nunca <code>outline: none</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> En <em>Accessibility</em> el nombre accesible del enlace es su texto visible.</li>
+</ul>
+</div>
+<h2 id="5-jerarquia-de-encabezados-y-outline">5. Jerarquía de encabezados y <em>outline</em></h2>
+<h3 id="51-reglas">5.1 Reglas</h3>
+<ul>
+<li><strong>Un solo <code>&lt;h1&gt;</code> por página</strong> (título del documento o de la entrada).</li>
+<li><mark>Sin saltos de nivel</mark>: <code>h1</code> → <code>h2</code> → <code>h3</code>… Los lectores de pantalla usan los encabezados como índice.</li>
+<li><strong>Cada sección lleva su nivel estructural</strong>, no el que pida el diseño; <strong>el tamaño es CSS</strong> (<code>h2 { font-size: 1rem; }</code> es válido).</li>
+</ul>
+<div class="admonition quote">
+<p class="admonition-title"><abbr title="Web Content Accessibility Guidelines — pautas de accesibilidad del W3C citadas en los criterios 1.3.1 y 2.4.1.">WCAG</abbr> 2.1 — criterio 1.3.1, info y relaciones</p>
+<p>"La información, la estructura y las relaciones transmitidas mediante la presentación pueden determinarse <strong>programáticamente</strong> o estar disponibles en texto."</p>
+<p>— traducción de la norma. Si el "título" de una sección es solo un <code>&lt;div&gt;</code> con fuente grande, esa relación <strong>no</strong> se puede determinar programáticamente y el criterio queda incumplido.</p>
+</div>
+<div class="language-html highlight"><span class="filename">encabezados.html</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cm">&lt;!-- ❌ Salto de nivel y dos h1 --&gt;</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Curso de HTML<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;&lt;</span><span class="nt">h4</span><span class="p">&gt;</span>Etiquetas semánticas<span class="p">&lt;/</span><span class="nt">h4</span><span class="p">&gt;</span> <span class="cm">&lt;!-- (1)! --&gt;</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="cm">&lt;!-- ✅ niveles encadenados; el estilo lo pone CSS --&gt;</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Curso de HTML<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>  <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Etiquetas semánticas<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span> <span class="cm">&lt;!-- (2)! --&gt;</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span>Elementos de sección<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>  <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Formularios<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<ol>
+<li>
+<p>Salto de nivel (<code>h1</code> → <code>h4</code>) y dos <code>h1</code>: el lector pierde el índice y el examen considera rota la jerarquía.</p>
+</li>
+<li>
+<p>Niveles encadenados (<code>h1</code> → <code>h2</code> → <code>h3</code>); el <strong>tamaño visual</strong> lo decide CSS, no la etiqueta.</p>
+</li>
+</ol>
+<h2 id="6-aria-lo-minimo-que-funciona">6. <abbr title="Accessible Rich Internet Applications — roles y atributos que describen interfaces cuando el HTML nativo no llega.">ARIA</abbr>: lo mínimo que funciona</h2>
+<h3 id="61-regla-de-oro-primero-el-elemento-html-nativo">6.1 Regla de oro: primero el elemento HTML nativo</h3>
+<p><abbr title="Accessible Rich Internet Applications — roles y atributos que describen interfaces cuando el HTML nativo no llega.">ARIA</abbr> es un <strong>añadido</strong> para lo que HTML no puede expresar; la <mark>regla de oro</mark> de su especificación es: <em>no uses <abbr title="Accessible Rich Internet Applications — roles y atributos que describen interfaces cuando el HTML nativo no llega.">ARIA</abbr> si existe un elemento HTML que haga ese trabajo</em>.</p>
+<div class="language-html highlight"><span class="filename">div-vs-button.html</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="cm">&lt;!-- ❌ "divitis" accesible: hay que reimplementar todo a mano --&gt;</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="hll"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">role</span><span class="o">=</span><span class="s">"button"</span> <span class="na">class</span><span class="o">=</span><span class="s">"boton"</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">"0"</span><span class="p">&gt;</span>Guardar cambios<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="cm">&lt;!--  role no da teclado · falta tabindex · falta JS para Intro/Espacio --&gt;</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="hll"><span class="cm">&lt;!-- ✅ el nativo lo trae todo GRATIS --&gt;</span>
+</span></span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">"button"</span><span class="p">&gt;</span>Guardar cambios<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="cm">&lt;!--  teclado · foco · nombre accesible · disabled · ratón y dedo --&gt;</span>
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Error común</p>
+<p>Escribir <abbr title="Accessible Rich Internet Applications — roles y atributos que describen interfaces cuando el HTML nativo no llega.">ARIA</abbr> <strong>antes</strong> de comprobar si el HTML ya lo resuelve: <code>role="link"</code> sobre un <code>&lt;div&gt;</code> con <code>onclick</code>, <code>role="heading" level="2"</code> en un <code>&lt;span&gt;</code> donde existía <code>&lt;h2&gt;</code>, <code>role="list"</code> sobre un <code>&lt;div&gt;</code> con <code>display: flex</code>. Cada rol obliga a reimplementar teclado, foco y nombre accesible: casi siempre hay que cambiar la etiqueta.</p>
+</div>
+<h3 id="62-roles-utiles">6.2 Roles útiles</h3>
+<table>
+<thead>
+<tr>
+<th>Rol</th>
+<th>Cuándo se justifica</th>
+<th>Alternativa nativa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>role="button"</code></td>
+<td>Si el elemento <strong>no puede</strong> ser <code>&lt;button&gt;</code></td>
+<td><code>&lt;button&gt;</code></td>
+</tr>
+<tr>
+<td><code>role="link"</code></td>
+<td>Enlace que dispara JS en contenido rico</td>
+<td><code>&lt;a href&gt;</code></td>
+</tr>
+<tr>
+<td><code>role="dialog"</code></td>
+<td>Ventana modal creada por tu código</td>
+<td><code>&lt;dialog&gt;</code></td>
+</tr>
+<tr>
+<td><code>role="alert"</code></td>
+<td>Error que debe anunciarse de inmediato</td>
+<td><code>&lt;output&gt;</code> + <code>aria-live="assertive"</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="63-aria-label-vs-aria-labelledby-vs-aria-describedby">6.3 <code>aria-label</code> vs <code>aria-labelledby</code> vs <code>aria-describedby</code></h3>
+<table>
+<thead>
+<tr>
+<th>Atributo</th>
+<th>¿Forma el nombre accesible?</th>
+<th>Cuándo se lee</th>
+<th>Para qué sirve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>aria-label</code></td>
+<td><strong>Sí</strong></td>
+<td>Al enfocar/anunciar</td>
+<td>Nombre donde <strong>no hay texto visible</strong></td>
+</tr>
+<tr>
+<td><code>aria-labelledby</code></td>
+<td><strong>Sí</strong> (lo toma de otro <code>id</code>)</td>
+<td>Igual que <code>aria-label</code></td>
+<td>Unir el nombre a un <strong>texto ya existente</strong></td>
+</tr>
+<tr>
+<td><code>aria-describedby</code></td>
+<td><strong>No</strong>: es <strong>descripción</strong></td>
+<td><strong>Después</strong> del nombre</td>
+<td>Ayuda, instrucción o error largo</td>
+</tr>
+</tbody>
+</table>
+<div class="language-html highlight"><span class="filename">nombres-accesibles.html</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">"button"</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">"Eliminar el borrador"</span><span class="p">&gt;</span>🗑️<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span> <span class="cm">&lt;!-- (1)! --&gt;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">&lt;</span><span class="nt">section</span> <span class="na">aria-labelledby</span><span class="o">=</span><span class="s">"tit-promo"</span><span class="p">&gt;</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>  <span class="p">&lt;</span><span class="nt">h2</span> <span class="na">id</span><span class="o">=</span><span class="s">"tit-promo"</span><span class="p">&gt;</span>Oferta de matrícula<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">"button"</span><span class="p">&gt;</span>Ver condiciones<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"dni"</span><span class="p">&gt;</span>NIF<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">"dni"</span> <span class="na">required</span> <span class="na">aria-describedby</span><span class="o">=</span><span class="s">"ayuda-dni"</span><span class="p">&gt;</span> <span class="cm">&lt;!-- (2)! --&gt;</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="p">&lt;</span><span class="nt">p</span> <span class="na">id</span><span class="o">=</span><span class="s">"ayuda-dni"</span><span class="p">&gt;</span>Ejemplo: 12345678Z.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<ol>
+<li>
+<p><code>aria-label</code> aporta <strong>nombre</strong> donde no hay texto visible: el emoji se anuncia completo como "Eliminar el borrador".</p>
+</li>
+<li>
+<p><code>aria-describedby</code> aporta <strong>descripción</strong>: se anuncia después del nombre y <strong>no</strong> forma parte de él.</p>
+</li>
+</ol>
+<blockquote>
+<p><strong>Orden del nombre accesible:</strong> <code>aria-labelledby</code> → <code>aria-label</code> → texto visible → <code>title</code>. <mark><code>aria-describedby</code></mark> <strong>nunca</strong> sustituye al nombre.</p>
+</blockquote>
+<h3 id="64-aria-expanded-aria-hidden-y-aria-current">6.4 <code>aria-expanded</code>, <code>aria-hidden</code> y <code>aria-current</code></h3>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="cm">&lt;!-- estado de un desplegable: sincronízalo SIEMPRE con el JS --&gt;</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">"button"</span> <span class="na">aria-expanded</span><span class="o">=</span><span class="s">"false"</span> <span class="na">aria-controls</span><span class="o">=</span><span class="s">"menu"</span><span class="p">&gt;</span>Cursos ▾<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">id</span><span class="o">=</span><span class="s">"menu"</span> <span class="na">hidden</span><span class="p">&gt;</span> ... <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="p">&lt;</span><span class="nt">span</span> <span class="na">aria-hidden</span><span class="o">=</span><span class="s">"true"</span><span class="p">&gt;</span>★<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>   <span class="cm">&lt;!-- decorativo junto a texto --&gt;</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">"/"</span> <span class="na">aria-current</span><span class="o">=</span><span class="s">"page"</span><span class="p">&gt;</span>Inicio<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>   <span class="cm">&lt;!-- "estás aquí" --&gt;</span>
+</span></code></pre></div>
+<p><code>hidden</code> / <code>display: none</code> → <strong>no existe</strong> para nadie (ni foco, ni ratón, ni lector); <code>aria-hidden="true"</code> → sigue visible y clicable pero <strong>no se anuncia</strong>, y si además es enfocable creas un <em>foco fantasma</em>. <code>aria-expanded</code> es <strong>solo informativo</strong>: si tu JS no lo actualiza, anuncia mentiras (con <code>&lt;details&gt;</code> lo gestiona el navegador).</p>
+<h3 id="65-aria-live-regiones-que-anuncian-cambios">6.5 <code>aria-live</code>: regiones que anuncian cambios</h3>
+<p>Marcaste con <mark><code>aria-live</code></mark> la región que debe <strong>reanunciarse</strong> cuando su contenido cambia; sin esa marca, el lector de pantalla no se entera de nada.</p>
+<table>
+<thead>
+<tr>
+<th>Valor</th>
+<th>Comportamiento</th>
+<th>Ejemplo típico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>aria-live="polite"</code></td>
+<td>Espera su turno; <strong>no interrumpe</strong></td>
+<td>"Cambios guardados", resultados</td>
+</tr>
+<tr>
+<td><code>aria-live="assertive"</code></td>
+<td><strong>Interrumpe</strong> lo que se esté leyendo</td>
+<td>Error de validación</td>
+</tr>
+<tr>
+<td><code>aria-live="off"</code></td>
+<td>No anuncia nada (por defecto)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<div class="language-html highlight"><span class="filename">aviso-en-vivo.html</span><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">&lt;</span><span class="nt">p</span> <span class="na">id</span><span class="o">=</span><span class="s">"aviso"</span> <span class="na">role</span><span class="o">=</span><span class="s">"status"</span> <span class="na">aria-live</span><span class="o">=</span><span class="s">"polite"</span> <span class="na">aria-atomic</span><span class="o">=</span><span class="s">"true"</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="p">&lt;</span><span class="nt">button</span> <span class="na">onclick</span><span class="o">=</span><span class="s">"guardar()"</span><span class="p">&gt;</span>Guardar<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="p">&lt;</span><span class="nt">script</span><span class="p">&gt;</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="kd">function</span><span class="w"> </span><span class="nx">guardar</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">  </span><span class="c1">// role="status" = aria-live="polite": no interrumpe</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">'aviso'</span><span class="p">).</span><span class="nx">textContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Cambios guardados ✓'</span><span class="p">;</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="p">}</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<p><code>aria-atomic="true"</code> lee <strong>toda</strong> la región; <code>role="alert"</code> es el equivalente <em>assertive</em> (errores reales).</p>
+<h2 id="7-cuando-no-usar-aria-anti-patrones">7. Cuándo NO usar <abbr title="Accessible Rich Internet Applications — roles y atributos que describen interfaces cuando el HTML nativo no llega.">ARIA</abbr> (anti-patrones)</h2>
+<ol>
+<li><strong><code>aria-label</code> redundante con el texto visible</strong> (<code>&lt;a href="/ayuda"&gt;Ayuda&lt;/a&gt;</code> + <code>aria-label="Ir a la página de ayuda"</code>): anuncia dos frases y <strong>sobrescribe</strong> el texto visible.</li>
+<li><strong>Roles que empeoran</strong>: <code>role="button"</code> sobre un <code>&lt;div&gt;</code> sin teclado, <code>role="img"</code> con texto dentro, <code>role="presentation"</code> en una tabla con datos.</li>
+<li><strong>Marcar lo que el HTML ya hace</strong>: <code>role="navigation"</code> sobre <code>&lt;nav&gt;</code>, <code>role="heading"</code> sobre <code>&lt;h2&gt;</code>, <code>role="main"</code> sobre <code>&lt;main&gt;</code>.</li>
+<li><strong><abbr title="Accessible Rich Internet Applications — roles y atributos que describen interfaces cuando el HTML nativo no llega.">ARIA</abbr> sin JavaScript</strong>: <code>aria-expanded</code>, <code>aria-selected</code>, <code>aria-checked</code> e <code>aria-invalid</code> <strong>no cambian solos</strong>; si no los actualizas, estás mintiendo.</li>
+<li><strong><code>aria-hidden</code> en contenido enfocable</strong>: el foco llega a un sitio que el lector no anuncia.</li>
+<li><strong>Empezar por <abbr title="Accessible Rich Internet Applications — roles y atributos que describen interfaces cuando el HTML nativo no llega.">ARIA</abbr> en vez de arreglar el HTML</strong>: si faltaba un <code>&lt;h2&gt;</code>, la solución es el <code>&lt;h2&gt;</code>.</li>
+</ol>
+<div class="admonition failure">
+<p class="admonition-title">Anti-patrón: <abbr title="Accessible Rich Internet Applications — roles y atributos que describen interfaces cuando el HTML nativo no llega.">ARIA</abbr> de más</p>
+<p>El problema no es que "haya mucho <abbr title="Accessible Rich Internet Applications — roles y atributos que describen interfaces cuando el HTML nativo no llega.">ARIA</abbr>", sino que <strong>estorba</strong>:</p>
+<ul>
+<li>Doble anuncio: el lector lee el texto visible <strong>y</strong> el <code>aria-label</code> redundante.</li>
+<li>Doble mantenimiento: cada <code>role</code> de más obliga a reimplementar <strong>teclado, foco y nombre accesible</strong>.</li>
+<li>Estado desfasado: un atributo que nadie sincroniza convierte la página en una mentira anunciada.</li>
+</ul>
+<p>Corrección: <mark>cambia la etiqueta, no añadas roles</mark>.</p>
+</div>
+<h2 id="8-practica-como-comprobarlo">8. Práctica: cómo comprobarlo</h2>
+<h3 id="81-el-arbol-de-accesibilidad-de-devtools">8.1 El árbol de accesibilidad de DevTools</h3>
+<p><em>Elements</em> → sub-pestaña <strong>Accessibility</strong>: verás los <strong>roles y nombres accesibles reales</strong>, no lo que tú crees haber escrito. Comprueba que <code>main</code>, <code>nav</code> y <code>aside</code> aparecen como <abbr title="región navegable de la página (banner, navigation, main, complementary, contentinfo) que el lector de pantalla puede listar y saltar.">landmark</abbr> y que Issues no señala problemas. El árbol <strong>no cambia</strong> con colores o tamaños: la <mark>semántica es independiente del CSS</mark> (→ <a href="../../css/13-accesibilidad-usabilidad/">../css/13-accesibilidad-usabilidad.md</a>).</p>
+<h3 id="82-lector-de-pantalla-y-teclado">8.2 Lector de pantalla y teclado</h3>
+<p>Windows: NVDA (gratuito y estándar en pruebas), Narrador o JAWS; macOS: VoiceOver (<code>Cmd + F5</code>). <strong>Prueba mínima</strong>: recorre la página solo con <strong>Tab</strong>, lista los encabezados (<code>h</code>) y usa los atajos de <abbr title="región navegable de la página (banner, navigation, main, complementary, contentinfo) que el lector de pantalla puede listar y saltar.">landmark</abbr> (<code>D</code> = <em>main</em>, <code>M</code> = <em>navigation</em>). Si no llegas a todo el contenido sin ratón, algo falla.</p>
+<h2 id="9-relacion-con-la-clase-de-interfaces">9. Relación con la clase de interfaces</h2>
+<p>Esta unidad es la parte <strong>HTML</strong> de la accesibilidad (estructura y nombres accesibles); la parte <strong>CSS</strong> está en la clase de interfaces → <a href="../../css/13-accesibilidad-usabilidad/">../css/13-accesibilidad-usabilidad.md</a>.</p>
+<h2 id="10-errores-frecuentes-y-claves-para-el-examen">10. Errores frecuentes y claves para el examen</h2>
+<div class="admonition warning">
+<p class="admonition-title">Error común</p>
+<p>Los tres fallos que más se corrigen en la práctica:
+- <strong>Dos <code>&lt;main&gt;</code></strong> en la página (contenido y pie, o contenido y modal): solo puede haber <strong>uno visible</strong>; para el otro usa <code>&lt;section&gt;</code> o <code>&lt;div&gt;</code>.
+- <strong>Elegir el encabezado por el tamaño visual</strong> (<code>&lt;h4&gt;</code> porque "queda más pequeño" o varias <code>&lt;h1&gt;</code> porque el diseño las pide): el nivel es <strong>estructural</strong>, el tamaño es CSS.
+- <strong><abbr title="Accessible Rich Internet Applications — roles y atributos que describen interfaces cuando el HTML nativo no llega.">ARIA</abbr> de más</strong>: <code>aria-label</code> redundante con el texto visible, <code>role="navigation"</code> sobre <code>&lt;nav&gt;</code>, <code>aria-expanded</code> que nadie actualiza. Más <abbr title="Accessible Rich Internet Applications — roles y atributos que describen interfaces cuando el HTML nativo no llega.">ARIA</abbr> no significa más accesibilidad.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Claves para el examen</p>
+<ul>
+<li>Semántica = <strong>significado en el HTML</strong> (buscadores, lectores de pantalla y mantenimiento; no es estética). Siete elementos: <code>header</code>, <code>nav</code>, <code>main</code>, <code>article</code>, <code>section</code>, <code>aside</code>, <code>footer</code>; <abbr title="región navegable de la página (banner, navigation, main, complementary, contentinfo) que el lector de pantalla puede listar y saltar.">landmark</abbr> <code>banner</code>/<code>contentinfo</code> <strong>solo</strong> si <code>header</code>/<code>footer</code> son hijos directos de <code>&lt;body&gt;</code>.</li>
+<li><strong>Un solo <code>&lt;main&gt;</code> visible</strong>; <code>article</code> = contenido independiente; <code>section</code> = tema con encabezado propio; si es solo maquetación → <code>&lt;div&gt;</code>.</li>
+<li><strong>Skip link</strong>: primer enlace del DOM, <code>href="#id"</code> del <code>&lt;main&gt;</code>, visible <strong>solo con el foco</strong>; se prueba con Tab → Intro → Tab.</li>
+<li><strong>Encabezados sin saltos</strong> y un solo <code>h1</code>; el tamaño visual lo decide CSS.</li>
+<li><strong><abbr title="Accessible Rich Internet Applications — roles y atributos que describen interfaces cuando el HTML nativo no llega.">ARIA</abbr></strong>: primero el nativo (<code>&lt;button&gt;</code> frente a <code>&lt;div role="button"&gt;</code>, que exige <code>tabindex</code> y JS); <code>aria-label</code>/<code>aria-labelledby</code> → <strong>nombre accesible</strong>, <code>aria-describedby</code> → <strong>descripción</strong>; <code>aria-expanded</code>/<code>aria-current</code> describen estado, <code>aria-hidden</code> oculta solo del lector, <code>aria-live="polite"</code> avisa sin interrumpir y <code>"assertive"</code> interrumpe.</li>
+<li>Verifica el <strong>árbol de accesibilidad de DevTools</strong> y recorre la página con teclado y lector de pantalla.</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../06-formularios-html5/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 06. Formularios HTML5">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                06. Formularios HTML5
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../08-apis-html5/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 08. APIs y funcionalidades nativas">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                08. APIs y funcionalidades nativas
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 The authors
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      
+      
+        
+        
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.top","navigation.tracking","search.highlight"],"redirect":null,"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copiado al portapapeles","clipboard.copy":"Copiar al portapapeles","search.result.more.one":"1 más en esta página","search.result.more.other":"# más en esta página","search.result.none":"No se encontraron documentos","search.result.one":"1 documento encontrado","search.result.other":"# documentos encontrados","search.result.placeholder":"Teclee para comenzar búsqueda","search.result.term.missing":"Falta","select.version":"Seleccionar versión"},"version":null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b7d3f789.min.js"></script>
+      
+    
+  </body>
+</html>

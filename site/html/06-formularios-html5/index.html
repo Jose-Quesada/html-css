@@ -1,0 +1,2624 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Formularios en HTML5: elemento form con GET y POST, label y fieldset, tipos de input, atributos de validación nativa, Constraint Validation API y accesibilidad de los campos.">
+      
+      
+        <meta name="author" content="Jose Quesada">
+      
+      
+      
+        <link rel="prev" href="../05-tablas/">
+      
+      
+        <link rel="next" href="../07-estructura-semantica-y-aria/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.66">
+    
+    
+      
+        <title>HTML 06 - Formularios HTML5 - HTML y CSS — Apuntes de interfaces</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.1502b751.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.812a03bb.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navegación"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#html-06-formularios-html5" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="HTML y CSS — Apuntes de interfaces" class="md-header__button md-logo" aria-label="HTML y CSS — Apuntes de interfaces" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navegación">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HTML y CSS — Apuntes de interfaces
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              HTML 06 - Formularios HTML5
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Buscar">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Buscar">
+  <button type="button" class="md-search__button">
+    Buscar
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="HTML y CSS — Apuntes de interfaces" class="md-nav__button md-logo" aria-label="HTML y CSS — Apuntes de interfaces" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    HTML y CSS — Apuntes de interfaces
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-rocket" viewBox="0 0 24 24"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"/><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Inicio
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  HTML5
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+            <label class="md-nav__title" for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  HTML5
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-introduccion-html5/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-code-xml" viewBox="0 0 24 24"><path d="m18 16 4-4-4-4M6 8l-4 4 4 4M14.5 4l-5 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  01. Introducción a HTML5
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-texto-y-semantica/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-type" viewBox="0 0 24 24"><path d="M12 4v16M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2M9 20h6"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  02. Texto y semántica
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-enlaces-y-recursos/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  03. Enlaces y recursos
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-multimedia/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-film" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18M3 7.5h4M3 12h18M3 16.5h4M17 3v18M17 7.5h4M17 16.5h4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  04. Multimedia
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-tablas/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-table" viewBox="0 0 24 24"><path d="M12 3v18"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M3 15h18"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  05. Tablas de datos
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-clipboard-list" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2M12 11h4M12 16h4M8 11h.01M8 16h.01"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  06. Formularios HTML5
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-clipboard-list" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2M12 11h4M12 16h4M8 11h.01M8 16h.01"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  06. Formularios HTML5
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-el-elemento-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1. El elemento <code>form</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. El elemento form">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-action-y-method-get-vs-post" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1.1 <code>action</code> y <code>method</code>: GET vs POST
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-enctype-nameid-y-novalidate" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1.2 <code>enctype</code>, <code>name</code>/<code>id</code> y <code>novalidate</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-html-no-programa-el-control-llega-con-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1.3 HTML no programa: el control llega con TypeScript
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-label-la-pieza-obligatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2. <code>label</code>: la pieza obligatoria
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. label: la pieza obligatoria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-for-id-y-area-de-clic" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.1 <code>for</code> / <code>id</code> y área de clic
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-placeholder-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.2 <code>placeholder</code> ≠ <code>label</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-fieldset-y-legend-agrupar-opciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.3 <code>fieldset</code> y <code>legend</code>: agrupar opciones
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-tipos-de-input-tabla-completa" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3. Tipos de <code>input</code>: tabla completa
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-atributos-de-validacion-y-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4. Atributos de validación y control
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Atributos de validación y control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-required-readonly-y-disabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.1 <code>required</code>, <code>readonly</code> y <code>disabled</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-min-max-step-minlength-maxlength" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.2 <code>min</code>, <code>max</code>, <code>step</code>, <code>minlength</code>, <code>maxlength</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-pattern-validar-un-formato-exacto" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.3 <code>pattern</code>: validar un formato exacto
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-placeholder-value-y-autocomplete" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.4 <code>placeholder</code>, <code>value</code> y <code>autocomplete</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-multiple-accept-list-y-datalist" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.5 <code>multiple</code>, <code>accept</code>, <code>list</code> y <code>datalist</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-autofocus-spellcheck-e-inputmode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.6 <code>autofocus</code>, <code>spellcheck</code> e <code>inputmode</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-el-resto-de-controles" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5. El resto de controles
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. El resto de controles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-select-optgroup-y-selected" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.1 <code>select</code>, <code>optgroup</code> y <code>selected</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-textarea" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.2 <code>textarea</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-output-progress-y-meter" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.3 <code>output</code>, <code>progress</code> y <code>meter</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-button-typesubmit-reset-o-button" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.4 <code>&lt;button&gt;</code>: <code>type="submit"</code>, <code>reset</code> o <code>button</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-validacion-nativa-de-html5" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6. Validación nativa de HTML5
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Validación nativa de HTML5">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-mensajes-del-navegador-y-pseudoclases" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.1 Mensajes del navegador y pseudoclases
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-constraint-validation-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.2 Constraint Validation API
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-novalidate-y-validacion-propia" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.3 <code>novalidate</code> y validación propia
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-accesibilidad-de-los-formularios" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        7. Accesibilidad de los formularios
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-ejemplo-practico-formulario-de-matricula" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8. Ejemplo práctico: formulario de matrícula
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-claves-para-el-examen-y-errores-frecuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        9. Claves para el examen y errores frecuentes
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-estructura-semantica-y-aria/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  07. Estructura semántica y ARIA
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-apis-html5/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-braces" viewBox="0 0 24 24"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  08. APIs y funcionalidades nativas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-ejercicios/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-pencil" viewBox="0 0 24 24"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497zM15 5l4 4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  09. Ejercicios
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-ejercicios-soluciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  10. Ejercicios: soluciones
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  CSS
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  CSS
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/00-normativa-y-marco-curricular/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  00. Normativa y marco curricular
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/01-fundamentos-de-css/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  01. Fundamentos de CSS
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/02-selectores/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-crosshair" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M22 12h-4M6 12H2M12 6V2M12 22v-4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  02. Selectores
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/03-modelo-de-caja/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-box" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  03. Modelo de caja
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/04-posicionamiento-y-z-index/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-move" viewBox="0 0 24 24"><path d="M12 2v20M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M5 9l-3 3 3 3M9 5l3-3 3 3"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  04. Posicionamiento y z-index
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/05-flexbox/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-move-horizontal" viewBox="0 0 24 24"><path d="m18 8 4 4-4 4M2 12h20M6 8l-4 4 4 4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  05. Flexbox
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/06-grid/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-layout-grid" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  06. Grid
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/07-flujo-multicolumna-tablas-display/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-columns-3" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18M15 3v18"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  07. Flujo, multicolumna, tablas y display
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/08-unidades-tipografia-colores/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-palette" viewBox="0 0 24 24"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  08. Unidades, tipografía y colores
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/09-fondos-imagenes-decoracion/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-image" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  09. Fondos, imágenes y decoración
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/10-diseno-responsivo/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  10. Diseño responsivo
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/11-transiciones-animaciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-zap" viewBox="0 0 24 24"><path d="M15.914 4a1.5 1.5 0 0 0-2.474-1.561l-9 9A1.5 1.5 0 0 0 5.5 14h4.002a.5.5 0 0 1 .471.666L8.086 20a1.5 1.5 0 0 0 2.475 1.56l9-9A1.5 1.5 0 0 0 18.5 10h-3.997a.5.5 0 0 1-.472-.667z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  11. Transiciones y animaciones
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/12-css-moderno-arquitectura/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-blocks" viewBox="0 0 24 24"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2"/><rect width="8" height="8" x="14" y="2" rx="1"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  12. CSS moderno y arquitectura
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/13-accesibilidad-usabilidad/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-accessibility" viewBox="0 0 24 24"><circle cx="16" cy="4" r="1"/><path d="m18 19 1-7-6 1M5 8l3-3 5.5 3-2.36 3.5M4.24 14.5a5 5 0 0 0 6.88 6"/><path d="M13.76 17.5a5 5 0 0 0-6.88-6"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  13. Accesibilidad y usabilidad
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/14-rendimiento-buenas-practicas/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-gauge" viewBox="0 0 24 24"><path d="m12 14 4-4M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  14. Rendimiento y buenas prácticas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/15-ejercicios-glosario-recursos/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-list-checks" viewBox="0 0 24 24"><path d="M13 5h8M13 12h8M13 19h8M3 17l2 2 4-4M3 7l2 2 4-4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  15. Ejercicios, glosario y recursos
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-el-elemento-form" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1. El elemento <code>form</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. El elemento form">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-action-y-method-get-vs-post" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1.1 <code>action</code> y <code>method</code>: GET vs POST
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-enctype-nameid-y-novalidate" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1.2 <code>enctype</code>, <code>name</code>/<code>id</code> y <code>novalidate</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-html-no-programa-el-control-llega-con-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1.3 HTML no programa: el control llega con TypeScript
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-label-la-pieza-obligatoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2. <code>label</code>: la pieza obligatoria
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. label: la pieza obligatoria">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-for-id-y-area-de-clic" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.1 <code>for</code> / <code>id</code> y área de clic
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-placeholder-label" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.2 <code>placeholder</code> ≠ <code>label</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-fieldset-y-legend-agrupar-opciones" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.3 <code>fieldset</code> y <code>legend</code>: agrupar opciones
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-tipos-de-input-tabla-completa" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3. Tipos de <code>input</code>: tabla completa
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-atributos-de-validacion-y-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4. Atributos de validación y control
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Atributos de validación y control">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-required-readonly-y-disabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.1 <code>required</code>, <code>readonly</code> y <code>disabled</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-min-max-step-minlength-maxlength" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.2 <code>min</code>, <code>max</code>, <code>step</code>, <code>minlength</code>, <code>maxlength</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-pattern-validar-un-formato-exacto" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.3 <code>pattern</code>: validar un formato exacto
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-placeholder-value-y-autocomplete" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.4 <code>placeholder</code>, <code>value</code> y <code>autocomplete</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-multiple-accept-list-y-datalist" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.5 <code>multiple</code>, <code>accept</code>, <code>list</code> y <code>datalist</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46-autofocus-spellcheck-e-inputmode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.6 <code>autofocus</code>, <code>spellcheck</code> e <code>inputmode</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-el-resto-de-controles" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5. El resto de controles
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. El resto de controles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-select-optgroup-y-selected" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.1 <code>select</code>, <code>optgroup</code> y <code>selected</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-textarea" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.2 <code>textarea</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-output-progress-y-meter" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.3 <code>output</code>, <code>progress</code> y <code>meter</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-button-typesubmit-reset-o-button" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.4 <code>&lt;button&gt;</code>: <code>type="submit"</code>, <code>reset</code> o <code>button</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-validacion-nativa-de-html5" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6. Validación nativa de HTML5
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Validación nativa de HTML5">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-mensajes-del-navegador-y-pseudoclases" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.1 Mensajes del navegador y pseudoclases
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-constraint-validation-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.2 Constraint Validation API
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-novalidate-y-validacion-propia" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.3 <code>novalidate</code> y validación propia
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-accesibilidad-de-los-formularios" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        7. Accesibilidad de los formularios
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-ejemplo-practico-formulario-de-matricula" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8. Ejemplo práctico: formulario de matrícula
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-claves-para-el-examen-y-errores-frecuentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        9. Claves para el examen y errores frecuentes
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../01-introduccion-html5/" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    HTML5
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+<h1 id="html-06-formularios-html5"><abbr title="HyperText Markup Language">HTML</abbr> 06 — Formularios HTML5</h1>
+<p>Un formulario es la <strong>puerta de entrada de datos</strong> hacia el servidor: sin <code>label</code>, sin <code>name</code> o con <code>method</code> equivocado, el dato se pierde o el usuario no puede escribir. Aquí vemos <code>form</code>, los tipos de <code>input</code> con su validación nativa, los atributos de control y la accesibilidad.</p>
+<div class="admonition note">
+<p class="admonition-title">Conocimientos previos</p>
+<ul>
+<li>Estructura de un documento <abbr title="HyperText Markup Language">HTML</abbr>.</li>
+<li>Accesibilidad y ARIA de la clase de interfaces (→ <a href="../07-estructura-semantica-y-aria/">07-estructura-semantica-y-aria.md</a>).</li>
+<li>Constraint Validation y otras APIs → <a href="../08-apis-html5/">08-apis-html5.md</a>; práctica → <a href="../09-ejercicios/">09-ejercicios.md</a>.</li>
+</ul>
+</div>
+<h2 id="1-el-elemento-form">1. El elemento <code>form</code></h2>
+<h3 id="11-action-y-method-get-vs-post">1.1 <code>action</code> y <code>method</code>: GET vs POST</h3>
+<p><code>&lt;form&gt;</code> envía los campos a la URL de <strong><code>action</code></strong> con el verbo de <strong><code>method</code></strong>.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>GET</strong></th>
+<th><strong>POST</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dónde van los datos</td>
+<td>En la <strong>URL</strong>: <code>buscar?nota=8</code></td>
+<td>En el <strong>cuerpo</strong> de la petición</td>
+</tr>
+<tr>
+<td>En la URL</td>
+<td>Sí: historial, caché, <em>logs</em></td>
+<td>No</td>
+</tr>
+<tr>
+<td>Longitud</td>
+<td>Limitada (~2.000-8.000 caracteres)</td>
+<td>Sin límite práctico</td>
+</tr>
+<tr>
+<td>Efecto</td>
+<td>Consulta, repetible</td>
+<td>Escritura, crea o modifica</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Regla:</strong> datos <strong>sensibles o largos</strong> → <code>POST</code>: una contraseña con <code>GET</code> queda en la barra de dirección, en el historial y en los <em>logs</em>. Cada campo viaja como <code>clave=valor</code> con como clave su atributo <code>name</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">GET</label><label for="__tabbed_1_2">POST</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-html highlight"><span class="filename">busqueda.html</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">"/buscar"</span> <span class="na">method</span><span class="o">=</span><span class="s">"get"</span> <span class="na">role</span><span class="o">=</span><span class="s">"search"</span><span class="p">&gt;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"search"</span> <span class="na">id</span><span class="o">=</span><span class="s">"q"</span> <span class="na">name</span><span class="o">=</span><span class="s">"q"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"Lenguajes de marcas"</span><span class="p">&gt;</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">"submit"</span><span class="p">&gt;</span>Buscar<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-html highlight"><span class="filename">login.html</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">"/login"</span> <span class="na">method</span><span class="o">=</span><span class="s">"post"</span><span class="p">&gt;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"usuario"</span><span class="p">&gt;</span>Usuario<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">id</span><span class="o">=</span><span class="s">"usuario"</span> <span class="na">name</span><span class="o">=</span><span class="s">"usuario"</span> <span class="na">autocomplete</span><span class="o">=</span><span class="s">"username"</span> <span class="na">required</span><span class="p">&gt;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"clave"</span><span class="p">&gt;</span>Contraseña<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"password"</span> <span class="na">id</span><span class="o">=</span><span class="s">"clave"</span> <span class="na">name</span><span class="o">=</span><span class="s">"clave"</span> <span class="na">autocomplete</span><span class="o">=</span><span class="s">"current-password"</span> <span class="na">required</span><span class="p">&gt;</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">"submit"</span><span class="p">&gt;</span>Entrar<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Datos sensibles enviados con <code>GET</code></p>
+<p>El valor queda en la <strong>barra de dirección</strong>, en el <strong>historial</strong>, en <strong>marcadores</strong> y en los <strong>logs</strong> de proxy y servidor: cualquiera con acceso a esos registros lo lee sin esfuerzo. Credenciales, DNI y tarjetas → <strong><code>POST</code> siempre</strong>.</p>
+</div>
+<h3 id="12-enctype-nameid-y-novalidate">1.2 <code>enctype</code>, <code>name</code>/<code>id</code> y <code>novalidate</code></h3>
+<ul>
+<li><strong><code>enctype</code></strong>: por defecto <code>application/x-www-form-urlencoded</code> y, con <code>type="file"</code>, es obligatorio <code>multipart/form-data</code>.</li>
+<li><strong><code>name</code></strong> es la clave de envío y <strong><code>id</code></strong> el identificador que enlaza el <code>&lt;label&gt;</code>: <strong>sin <code>name</code> el dato no se envía</strong>, aunque el campo esté relleno.</li>
+<li><strong><code>novalidate</code></strong>: desactiva la validación nativa para validar con JavaScript.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Qué viaja en el cuerpo de la petición</p>
+<p>Con <code>application/x-www-form-urlencoded</code> los campos se serializan como <code>clave=valor&amp;...</code> (el mismo formato que usan las URLs). Con <code>multipart/form-data</code> se abre un <strong>límite por parte</strong> y el navegador añade cabeceras <code>Content-Disposition</code>: por eso es <strong>obligatorio</strong> al subir ficheros con <code>type="file"</code>.</p>
+</div>
+<h3 id="13-html-no-programa-el-control-llega-con-typescript">1.3 <abbr title="HyperText Markup Language">HTML</abbr> no programa: el control llega con TypeScript</h3>
+<p><abbr title="HyperText Markup Language">HTML</abbr> declara los campos, pero no calcula ni muestra mensajes propios: eso es JavaScript. En la clase de interfaces verás que en <strong>Angular</strong> el <code>&lt;form&gt;</code> se controla con TypeScript (<em>Reactive Forms</em>, <code>ngSubmit</code>) y el envío va con <code>HttpClient</code>.</p>
+<h2 id="2-label-la-pieza-obligatoria">2. <code>label</code>: la pieza obligatoria</h2>
+<h3 id="21-for-id-y-area-de-clic">2.1 <code>for</code> / <code>id</code> y área de clic</h3>
+<div class="language-html highlight"><span class="filename">nombre.html</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"nombre"</span><span class="p">&gt;</span>Nombre y apellidos<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">id</span><span class="o">=</span><span class="s">"nombre"</span> <span class="na">name</span><span class="o">=</span><span class="s">"nombre"</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<ul>
+<li><code>for</code> debe coincidir <strong>exactamente</strong> con el <code>id</code>.</li>
+<li>Da <strong>área de clic</strong>: al pulsar el texto se enfoca (o se marca si es <code>radio</code>/<code>checkbox</code>), con objetivo cómodo en táctil.</li>
+<li>También vale envolver el campo dentro del label, pero con varios campos juntos <code>for</code>/<code>id</code> es más claro.</li>
+</ul>
+<h3 id="22-placeholder-label">2.2 <code>placeholder</code> ≠ <code>label</code></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>&lt;label&gt;</code></th>
+<th><code>placeholder</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>¿Qué es?</td>
+<td>Etiqueta permanente</td>
+<td>Ayuda <strong>temporal</strong> dentro del campo</td>
+</tr>
+<tr>
+<td>¿Se ve tras escribir?</td>
+<td>Siempre</td>
+<td>No: desaparece al escribir</td>
+</tr>
+<tr>
+<td>¿Lo anuncia el lector?</td>
+<td>Sí: es el <strong>nombre</strong> del campo</td>
+<td>No, o de forma poco fiable</td>
+</tr>
+<tr>
+<td>¿Sirve para el formato?</td>
+<td>Junto a un texto de ayuda</td>
+<td>Como pista, nunca como única info</td>
+</tr>
+</tbody>
+</table>
+<p>El <mark><code>label</code></mark> <strong>es obligatorio</strong>; el <code>placeholder</code> es opcional y se borra al escribir.</p>
+<h3 id="23-fieldset-y-legend-agrupar-opciones">2.3 <code>fieldset</code> y <code>legend</code>: agrupar opciones</h3>
+<p>Los campos que el usuario percibe como <strong>un mismo bloque</strong> se envuelven en <mark><code>fieldset</code></mark>, y <code>legend</code> aporta su título accesible:</p>
+<div class="language-html highlight"><span class="filename">turno.html</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">&lt;</span><span class="nt">fieldset</span><span class="p">&gt;</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  <span class="p">&lt;</span><span class="nt">legend</span><span class="p">&gt;</span>Turno de matrícula<span class="p">&lt;/</span><span class="nt">legend</span><span class="p">&gt;</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"radio"</span> <span class="na">id</span><span class="o">=</span><span class="s">"manana"</span> <span class="na">name</span><span class="o">=</span><span class="s">"turno"</span> <span class="na">value</span><span class="o">=</span><span class="s">"manana"</span><span class="p">&gt;</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"manana"</span><span class="p">&gt;</span>Mañana<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"radio"</span> <span class="na">id</span><span class="o">=</span><span class="s">"tarde"</span> <span class="na">name</span><span class="o">=</span><span class="s">"turno"</span> <span class="na">value</span><span class="o">=</span><span class="s">"tarde"</span><span class="p">&gt;</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>  <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"tarde"</span><span class="p">&gt;</span>Tarde<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">&lt;/</span><span class="nt">fieldset</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<ul>
+<li><code>&lt;legend&gt;</code> es el <strong>título accesible</strong> del grupo: el lector lo anuncia antes de cada opción.</li>
+<li>Los <code>radio</code> de un grupo comparten <strong>el mismo <code>name</code></strong> (solo se marca uno); cada control lleva su <code>id</code>/<code>label</code>.</li>
+<li>Los <code>checkbox</code> son independientes: cada uno con su <code>name</code>.</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Qué oye el lector de pantalla</p>
+<p>Al enfocar cada opción del bloque anterior se anuncia <em>"Turno de matrícula, Mañana, 1 de 2, botón de opción"</em>.</p>
+<p>Sin <code>fieldset</code>/<code>legend</code>, el mismo campo suena <strong>solo</strong> <em>"Mañana, 1 de 2"</em>: <strong>se pierde el grupo</strong> al que pertenece.</p>
+</div>
+<h2 id="3-tipos-de-input-tabla-completa">3. Tipos de <code>input</code>: tabla completa</h2>
+<p>El <code>type</code> decide <strong>qué acepta</strong> el navegador y <strong>qué teclado</strong> aparece en móvil: validación + teclado.</p>
+<table>
+<thead>
+<tr>
+<th><code>type</code></th>
+<th>Validación nativa</th>
+<th>Teclado móvil</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>text</code></td>
+<td>Ninguna (solo <code>maxlength</code>)</td>
+<td>Alfanumérico</td>
+<td>DNI</td>
+</tr>
+<tr>
+<td><code>password</code></td>
+<td>Ninguna (oculta la entrada)</td>
+<td>Alfanumérico</td>
+<td>Contraseña</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>Formato <code>algo@dominio.tld</code></td>
+<td><code>@</code> y <code>.es</code></td>
+<td>Correo</td>
+</tr>
+<tr>
+<td><code>url</code></td>
+<td>Exige <code>http(s)://</code></td>
+<td><code>/</code> y <code>.com</code></td>
+<td>Página personal</td>
+</tr>
+<tr>
+<td><code>tel</code></td>
+<td>Ninguna (validar en servidor)</td>
+<td>Numérico con <code>+</code></td>
+<td>Teléfono</td>
+</tr>
+<tr>
+<td><code>search</code></td>
+<td>Ninguna (botón de borrado)</td>
+<td>Alfanumérico</td>
+<td>Buscador</td>
+</tr>
+<tr>
+<td><code>number</code></td>
+<td>Números con <code>min</code>/<code>max</code>/<code>step</code></td>
+<td>Numérico <code>+ -</code></td>
+<td>Nota, edad</td>
+</tr>
+<tr>
+<td><code>range</code></td>
+<td>Dentro de <code>min</code>/<code>max</code></td>
+<td>Deslizador</td>
+<td>Satisfacción</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>Fecha del calendario</td>
+<td>Selector de fecha</td>
+<td>Nacimiento</td>
+</tr>
+<tr>
+<td><code>time</code></td>
+<td>Hora válida</td>
+<td>Selector de hora</td>
+<td>Tutoría</td>
+</tr>
+<tr>
+<td><code>datetime-local</code></td>
+<td>Fecha y hora juntas</td>
+<td>Fecha y hora</td>
+<td>Cita previa</td>
+</tr>
+<tr>
+<td><code>month</code></td>
+<td>Mes y año válidos</td>
+<td>Mes/año</td>
+<td>Caducidad</td>
+</tr>
+<tr>
+<td><code>week</code></td>
+<td>Semana ISO válida</td>
+<td>Selector de semana</td>
+<td>Entrega semanal</td>
+</tr>
+<tr>
+<td><code>color</code></td>
+<td>Solo <code>#rrggbb</code></td>
+<td>Paleta de color</td>
+<td>Color corporativo</td>
+</tr>
+<tr>
+<td><code>file</code></td>
+<td>Extensión según <code>accept</code></td>
+<td>Selector de archivos</td>
+<td>Subir currículum</td>
+</tr>
+<tr>
+<td><code>checkbox</code></td>
+<td>Marcado o no</td>
+<td>Casilla grande</td>
+<td>Aceptar condiciones</td>
+</tr>
+<tr>
+<td><code>radio</code></td>
+<td><strong>Uno</strong> del grupo marcado</td>
+<td>Casilla redonda</td>
+<td>Turno, pago</td>
+</tr>
+<tr>
+<td><code>hidden</code></td>
+<td>Oculto, no editable, <strong>sí se envía</strong></td>
+<td>—</td>
+<td>ID del curso</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Importante:</strong> <code>email</code>, <code>url</code> o <code>date</code> solo garantizan <strong>forma correcta</strong>, no que el dato sea <strong>verdadero</strong>. La validación definitiva es del servidor.</p>
+<h2 id="4-atributos-de-validacion-y-control">4. Atributos de validación y control</h2>
+<h3 id="41-required-readonly-y-disabled">4.1 <code>required</code>, <code>readonly</code> y <code>disabled</code></h3>
+<div class="language-html highlight"><span class="filename">estados.html</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">id</span><span class="o">=</span><span class="s">"dni"</span> <span class="na">name</span><span class="o">=</span><span class="s">"dni"</span> <span class="na">required</span><span class="p">&gt;</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="hll"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">id</span><span class="o">=</span><span class="s">"curso"</span> <span class="na">name</span><span class="o">=</span><span class="s">"curso"</span> <span class="na">value</span><span class="o">=</span><span class="s">"2026-2027"</span> <span class="na">readonly</span><span class="p">&gt;</span>
+</span></span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="hll"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">id</span><span class="o">=</span><span class="s">"codigo"</span> <span class="na">name</span><span class="o">=</span><span class="s">"codigo"</span> <span class="na">value</span><span class="o">=</span><span class="s">"DAW-A"</span> <span class="na">disabled</span><span class="p">&gt;</span>
+</span></span></code></pre></div>
+<p>El <mark><code>required</code></mark> <strong>bloquea el envío</strong> hasta que el campo tenga valor; <code>readonly</code> <strong>se envía</strong> (visible y tabulable); <code>disabled</code> <strong>no</strong> (gris, sin foco). El primero deja un valor calculado en el formulario; el segundo apaga un control hasta que corresponda.</p>
+<div class="admonition question">
+<p class="admonition-title">¿Qué llega al servidor?</p>
+<p>Los tres campos de arriba se cumplimentan y se pulsa el botón de envío. ¿Qué recibe el servidor y qué no?</p>
+<details class="success">
+<summary>Respuesta</summary>
+<ul>
+<li><code>dni</code> (<code>required</code>): se envía si tiene valor; <strong>vacío, el navegador ni siquiera deja enviar</strong>.</li>
+<li><code>curso</code> (<code>readonly</code>): <strong>sí se envía</strong>, porque el campo sigue visible, enfocable y con nombre.</li>
+<li><code>codigo</code> (<code>disabled</code>): <strong>no se envía</strong>, como si no existiera en el formulario.</li>
+</ul>
+</details>
+</div>
+<h3 id="42-min-max-step-minlength-maxlength">4.2 <code>min</code>, <code>max</code>, <code>step</code>, <code>minlength</code>, <code>maxlength</code></h3>
+<ul>
+<li><code>min</code>/<code>max</code> y <code>step</code> en <code>number</code> (<code>min="0" max="10" step="0.5"</code>), en <code>range</code> y en <code>date</code> (<code>min="2026-10-01"</code>): delimitan el intervalo.</li>
+<li>En <code>number</code>, <code>step</code> por defecto es <code>1</code>: <code>step="0.5"</code> admite 7,5 pero no 7,3.</li>
+<li><code>minlength</code>/<code>maxlength</code> miden <strong>caracteres</strong>; <code>maxlength</code> además corta la escritura.</li>
+</ul>
+<h3 id="43-pattern-validar-un-formato-exacto">4.3 <code>pattern</code>: validar un formato exacto</h3>
+<div class="language-html highlight"><span class="filename">nif.html</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"nif"</span><span class="p">&gt;</span>NIF<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">id</span><span class="o">=</span><span class="s">"nif"</span> <span class="na">name</span><span class="o">=</span><span class="s">"nif"</span> <span class="na">pattern</span><span class="o">=</span><span class="s">"[0-9]{8}[A-Za-z]"</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>       <span class="na">title</span><span class="o">=</span><span class="s">"8 dígitos y una letra, ej.: 12345678Z"</span> <span class="na">required</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<ul>
+<li><mark><code>pattern</code></mark> recibe una <strong>expresión regular</strong> que cubre <strong>todo</strong> el valor (el navegador añade <code>^</code> y <code>$</code>). Otro caso: <code>pattern="[A-Z]{3}-[0-9]{2}"</code> → <code>LMH-05</code>.</li>
+<li><code>title</code> alimenta el mensaje de error y describe el formato al lector.</li>
+<li>Sensible a mayúsculas: <code>[a-z]</code> no admite <code>A</code>.</li>
+</ul>
+<h3 id="44-placeholder-value-y-autocomplete">4.4 <code>placeholder</code>, <code>value</code> y <code>autocomplete</code></h3>
+<ul>
+<li><strong><code>placeholder</code></strong>: pista de formato; se borra al escribir y nunca sustituye al label (§ 2.2).</li>
+<li><strong><code>value</code></strong>: valor inicial o fijo; en los botones, el texto visible.</li>
+<li><strong><code>autocomplete</code></strong>: qué autocompleta el navegador (<code>name</code>, <code>email</code>, <code>tel</code>, <code>postal-code</code>, <code>current-password</code>, <code>cc-number</code>...); criterio <strong><abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 1.3.5</strong>.</li>
+</ul>
+<h3 id="45-multiple-accept-list-y-datalist">4.5 <code>multiple</code>, <code>accept</code>, <code>list</code> y <code>datalist</code></h3>
+<div class="language-html highlight"><span class="filename">adjuntos.html</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"file"</span> <span class="na">id</span><span class="o">=</span><span class="s">"docs"</span> <span class="na">name</span><span class="o">=</span><span class="s">"docs"</span> <span class="na">accept</span><span class="o">=</span><span class="s">".pdf,.jpg"</span> <span class="na">multiple</span><span class="p">&gt;</span> <span class="cm">&lt;!-- (1)! --&gt;</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">id</span><span class="o">=</span><span class="s">"modulo"</span> <span class="na">name</span><span class="o">=</span><span class="s">"modulo"</span> <span class="na">list</span><span class="o">=</span><span class="s">"modulos"</span><span class="p">&gt;</span> <span class="cm">&lt;!-- (2)! --&gt;</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">&lt;</span><span class="nt">datalist</span> <span class="na">id</span><span class="o">=</span><span class="s">"modulos"</span><span class="p">&gt;</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>  <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">"Lenguajes de marcas"</span><span class="p">&gt;</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">&lt;/</span><span class="nt">datalist</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<ol>
+<li>
+<p><code>multiple</code> permite adjuntar <strong>varios ficheros</strong> en un solo campo y <code>accept</code> filtra las extensiones que ofrece el selector.</p>
+</li>
+<li>
+<p><code>list</code> enlaza el campo con el <code>datalist</code> de debajo: el navegador muestra las <strong>sugerencias</strong> mientras se escribe.</p>
+</li>
+</ol>
+<p><code>datalist</code> ofrece <strong>sugerencias</strong> pero <strong>no obliga</strong> a elegir: no sustituye a un <code>&lt;select&gt;</code>, donde solo se escoge entre las opciones.</p>
+<h3 id="46-autofocus-spellcheck-e-inputmode">4.6 <code>autofocus</code>, <code>spellcheck</code> e <code>inputmode</code></h3>
+<ul>
+<li><strong><code>autofocus</code></strong>: enfoca al cargar; evítalo con varios campos: interrumpe a quien usa lector de pantalla.</li>
+<li><strong><code>spellcheck="false"</code></strong>: apaga el corrector (códigos, usuario, contraseñas).</li>
+<li><strong><code>inputmode</code></strong>: teclado virtual (<code>numeric</code>, <code>decimal</code>, <code>email</code>, <code>tel</code>) <strong>sin cambiar el <code>type</code></strong>; ideal para DNI o CP, donde <code>type="number"</code> admite <code>e</code> y <code>+</code>.</li>
+</ul>
+<h2 id="5-el-resto-de-controles">5. El resto de controles</h2>
+<h3 id="51-select-optgroup-y-selected">5.1 <code>select</code>, <code>optgroup</code> y <code>selected</code></h3>
+<div class="language-html highlight"><span class="filename">ciclo.html</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"ciclo"</span><span class="p">&gt;</span>Ciclo formativo<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="p">&lt;</span><span class="nt">select</span> <span class="na">id</span><span class="o">=</span><span class="s">"ciclo"</span> <span class="na">name</span><span class="o">=</span><span class="s">"ciclo"</span> <span class="na">required</span><span class="p">&gt;</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>  <span class="p">&lt;</span><span class="nt">optgroup</span> <span class="na">label</span><span class="o">=</span><span class="s">"Grado medio"</span><span class="p">&gt;</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">"smr"</span><span class="p">&gt;</span>Sistemas microinformáticos y redes<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>  <span class="p">&lt;/</span><span class="nt">optgroup</span><span class="p">&gt;</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>  <span class="p">&lt;</span><span class="nt">optgroup</span> <span class="na">label</span><span class="o">=</span><span class="s">"Grado superior"</span><span class="p">&gt;</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">"daw"</span> <span class="na">selected</span><span class="p">&gt;</span>Desarrollo de aplicaciones web<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>  <span class="p">&lt;/</span><span class="nt">optgroup</span><span class="p">&gt;</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<ul>
+<li>Lo que se envía es <strong><code>value</code></strong>; sin <code>value</code>, se envía el texto.</li>
+<li><strong><code>selected</code></strong> precarga y <strong><code>optgroup</code></strong> agrupa con un subtítulo.</li>
+<li><code>required</code> exige elegir: por eso se añade <code>&lt;option value="" disabled selected&gt;Elige una opción&lt;/option&gt;</code>.</li>
+</ul>
+<h3 id="52-textarea">5.2 <code>textarea</code></h3>
+<div class="language-html highlight"><span class="filename">observaciones.html</span><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"obs"</span><span class="p">&gt;</span>Observaciones<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="p">&lt;</span><span class="nt">textarea</span> <span class="na">id</span><span class="o">=</span><span class="s">"obs"</span> <span class="na">name</span><span class="o">=</span><span class="s">"obs"</span> <span class="na">rows</span><span class="o">=</span><span class="s">"4"</span> <span class="na">cols</span><span class="o">=</span><span class="s">"60"</span> <span class="na">maxlength</span><span class="o">=</span><span class="s">"500"</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>          <span class="na">placeholder</span><span class="o">=</span><span class="s">"Necesito adaptación de horario..."</span><span class="p">&gt;&lt;/</span><span class="nt">textarea</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<p><code>rows</code>/<code>cols</code> fijan el tamaño inicial y <code>maxlength</code> limita los caracteres; el texto va <strong>entre las etiquetas</strong>: no usa <code>value</code>.</p>
+<h3 id="53-output-progress-y-meter">5.3 <code>output</code>, <code>progress</code> y <code>meter</code></h3>
+<ul>
+<li><strong><code>&lt;output&gt;</code></strong>: resultado <strong>calculado</strong> (media de las notas, total de la cesta).</li>
+<li><strong><code>&lt;progress&gt;</code></strong>: avance de una <strong>tarea</strong> hacia una meta: <code>&lt;progress value="3" max="4"&gt;</code> (sin <code>value</code> queda indeterminado); subida de archivo, paso 3 de 4.</li>
+<li><strong><code>&lt;meter&gt;</code></strong>: medida con <strong>umbral</strong> que se colorea sola: <code>&lt;meter value="6,7" low="5" high="8"&gt;</code> (nota, espacio en disco, batería).</li>
+</ul>
+<p>Clave: <code>progress</code> es <strong>cómo va</strong> una operación; <code>meter</code> es <strong>en qué estado</strong> está una cantidad.</p>
+<h3 id="54-button-typesubmit-reset-o-button">5.4 <code>&lt;button&gt;</code>: <code>type="submit"</code>, <code>reset</code> o <code>button</code></h3>
+<div class="language-html highlight"><span class="filename">botones.html</span><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">"submit"</span><span class="p">&gt;</span>Enviar matrícula<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>        <span class="cm">&lt;!-- envía el form --&gt;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">"reset"</span><span class="p">&gt;</span>Borrar todo<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>              <span class="cm">&lt;!-- valores iniciales --&gt;</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">"button"</span> <span class="na">id</span><span class="o">=</span><span class="s">"vista"</span><span class="p">&gt;</span>Vista previa<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span> <span class="cm">&lt;!-- solo con JS --&gt;</span>
+</span></code></pre></div>
+<p>⚠ El <strong>valor por defecto de <code>&lt;button&gt;</code> es <code>submit</code>, no <code>button</code></strong> (igual que <code>&lt;input type="submit"&gt;</code>): un botón "Calcular media" <strong>sin <code>type</code></strong> envía el formulario sin querer. <strong>Escribe siempre <code>type</code></strong>.</p>
+<h2 id="6-validacion-nativa-de-html5">6. Validación nativa de HTML5</h2>
+<h3 id="61-mensajes-del-navegador-y-pseudoclases">6.1 Mensajes del navegador y pseudoclases</h3>
+<p>El navegador comprueba <code>required</code>, <code>type</code>, <code>pattern</code>, <code>min</code>/<code>max</code>... y muestra su mensaje (<em>"Introduce un correo electrónico válido"</em>). Es correcto, pero <strong>no se estila con CSS</strong>; sí lo hacen las pseudoclases:</p>
+<div class="language-css highlight"><span class="filename">validacion.css</span><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="hll"><span class="nt">input</span><span class="p">:</span><span class="nd">invalid</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">:</span><span class="nd">placeholder-shown</span><span class="o">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#b00020</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">  </span><span class="c">/* error real */</span>
+</span></span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nt">input</span><span class="p">:</span><span class="nd">valid</span><span class="w">                            </span><span class="p">{</span><span class="w"> </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#146c2e</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="hll"><span class="nt">input</span><span class="p">:</span><span class="nd">user-invalid</span><span class="w">                      </span><span class="p">{</span><span class="w"> </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#b00020</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">  </span><span class="c">/* tras interactuar */</span>
+</span></span></code></pre></div>
+<p><code>:user-invalid</code> marca el campo <strong>solo después</strong> de escribir o enviar, evitando que la página arranque "en rojo".</p>
+<h3 id="62-constraint-validation-api">6.2 Constraint Validation API</h3>
+<p>Para leer el estado desde JavaScript (→ <a href="../08-apis-html5/">08-apis-html5.md</a>):</p>
+<ul>
+<li><strong><code>campo.checkValidity()</code></strong> → <code>true</code>/<code>false</code> aplicando todas las reglas.</li>
+<li><strong><code>campo.validity</code></strong> → el motivo: <code>valueMissing</code>, <code>typeMismatch</code>, <code>patternMismatch</code>, <code>tooShort</code>, <code>rangeUnderflow</code>, <code>stepMismatch</code>, <code>customError</code>...</li>
+<li><strong><code>campo.validationMessage</code></strong> → texto de error listo para mostrar y <strong><code>setCustomValidity("...")</code></strong> → mensaje propio (cadena vacía para limpiarlo).</li>
+</ul>
+<h3 id="63-novalidate-y-validacion-propia">6.3 <code>novalidate</code> y validación propia</h3>
+<p><code>&lt;form action="/matricula" method="post" novalidate&gt;</code> apaga los globos nativos para mostrar errores con <strong>nuestro diseño e idioma</strong>. A cambio la validación pasa a JavaScript, que puede fallar: se mantienen <code>required</code>, <code>pattern</code> y <code>type</code> en el <abbr title="HyperText Markup Language">HTML</abbr> y <strong>se valida siempre también en el servidor</strong>.</p>
+<h2 id="7-accesibilidad-de-los-formularios">7. Accesibilidad de los formularios</h2>
+<ul>
+<li><strong><code>label</code> visible siempre</strong>, nunca solo <code>placeholder</code> (→ <a href="../07-estructura-semantica-y-aria/">07-estructura-semantica-y-aria.md</a>).</li>
+<li><strong>Errores asociados al campo</strong>: <code>aria-describedby</code> apunta al <code>id</code> del mensaje, <code>role="alert"</code> lo anuncia al aparecer y <code>aria-invalid="true"</code> marca el campo.</li>
+<li><strong><code>required</code> + <code>aria-required="true"</code></strong> cuando el estado lo gestiona el código.</li>
+<li><strong><code>fieldset</code>/<code>legend</code></strong> agrupan radios y checkboxes: el <code>legend</code> es el nombre del grupo.</li>
+<li><strong>Orden de tabulación = orden del documento</strong>: <code>Tab</code> pasa de campo en campo; evita <code>tabindex</code> positivos.</li>
+</ul>
+<div class="language-html highlight"><span class="filename">error-email.html</span><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"email"</span><span class="p">&gt;</span>Correo electrónico<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="hll"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"email"</span> <span class="na">id</span><span class="o">=</span><span class="s">"email"</span> <span class="na">name</span><span class="o">=</span><span class="s">"email"</span> <span class="na">required</span> <span class="na">aria-required</span><span class="o">=</span><span class="s">"true"</span>
+</span></span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="hll">       <span class="na">aria-describedby</span><span class="o">=</span><span class="s">"err-email"</span> <span class="na">aria-invalid</span><span class="o">=</span><span class="s">"true"</span><span class="p">&gt;</span> <span class="cm">&lt;!-- (1)! --&gt;</span>
+</span></span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="p">&lt;</span><span class="nt">p</span> <span class="na">id</span><span class="o">=</span><span class="s">"err-email"</span> <span class="na">role</span><span class="o">=</span><span class="s">"alert"</span><span class="p">&gt;</span>Debe tener formato usuario@dominio.com<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<ol>
+<li><code>aria-describedby</code> enlaza el mensaje con el campo, <code>aria-invalid="true"</code> lo declara erróneo y <code>role="alert"</code> hace que el lector <strong>lo anuncie al aparecer</strong>.</li>
+</ol>
+<div class="admonition success">
+<p class="admonition-title">Comprueba que el formulario es accesible</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Todos los campos tienen <strong><code>label</code> visible</strong>, no solo <code>placeholder</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Cada error apunta al campo con <strong><code>aria-describedby</code></strong> y se anuncia con <strong><code>role="alert"</code></strong>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Los grupos de radios van con <strong><code>fieldset</code> + <code>legend</code></strong>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> El orden de <code>Tab</code> <strong>coincide con el orden visual</strong> (sin <code>tabindex</code> positivos).</li>
+</ul>
+</div>
+<h2 id="8-ejemplo-practico-formulario-de-matricula">8. Ejemplo práctico: formulario de matrícula</h2>
+<div class="language-html highlight"><span class="filename">matricula.html</span><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">"/matricula"</span> <span class="na">method</span><span class="o">=</span><span class="s">"post"</span> <span class="na">enctype</span><span class="o">=</span><span class="s">"multipart/form-data"</span><span class="p">&gt;</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>  <span class="cm">&lt;!-- POST: nada de URL cargada; multipart: hay un file --&gt;</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>  <span class="p">&lt;</span><span class="nt">fieldset</span><span class="p">&gt;</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="p">&lt;</span><span class="nt">legend</span><span class="p">&gt;</span>Datos personales<span class="p">&lt;/</span><span class="nt">legend</span><span class="p">&gt;</span> <span class="cm">&lt;!-- (1)! --&gt;</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"nombre"</span><span class="p">&gt;</span>Nombre y apellidos<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">id</span><span class="o">=</span><span class="s">"nombre"</span> <span class="na">name</span><span class="o">=</span><span class="s">"nombre"</span> <span class="na">autocomplete</span><span class="o">=</span><span class="s">"name"</span> <span class="na">required</span><span class="p">&gt;</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    <span class="cm">&lt;!-- autocomplete cumple WCAG 1.3.5 --&gt;</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"dni"</span><span class="p">&gt;</span>DNI/NIE<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">id</span><span class="o">=</span><span class="s">"dni"</span> <span class="na">name</span><span class="o">=</span><span class="s">"dni"</span> <span class="na">pattern</span><span class="o">=</span><span class="s">"[0-9]{8}[A-Za-z]"</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>           <span class="na">title</span><span class="o">=</span><span class="s">"8 dígitos y una letra, ej.: 12345678Z"</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>           <span class="na">aria-describedby</span><span class="o">=</span><span class="s">"pista-dni"</span> <span class="na">required</span><span class="p">&gt;</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">id</span><span class="o">=</span><span class="s">"pista-dni"</span><span class="p">&gt;</span>Ejemplo: 12345678Z<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>    <span class="cm">&lt;!-- pista asociada al campo --&gt;</span>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"email"</span><span class="p">&gt;</span>Correo electrónico<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"email"</span> <span class="na">id</span><span class="o">=</span><span class="s">"email"</span> <span class="na">name</span><span class="o">=</span><span class="s">"email"</span> <span class="na">autocomplete</span><span class="o">=</span><span class="s">"email"</span> <span class="na">required</span><span class="p">&gt;</span>
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"nacimiento"</span><span class="p">&gt;</span>Fecha de nacimiento<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"date"</span> <span class="na">id</span><span class="o">=</span><span class="s">"nacimiento"</span> <span class="na">name</span><span class="o">=</span><span class="s">"nacimiento"</span> <span class="na">required</span><span class="p">&gt;</span>
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>  <span class="p">&lt;/</span><span class="nt">fieldset</span><span class="p">&gt;</span>
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>  <span class="p">&lt;</span><span class="nt">fieldset</span><span class="p">&gt;</span>
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>    <span class="p">&lt;</span><span class="nt">legend</span><span class="p">&gt;</span>Turno de matrícula<span class="p">&lt;/</span><span class="nt">legend</span><span class="p">&gt;</span>
+</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"radio"</span> <span class="na">id</span><span class="o">=</span><span class="s">"manana"</span> <span class="na">name</span><span class="o">=</span><span class="s">"turno"</span> <span class="na">value</span><span class="o">=</span><span class="s">"manana"</span> <span class="na">required</span><span class="p">&gt;</span>
+</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"manana"</span><span class="p">&gt;</span>Mañana<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-12-23"><a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>    <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"radio"</span> <span class="na">id</span><span class="o">=</span><span class="s">"tarde"</span> <span class="na">name</span><span class="o">=</span><span class="s">"turno"</span> <span class="na">value</span><span class="o">=</span><span class="s">"tarde"</span><span class="p">&gt;</span>
+</span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>    <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"tarde"</span><span class="p">&gt;</span>Tarde<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-12-25"><a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a>    <span class="cm">&lt;!-- mismo name: solo uno marcado --&gt;</span>
+</span><span id="__span-12-26"><a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a>  <span class="p">&lt;/</span><span class="nt">fieldset</span><span class="p">&gt;</span>
+</span><span id="__span-12-27"><a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a>  <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"observaciones"</span><span class="p">&gt;</span>Observaciones<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-12-28"><a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a>  <span class="p">&lt;</span><span class="nt">textarea</span> <span class="na">id</span><span class="o">=</span><span class="s">"observaciones"</span> <span class="na">name</span><span class="o">=</span><span class="s">"observaciones"</span> <span class="na">rows</span><span class="o">=</span><span class="s">"4"</span> <span class="na">cols</span><span class="o">=</span><span class="s">"60"</span>
+</span><span id="__span-12-29"><a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a>            <span class="na">maxlength</span><span class="o">=</span><span class="s">"500"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"Adaptación de horario..."</span><span class="p">&gt;&lt;/</span><span class="nt">textarea</span><span class="p">&gt;</span>
+</span><span id="__span-12-30"><a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a>  <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"cv"</span><span class="p">&gt;</span>Currículum (PDF)<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-12-31"><a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"file"</span> <span class="na">id</span><span class="o">=</span><span class="s">"cv"</span> <span class="na">name</span><span class="o">=</span><span class="s">"cv"</span> <span class="na">accept</span><span class="o">=</span><span class="s">".pdf, application/pdf"</span><span class="p">&gt;</span>
+</span><span id="__span-12-32"><a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"checkbox"</span> <span class="na">id</span><span class="o">=</span><span class="s">"terminos"</span> <span class="na">name</span><span class="o">=</span><span class="s">"terminos"</span> <span class="na">value</span><span class="o">=</span><span class="s">"si"</span> <span class="na">required</span><span class="p">&gt;</span> <span class="cm">&lt;!-- (2)! --&gt;</span>
+</span><span id="__span-12-33"><a id="__codelineno-12-33" name="__codelineno-12-33" href="#__codelineno-12-33"></a>  <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">"terminos"</span><span class="p">&gt;</span>He leído y acepto la normativa del centro<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+</span><span id="__span-12-34"><a id="__codelineno-12-34" name="__codelineno-12-34" href="#__codelineno-12-34"></a>  <span class="cm">&lt;!-- required: sin marcarlo no se envía --&gt;</span>
+</span><span id="__span-12-35"><a id="__codelineno-12-35" name="__codelineno-12-35" href="#__codelineno-12-35"></a>  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">"submit"</span><span class="p">&gt;</span>Enviar matrícula<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span><span id="__span-12-36"><a id="__codelineno-12-36" name="__codelineno-12-36" href="#__codelineno-12-36"></a>  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">"reset"</span><span class="p">&gt;</span>Borrar formulario<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span><span id="__span-12-37"><a id="__codelineno-12-37" name="__codelineno-12-37" href="#__codelineno-12-37"></a><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<ol>
+<li>
+<p>El <code>legend</code> da <strong>nombre accesible</strong> al primer grupo: el lector lo anuncia antes de cada campo que lleva dentro.</p>
+</li>
+<li>
+<p><code>required</code> en la casilla de normativa: <strong>si no se marca, el navegador bloquea el envío</strong>.</p>
+</li>
+</ol>
+<p><code>label</code>+<code>id</code> y <code>name</code> en cada campo, validación nativa y <code>POST</code> para los datos personales.</p>
+<h2 id="9-claves-para-el-examen-y-errores-frecuentes">9. Claves para el examen y errores frecuentes</h2>
+<div class="admonition warning">
+<p class="admonition-title">Error común</p>
+<p>Usar el <strong><code>placeholder</code> como si fuera el <code>label</code></strong>. Al escribir desaparece: el usuario ya no sabe qué campo rellena, el lector no lo toma como nombre y, si el campo viene precargado, no se ve nada. Solución: <code>&lt;label for="id"&gt;</code> <strong>siempre visible</strong> y el <code>placeholder</code> solo como pista.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Error común</p>
+<p>Enviar un login o datos sensibles con <strong><code>method="get"</code></strong>: los valores quedan en la barra de dirección, en el historial, en los marcadores y en los registros del servidor. Contraseñas, DNI y tarjetas → <strong><code>method="post"</code></strong>.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Claves para el examen</p>
+<ul>
+<li><code>&lt;form&gt;</code> = <code>action</code> (dónde) + <code>method</code> (cómo): <code>GET</code> para consultas en la URL, <code>POST</code> para datos sensibles o largos.</li>
+<li><code>label for</code> ↔ <code>id</code> es obligatorio; el <code>placeholder</code> nunca sustituye a la etiqueta.</li>
+<li>Sin <strong><code>name</code></strong> el dato no llega al servidor; <strong><code>readonly</code> sí se envía, <code>disabled</code> no</strong>.</li>
+<li>El <strong><code>type</code></strong> aporta validación y teclado móvil; se refuerzan con <code>required</code>, <code>pattern</code> y <code>min</code>/<code>max</code>/<code>step</code>.</li>
+<li><code>fieldset</code> + <code>legend</code> agrupan; los radios comparten <code>name</code> y cada control su <code>id</code>/<code>label</code>.</li>
+<li><code>&lt;button&gt;</code> <strong>sin <code>type</code> equivale a <code>submit</code></strong>: los botones de acción propia necesitan <code>type="button"</code>.</li>
+<li>Validación con pseudoclases CSS y Constraint Validation API → <a href="../08-apis-html5/">08-apis-html5.md</a>; práctica → <a href="../09-ejercicios/">09-ejercicios.md</a>.</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../05-tablas/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 05. Tablas de datos">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                05. Tablas de datos
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../07-estructura-semantica-y-aria/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 07. Estructura semántica y ARIA">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                07. Estructura semántica y ARIA
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 The authors
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      
+      
+        
+        
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.top","navigation.tracking","search.highlight"],"redirect":null,"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copiado al portapapeles","clipboard.copy":"Copiar al portapapeles","search.result.more.one":"1 más en esta página","search.result.more.other":"# más en esta página","search.result.none":"No se encontraron documentos","search.result.one":"1 documento encontrado","search.result.other":"# documentos encontrados","search.result.placeholder":"Teclee para comenzar búsqueda","search.result.term.missing":"Falta","select.version":"Seleccionar versión"},"version":null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b7d3f789.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2827 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Propiedad background completa, degradados, formatos de imagen y su optimización, srcset/picture/object-fit, bordes, sombras, filtros, blend modes, máscaras y clip-path.">
+      
+      
+        <meta name="author" content="Jose Quesada">
+      
+      
+      
+        <link rel="prev" href="../08-unidades-tipografia-colores/">
+      
+      
+        <link rel="next" href="../10-diseno-responsivo/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="zensical-0.0.66">
+    
+    
+      
+        <title>Unidad 09 — Fondos, imágenes y decoración - HTML y CSS — Apuntes de interfaces</title>
+      
+    
+    
+      
+        
+      
+      <link rel="stylesheet" href="../../assets/stylesheets/modern/main.1502b751.min.css">
+      
+        
+          
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/modern/palette.812a03bb.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,500,500i,700,700i%7CJetBrains+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/css/custom.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_scope.pathname.endsWith("/")||(__md_scope=new URL(__md_scope.pathname+"/",location)),__md_hash=e=>[...e].reduce(((e,t)=>(e<<5)-e+t.charCodeAt(0)),0),__md_get=(e,t=localStorage,_=__md_scope)=>JSON.parse(t.getItem(_.pathname+"."+e)),__md_set=(e,t,_=localStorage,a=__md_scope)=>{try{_.setItem(a.pathname+"."+e,JSON.stringify(t))}catch(e){}},document.documentElement.setAttribute("data-platform",navigator.platform)</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer" aria-label="Navegación"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#unidad-09-fondos-imagenes-y-decoracion" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="HTML y CSS — Apuntes de interfaces" class="md-header__button md-logo" aria-label="HTML y CSS — Apuntes de interfaces" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Navegación">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-menu" viewBox="0 0 24 24"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            HTML y CSS — Apuntes de interfaces
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Unidad 09 — Fondos, imágenes y decoración
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="none" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-moon" viewBox="0 0 24 24"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search" aria-label="Buscar">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog" aria-label="Buscar">
+  <button type="button" class="md-search__button">
+    Buscar
+  </button>
+</div>
+      
+    
+    <div class="md-header__source">
+      
+    </div>
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="HTML y CSS — Apuntes de interfaces" class="md-nav__button md-logo" aria-label="HTML y CSS — Apuntes de interfaces" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+
+    </a>
+    HTML y CSS — Apuntes de interfaces
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-rocket" viewBox="0 0 24 24"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"/><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  Inicio
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  HTML5
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+            <label class="md-nav__title" for="__nav_2">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  HTML5
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../html/01-introduccion-html5/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-code-xml" viewBox="0 0 24 24"><path d="m18 16 4-4-4-4M6 8l-4 4 4 4M14.5 4l-5 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  01. Introducción a HTML5
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../html/02-texto-y-semantica/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-type" viewBox="0 0 24 24"><path d="M12 4v16M4 7V5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v2M9 20h6"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  02. Texto y semántica
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../html/03-enlaces-y-recursos/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  03. Enlaces y recursos
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../html/04-multimedia/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-film" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18M3 7.5h4M3 12h18M3 16.5h4M17 3v18M17 7.5h4M17 16.5h4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  04. Multimedia
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../html/05-tablas/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-table" viewBox="0 0 24 24"><path d="M12 3v18"/><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M3 15h18"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  05. Tablas de datos
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../html/06-formularios-html5/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-clipboard-list" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2M12 11h4M12 16h4M8 11h.01M8 16h.01"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  06. Formularios HTML5
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../html/07-estructura-semantica-y-aria/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  07. Estructura semántica y ARIA
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../html/08-apis-html5/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-braces" viewBox="0 0 24 24"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  08. APIs y funcionalidades nativas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../html/09-ejercicios/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-pencil" viewBox="0 0 24 24"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497zM15 5l4 4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  09. Ejercicios
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../html/10-ejercicios-soluciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  10. Ejercicios: soluciones
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+  CSS
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        
+          <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+            <label class="md-nav__title" for="__nav_3">
+              <span class="md-nav__icon md-icon"></span>
+              
+  
+  CSS
+
+            </label>
+            <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-normativa-y-marco-curricular/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  00. Normativa y marco curricular
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-fundamentos-de-css/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-lightbulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  01. Fundamentos de CSS
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-selectores/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-crosshair" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M22 12h-4M6 12H2M12 6V2M12 22v-4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  02. Selectores
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-modelo-de-caja/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-box" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  03. Modelo de caja
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-posicionamiento-y-z-index/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-move" viewBox="0 0 24 24"><path d="M12 2v20M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M5 9l-3 3 3 3M9 5l3-3 3 3"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  04. Posicionamiento y z-index
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-flexbox/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-move-horizontal" viewBox="0 0 24 24"><path d="m18 8 4 4-4 4M2 12h20M6 8l-4 4 4 4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  05. Flexbox
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-grid/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-layout-grid" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  06. Grid
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-flujo-multicolumna-tablas-display/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-columns-3" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18M15 3v18"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  07. Flujo, multicolumna, tablas y display
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-unidades-tipografia-colores/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-palette" viewBox="0 0 24 24"><path d="M12 22a1 1 0 0 1 0-20 10 9 0 0 1 10 9 5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z"/><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  08. Unidades, tipografía y colores
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-image" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  09. Fondos, imágenes y decoración
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="././" class="md-nav__link md-nav__link--active">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-image" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  09. Fondos, imágenes y decoración
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-background-la-propiedad-maestra" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1. <code>background</code>: la propiedad maestra
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. background: la propiedad maestra">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-subpropiedades" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1.1. Subpropiedades
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-el-atajo-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1.2. El atajo <code>background</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-multiples-capas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1.3. Múltiples capas
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-degradados-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2. Degradados (gradient)
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Degradados (gradient)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-linear-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.1. <code>linear-gradient</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-radial-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.2. <code>radial-gradient</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-conic-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.3. <code>conic-gradient</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-repetidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.4. Repetidos
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-trucos-clasicos-con-degradados" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.5. Trucos clásicos con degradados
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-imagenes-formatos-y-eleccion-ra-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3. Imágenes: formatos y elección (RA 3)
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-integrar-imagenes-en-htmlcss-ra-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4. Integrar imágenes en HTML+CSS (RA 4)
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Integrar imágenes en HTML+CSS (RA 4)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-img-responsivo-con-srcset-y-sizes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.1. <code>&lt;img&gt;</code> responsivo con <code>srcset</code> y <code>sizes</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-picture-para-arte-direccional-y-formatos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.2. <code>&lt;picture&gt;</code> para arte direccional y formatos
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-object-fit-object-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.3. <code>object-fit</code> / <code>object-position</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-imagen-como-fondo-vs-img" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.4. Imagen como fondo vs <code>&lt;img&gt;</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-image-rendering-y-image-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.5. <code>image-rendering</code> y <code>image-set()</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-bordes-sombras-y-contornos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5. Bordes, sombras y contornos
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Bordes, sombras y contornos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-bordes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.1. Bordes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-box-shadow" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.2. <code>box-shadow</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-outline-el-amigo-del-foco" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.3. <code>outline</code> (el amigo del foco)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-filtros-y-modos-de-mezcla" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6. Filtros y modos de mezcla
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Filtros y modos de mezcla">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.1. <code>filter</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-backdrop-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.2. <code>backdrop-filter</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-blend-modes-mix-blend-mode-background-blend-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.3. Blend modes (<code>mix-blend-mode</code>, <code>background-blend-mode</code>)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-mascaras-y-clip-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        7. Máscaras y <code>clip-path</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Máscaras y clip-path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-clip-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        7.1. <code>clip-path</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-mask-mask-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        7.2. <code>mask</code> / <code>mask-image</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-patrones-decorativos-completos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8. Patrones decorativos completos
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Patrones decorativos completos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-glassmorphism-accesible" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8.1. Glassmorphism accesible
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-skeleton-loader-con-degradado-animado" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8.2. Skeleton loader con degradado animado
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-fondo-con-ruido-textura" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8.3. Fondo con ruido (textura)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-errores-comunes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        9. Errores comunes
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-autoevaluacion-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        10. Autoevaluación rápida
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-diseno-responsivo/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  10. Diseño responsivo
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-transiciones-animaciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-zap" viewBox="0 0 24 24"><path d="M15.914 4a1.5 1.5 0 0 0-2.474-1.561l-9 9A1.5 1.5 0 0 0 5.5 14h4.002a.5.5 0 0 1 .471.666L8.086 20a1.5 1.5 0 0 0 2.475 1.56l9-9A1.5 1.5 0 0 0 18.5 10h-3.997a.5.5 0 0 1-.472-.667z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  11. Transiciones y animaciones
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-css-moderno-arquitectura/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-blocks" viewBox="0 0 24 24"><path d="M10 22V7a1 1 0 0 0-1-1H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1H2"/><rect width="8" height="8" x="14" y="2" rx="1"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  12. CSS moderno y arquitectura
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../13-accesibilidad-usabilidad/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-accessibility" viewBox="0 0 24 24"><circle cx="16" cy="4" r="1"/><path d="m18 19 1-7-6 1M5 8l3-3 5.5 3-2.36 3.5M4.24 14.5a5 5 0 0 0 6.88 6"/><path d="M13.76 17.5a5 5 0 0 0-6.88-6"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  13. Accesibilidad y usabilidad
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../14-rendimiento-buenas-practicas/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-gauge" viewBox="0 0 24 24"><path d="m12 14 4-4M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  14. Rendimiento y buenas prácticas
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../15-ejercicios-glosario-recursos/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-list-checks" viewBox="0 0 24 24"><path d="M13 5h8M13 12h8M13 19h8M3 17l2 2 4-4M3 7l2 2 4-4"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  15. Ejercicios, glosario y recursos
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+            </ul>
+          </nav>
+        
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  
+                    
+                    
+                    
+                      
+                    
+                    
+                      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+                      <div class="md-sidebar-button__wrapper">
+                        <label class="md-sidebar-button" for="__toc"></label>
+                      </div>
+                    
+                  
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-background-la-propiedad-maestra" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1. <code>background</code>: la propiedad maestra
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. background: la propiedad maestra">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-subpropiedades" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1.1. Subpropiedades
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-el-atajo-background" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1.2. El atajo <code>background</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-multiples-capas" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        1.3. Múltiples capas
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-degradados-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2. Degradados (gradient)
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Degradados (gradient)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-linear-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.1. <code>linear-gradient</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-radial-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.2. <code>radial-gradient</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-conic-gradient" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.3. <code>conic-gradient</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-repetidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.4. Repetidos
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-trucos-clasicos-con-degradados" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        2.5. Trucos clásicos con degradados
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-imagenes-formatos-y-eleccion-ra-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        3. Imágenes: formatos y elección (RA 3)
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-integrar-imagenes-en-htmlcss-ra-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4. Integrar imágenes en HTML+CSS (RA 4)
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Integrar imágenes en HTML+CSS (RA 4)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-img-responsivo-con-srcset-y-sizes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.1. <code>&lt;img&gt;</code> responsivo con <code>srcset</code> y <code>sizes</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-picture-para-arte-direccional-y-formatos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.2. <code>&lt;picture&gt;</code> para arte direccional y formatos
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-object-fit-object-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.3. <code>object-fit</code> / <code>object-position</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44-imagen-como-fondo-vs-img" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.4. Imagen como fondo vs <code>&lt;img&gt;</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45-image-rendering-y-image-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        4.5. <code>image-rendering</code> y <code>image-set()</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-bordes-sombras-y-contornos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5. Bordes, sombras y contornos
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Bordes, sombras y contornos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-bordes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.1. Bordes
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-box-shadow" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.2. <code>box-shadow</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-outline-el-amigo-del-foco" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        5.3. <code>outline</code> (el amigo del foco)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-filtros-y-modos-de-mezcla" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6. Filtros y modos de mezcla
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Filtros y modos de mezcla">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.1. <code>filter</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-backdrop-filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.2. <code>backdrop-filter</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-blend-modes-mix-blend-mode-background-blend-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        6.3. Blend modes (<code>mix-blend-mode</code>, <code>background-blend-mode</code>)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-mascaras-y-clip-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        7. Máscaras y <code>clip-path</code>
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Máscaras y clip-path">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-clip-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        7.1. <code>clip-path</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-mask-mask-image" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        7.2. <code>mask</code> / <code>mask-image</code>
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-patrones-decorativos-completos" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8. Patrones decorativos completos
+      </span>
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Patrones decorativos completos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-glassmorphism-accesible" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8.1. Glassmorphism accesible
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-skeleton-loader-con-degradado-animado" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8.2. Skeleton loader con degradado animado
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-fondo-con-ruido-textura" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        8.3. Fondo con ruido (textura)
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-errores-comunes" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        9. Errores comunes
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-autoevaluacion-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        10. Autoevaluación rápida
+      </span>
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navegación" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  
+  <span class="md-ellipsis">
+    Inicio
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+      <li class="md-path__item">
+        <a href="../00-normativa-y-marco-curricular/" class="md-path__link">
+          
+  
+  <span class="md-ellipsis">
+    CSS
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+<h1 id="unidad-09-fondos-imagenes-y-decoracion">Unidad 09 · Fondos, imágenes y decoración</h1>
+<p>Cubre el <abbr title="Resultado de Aprendizaje">RA</abbr> &frac34; del módulo 0615 (preparar e integrar contenido multimedia) desde el lado CSS: cómo presentar, optimizar y decorar con imágenes.</p>
+<div class="admonition note">
+<p class="admonition-title">Conocimientos previos</p>
+<ul>
+<li>Modelo de caja y <strong>unidades</strong> de la <a href="../03-modelo-de-caja/">unidad 03</a>.</li>
+<li>Imágenes y multimedia en HTML: <code>&lt;img&gt;</code>, <code>alt</code> y formatos (unidad 04).</li>
+<li>Idea de <strong>accesibilidad</strong> y de métrica de rendimiento (unidad 13).</li>
+</ul>
+</div>
+<h2 id="1-background-la-propiedad-maestra">1. <code>background</code>: la propiedad maestra</h2>
+<p>Domina <mark>background-size</mark>: <code>cover</code> <strong>llena recortando</strong>, <code>contain</code> <strong>cabe entero</strong>.</p>
+<h3 id="11-subpropiedades">1.1. Subpropiedades</h3>
+<table>
+<thead>
+<tr>
+<th>Propiedad</th>
+<th>Valores clave</th>
+<th>Notas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>background-image</code></td>
+<td><code>url()</code>, degradados, <code>image-set()</code>, <code>element()</code> (sin soporte), <code>paint()</code> (Houdini, parcial)</td>
+<td>Acepta <strong>lista</strong> (varias capas).</td>
+</tr>
+<tr>
+<td><code>background-position</code></td>
+<td><code>x y</code>, keywords (<code>top left</code>…), <code>%</code>, longitudes</td>
+<td>Con dos valores: primero X, luego Y.</td>
+</tr>
+<tr>
+<td><code>background-size</code></td>
+<td><code>cover</code>, <code>contain</code>, longitud(es), <code>%</code>, <code>auto</code></td>
+<td><code>cover</code>: llena recortando; <code>contain</code>: cabe entero.</td>
+</tr>
+<tr>
+<td><code>background-repeat</code></td>
+<td><code>repeat</code>, <code>no-repeat</code>, <code>repeat-x/y</code>, <code>space</code>, <code>round</code></td>
+<td><code>space</code>/<code>round</code>: reparten sin cortar tiles.</td>
+</tr>
+<tr>
+<td><code>background-origin</code></td>
+<td><code>padding-box</code>, <code>border-box</code>, <code>content-box</code></td>
+<td>De dónde se mide la posición.</td>
+</tr>
+<tr>
+<td><code>background-clip</code></td>
+<td><code>border-box</code> (def), <code>padding-box</code>, <code>content-box</code>, <strong><code>text</code></strong></td>
+<td><code>text</code>: recorta al texto (efecto degradado tipográfico).</td>
+</tr>
+<tr>
+<td><code>background-attachment</code></td>
+<td><code>scroll</code> (def), <code>local</code>, <code>fixed</code></td>
+<td><code>fixed</code>: parallax barato (cuidado en móvil: muchos lo desactivan).</td>
+</tr>
+<tr>
+<td><code>background-color</code></td>
+<td>cualquier color</td>
+<td>Capa base siempre visible.</td>
+</tr>
+<tr>
+<td><code>background-blend-mode</code></td>
+<td>modos de mezcla (ver sección 6)</td>
+<td>Mezcla cada capa de imagen con el color/capas inferiores.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Una propiedad, ocho subpropiedades</p>
+<ul>
+<li><code>background</code> es un <strong>atajo</strong>: lo que no escribas se resetea.</li>
+<li>Cada subpropiedad admite <strong>listas</strong>, una entrada por capa.</li>
+<li>Primera capa de la lista = <strong>la que se pinta encima</strong>.</li>
+</ul>
+</div>
+<h3 id="12-el-atajo-background">1.2. El atajo <code>background</code></h3>
+<div class="language-css highlight"><span class="filename">hero.css</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">.</span><span class="nc">hero</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="hll"><span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#0b1020</span><span class="w"> </span><span class="nb">url</span><span class="p">(</span><span class="s2">"/img/fondo.jpg"</span><span class="p">)</span><span class="w"> </span><span class="kc">center</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="kc">cover</span><span class="w"> </span><span class="kc">no-repeat</span><span class="w"> </span><span class="kc">fixed</span><span class="p">;</span>
+</span></span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Orden libre, pero: la <strong>primera</strong> longitud = position, la <strong>segunda</strong> = size (separadas por <code>/</code>). Resetear con <code>background: none</code> o <code>background: initial</code>.</p>
+<h3 id="13-multiples-capas">1.3. Múltiples capas</h3>
+<div class="language-css highlight"><span class="filename">capas.css</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">.</span><span class="nc">textura</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="k">background-image</span><span class="p">:</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nb">url</span><span class="p">(</span><span class="s2">"ruido.svg"</span><span class="p">),</span><span class="w">                       </span><span class="c">/* capa 1 (encima) (1)! */</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="nb">radial-gradient</span><span class="p">(</span><span class="kc">circle</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="mi">20</span><span class="kt">%</span><span class="w"> </span><span class="mi">20</span><span class="kt">%</span><span class="p">,</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">255</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">.2</span><span class="p">),</span><span class="w"> </span><span class="kc">transparent</span><span class="w"> </span><span class="mi">50</span><span class="kt">%</span><span class="p">),</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="nb">linear-gradient</span><span class="p">(</span><span class="mh">#222</span><span class="p">,</span><span class="w"> </span><span class="mh">#111</span><span class="p">);</span><span class="w">            </span><span class="c">/* capa base */</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">  </span><span class="k">background-size</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="kt">px</span><span class="p">,</span><span class="w"> </span><span class="kc">auto</span><span class="p">,</span><span class="w"> </span><span class="kc">auto</span><span class="p">;</span><span class="w">       </span><span class="c">/* por capa, mismo orden (2)! */</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="k">background-repeat</span><span class="p">:</span><span class="w"> </span><span class="kc">repeat</span><span class="p">,</span><span class="w"> </span><span class="kc">no-repeat</span><span class="p">,</span><span class="w"> </span><span class="kc">no-repeat</span><span class="p">;</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">}</span>
+</span></code></pre></div>
+<ol>
+<li>La <strong>primera de la lista se pinta encima</strong> de las demás.</li>
+<li>Las listas se emparejan <strong>por posición</strong>: 3 tamaños para 3 capas.</li>
+</ol>
+<p>La primera de la lista se pinta <strong>encima</strong>. Cada subpropiedad en lista se aplica por posición.</p>
+<h2 id="2-degradados-gradient">2. Degradados (gradient)</h2>
+<p>Para examen, el <mark>linear-gradient</mark> es el rey: <strong>dirección + paradas de color</strong>.</p>
+<h3 id="21-linear-gradient">2.1. <code>linear-gradient</code></h3>
+<div class="language-css highlight"><span class="filename">degradado.css</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">background-image</span><span class="o">:</span><span class="w"> </span><span class="nt">linear-gradient</span><span class="o">(</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">135deg</span><span class="o">,</span><span class="w">                          </span><span class="c">/* dirección */</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">var</span><span class="o">(</span><span class="nt">--c1</span><span class="o">)</span><span class="w"> </span><span class="nt">0</span><span class="o">%,</span><span class="w">                    </span><span class="c">/* parada inicial */</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nt">var</span><span class="o">(</span><span class="nt">--c2</span><span class="o">)</span><span class="w"> </span><span class="nt">50</span><span class="o">%,</span><span class="w"> </span><span class="nt">var</span><span class="o">(</span><span class="nt">--c3</span><span class="o">)</span><span class="w"> </span><span class="nt">100</span><span class="o">%</span><span class="w">    </span><span class="c">/* paradas intermedias */</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="o">);</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="c">/* atajos de dirección: to right, to bottom left, 45deg… */</span>
+</span></code></pre></div>
+<ul>
+<li>Ángulo: <code>0deg</code> = hacia arriba; <code>90deg</code> = hacia la derecha.</li>
+<li>Paradas dobles (<code>red 20% 40%</code>) crean <strong>tramos sólidos</strong>.</li>
+<li>Interpolación en espacio elegido: <code>linear-gradient(in oklab, red, blue)</code> evita el paso por marrón.</li>
+</ul>
+<h3 id="22-radial-gradient">2.2. <code>radial-gradient</code></h3>
+<div class="language-css highlight"><span class="filename">radial.css</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">background-image</span><span class="o">:</span><span class="w"> </span><span class="nt">radial-gradient</span><span class="o">(</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">circle</span><span class="w"> </span><span class="nt">at</span><span class="w"> </span><span class="nt">top</span><span class="w"> </span><span class="nt">left</span><span class="o">,</span><span class="w">              </span><span class="c">/* forma + origen */</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="p">#</span><span class="nn">fff</span><span class="w"> </span><span class="nt">0</span><span class="o">%,</span><span class="w"> </span><span class="p">#</span><span class="nn">8894d0</span><span class="w"> </span><span class="nt">90</span><span class="o">%</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="o">);</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c">/* ellipse | circle [radio], at pos */</span>
+</span></code></pre></div>
+<h3 id="23-conic-gradient">2.3. <code>conic-gradient</code></h3>
+<div class="language-css highlight"><span class="filename">conico.css</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">background-image</span><span class="o">:</span><span class="w"> </span><span class="nt">conic-gradient</span><span class="o">(</span><span class="nt">from</span><span class="w"> </span><span class="nt">45deg</span><span class="o">,</span><span class="w"> </span><span class="p">#</span><span class="nn">f00</span><span class="o">,</span><span class="w"> </span><span class="p">#</span><span class="nn">ff0</span><span class="o">,</span><span class="w"> </span><span class="p">#</span><span class="nn">0f0</span><span class="o">,</span><span class="w"> </span><span class="p">#</span><span class="nn">00f</span><span class="o">,</span><span class="w"> </span><span class="p">#</span><span class="nn">f0f</span><span class="o">,</span><span class="w"> </span><span class="p">#</span><span class="nn">f00</span><span class="o">);</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c">/* anillos: conic-gradient(at 50% 50%, transparent 0 25%, #fff 0 50%, …) */</span>
+</span></code></pre></div>
+<p>Usos: donuts de progreso, aros, efectos «candy stripe», combinado con <code>mask</code> para gauge.</p>
+<h3 id="24-repetidos">2.4. Repetidos</h3>
+<p><code>repeating-linear-gradient(45deg, #eee 0 10px, #fff 10px 20px)</code> → rayas infinitas sin imagen. Ídem <code>repeating-radial-gradient</code> y <code>repeating-conic-gradient</code>.</p>
+<div class="admonition example">
+<p class="admonition-title">Rayas sin descargar nada</p>
+<div class="language-css highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">.</span><span class="nc">via</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nb">repeating-linear-gradient</span><span class="p">(</span><span class="mi">90</span><span class="kt">deg</span><span class="p">,</span><span class="w"> </span><span class="mh">#facc15</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">40</span><span class="kt">px</span><span class="p">,</span><span class="w"> </span><span class="kc">transparent</span><span class="w"> </span><span class="mi">40</span><span class="kt">px</span><span class="w"> </span><span class="mi">80</span><span class="kt">px</span><span class="p">);</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><strong>Cero peticiones</strong> y escala infinita: patrón generado por el navegador.</p>
+</div>
+<h3 id="25-trucos-clasicos-con-degradados">2.5. Trucos clásicos con degradados</h3>
+<div class="language-css highlight"><span class="filename">trucos.css</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c">/* Texto con degradado */</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="p">.</span><span class="nc">titulo</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nb">linear-gradient</span><span class="p">(</span><span class="mi">90</span><span class="kt">deg</span><span class="p">,</span><span class="w"> </span><span class="mh">#6366f1</span><span class="p">,</span><span class="w"> </span><span class="mh">#ec4899</span><span class="p">);</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">  </span><span class="k">background-clip</span><span class="p">:</span><span class="w"> </span><span class="kc">text</span><span class="p">;</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="kc">transparent</span><span class="p">;</span><span class="w">   </span><span class="c">/* -webkit-background-clip: text en Safari antiguo */</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">}</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="c">/* Borde degradado (truco de doble fondo) */</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="p">.</span><span class="nc">borde-grad</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">  </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="kc">transparent</span><span class="p">;</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">  </span><span class="k">background</span><span class="p">:</span>
+</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span><span class="nb">linear-gradient</span><span class="p">(</span><span class="mh">#fff</span><span class="p">,</span><span class="w"> </span><span class="mh">#fff</span><span class="p">)</span><span class="w"> </span><span class="kc">padding-box</span><span class="p">,</span>
+</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="w">    </span><span class="nb">linear-gradient</span><span class="p">(</span><span class="mi">90</span><span class="kt">deg</span><span class="p">,</span><span class="w"> </span><span class="mh">#f0f</span><span class="p">,</span><span class="w"> </span><span class="mh">#0ff</span><span class="p">)</span><span class="w"> </span><span class="kc">border-box</span><span class="p">;</span>
+</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a><span class="p">}</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>
+</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="c">/* Línea divisoria que desvanece */</span>
+</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="p">.</span><span class="nc">divisor</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">  </span><span class="k">height</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nb">linear-gradient</span><span class="p">(</span><span class="mi">90</span><span class="kt">deg</span><span class="p">,</span><span class="w"> </span><span class="kc">transparent</span><span class="p">,</span><span class="w"> </span><span class="kc">currentColor</span><span class="p">,</span><span class="w"> </span><span class="kc">transparent</span><span class="p">);</span>
+</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="p">}</span>
+</span></code></pre></div>
+<h2 id="3-imagenes-formatos-y-eleccion-ra-3">3. Imágenes: formatos y elección (<abbr title="Resultado de Aprendizaje">RA</abbr> 3)</h2>
+<p>La regla de oro: foto → <mark>AVIF</mark>/WebP, <strong>icono → SVG</strong>, animación corta → WebP.</p>
+<table>
+<thead>
+<tr>
+<th>Formato</th>
+<th>Tipo</th>
+<th>Compresión</th>
+<th>Transparencia</th>
+<th>Animación</th>
+<th>Cuándo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AVIF</strong></td>
+<td>Raster</td>
+<td>Mejor (20–50% menos que WebP)</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Imágenes modernas; fallback WebP.</td>
+</tr>
+<tr>
+<td><strong>WebP</strong></td>
+<td>Raster</td>
+<td>Muy buena</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Estándar actual universal.</td>
+</tr>
+<tr>
+<td><strong>JPEG</strong></td>
+<td>Raster</td>
+<td>Buena (pérdida)</td>
+<td>No</td>
+<td>No</td>
+<td>Fotos sin transparencia.</td>
+</tr>
+<tr>
+<td><strong>PNG-8</strong></td>
+<td>Raster</td>
+<td>Media (paleta)</td>
+<td>1 bit</td>
+<td>No</td>
+<td>Gráficos simples, logos planos.</td>
+</tr>
+<tr>
+<td><strong>PNG-24</strong></td>
+<td>Raster</td>
+<td>Pesada</td>
+<td>Alfa</td>
+<td>No</td>
+<td>Capturas con gradientes/transparencia compleja.</td>
+</tr>
+<tr>
+<td><strong>GIF</strong></td>
+<td>Raster</td>
+<td>Pobres (256 colores)</td>
+<td>1 bit</td>
+<td>Sí</td>
+<td>Legacy; sustituir por WebP animado.</td>
+</tr>
+<tr>
+<td><strong>SVG</strong></td>
+<td>Vector</td>
+<td>Textual</td>
+<td>Sí</td>
+<td>Sí (SMIL/CSS)</td>
+<td>Iconos, logotipos, ilustraciones geométricas, patrones.</td>
+</tr>
+<tr>
+<td><strong>ICO/cur</strong></td>
+<td>Raster</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>Favicons/cursors.</td>
+</tr>
+</tbody>
+</table>
+<p>Reglas de oro:</p>
+<ol>
+<li><strong>Foto → AVIF/WebP</strong>; <strong>icono/logo → SVG</strong>; <strong>animación corta → WebP/GIF solo legacy</strong>.</li>
+<li>Optimiza: calidad 70–85, dimensiones reales (no servir 4000 px donde caben 800), stripping de metadatos.</li>
+<li>SVG: comprime (SVGO), inline si es un icono pequeño (permite <code>currentColor</code>), <code>aria-hidden="true"</code> si decorativo.</li>
+<li>Pesa: una imagen de 200 KB mal elegida cuesta más que toda tu hoja CSS.</li>
+</ol>
+<div class="admonition success">
+<p class="admonition-title">Checklist antes de subir una imagen</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Formato elegido: <strong>AVIF/WebP</strong>, SVG para iconos.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Dimensiones <strong>reales</strong> de uso (sin 4000 px de sobra).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Calidad 70–85 y metadatos retirados.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>width</code>/<code>height</code> o <code>aspect-ratio</code> declarados.</li>
+</ul>
+</div>
+<h2 id="4-integrar-imagenes-en-htmlcss-ra-4">4. Integrar imágenes en HTML+CSS (<abbr title="Resultado de Aprendizaje">RA</abbr> 4)</h2>
+<p>La etiqueta responsable es <mark>srcset</mark>: <strong>variantes + <code>sizes</code></strong> y el navegador elige.</p>
+<h3 id="41-img-responsivo-con-srcset-y-sizes">4.1. <code>&lt;img&gt;</code> responsivo con <code>srcset</code> y <code>sizes</code></h3>
+<div class="language-html highlight"><span class="filename">imagen.html</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">"foto-800.webp"</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="hll">     <span class="na">srcset</span><span class="o">=</span><span class="s">"foto-400.webp 400w, foto-800.webp 800w, foto-1600.webp 1600w"</span>
+</span></span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="hll">     <span class="na">sizes</span><span class="o">=</span><span class="s">"(max-width: 600px) 100vw, 50vw"</span>
+</span></span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>     <span class="na">alt</span><span class="o">=</span><span class="s">"Descripción"</span> <span class="na">width</span><span class="o">=</span><span class="s">"800"</span> <span class="na">height</span><span class="o">=</span><span class="s">"600"</span> <span class="na">loading</span><span class="o">=</span><span class="s">"lazy"</span><span class="p">&gt;</span> <span class="cm">&lt;!-- (1)! --&gt;</span>
+</span></code></pre></div>
+<ol>
+<li>
+<p><code>400w/800w/1600w</code> declaran el <strong>ancho real</strong> de cada variante; <code>width</code>/<code>height</code> y <code>loading="lazy"</code> <strong>evitan <abbr title="Cumulative Layout Shift">CLS</abbr></strong>.</p>
+</li>
+<li>
+<p><code>width</code>/<code>height</code> en atributos → reserva de espacio → <strong>evita <abbr title="Cumulative Layout Shift">CLS</abbr></strong> (unidad 14).</p>
+</li>
+<li><code>loading="lazy"</code> nativo; <code>fetchpriority="high"</code> para <abbr title="Largest Contentful Paint">LCP</abbr>.</li>
+</ol>
+<h3 id="42-picture-para-arte-direccional-y-formatos">4.2. <code>&lt;picture&gt;</code> para arte direccional y formatos</h3>
+<div class="language-html highlight"><span class="filename">picture.html</span><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">&lt;</span><span class="nt">picture</span><span class="p">&gt;</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>  <span class="p">&lt;</span><span class="nt">source</span> <span class="na">media</span><span class="o">=</span><span class="s">"(min-width: 900px)"</span> <span class="na">srcset</span><span class="o">=</span><span class="s">"hero-ancha.avif"</span> <span class="na">type</span><span class="o">=</span><span class="s">"image/avif"</span><span class="p">&gt;</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>  <span class="p">&lt;</span><span class="nt">source</span> <span class="na">srcset</span><span class="o">=</span><span class="s">"hero-movil.webp"</span> <span class="na">type</span><span class="o">=</span><span class="s">"image/webp"</span><span class="p">&gt;</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>  <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">"hero-movil.jpg"</span> <span class="na">alt</span><span class="o">=</span><span class="s">""</span> <span class="na">width</span><span class="o">=</span><span class="s">"1600"</span> <span class="na">height</span><span class="o">=</span><span class="s">"900"</span><span class="p">&gt;</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="p">&lt;/</span><span class="nt">picture</span><span class="p">&gt;</span>
+</span></code></pre></div>
+<h3 id="43-object-fit-object-position">4.3. <code>object-fit</code> / <code>object-position</code></h3>
+<div class="language-css highlight"><span class="filename">tarjeta.css</span><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">.</span><span class="nc">card</span><span class="w"> </span><span class="nt">img</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="k">width</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="k">aspect-ratio</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="k">object-fit</span><span class="p">:</span><span class="w"> </span><span class="kc">cover</span><span class="p">;</span><span class="w">          </span><span class="c">/* fill | contain | cover | none | scale-down */</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span><span class="k">object-position</span><span class="p">:</span><span class="w"> </span><span class="kc">center</span><span class="w"> </span><span class="kc">top</span><span class="p">;</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="p">}</span>
+</span></code></pre></div>
+<p><code>object-fit</code> resuelve el «recorte elegante» sin crop manual; combínalo con <mark><code>aspect-ratio</code></mark> para galerías uniformes.</p>
+<h3 id="44-imagen-como-fondo-vs-img">4.4. Imagen como fondo vs <code>&lt;img&gt;</code></h3>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th><code>background-image</code></th>
+<th><code>&lt;img&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Semántica/accesibilidad</td>
+<td>Decorativa (invisible para AT)</td>
+<td>Contenido (alt, focusable, seleccionable)</td>
+</tr>
+<tr>
+<td>Carga</td>
+<td>Solo si se pinta (puede no cargarse)</td>
+<td>Siempre (con lazy)</td>
+</tr>
+<tr>
+<td>Layout</td>
+<td>No ocupa espacio propio</td>
+<td>Ocupa caja</td>
+</tr>
+<tr>
+<td>Uso correcto</td>
+<td>Texturas, hero decorativos, patrones</td>
+<td>Fotografía de contenido, iconos informativos</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Claves para el examen</strong>: «¿Cuándo usar background-image?» → cuando la imagen es <strong>decorativa</strong>. Si aporta información, es <code>&lt;img&gt;</code> con <code>alt</code>.</p>
+</blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Error común</p>
+<p>Meter una imagen <strong>con información</strong> en <code>background-image</code>: el lector de pantalla no la anuncia y no admite <code>alt</code>. Si comunica, va en un <code>&lt;img&gt;</code>; el fondo es solo <strong>decoración</strong>.</p>
+</div>
+<h3 id="45-image-rendering-y-image-set">4.5. <code>image-rendering</code> y <code>image-set()</code></h3>
+<div class="language-css highlight"><span class="filename">fondos.css</span><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">.</span><span class="nc">pixel-art</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">image-rendering</span><span class="p">:</span><span class="w"> </span><span class="kc">pixelated</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c">/* o crisp-edges */</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="p">.</span><span class="nc">fondo-adaptable</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="k">background-image</span><span class="p">:</span><span class="w"> </span><span class="nf">image-set</span><span class="p">(</span><span class="nb">url</span><span class="p">(</span><span class="s2">"fondo-1x.png"</span><span class="p">)</span><span class="w"> </span><span class="mi">1</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="nb">url</span><span class="p">(</span><span class="s2">"fondo-2x.png"</span><span class="p">)</span><span class="w"> </span><span class="mi">2</span><span class="n">x</span><span class="p">);</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="p">}</span>
+</span></code></pre></div>
+<h2 id="5-bordes-sombras-y-contornos">5. Bordes, sombras y contornos</h2>
+<h3 id="51-bordes">5.1. Bordes</h3>
+<div class="language-css highlight"><span class="filename">bordes.css</span><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">.</span><span class="nc">tarjeta</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--borde</span><span class="p">);</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="k">border-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">rem</span><span class="p">;</span><span class="w">               </span><span class="c">/* los 4 */</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span><span class="k">border-start-start-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="kt">rem</span><span class="p">;</span><span class="w">   </span><span class="c">/* esquinas lógicas (i18n) */</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">  </span><span class="k">border-end-end-radius</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="kt">rem</span><span class="p">;</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="p">}</span>
+</span></code></pre></div>
+<ul>
+<li><code>border-style</code> obligatorio (<code>solid</code>, <code>dashed</code>, <code>dotted</code>, <code>double</code>, <code>groove</code>…).</li>
+<li>Radio &gt; mitad del lado → <strong>elipse automática</strong>.</li>
+</ul>
+<h3 id="52-box-shadow">5.2. <code>box-shadow</code></h3>
+<div class="language-css highlight"><span class="filename">sombras.css</span><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">.</span><span class="nc">elevada</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="k">box-shadow</span><span class="p">:</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="hll"><span class="w">    </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">.08</span><span class="p">),</span>
+</span></span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="mi">0</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="w"> </span><span class="mi">24</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">.12</span><span class="p">);</span><span class="w">   </span><span class="c">/* (1)! */</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="p">}</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="p">.</span><span class="nc">interna</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="kc">inset</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">.2</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="c">/* formato: x y blur spread color [inset] — varias capas separadas por coma */</span>
+</span></code></pre></div>
+<ol>
+<li>Dos capas: <strong>sombra corta</strong> de contacto + <strong>sombra difusa</strong> de elevación.</li>
+</ol>
+<p>Las sombras <strong>no</strong> afectan al layout (pintan fuera): reserva espacio si son grandes o usa <code>outline</code>/bordes para elementos interactivos.</p>
+<h3 id="53-outline-el-amigo-del-foco">5.3. <code>outline</code> (el amigo del foco)</h3>
+<div class="language-css highlight"><span class="filename">foco.css</span><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">:</span><span class="nd">focus-visible</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">outline</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--enfoque</span><span class="p">);</span><span class="w"> </span><span class="k">outline-offset</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div>
+<p><code>outline</code> no ocupa espacio, sigue el radio moderno en navegadores actuales, y es <strong>obligatorio</strong> mantenerlo visible (WCAG 2.4.7). Nunca <code>outline: none</code> sin reemplazo.</p>
+<h2 id="6-filtros-y-modos-de-mezcla">6. Filtros y modos de mezcla</h2>
+<h3 id="61-filter">6.1. <code>filter</code></h3>
+<div class="language-css highlight"><span class="filename">filtros.css</span><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">.</span><span class="nc">desenfocada</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">filter</span><span class="p">:</span><span class="w"> </span><span class="nb">blur</span><span class="p">(</span><span class="mi">8</span><span class="kt">px</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="p">.</span><span class="nc">combinado</span><span class="w">   </span><span class="p">{</span><span class="w"> </span><span class="k">filter</span><span class="p">:</span><span class="w"> </span><span class="nb">grayscale</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="nb">contrast</span><span class="p">(</span><span class="mf">1.1</span><span class="p">)</span><span class="w"> </span><span class="nb">brightness</span><span class="p">(</span><span class="mf">.95</span><span class="p">)</span><span class="w"> </span><span class="nb">drop-shadow</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="w"> </span><span class="mi">8</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">0</span><span class="o">/</span><span class="mf">.3</span><span class="p">));</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div>
+<p>Funciones: <code>blur()</code>, <code>brightness()</code>, <code>contrast()</code>, <code>grayscale()</code>, <code>hue-rotate()</code>, <code>invert()</code>, <code>opacity()</code>, <code>saturate()</code>, <code>sepia()</code>, <mark><code>drop-shadow()</code></mark> (respeta alpha, a diferencia de box-shadow), <code>url()</code> (SVG filters).</p>
+<div class="admonition info">
+<p class="admonition-title">Filtro, sombra o blend</p>
+<ul>
+<li><strong><code>filter</code></strong>: altera el propio elemento (píxeles ya pintados).</li>
+<li><strong><code>drop-shadow()</code></strong>: sombra que <strong>respeta la alfa</strong> de formas irregulares.</li>
+<li><strong><code>mix-blend-mode</code></strong>: mezcla el elemento con lo que hay <strong>detrás</strong>.</li>
+</ul>
+</div>
+<h3 id="62-backdrop-filter">6.2. <code>backdrop-filter</code></h3>
+<div class="language-css highlight"><span class="filename">vidrio.css</span><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">.</span><span class="nc">vidrio</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">255</span><span class="w"> </span><span class="mi">255</span><span class="w"> </span><span class="mi">255</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">.6</span><span class="p">);</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">  </span><span class="n">backdrop-filter</span><span class="p">:</span><span class="w"> </span><span class="nb">blur</span><span class="p">(</span><span class="mi">12</span><span class="kt">px</span><span class="p">)</span><span class="w"> </span><span class="nb">saturate</span><span class="p">(</span><span class="mf">1.4</span><span class="p">);</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">  </span><span class="c">/* glassmorphism clásico; requiere -webkit- en Safari */</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Coste de GPU alto: no abusar en listas largas.</p>
+<h3 id="63-blend-modes-mix-blend-mode-background-blend-mode">6.3. Blend modes (<code>mix-blend-mode</code>, <code>background-blend-mode</code>)</h3>
+<p>Modos principales: <code>multiply</code> (oscurece), <code>screen</code> (aclara), <code>overlay</code>, <code>soft-light</code>, <code>difference</code>, <code>exclusion</code>, <code>hue</code>, <code>saturation</code>, <code>color</code>, <code>luminosity</code>.</p>
+<div class="language-css highlight"><span class="filename">mezcla.css</span><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="p">.</span><span class="nc">marca-sobre-foto</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">mix-blend-mode</span><span class="p">:</span><span class="w"> </span><span class="kc">multiply</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">   </span><span class="c">/* logo tinta sobre foto */</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="p">.</span><span class="nc">capas</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">background-blend-mode</span><span class="p">:</span><span class="w"> </span><span class="kc">overlay</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">        </span><span class="c">/* textura sobre degradado */</span>
+</span></code></pre></div>
+<p>Requieren que el elemento no rompa la «banda» (sin <code>opacity</code> fraccionaria en intermediarios sin necesidad).</p>
+<h2 id="7-mascaras-y-clip-path">7. Máscaras y <code>clip-path</code></h2>
+<p>Aquí decide <mark>clip-path</mark> (recorte <strong>duro</strong>) frente a <code>mask</code> (máscara de <strong>alfa</strong>).</p>
+<h3 id="71-clip-path">7.1. <code>clip-path</code></h3>
+<div class="language-css highlight"><span class="filename">recortes.css</span><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="p">.</span><span class="nc">circulo</span><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="k">clip-path</span><span class="p">:</span><span class="w"> </span><span class="nb">circle</span><span class="p">(</span><span class="mi">50</span><span class="kt">%</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="mi">50</span><span class="kt">%</span><span class="w"> </span><span class="mi">50</span><span class="kt">%</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="p">.</span><span class="nc">hexagono</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">clip-path</span><span class="p">:</span><span class="w"> </span><span class="nb">polygon</span><span class="p">(</span><span class="mi">25</span><span class="kt">%</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">75</span><span class="kt">%</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="w"> </span><span class="mi">50</span><span class="kt">%</span><span class="p">,</span><span class="w"> </span><span class="mi">75</span><span class="kt">%</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="p">,</span><span class="w"> </span><span class="mi">25</span><span class="kt">%</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">50</span><span class="kt">%</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="p">.</span><span class="nc">inset</span><span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="k">clip-path</span><span class="p">:</span><span class="w"> </span><span class="nb">inset</span><span class="p">(</span><span class="mi">10</span><span class="kt">px</span><span class="w"> </span><span class="kc">round</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="p">.</span><span class="nc">trayecto</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">clip-path</span><span class="p">:</span><span class="w"> </span><span class="nf">path</span><span class="p">(</span><span class="s2">"M0,50 C50,0 150,100 200,50"</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="p">.</span><span class="nc">externa</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">clip-path</span><span class="p">:</span><span class="w"> </span><span class="nb">url</span><span class="p">(</span><span class="s2">"#mi-mascara-svg"</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div>
+<p>Recorta la <strong>pintura</strong> (incluye shadow? no: box-shadow se recorta también). No afecta al hit-testing fuera del recorte.</p>
+<h3 id="72-mask-mask-image">7.2. <code>mask</code> / <code>mask-image</code></h3>
+<p>A diferencia de clip (dúo todo/nada), mask trabaja con <strong>alfa</strong>:</p>
+<div class="language-css highlight"><span class="filename">mascara.css</span><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="p">.</span><span class="nc">desvanecido</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span><span class="k">mask-image</span><span class="p">:</span><span class="w"> </span><span class="nb">linear-gradient</span><span class="p">(</span><span class="kc">to</span><span class="w"> </span><span class="kc">right</span><span class="p">,</span><span class="w"> </span><span class="kc">black</span><span class="w"> </span><span class="mi">60</span><span class="kt">%</span><span class="p">,</span><span class="w"> </span><span class="kc">transparent</span><span class="p">);</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">  </span><span class="k">mask-size</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="p">}</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="p">.</span><span class="nc">mascara-img</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">  </span><span class="k">mask</span><span class="p">:</span><span class="w"> </span><span class="nb">url</span><span class="p">(</span><span class="s2">"logo.svg"</span><span class="p">)</span><span class="w"> </span><span class="kc">center</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="kc">contain</span><span class="w"> </span><span class="kc">no-repeat</span><span class="p">;</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">  </span><span class="c">/* el contenido solo se ve donde el logo es opaco */</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Propiedades: <code>mask-image</code>, <code>mask-mode</code> (<code>match-source | alpha | luminance</code>), <code>mask-position/size/repeat</code>, <code>mask-clip</code> (<code>border-box | padding-box | content-box | stroke | fill</code>), <code>mask-origin</code>, <code>mask-composite</code>. Soporte sin prefijo: Chrome 120+, Firefox 53+, Safari 15.4+.</p>
+<p>Casos: fundidos de carrousels, textos con textura, íconos rellenables con <code>currentColor</code> + mask.</p>
+<div class="admonition question">
+<p class="admonition-title">Recorte o máscara</p>
+<p>¿Qué uso para un hexágono de bordes nítidos y qué para fundir un logo hacia la derecha?</p>
+<details class="success">
+<summary>Respuesta</summary>
+<p><strong>Hexágono → <code>clip-path</code></strong> (recorte duro, todo/nada). <strong>Fundido → <code>mask-image</code></strong> con degradado: trabaja por <strong>alfa</strong> y permite medios tonos.</p>
+</details>
+</div>
+<h2 id="8-patrones-decorativos-completos">8. Patrones decorativos completos</h2>
+<h3 id="81-glassmorphism-accesible">8.1. Glassmorphism accesible</h3>
+<div class="language-css highlight"><span class="filename">glass.css</span><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="p">.</span><span class="nc">panel</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nf">light-dark</span><span class="p">(</span><span class="nb">rgb</span><span class="p">(</span><span class="mi">255</span><span class="w"> </span><span class="mi">255</span><span class="w"> </span><span class="mi">255</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">.65</span><span class="p">),</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="mi">20</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="mi">25</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">.65</span><span class="p">));</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">  </span><span class="n">backdrop-filter</span><span class="p">:</span><span class="w"> </span><span class="nb">blur</span><span class="p">(</span><span class="mi">14</span><span class="kt">px</span><span class="p">);</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">  </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="nb">rgb</span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="nv">--marca</span><span class="p">)</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">.25</span><span class="p">);</span><span class="w"> </span><span class="c">/* relative color syntax */</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="p">}</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="p">@</span><span class="k">media</span><span class="w"> </span><span class="o">(</span><span class="nt">prefers-reduced-transparency</span><span class="o">:</span><span class="w"> </span><span class="nt">reduce</span><span class="o">)</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-19-7"><a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">  </span><span class="p">.</span><span class="nc">panel</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">backdrop-filter</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span><span class="w"> </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="n">Canvas</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</span><span id="__span-19-8"><a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>(<code>rgb(from … r g b / .25)</code> = <em>relative color syntax</em>, Color L5.)</p>
+<h3 id="82-skeleton-loader-con-degradado-animado">8.2. Skeleton loader con degradado animado</h3>
+<div class="language-css highlight"><span class="filename">skeleton.css</span><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="p">.</span><span class="nc">skeleton</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nb">linear-gradient</span><span class="p">(</span><span class="mi">90</span><span class="kt">deg</span><span class="p">,</span><span class="w"> </span><span class="mh">#eee</span><span class="w"> </span><span class="mi">25</span><span class="kt">%</span><span class="p">,</span><span class="w"> </span><span class="mh">#f7f7f7</span><span class="w"> </span><span class="mi">50</span><span class="kt">%</span><span class="p">,</span><span class="w"> </span><span class="mh">#eee</span><span class="w"> </span><span class="mi">75</span><span class="kt">%</span><span class="p">);</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">  </span><span class="k">background-size</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="kt">%</span><span class="w"> </span><span class="mi">100</span><span class="kt">%</span><span class="p">;</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">  </span><span class="k">animation</span><span class="p">:</span><span class="w"> </span><span class="n">shimmer</span><span class="w"> </span><span class="mf">1.2</span><span class="kt">s</span><span class="w"> </span><span class="kc">infinite</span><span class="p">;</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="p">}</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="p">@</span><span class="k">keyframes</span><span class="w"> </span><span class="nt">shimmer</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">to</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">background-position</span><span class="p">:</span><span class="w"> </span><span class="mi">-200</span><span class="kt">%</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="83-fondo-con-ruido-textura">8.3. Fondo con ruido (textura)</h3>
+<div class="language-css highlight"><span class="filename">ruido.css</span><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nt">body</span><span class="p">::</span><span class="nd">before</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">  </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">;</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="w">  </span><span class="k">position</span><span class="p">:</span><span class="w"> </span><span class="kc">fixed</span><span class="p">;</span><span class="w"> </span><span class="k">inset</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">  </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="nb">url</span><span class="p">(</span><span class="s2">"data:image/svg+xml,…fractalNoise…"</span><span class="p">)</span><span class="w"> </span><span class="p">;</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">  </span><span class="k">opacity</span><span class="p">:</span><span class="w"> </span><span class="mf">.04</span><span class="p">;</span><span class="w"> </span><span class="k">pointer-events</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="p">}</span>
+</span></code></pre></div>
+<details class="note">
+<summary>Para saber más</summary>
+<p>Las texturas <strong>inline en <code>data:</code></strong> ahorran una petición, pero inflan el HTML: para gráficos grandes, mejor un archivo aparte con <strong>caché</strong> y <code>background-size</code> ajustado.</p>
+</details>
+<h2 id="9-errores-comunes">9. Errores comunes</h2>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Síntoma</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Imagen de contenido como <code>background</code></td>
+<td>Invisible para lectores de pantalla</td>
+<td><code>&lt;img&gt;</code> + <code>alt</code>.</td>
+</tr>
+<tr>
+<td>Sin <code>width/height</code> ni <code>aspect-ratio</code></td>
+<td><abbr title="Cumulative Layout Shift">CLS</abbr> al cargar</td>
+<td>Dimensiones explícitas.</td>
+</tr>
+<tr>
+<td><code>background-size: cover</code> sin <code>position</code></td>
+<td>Recorte aleatorio</td>
+<td><code>background-position</code> intencional.</td>
+</tr>
+<tr>
+<td>GIF pesado de 3 MB</td>
+<td><abbr title="Largest Contentful Paint">LCP</abbr> fatal</td>
+<td>WebP animado o video corto.</td>
+</tr>
+<tr>
+<td><code>backdrop-filter</code> en 50 items</td>
+<td>FPS bajos</td>
+<td>Limitar a pocos elementos.</td>
+</tr>
+<tr>
+<td><code>transparent</code> en degradado de color</td>
+<td>Banda gris</td>
+<td>Alpha del propio tono.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="10-autoevaluacion-rapida">10. Autoevaluación rápida</h2>
+<ol>
+<li>Ordena las capas de este <code>background-image</code> de arriba a abajo y explica el resultado visual.</li>
+<li>¿Qué hace <code>object-fit: cover</code> con <code>aspect-ratio: 1</code> en una foto 16:9?</li>
+<li>Diferencia entre <code>clip-path</code> y <code>mask-image</code> con un ejemplo de uso de cada uno.</li>
+<li>Escribe el CSS de un borde degradado de 3px con interior blanco.</li>
+<li>¿Por qué <code>drop-shadow()</code> es mejor que <code>box-shadow</code> para un SVG con formas irregulares?</li>
+<li>Justifica la elección de formato para: (a) logo, (b) foto de producto, &copy; animación de 2 s.</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Claves para el examen</p>
+<ul>
+<li><code>background</code> es un <strong>atajo</strong>: lo no indicado se resetea y la <strong>primera capa va encima</strong>.</li>
+<li>Foto → <strong>AVIF/WebP</strong>, icono → <strong>SVG</strong>; calidad 70–85 y dimensiones reales.</li>
+<li>Imagen decorativa → <code>background</code>; imagen con información → <strong><code>&lt;img&gt;</code> con <code>alt</code></strong>.</li>
+<li><code>width</code>/<code>height</code> + <code>aspect-ratio</code> = <strong>cero <abbr title="Cumulative Layout Shift">CLS</abbr></strong>.</li>
+<li><code>clip-path</code> recorta <strong>duro</strong>; <code>mask</code> trabaja con <strong>alfa</strong>.</li>
+<li><code>outline</code> <strong>nunca</strong> se elimina sin reemplazo visible (WCAG 2.4.7).</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-circle-arrow-up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16 12-4-4-4 4M12 16V8"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Pie" >
+        
+          
+          <a href="../08-unidades-tipografia-colores/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: 08. Unidades, tipografía y colores">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7M19 12H5"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                08. Unidades, tipografía y colores
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../10-diseno-responsivo/" class="md-footer__link md-footer__link--next" aria-label="Siguiente: 10. Diseño responsivo">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Siguiente
+              </span>
+              <div class="md-ellipsis">
+                10. Diseño responsivo
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2026 The authors
+
+    </div>
+  
+  
+    Made with
+    <a href="https://zensical.org/" target="_blank" rel="noopener">
+      Zensical
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      
+      
+        
+        
+      <script id="__config" type="application/json">{"annotate":null,"base":"../..","features":["announce.dismiss","content.code.annotate","content.code.copy","content.code.select","content.footnote.tooltips","content.tabs.link","content.tooltips","navigation.footer","navigation.indexes","navigation.instant","navigation.instant.prefetch","navigation.path","navigation.sections","navigation.top","navigation.tracking","search.highlight"],"redirect":null,"search":"../../assets/javascripts/workers/search.7d14d953.min.js","tags":null,"translations":{"clipboard.copied":"Copiado al portapapeles","clipboard.copy":"Copiar al portapapeles","search.result.more.one":"1 más en esta página","search.result.more.other":"# más en esta página","search.result.none":"No se encontraron documentos","search.result.one":"1 documento encontrado","search.result.other":"# documentos encontrados","search.result.placeholder":"Teclee para comenzar búsqueda","search.result.term.missing":"Falta","select.version":"Seleccionar versión"},"version":null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.b7d3f789.min.js"></script>
+      
+    
+  </body>
+</html>
