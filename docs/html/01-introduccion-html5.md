@@ -29,6 +29,8 @@ HTML (*HyperText Markup Language*) describe la **estructura** y el **contenido**
 
 HTML son los cimientos y las paredes, CSS la pintura, JavaScript la instalación eléctrica. **HTML no programa**: solo declara significado; lo que debe *ocurrir* va en JavaScript y lo que debe *lucir* va en CSS, en ficheros separados.
 
+![HTML vs CSS vs JS](../img/html/01/html-css-js.jpg)
+
 ### 1.2 Origen: de SGML a HTML5
 
 - **SGML** (ISO 8879): meta-lenguaje del que HTML hereda las etiquetas de apertura y cierre.
@@ -325,7 +327,7 @@ Matrícula de ciclo, cada línea comentada y sin estilos.
     - [ ] Etiquetas cerradas en orden inverso.
     - [ ] Validador sin *errors*.
 
-Un horario de clase se tabula, no se lista: va en [05-tablas.md](05-tablas.md); practica en el [ejercicio 1 de 09-ejercicios.md](09-ejercicios.md).
+Un horario de clase se tabula, no se lista: va en [05-tablas.md](05-tablas.md); practica en el [ejercicio 8 de 09-ejercicios.md](09-ejercicios.md).
 
 ## 7. Claves para el examen
 
@@ -338,6 +340,12 @@ Un horario de clase se tabula, no se lista: va en [05-tablas.md](05-tablas.md); 
     - HTML admite mayúsculas, pero **se escribe en minúsculas**: convención y compatibilidad con XHTML/XML.
     - Anidamiento: **lo que se abre de último, se cierra de primero**, aunque el navegador lo "arregle".
     - Bloque/línea no es lo mismo que `display`; entidades solo para `<`, `>`, `&` (más `&nbsp;`): con UTF-8 los acentos van directos. Valida en <https://validator.w3.org/>.
+
+
+!!! success "Practica esta unidad"
+
+    - Enunciados: [Ejercicios de la Unidad 1 — Introducción a HTML5](09-ejercicios.md#ej-u1) — cuatro retos (`U1.1` a `U1.4`) — del más básico al más avanzado.
+    - Comprueba tu trabajo con [las soluciones de esta unidad](10-ejercicios-soluciones.md#sol-u1).
 
 [^1]: El W3C publicó HTML5 como Recomendación el 28 de octubre de 2014; hoy la mantiene el WHATWG como *HTML Living Standard*.
 

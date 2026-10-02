@@ -346,6 +346,12 @@ Esta unidad es la parte **HTML** de la accesibilidad (estructura y nombres acces
     - **ARIA**: primero el nativo (`<button>` frente a `<div role="button">`, que exige `tabindex` y JS); `aria-label`/`aria-labelledby` → **nombre accesible**, `aria-describedby` → **descripción**; `aria-expanded`/`aria-current` describen estado, `aria-hidden` oculta solo del lector, `aria-live="polite"` avisa sin interrumpir y `"assertive"` interrumpe.
     - Verifica el **árbol de accesibilidad de DevTools** y recorre la página con teclado y lector de pantalla.
 
+
+!!! success "Practica esta unidad"
+
+    - Enunciados: [Ejercicios de la Unidad 7 — Estructura semántica y ARIA](09-ejercicios.md#ej-u7) — cuatro retos (`U7.1` a `U7.4`) — del más básico al más avanzado.
+    - Comprueba tu trabajo con [las soluciones de esta unidad](10-ejercicios-soluciones.md#sol-u7).
+
 *[ARIA]: Accessible Rich Internet Applications — roles y atributos que describen interfaces cuando el HTML nativo no llega.
 *[WCAG]: Web Content Accessibility Guidelines — pautas de accesibilidad del W3C citadas en los criterios 1.3.1 y 2.4.1.
 *[landmark]: región navegable de la página (banner, navigation, main, complementary, contentinfo) que el lector de pantalla puede listar y saltar.

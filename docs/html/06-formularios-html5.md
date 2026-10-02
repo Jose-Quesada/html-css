@@ -381,5 +381,11 @@ Para leer el estado desde JavaScript (→ [08-apis-html5.md](08-apis-html5.md)):
     - `<button>` **sin `type` equivale a `submit`**: los botones de acción propia necesitan `type="button"`.
     - Validación con pseudoclases CSS y Constraint Validation API → [08-apis-html5.md](08-apis-html5.md); práctica → [09-ejercicios.md](09-ejercicios.md).
 
+
+!!! success "Practica esta unidad"
+
+    - Enunciados: [Ejercicios de la Unidad 6 — Formularios HTML5](09-ejercicios.md#ej-u6) — cuatro retos (`U6.1` a `U6.4`) — del más básico al más avanzado.
+    - Comprueba tu trabajo con [las soluciones de esta unidad](10-ejercicios-soluciones.md#sol-u6).
+
 *[HTML]: HyperText Markup Language
 *[WCAG]: Web Content Accessibility Guidelines

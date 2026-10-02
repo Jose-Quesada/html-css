@@ -323,6 +323,12 @@ Por qué nos importa en Interfaces: con ese esquema revisas en 10 segundos si la
     - Errores típicos: `<strong>` usado solo por el aspecto visual y **divitis** (todo de `div`); la segunda se practica en el [ejercicio 1 de 09-ejercicios.md](09-ejercicios.md).
     - Antes de entregar: extrae el esquema de encabezados y comprueba que no hay niveles saltados ni `div` donde falta significado.
 
+
+!!! success "Practica esta unidad"
+
+    - Enunciados: [Ejercicios de la Unidad 2 — Texto y semántica de contenido](09-ejercicios.md#ej-u2) — cuatro retos (`U2.1` a `U2.4`) — del más básico al más avanzado.
+    - Comprueba tu trabajo con [las soluciones de esta unidad](10-ejercicios-soluciones.md#sol-u2).
+
 [^1]: Traducción española de las WCAG (W3C): criterio de conformidad 1.3.1 «Información y relaciones», nivel A.
 
 *[HTML]: HyperText Markup Language

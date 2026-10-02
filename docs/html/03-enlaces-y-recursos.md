@@ -430,6 +430,12 @@ Añade además *skip link*, `<header>` y `<footer>` (**sección 4.3**). Más pr�
     - `alt` descriptivo si informa, vacío si decora; `width`/`height` evitan el CLS; `lazy` fuera del pliegue.
     - Responsive: `srcset` + `sizes`, `<picture>` para formatos; `<iframe>` con `title`.
 
+
+!!! success "Practica esta unidad"
+
+    - Enunciados: [Ejercicios de la Unidad 3 — Enlaces y recursos](09-ejercicios.md#ej-u3) — cuatro retos (`U3.1` a `U3.4`) — del más básico al más avanzado.
+    - Comprueba tu trabajo con [las soluciones de esta unidad](10-ejercicios-soluciones.md#sol-u3).
+
 *[URL]: Uniform Resource Locator
 *[srcset]: Source Set
 *[CLS]: Cumulative Layout Shift

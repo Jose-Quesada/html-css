@@ -299,6 +299,12 @@ El nativo es preferible **si controlas los ficheros**: `<video>` no arrastra coo
     - Accesibilidad: `<track>` con `kind`, `srclang`, `label` y opcional `default`, fichero `.vtt` y transcripción en la página (WCAG 1.2.1 y 1.2.2).
     - `<iframe>` externo con `title`, `loading="lazy"` y `allowfullscreen`; si tienes el fichero, el reproductor nativo es mejor.
 
+
+!!! success "Practica esta unidad"
+
+    - Enunciados: [Ejercicios de la Unidad 4 — Multimedia en HTML5](09-ejercicios.md#ej-u4) — cuatro retos (`U4.1` a `U4.4`) — del más básico al más avanzado.
+    - Comprueba tu trabajo con [las soluciones de esta unidad](10-ejercicios-soluciones.md#sol-u4).
+
 *[WCAG]: Web Content Accessibility Guidelines
 *[CLS]: Cumulative Layout Shift
 *[AAC]: Advanced Audio Coding

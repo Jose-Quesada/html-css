@@ -57,7 +57,7 @@ nav = [
     { "07. Estructura semántica y ARIA" = "html/07-estructura-semantica-y-aria.md" },
     { "08. APIs y funcionalidades nativas" = "html/08-apis-html5.md" },
     { "09. Ejercicios" = "html/09-ejercicios.md" },
-    { "10. Ejercicios: soluciones" = "html/10-ejercicios-soluciones.md" },
+  #  { "10. Ejercicios: soluciones" = "html/10-ejercicios-soluciones.md" },
   ] },
   { "CSS" = [
     { "00. Normativa y marco curricular" = "css/00-normativa-y-marco-curricular.md" },

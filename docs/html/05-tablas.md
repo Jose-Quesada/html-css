@@ -403,6 +403,12 @@ Todo lo visto junto: `caption`, `scope` en las dos dimensiones, `abbr` en la cab
     - `<col>`/`colgroup` sirve para estilo de columna entera y su `width` puede ser ignorado → ancho fiable con CSS o `table-layout: fixed`.
     - Responsivo: contenedor con `overflow-x: auto`, `tabindex="0"` y `role="region"` + `aria-labelledby` apuntando al `id` del `caption`.
 
+
+!!! success "Practica esta unidad"
+
+    - Enunciados: [Ejercicios de la Unidad 5 — Tablas de datos](09-ejercicios.md#ej-u5) — cuatro retos (`U5.1` a `U5.4`) — del más básico al más avanzado.
+    - Comprueba tu trabajo con [las soluciones de esta unidad](10-ejercicios-soluciones.md#sol-u5).
+
 *[HTML]: HyperText Markup Language
 *[WCAG]: Web Content Accessibility Guidelines
 

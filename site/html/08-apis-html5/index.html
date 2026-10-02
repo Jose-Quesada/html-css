@@ -268,8 +268,6 @@
       
         
       
-        
-      
     
     
     
@@ -896,35 +894,6 @@
     
   
   09. Ejercicios
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-                
-              
-                
-                  
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../10-ejercicios-soluciones/" class="md-nav__link">
-        
-  
-  
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"/></svg>
-  
-  <span class="md-ellipsis">
-    
-  
-  10. Ejercicios: soluciones
 
     
   </span>
@@ -1888,8 +1857,6 @@
       
         
       
-        
-      
     
     
     
@@ -2214,7 +2181,7 @@
 </span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="nx">ctx</span><span class="p">.</span><span class="nx">stroke</span><span class="p">();</span>
 </span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
 </span></code></pre></div>
-<p>Claves: es un <strong>bitmap</strong> (píxeles; al escalar con CSS se pixela), su contenido <mark>se pierde al recargar</mark> y <strong>no existe sin JavaScript</strong>. Se usa para gráficos, juegos, visualizaciones y efectos en tiempo real. El ejercicio de vídeo/canvas de los apuntes (<code>drawImage</code> sobre fotogramas) está en <a href="../09-ejercicios/">09-ejercicios.md</a> y su sección teórica en los apuntes de elementos.</p>
+<p>Claves: es un <strong>bitmap</strong> (píxeles; al escalar con CSS se pixela), su contenido <mark>se pierde al recargar</mark> y <strong>no existe sin JavaScript</strong>. Se usa para gráficos, juegos, visualizaciones y efectos en tiempo real. El ejercicio de vídeo/canvas de los apuntes (<code>drawImage</code> sobre fotogramas) está en <a href="../09-ejercicios/">09-ejercicios.md</a> y su teoría está en la §6.1 de este capítulo.</p>
 <h3 id="62-svg-como-alternativa-vectorial">6.2 SVG como alternativa vectorial</h3>
 <p>SVG describe el dibujo con <strong>XML</strong> (caminos, círculos, texto): escala sin pixelarse, se puede dar estilo con CSS y es seleccionable y accesible. Regla rápida: <strong>bitmap + movimiento + muchos píxeles → canvas; formas nítidas, iconos y gráficos interactivos → SVG</strong>. Rutas y enlaces de descarga en <a href="../03-enlaces-y-recursos/">03-enlaces-y-recursos.md</a>.</p>
 <h2 id="7-el-ecosistema-javascript-que-acompana">7. El ecosistema JavaScript que acompaña</h2>
@@ -2350,6 +2317,13 @@
 <li><code>getCurrentPosition</code> necesita <strong>permiso</strong> y <strong>HTTPS</strong> (no en <code>http://</code>); errores: 1 permiso, 2 no disponible, 3 <em>timeout</em>.</li>
 <li>Drag &amp; drop: <code>draggable="true"</code>, <code>dragstart</code> (carga <code>dataTransfer</code>), <strong><code>dragover</code> + <code>preventDefault()</code></strong> (obligatorio) y <code>drop</code>; no funciona con dedo → <strong>Pointer Events</strong>.</li>
 <li><code>&lt;canvas&gt;</code> = <strong>bitmap</strong> con JS (se pierde al recargar); <strong>SVG</strong> = vectorial y con estilo CSS. Fetch/Workers/IntersectionObserver son APIs del navegador, <strong>no "HTML5"</strong>.</li>
+</ul>
+</div>
+<div class="admonition success">
+<p class="admonition-title">Practica esta unidad</p>
+<ul>
+<li>Enunciados: <a href="../09-ejercicios/#ej-u8">Ejercicios de la Unidad 8 — APIs y funcionalidades nativas</a> — cuatro retos (<code>U8.1</code> a <code>U8.4</code>) — del más básico al más avanzado.</li>
+<li>Comprueba tu trabajo con <a href="../10-ejercicios-soluciones/#sol-u8">las soluciones de esta unidad</a>.</li>
 </ul>
 </div>
 <div class="footnote">

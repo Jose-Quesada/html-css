@@ -268,7 +268,7 @@ ctx.stroke();
 </script>
 ```
 
-Claves: es un **bitmap** (píxeles; al escalar con CSS se pixela), su contenido ==se pierde al recargar== y **no existe sin JavaScript**. Se usa para gráficos, juegos, visualizaciones y efectos en tiempo real. El ejercicio de vídeo/canvas de los apuntes (`drawImage` sobre fotogramas) está en [09-ejercicios.md](09-ejercicios.md) y su sección teórica en los apuntes de elementos.
+Claves: es un **bitmap** (píxeles; al escalar con CSS se pixela), su contenido ==se pierde al recargar== y **no existe sin JavaScript**. Se usa para gráficos, juegos, visualizaciones y efectos en tiempo real. El ejercicio de vídeo/canvas de los apuntes (`drawImage` sobre fotogramas) está en [09-ejercicios.md](09-ejercicios.md) y su teoría está en la §6.1 de este capítulo.
 
 ### 6.2 SVG como alternativa vectorial
 
@@ -389,6 +389,12 @@ console.log(notas);
     - `getCurrentPosition` necesita **permiso** y **HTTPS** (no en `http://`); errores: 1 permiso, 2 no disponible, 3 *timeout*.
     - Drag & drop: `draggable="true"`, `dragstart` (carga `dataTransfer`), **`dragover` + `preventDefault()`** (obligatorio) y `drop`; no funciona con dedo → **Pointer Events**.
     - `<canvas>` = **bitmap** con JS (se pierde al recargar); **SVG** = vectorial y con estilo CSS. Fetch/Workers/IntersectionObserver son APIs del navegador, **no "HTML5"**.
+
+
+!!! success "Practica esta unidad"
+
+    - Enunciados: [Ejercicios de la Unidad 8 — APIs y funcionalidades nativas](09-ejercicios.md#ej-u8) — cuatro retos (`U8.1` a `U8.4`) — del más básico al más avanzado.
+    - Comprueba tu trabajo con [las soluciones de esta unidad](10-ejercicios-soluciones.md#sol-u8).
 
 [^1]: Un **origen** es protocolo + dominio + puerto: `https://ejemplo.es` y `http://ejemplo.es` **no** comparten origen, y por eso el almacenamiento no se pasa de un sitio a otro.
 
