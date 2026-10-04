@@ -1,57 +1,77 @@
 ---
 icon: lucide/book-open
 title: "Unidad 00 — Normativa y marco curricular"
-description: "Marco normativo estatal y autonómico del ciclo DAW en Andalucía, resultados de aprendizaje y criterios de evaluación aplicables a CSS, y papel del W3C como organismo de estandarización."
-modulo: "LMH (0373) / DIW (0615)"
+description: "Marco normativo estatal y autonómico de los ciclos DAW y DAM en Andalucía, resultados de aprendizaje y criterios de evaluación aplicables a CSS, y papel del W3C como organismo de estandarización."
+modulo: "LMH (0373) / DIW (0615) / DI (0488)"
 unidad: 0
-fecha: "2026-09-06"
+fecha: "2026-10-04"
 ---
 
 # Unidad 00 · Normativa y marco curricular
 
-Antes de entrar en técnica, conviene situar **qué nos exige el currículo** y **dónde se define**. En un examen o en una programación didáctica, saber citar la norma correcta es parte de la competencia profesional.
+Antes de entrar en materia técnica, conviene situar **qué nos exige el currículo oficial**, **dónde se define** y **cómo se justifica** cada decisión de diseño y maquetación. En una prueba de evaluación, en un proyecto integrado o en una programación didáctica, saber citar la norma correcta y justificar el cumplimiento de los estándares y la legislación de accesibilidad es parte esencial de la competencia profesional técnica.
 
 !!! note "Conocimientos previos"
 
-    - Qué es un **módulo**, un **resultado de aprendizaje (RA)** y un **criterio de evaluación (CE)**.
-    - Diferenciar **BOE** (estatal) y **BOJA** (andaluz).
-    - Tu módulo: **0373 (LMH)** o **0615 (DIW)**.
+    - Qué es un **módulo profesional**, un **resultado de aprendizaje (RA)** y un **criterio de evaluación (CE)**.
+    - Diferenciar entre normativa estatal (**BOE**) y autonómica andaluza (**BOJA**).
+    - Tu ciclo formativo: **DAW** (Desarrollo de Aplicaciones Web) o **DAM** (Desarrollo de Aplicaciones Multiplataforma), y tus módulos asociados: **0373 (LMSGI/LMH)** en 1.º, **0615 (DIW)** en 2.º de DAW o **0488 (DI)** en 2.º de DAM.
 
-## 1. El marco normativo del ciclo DAW
+---
+
+## 1. El marco normativo de la FP en Andalucía
+
+```mermaid
+flowchart TD
+    subgraph Estado ["1. Nivel Estatal (Enseñanzas Mínimas)"]
+        LOFP["Ley Orgánica 3/2022 y RD 659/2023<br>Ordenación e integración de la FP"]
+        RD_DAW["RD 686/2010 (BOE 21/05/2010)<br>Título y mínimas de DAW"]
+        RD_DAM["RD 453/2010 (BOE 16/04/2010)<br>Título y mínimas de DAM"]
+        RD_ACC["RD 1112/2018 (BOE 19/09/2018)<br>Accesibilidad web y apps (Sector público / UNE-EN 301549)"]
+    end
+
+    subgraph Andalucia ["2. Nivel Autonómico (Andalucía)"]
+        BOJA_DAW["Orden de 16 de junio de 2011 (BOJA 149/2011)<br>Currículo DAW en Andalucía"]
+        BOJA_DAM["Orden de 16 de junio de 2011 (BOJA 150/2011)<br>Currículo DAM en Andalucía"]
+    end
+
+    subgraph Modulos ["3. Módulos Profesionales Implicados"]
+        M0373["0373: Lenguajes de marcas (1.º DAW/DAM)"]
+        M0615["0615: Diseño de interfaces web (2.º DAW)"]
+        M0488["0488: Desarrollo de interfaces (2.º DAM)"]
+    end
+
+    LOFP --> RD_DAW & RD_DAM
+    RD_DAW --> BOJA_DAW
+    RD_DAM --> BOJA_DAM
+    BOJA_DAW --> M0373 & M0615
+    BOJA_DAM --> M0373 & M0488
+```
 
 ### 1.1. Nivel estatal
 
 | Norma | Qué establece |
 |---|---|
-| **Real Decreto 686/2010**, de 20 de mayo (BOE de 21/05/2010) | Establece el título de **Técnico Superior en Desarrollo de Aplicaciones Web** y fija sus **enseñanzas mínimas**: objetivos generales, módulos profesionales, duración total (2.000 h), equivalencias ECTS, espacios, equipamientos y perfil docente. |
-| Real Decreto 1538/2006, de 15 de diciembre | Ordenación general de la FP del sistema educativo (marco superior al RD 686/2010). |
-| Ley Orgánica 2/2006 (LOE) y LO 3/2020 (LOMLOE) | Marco legal de las enseñanzas; la LOMLOE actualiza principios (competencias digitales, inclusión, accesibilidad universal) que afectan a cómo se imparten los módulos. |
-
-El ciclo tiene **2.000 horas** y se organiza en dos cursos. Los módulos asociados a **unidades de competencia** incluyen **0612 Desarrollo web en entorno cliente** y **0615 Diseño de interfaces WEB**; entre los «otros módulos» está **0373 Lenguajes de marcas y sistemas de gestión de información**.
-
-!!! info "Qué son las enseñanzas mínimas"
-
-    **Núcleo común exigible**: se amplía, nunca se recorta. Se cita primero el **RD 686/2010** y luego su desarrollo autonómico; las ==enseñanzas mínimas== se dan por supuestas en examen.
+| **Real Decreto 686/2010**, de 20 de mayo (BOE 21/05/2010) | Establece el título de **Técnico Superior en Desarrollo de Aplicaciones Web (DAW)** y fija sus enseñanzas mínimas: objetivos generales, módulos (2.000 h) y criterios de evaluación. |
+| **Real Decreto 453/2010**, de 16 de abril (BOE 16/04/2010) | Establece el título de **Técnico Superior en Desarrollo de Aplicaciones Multiplataforma (DAM)** y fija sus enseñanzas mínimas correspondientes. |
+| **Ley Orgánica 3/2022** y **Real Decreto 659/2023**, de 18 de julio | Marco general de ordenación del Sistema de Formación Profesional (modelo dual generalizado, competencias digitales, inclusión y sostenibilidad). |
+| **Real Decreto 1112/2018**, de 7 de septiembre (BOE 19/09/2018) | Transposición de la Directiva (UE) 2016/2102 sobre **accesibilidad de los sitios web y aplicaciones para dispositivos móviles**, obligando al cumplimiento de la norma **UNE-EN 301549** (equivalente a WCAG 2.1 nivel AA). |
 
 ### 1.2. Nivel autonómico (Andalucía)
 
 | Norma | Qué establece |
 |---|---|
-| **Orden de 16 de junio de 2011**, de la Consejería de Educación, por la que se desarrolla el currículo correspondiente al título de Técnico Superior en Desarrollo de Aplicaciones Web. Publicada en el **BOJA n.º 149, de 1 de agosto de 2011** | Desarrolla el currículo andaluz: **resultados de aprendizaje (RA)**, **criterios de evaluación (CE)**, **contenidos básicos**, **duración** y **orientaciones pedagógicas** de cada módulo. Es la **norma de referencia** para programaciones didácticas y exámenes en centros públicos y privados concertados de Andalucía. |
-| Decreto 436/2008, de 2 de septiembre | Ordenación de la FP inicial en Andalucía (faculta a la Consejería a regular cada currículo mediante Orden, art. 13). |
-| Ley 17/2007, de 10 de diciembre, de Educación de Andalucía | Competencia autonómica en ordenación de la FP (capítulo V, Título II). |
+| **Orden de 16 de junio de 2011** (DAW, BOJA n.º 149, de 1 de agosto de 2011) | Desarrolla el currículo andaluz para **DAW**: fija los Resultados de Aprendizaje (RA), Criterios de Evaluación (CE), contenidos y orientaciones pedagógicas de los módulos **0373** y **0615**. |
+| **Orden de 16 de junio de 2011** (DAM, BOJA n.º 150, de 2 de agosto de 2011) | Desarrolla el currículo andaluz para **DAM**: fija los RA, CE y contenidos de los módulos **0373** y **0488**. |
+| Ley 17/2007 (LEA) y Decreto 436/2008 | Marco andaluz de educación y formación profesional inicial. |
 
-> **Claves para el examen**: si te piden justificar el alcance de un contenido, la cadena correcta es:
-> `RD 686/2010 (mínimos estatales) → Orden de 16/06/2011 (desarrollo andaluz, BOJA 149/2011) → Programación didáctica del centro`.
-> La Orden de 2011 incluye además **horas de libre configuración** (3 h) que el departamento puede dedicar a profundizar en tecnologías TIC — buen contexto para justificar contenidos de CSS avanzado no contemplados explícitamente.
+> **Cadena de justificación normativa en examen / programación didáctica**:  
+> `Reales Decretos estatales (RD 686/2010 / RD 453/2010) → Órdenes andaluzas de 16/06/2011 (BOJA 149 y 150) → Programación didáctica de departamento`.  
+> Las 3 horas de libre configuración autonómica permiten justificar la incorporación de tecnologías punteras (Container Queries, Subgrid, `@layer`, espacios de color `oklch`).
 
-### 1.3. ¿Está vigente?
-
-La Orden de 16 de junio de 2011[^1] sigue siendo el desarrollo curricular del DAW en Andalucía (los portales oficiales de la Junta lo citan como ==normativa vigente del ciclo==). Aun así, buena práctica: **comprobar en el BOJA** (<https://www.juntadeandalucia.es/eboja.html>) si existen órdenes posteriores de modificación antes de citar la norma en un trabajo formal.
+---
 
 ## 2. Resultados de aprendizaje aplicables a CSS
-
-Los ==resultados de aprendizaje== dicen lo que hay que **saber hacer**; los **criterios de evaluación**, cómo se comprueba. Todo el cuerpo técnico (U01–15) responde a ese par **RA–CE**.
 
 ### 2.1. Módulo 0373 — Lenguajes de marcas y sistemas de gestión de información (128 h, 7 ECTS)
 
@@ -59,171 +79,116 @@ El bloque de CSS corresponde al **Resultado de aprendizaje 2**:
 
 > **«Utiliza lenguajes de marcas para la transmisión de información a través de la Web analizando la estructura de los documentos e identificando sus elementos».**
 
-Criterios de evaluación directamente aplicables a estos apuntes:
-
-| CE | Texto (resumido) | Unidades de estos apuntes |
+| CE | Texto curricular oficial | Unidades de estos apuntes |
 |---|---|---|
-| 2.g | Se han identificado las ventajas que aporta la utilización de hojas de estilo | 01 (separación de preocupaciones, mantenibilidad) |
-| 2.h | Se han aplicado hojas de estilo | 01–12 (todo el cuerpo técnico) |
+| **2.g** | Se han identificado las **ventajas que aporta la utilización de hojas de estilo**. | **U01** (separación de responsabilidades, mantenibilidad, consistencia) |
+| **2.h** | Se han **aplicado hojas de estilo**. | **U01–U12** (todo el cuerpo técnico del lenguaje) |
+| **2.i** | Se han utilizado herramientas para verificar la sintaxis y accesibilidad. | **U14** (Validador W3C, DevTools, Lighthouse) |
 
-**Contenidos básicos** del bloque «Utilización de lenguajes de marcas en entornos Web»: *estructura de un documento HTML, etiquetas y atributos, XHTML, versiones de HTML/XHTML, herramientas de diseño web, **hojas de estilo***.
+---
 
-!!! example "Del criterio al código (CE 2.h)"
+### 2.2. Módulo 0615 — Diseño de interfaces web (80 h, 9 ECTS - 2.º DAW)
 
-    El CE **2.h** («se han aplicado hojas de estilo»): **una sola regla** cambia todas las tarjetas.
-
-    ```css title="estilos.css" hl_lines="4"
-    /* RA 2 (0615): clases de estilos */
-    .tarjeta {
-      padding: 1rem;
-      border: 1px solid #d0d0d0;   /* (1)! */
-    }
-    .tarjeta--destacado {
-      border-color: crimson;       /* (2)! */
-    }
-    ```
-
-    1.  Regla base compartida: **consistencia** con una declaración.
-    2.  Modificador que ajusta un caso sin duplicar reglas.
-
-### 2.2. Módulo 0615 — Diseño de interfaces web (80 h, 9 ECTS)
-
-El módulo **0615 (DIW)** es el **núcleo de la asignatura**: sus seis RA recorren casi todo el temario, de la planificación (RA 1) a accesibilidad (RA 5) y usabilidad (RA 6).
+El módulo **0615 (DIW)** es el núcleo de la maquetación y el diseño en el ciclo DAW:
 
 | RA | Enunciado | Criterios clave | Unidades |
 |---|---|---|---|
-| **RA 1** | Planifica la creación de una interfaz web valorando y aplicando especificaciones de diseño | Comunicación visual; selección de **colores y tipografías** para pantalla; alternativas de presentación de la información; **guía de estilo**; plantillas de diseño; maquetación y elementos de ordenación | 08, 09, 12 (tokens/guía de estilo), 10 |
-| **RA 2** | Crea interfaces Web homogéneos definiendo y aplicando estilos | Estilos directos (en línea); **estilos globales en hojas externas**; **hojas de estilo alternativas**; redefinición de estilos; propiedades de cada elemento; **clases de estilos**; **herramientas de validación**; guía de estilo | 01, 02, 12, 14 |
-| **RA 3** | Prepara archivos multimedia para la Web | Formatos de imagen/audio/vídeo; optimización | 09 (imágenes), 14 (rendimiento) |
-| **RA 4** | Integra contenido multimedia en documentos Web | Tecnologías de inclusión; verificación multi-navegador | 09, 11 |
-| **RA 5** | Desarrolla interfaces Web **accesibles** | W3C; **WCAG**; prioridades y puntos de verificación; niveles de adecuación; herramientas de análisis; chequeo desde distintos navegadores | 13 |
-| **RA 6** | Desarrolla interfaces Web **amigables** (usabilidad) | Uso de estándares; facilidad de navegación; verificación en diferentes navegadores y tecnologías | 10, 13, 14 |
+| **RA 1** | Planifica la creación de una interfaz web valorando y aplicando especificaciones de diseño | Comunicación visual; selección de **colores y tipografías** para pantalla; **guía de estilo**; plantillas de diseño; maquetación y elementos de ordenación | **U08**, **U09**, **U10**, **U12** |
+| **RA 2** | Crea interfaces Web homogéneos definiendo y aplicando estilos | Estilos directos; **hojas externas**; **hojas de estilo alternativas**; redefinición de estilos; **clases de estilos**; **validación**; guía de estilo | **U01**, **U02**, **U12**, **U14** |
+| **RA 3 y 4** | Prepara e integra contenido multimedia en documentos Web | Formatos de imagen (AVIF, WebP, SVG); optimización; `object-fit`, `aspect-ratio`, filtros | **U09**, **U11** |
+| **RA 5** | Desarrolla interfaces Web **accesibles** | W3C; **WCAG 2.1/2.2**; **RD 1112/2018**; ratios de contraste; foco visible (`:focus-visible`); modos de color adaptativo | **U13** |
+| **RA 6** | Desarrolla interfaces Web **amigables** (usabilidad) | Uso de estándares; facilidad de navegación; diseño responsivo (Mobile-First, Container Queries); rendimiento web | **U10**, **U13**, **U14** |
 
-> **Nota curricular**: el RA 1 cita «marcos, tablas y capas» como elementos de ordenación. Los *frames* (==`<frameset>`==) están **obsoletos** en HTML5 y no se recomiendan; su equivalente moderno son los layouts con `display: grid`/`flexbox` (unidades 05–07). En clase conviene explicitar esta evolución: marcos → tablas → capas (divs + CSS) → grid/flex.
+> **Nota curricular sobre maquetación**: El RA 1 cita históricamente «marcos, tablas y capas». Los *frames* (`<frameset>`) están **obsoletos** y no se utilizan; las tablas se reservan exclusivamente a datos tabulares. El estándar moderno de maquetación se fundamenta en **CSS Grid** y **Flexbox** (unidades 05–07).
 
-!!! warning "Error común"
+---
 
-    - Citar el **RD 686/2010** como norma andaluza: el desarrollo es la **Orden de 16/06/2011**.
-    - Confundir **BOE** y **BOJA**: Estado → BOE; Consejería → BOJA.
+### 2.3. Módulo 0488 — Desarrollo de interfaces (140 h, 9 ECTS - 2.º DAM)
+
+En 2.º curso de DAM, CSS es la tecnología base para el estilado de componentes web incrustados (*WebViews*, aplicaciones híbridas y escritorio multiplataforma):
+
+- **RA 4:** Diseña interfaces gráficas adaptables a diferentes resoluciones, pantallas táctiles y densidades de píxel.
+- **RA 5:** Desarrolla componentes de interfaz accesibles cumpliendo las pautas internacionales de usabilidad y diseño universal.
+
+---
 
 ## 3. El W3C y la estandarización de CSS
 
 CSS no es una invención de un navegador: es un **estándar abierto** desarrollado por el **World Wide Web Consortium (W3C)** a través del **CSS Working Group (CSS WG)**.
 
-!!! quote "Posicionamiento del W3C"
-
-    «Making the web work — for everyone.» (la Web **para todos**.)
-
-    — W3C, *Our mission*: <https://www.w3.org/Consortium/mission>
-
 ### 3.1. Proceso de estandarización
 
-1. **Working Draft (WD)**: borrador de trabajo, sin garantías de compatibilidad.
-2. **Candidate Recommendation (CR)**: candidatos a recomendación; los navegadores deberían implementarlo.
-3. **Recommendation (REC)**: estándar estable; base para certificaciones y licitaciones.
+1. **Working Draft (WD):** Borrador de trabajo; en discusión y sujeto a cambios.
+2. **Candidate Recommendation (CR / CRD):** Candidato a recomendación; los navegadores implementan la especificación de forma estable.
+3. **Recommendation (REC):** Estándar oficial definitivo y maduro del W3C.
 
-Solo ==Recommendation== es **estándar oficial del W3C**: antes es borrador en movimiento.
+### 3.2. De CSS 2.1 a la modularización («CSS3 y CSS moderno»)
 
-Las specs se publican en <https://www.w3.org/TR/> (versiones TR) y <https://drafts.csswg.org/> (borradores vivos del CSS WG).
+- **CSS1 (1996) y CSS2.1 (2011):** Documentos monolíticos únicos.
+- **Modularización (a partir de 2011):** CSS se dividió en **módulos independientes** que evolucionan por separado con sus propios niveles (Selectors Level 4, Color Level 5, Grid Level 2, Cascade Level 5).
+- **«CSS4» no existe como especificación cerrada:** Hoy se habla formalmente de **CSS Moderno** o de los **niveles de cada módulo específico**.
 
-### 3.2. De CSS 2.1 a la modularización
+### 3.3. Módulos más relevantes en el currículo
 
-- **CSS1** (REC 1996): tipografía, colores, posicionamiento básico, caja.
-- **CSS2** (REC 1998) y **CSS2.1** (REC 2011): posicionamiento absoluto/fijo, floats, media types…
-- **CSS3**: cambio de modelo: en lugar de un único documento gigante, se divide en **módulos independientes** (Selectors, Color, Backgrounds & Borders, Box Model, Flexbox, Grid, Media Queries, Conditional Rules, Animations, Transitions…). Cada módulo avanza por separado con su propio nivel (L1, L2, L3…).
-- **CSS4 / CSS moderno**: la numeración «CSS4» no existe oficialmente; hoy se habla de los **niveles actuales de cada módulo** (p. ej., Selectors Level 4, Color Level 5, Grid Level 2).
-
-### 3.3. Módulos más relevantes para este curso
-
-| Módulo (spec) | Contenido | Estado orientativo |
+| Módulo (Especificación) | Contenido clave | Estado W3C |
 |---|---|---|
-| Selectors L4 | `:has()`, `:is()`, `:where()`, `:focus-visible`, selectores estructurales nuevos | WD (implementado en todos los navegadores principales) |
-| Color L5 | `oklch()`, `color-mix()`, `light-dark()` | WD (implementado) |
-| Box Alignment L3 | `place-items`, `place-content`, alineación moderna | WD (implementado) |
-| Flexbox L1 | Modelo de flexión | REC (implementado) |
-| Grid L2 | Cuadrícula + **subgrid** | CRD (implementado) |
-| Conditional Rules L5 | `@media`, `@supports`, **container queries** | WD (implementado) |
-| Nesting L1 | Anidación nativa | WD (implementado) |
-| Cascade L5/L6 | `!important`, orígenes, **`@layer`**, `@scope` | WD (implementado) |
-| Animations L2 | `animation-timeline` (scroll-driven) | WD (parcial) |
-| View Transitions L1 | Transiciones entre vistas | CRD (implementado) |
-| Values & Units L4 | `clamp()`, `min()`, `max()`, unidades viewport dinámicas | WD (implementado) |
+| **Selectors Level 4** | `:has()`, `:is()`, `:where()`, `:focus-visible`, `:user-invalid`, selectores estructurales | WD (Soporte universal) |
+| **Color Level 4 / 5** | `oklch()`, `color-mix()`, `light-dark()` | WD (Soporte universal) |
+| **Box Alignment Level 3** | `gap`, `place-items`, `place-content`, alineación moderna | WD (Soporte universal) |
+| **Flexbox Level 1** | Modelo de cajas flexibles unidimensional | REC |
+| **Grid Layout Level 2** | Cuadrícula bidimensional + **Subgrid** | CRD (Soporte universal) |
+| **Containment Level 3** | **Container Queries (`@container`)**, `container-type`, unidades `cqw` | WD (Soporte universal) |
+| **CSS Nesting Level 1** | Anidación nativa con `&` | WD (Soporte universal) |
+| **Cascade & Inheritance Level 5/6** | Capas de cascada (**`@layer`**), `@scope`, especificidad | WD (Soporte universal) |
+| **Scroll-driven Animations Level 1** | `animation-timeline: scroll()` / `view()` | WD |
+| **Values & Units Level 4** | `clamp()`, `min()`, `max()`, unidades viewport dinámicas (`dvh`, `svh`) | WD (Soporte universal) |
 
-> **Claves para el examen**: «CSS3» es un término histórico/marketing; lo correcto es hablar de **módulos del lenguaje CSS y sus niveles**. Un examinador valora que sepas que cada característica pertenece a una spec concreta.
-
-### 3.4. Otros organismos y referencias técnicas
-
-- **WHATWG**: mantiene la especificación de HTML (el **Living Standard**). HTML y CSS son complementarios pero specs distintas.
-- **WCAG** (Web Content Accessibility Guidelines, W3C): no es una spec de CSS, pero define requisitos de accesibilidad que CSS debe cumplir (contraste, foco, movimiento…). Base del RA 5 del módulo 0615.
-- **MDN Web Docs**: documentación de referencia mantenida por Mozilla con datos de compatibilidad (browser-compat-data). Es la fuente didáctica principal de estos apuntes.
-
-!!! info "Cómo se cita un estándar"
-
-    - **Organismo**: W3C (CSS, WCAG) o WHATWG (HTML).
-    - **Spec y fase**: p. ej. *Selectors Level 4*, fase **REC**.
-    - **Fecha**: obligatoria en licitaciones.
+---
 
 ## 4. Mapa de contenidos: de la norma a las unidades
 
-El ==mapa de contenidos== vincula cada **criterio** (p. ej. ==`CE 2.h`==) con la unidad donde se practica.
-
-```text title="mapa-de-contenidos.txt" hl_lines="3 4"
-Orden 16/06/2011 (BOJA)
-├── Módulo 0373 (LMH)
-│   └── RA 2 (g, h): hojas de estilo
-│        ├── Ventajas y aplicación básica ............ U01, U02
-│        └── Herramientas de validación .............. U14
-└── Módulo 0615 (DIW)
-    ├── RA 1: planificación de interfaz
-    │    ├── Color y tipografía ....................... U08
-    │    ├── Guía de estilo y plantillas .............. U12
-    │    └── Maquetación y ordenación ................. U03–U07
-    ├── RA 2: uso de estilos
-    │    ├── En línea / externo / alternativo ......... U01
-    │    ├── Clases y redefinición .................... U01, U02
-    │    └── Validación ............................... U14
-    ├── RA 3/4: multimedia
-    │    └── Imágenes, formatos, integración .......... U09
-    ├── RA 5: accesibilidad
-    │    └── WCAG aplicada a CSS ...................... U13
-    └── RA 6: usabilidad
-         ├── Responsivo y navegación .................. U10
-         └── Rendimiento y estándares ................. U14
+```text title="mapa-curricular-css.txt"
+Orden de 16 de junio de 2011 (BOJA 149 / BOJA 150)
+│
+├── Módulo 0373: Lenguajes de marcas y sist. gestión inf.
+│   ├── RA 2.g: Ventajas de hojas de estilo ................... U01
+│   ├── RA 2.h: Aplicación técnica del lenguaje .............. U01–U12
+│   └── RA 2.i: Validación y sintaxis ......................... U14
+│
+├── Módulo 0615: Diseño de interfaces web (DAW)
+│   ├── RA 1: Planificación, color y tipografía .............. U08, U09, U12
+│   ├── RA 2: Hojas externas, alternativas y reglas .......... U01, U02, U12
+│   ├── RA 3 y 4: Multimedia e imágenes ...................... U09, U11
+│   ├── RA 5: Accesibilidad legal (RD 1112/2018, WCAG) ....... U13
+│   └── RA 6: Usabilidad, responsivo y rendimiento ........... U10, U14
+│
+└── Módulo 0488: Desarrollo de interfaces (DAM)
+    ├── RA 4: Interfaces adaptables y componentes ............ U03–U07, U10
+    └── RA 5: Accesibilidad en interfaces de usuario ......... U13
 ```
 
-!!! question "Cadena normativa"
-
-    ¿Qué normas citas, y en qué orden, para justificar *container queries* en tu programación?
-
-    ??? success "Respuesta"
-
-        **RD 686/2010** → **Orden de 16/06/2011** (BOJA 149, con **3 h de libre configuración**) → **programación didáctica** del centro.
+---
 
 ## 5. Resumen ejecutivo
 
-1. El DAW en Andalucía se rige por el **RD 686/2010** (estatal) y la **Orden de 16 de junio de 2011** (BOJA 149/2011).
-2. CSS aparece explícitamente en el **RA 2 del 0373** y de forma extensa en los **RA 1, 2, 5 y 6 del 0615**.
-3. CSS es un estándar **W3C/CSS WG** organizado en **módulos con niveles**, no «CSS3 vs CSS4».
-4. La accesibilidad (WCAG) y la usabilidad son **requisitos curriculares explícitos**, no adornos: dedican aquí una unidad completa (U13).
+1. El currículo de CSS en Andalucía se fundamenta en los **RD 686/2010 (DAW)** y **RD 453/2010 (DAM)** a nivel estatal y en las **Órdenes de 16 de junio de 2011 (BOJA 149 y 150)** a nivel autonómico.
+2. CSS es evaluado en el **módulo 0373 (LMSGI)** en 1.º curso y de forma exhaustiva en el **módulo 0615 (DIW)** en 2.º de DAW y **módulo 0488 (DI)** en 2.º de DAM.
+3. CSS es un estándar del **W3C/CSS WG** organizado en **módulos independientes por niveles**, no una versión cerrada «CSS3» o «CSS4».
+4. La accesibilidad web es un **requisito legal exigible** en España por el **Real Decreto 1112/2018** y la norma **UNE-EN 301549** (WCAG 2.1 nivel AA).
 
 !!! success "Checklist de la unidad"
 
-    - [ ] Cito **RD 686/2010** y **Orden de 16/06/2011 (BOJA 149)** con fechas.
-    - [ ] Señalo el **RA** y el **CE** de cada contenido de CSS.
-    - [ ] Explico qué hace el **W3C** y por qué «CSS3» no es una spec.
-    - [ ] Distingo **BOE** de **BOJA**.
-
-!!! tip "Claves para el examen"
-
-    - **RD 686/2010 → Orden de 16/06/2011 (BOJA 149) → programación didáctica**.
-    - CSS en el currículo: **RA 2 del 0373** y **RA 1, 2, 5 y 6 del 0615**.
-    - «CSS3» es marketing: se citan **módulos con nivel y fase** (WD, CR, REC).
-    - **W3C** estandariza CSS y WCAG; **WHATWG** mantiene HTML.
-    - **3 h de libre configuración** = CSS avanzado no citado literalmente.
-    - Toda cita lleva **número, fecha y diario** correctos.
-
-[^1]: BOJA n.º 149, de 1 de agosto de 2011 (desarrollo del currículo DAW en Andalucía).
+    - [ ] Cito correctamente el **RD 686/2010** (DAW), el **RD 453/2010** (DAM) y la **Orden de 16/06/2011 (BOJA 149/150)**.
+    - [ ] Conozco el **Real Decreto 1112/2018** como marco legal de accesibilidad web en España.
+    - [ ] Mapeo cada unidad de CSS con su Resultado de Aprendizaje y Criterio de Evaluación correspondiente.
+    - [ ] Explico el modelo de modularización del W3C y por qué «CSS3» es un término de difusión comercial.
 
 *[W3C]: World Wide Web Consortium
+*[CSS WG]: CSS Working Group
 *[RA]: Resultado de aprendizaje
 *[CE]: Criterio de evaluación
+*[LMSGI]: Lenguajes de marcas y sistemas de gestión de información
+*[DIW]: Diseño de interfaces web
+*[DI]: Desarrollo de interfaces
+*[BOJA]: Boletín Oficial de la Junta de Andalucía
+*[BOE]: Boletín Oficial del Estado

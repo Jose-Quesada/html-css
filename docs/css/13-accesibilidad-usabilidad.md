@@ -2,19 +2,19 @@
 icon: lucide/accessibility
 title: "Unidad 13 — Accesibilidad y usabilidad"
 description: "WCAG aplicada a CSS: contraste, foco, movimiento reducido, forced-colors, técnicas de ocultación accesible, reflow y espaciado; principios de usabilidad y herramientas de verificación."
-modulo: "DIW (0615) — RA 5 y RA 6"
+modulo: "LMH (0373) / DIW (0615) / DI (0488)"
 unidad: 13
-fecha: "2026-09-06"
+fecha: "2026-10-04"
 ---
 
 # Unidad 13 · Accesibilidad y usabilidad
 
-El módulo 0615 dedica dos resultados de aprendizaje enteros a esto (RA 5 «interfaces accesibles» y RA 6 «interfaces amigables»). No es un extra: es **requisito de titulación** y, además, obligación legal en muchos contextos (Directiva europea de accesibilidad, Ley General de Derechos de las Personas con Discapacidad, contratos públicos).
+El módulo 0615 (DIW) y el módulo 0488 (DI) dedican resultados de aprendizaje enteros a la accesibilidad (RA 5 «interfaces accesibles») y a la usabilidad (RA 6 «interfaces amigables»). No es un añadido opcional: es un **requisito de titulación** y una **obligación legal estricta** en España y la Unión Europea regulada por el **Real Decreto 1112/2018** y la norma **UNE-EN 301549** (exigencia de conformidad con **WCAG 2.1 / 2.2 nivel AA**).
 
 !!! note "Conocimientos previos"
 
-    - HTML semántico y `label` (unidades 02 y 06 de HTML).
-    - Cascada y pseudo-clases (unidades 01–02 de CSS).
+    - HTML semántico, landmarks y nombres accesibles (unidades 02, 06 y 07 de HTML).
+    - Cascada y pseudo-clases de interacción (unidades 01–02 de CSS).
     - Tokens y guía de estilo (unidad 12).
 
 ## 1. Marco: WCAG
