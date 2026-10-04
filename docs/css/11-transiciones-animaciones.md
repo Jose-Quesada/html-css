@@ -66,7 +66,7 @@ El atajo `transition` acepta varias listas separadas por coma; el orden por list
 
 Keywords: `ease` (def), `linear`, `ease-in`, `ease-out`, `ease-in-out`.
 
-**`cubic-bezier(x1, y1, x2, y2)`**: curva bézier; x ∈ [0,1], y puede salirse (rebote). Referencias útiles:
+**`cubic-bezier(x1, y1, x2, y2)`**: curva bézier; $x \in [0, 1]$, $y$ puede salirse (rebote). Referencias útiles:
 
 ```css title="curvas.css"
 --ease-out-quint: cubic-bezier(.22, 1, .36, 1);   /* salida suave, estándar UI */

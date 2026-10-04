@@ -49,7 +49,7 @@ El texto del encabezado debe **resumir** lo que viene después ("Tipos de listas
 
 !!! quote "WCAG 2.1 — Criterio 1.3.1 Información y relaciones (nivel A)"
 
-    «La información, estructura y relaciones comunicadas a través de la presentación pueden ser determinadas por software o están disponibles como texto»[^1].
+    «La información, estructura y relaciones comunicadas a través de la presentación pueden ser determinadas por software o están disponibles como texto» (Traducción española oficial de las WCAG por el W3C).
 
 ## 2. Párrafos y separadores
 
@@ -328,8 +328,6 @@ Por qué nos importa en Interfaces: con ese esquema revisas en 10 segundos si la
 
     - Enunciados: [Ejercicios de la Unidad 2 — Texto y semántica de contenido](09-ejercicios.md#ej-u2) — cuatro retos (`U2.1` a `U2.4`) — del más básico al más avanzado.
     - Comprueba tu trabajo con [las soluciones de esta unidad](10-ejercicios-soluciones.md#sol-u2).
-
-[^1]: Traducción española de las WCAG (W3C): criterio de conformidad 1.3.1 «Información y relaciones», nivel A.
 
 *[HTML]: HyperText Markup Language
 *[SEO]: Search Engine Optimization
