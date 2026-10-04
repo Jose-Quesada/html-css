@@ -324,9 +324,15 @@ function guardar() {
 
 Windows: NVDA (gratuito y estándar en pruebas), Narrador o JAWS; macOS: VoiceOver (`Cmd + F5`). **Prueba mínima**: recorre la página solo con **Tab**, lista los encabezados (`h`) y usa los atajos de landmark (`D` = *main*, `M` = *navigation*). Si no llegas a todo el contenido sin ratón, algo falla.
 
-## 9. Relación con la clase de interfaces
+## 9. Marco legal de accesibilidad y relación con la clase de interfaces
 
-Esta unidad es la parte **HTML** de la accesibilidad (estructura y nombres accesibles); la parte **CSS** está en la clase de interfaces → [../css/13-accesibilidad-usabilidad.md](../css/13-accesibilidad-usabilidad.md).
+En España y la Unión Europea, la accesibilidad digital no es una recomendación estética opcional, sino una **obligación legal estricta** regulada por:
+
+- **Real Decreto 1112/2018**, de 7 de septiembre: Exige a las administraciones públicas y a empresas con financiación pública o servicios esenciales garantizar el nivel de adecuación **WCAG 2.1 nivel AA**.
+- **Norma UNE-EN 301549**: Estándar europeo de requisitos de accesibilidad para productos y servicios TIC.
+- **Módulo 0615 (DIW - RA 5) y Módulo 0488 (DI - RA 5):** Exigen evaluar la conformidad de las interfaces mediante herramientas automáticas (WAVE, axe DevTools, Lighthouse) y manuales (recorrido completo por teclado y lectores de pantalla como NVDA o VoiceOver).
+
+Esta unidad cubre la capa **HTML** de la accesibilidad (estructura semántica, landmarks y nombres accesibles); la capa **CSS** (contraste cromático, tipografía adaptativa, foco visible y animaciones reducidas) se desarrolla en [../css/13-accesibilidad-usabilidad.md](../css/13-accesibilidad-usabilidad.md).
 
 ## 10. Errores frecuentes y claves para el examen
 

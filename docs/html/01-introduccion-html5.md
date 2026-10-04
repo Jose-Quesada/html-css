@@ -1,354 +1,466 @@
 ---
 icon: lucide/code-xml
-title: "HTML 01 - Introducción a HTML5"
-description: "Fundamentos de HTML5: papel de HTML frente a CSS y JavaScript, evolución desde SGML, anatomía del documento, elementos, etiquetas y atributos, entidades de caracteres y validación con el W3C."
+title: "HTML 01 - Introducción a HTML5 y XHTML"
+description: "Fundamentos de HTML5 y XHTML: papel de HTML frente a CSS y JavaScript, evolución desde SGML y XML, documento bien formado frente a válido, tipos MIME, anatomía del documento, metadatos avanzados, entidades y validación W3C."
 modulo: "LMH (0373) / DIW (0615) / DI (0488)"
 unidad: 1
-fecha: "2026-09-29"
+fecha: "2026-10-04"
 ---
 
-# HTML 01 — Introducción a HTML5
+# HTML 01 — Introducción a HTML5 y XHTML
 
-HTML (*HyperText Markup Language*) describe la **estructura** y el **contenido** de una página: dice qué es cada cosa, no cómo se ve. Aquí ves de dónde viene, cómo se organiza un documento y qué reglas siguen para escribir código bien formado; el detalle del texto está en el [capítulo 02](02-texto-y-semantica.md).
+HTML (*HyperText Markup Language*) describe la **estructura** y el **significado** de un documento en la Web: declara qué es cada fragmento de información (un título, un párrafo, un enlace, una tabla), abstrayéndose completamente de cómo debe presentarse visualmente. En este tema se estudia de dónde surge, la distinción técnica y curricular entre HTML y XHTML, cómo se construye un documento bien formado y qué metadatos permiten a los motores de búsqueda, navegadores y tecnologías asistivas interpretar la información con fidelidad.
 
 !!! note "Conocimientos previos"
 
-    - Usar VS Code y guardar los archivos con la extensión correcta (`.html`).
-    - Rutas relativas dentro de una carpeta de proyecto (`./`, `../`).
-    - Idea general de qué hace un navegador al abrir una URL.
+    - Manejo básico del editor de código (VS Code) y guardado de ficheros con extensión `.html`.
+    - Concepto de jerarquía de directorios y rutas relativas (`./`, `../`).
+    - Comprensión del protocolo HTTP/HTTPS y el funcionamiento cliente-servidor en la Web.
+
+---
 
 ## 1. Qué es HTML y cuál es su papel
 
-### 1.1 Estructura, presentación y comportamiento
+### 1.1 Estructura, presentación y comportamiento (Separación de responsabilidades)
 
-| Tecnología | Pregunta | Capa | Archivo |
+En la arquitectura web moderna rige el principio de **Separación Estricta de Responsabilidades** (*Separation of Concerns*):
+
+| Tecnología | Pregunta clave | Capa arquitectónica | Archivo estándar |
 |---|---|---|---|
-| **HTML** | ¿**Qué** hay? | Estructura y contenido | `.html` |
-| **CSS** | ¿**Cómo se ve**? | Presentación | `.css` |
-| **JavaScript** | ¿**Qué hace**? | Comportamiento | `.js` |
+| **HTML** | ¿**Qué** información hay y qué significa? | Estructura y semántica | `.html` |
+| **CSS** | ¿**Cómo** se presenta visualmente? | Presentación y diseño | `.css` |
+| **JavaScript** | ¿**Qué hace** y cómo interactúa? | Comportamiento y lógica de cliente | `.js` / `.ts` |
 
-HTML son los cimientos y las paredes, CSS la pintura, JavaScript la instalación eléctrica. **HTML no programa**: solo declara significado; lo que debe *ocurrir* va en JavaScript y lo que debe *lucir* va en CSS, en ficheros separados.
+HTML constituye los cimientos y los muros maestros de un edificio; CSS aporta los acabados y la pintura; JavaScript instala los mecanismos automáticos e interactivos. **HTML no es un lenguaje de programación** (no posee bucles, estructuras condicionales ni gestión de memoria): es un lenguaje de marcado descriptivo.
 
 ![HTML vs CSS vs JS](../img/html/01/html-css-js.jpg)
 
-### 1.2 Origen: de SGML a HTML5
+---
 
-- **SGML** (ISO 8879): meta-lenguaje del que HTML hereda las etiquetas de apertura y cierre.
-- **HTML 4.01 (1999)**: separa contenido y estilo; de ahí el anidamiento estricto.
-- **XHTML 1.0/2.0**: HTML como XML estricto; el 2.0 se abandonó por incompatible con la web real.
-- **WHATWG y HTML5**: en 2004 Apple, Mozilla y Opera fundaron el *WHATWG*; el W3C publicó HTML5 en **2014**[^1].
-- **Hoy**: ya no hay "versiones": rige un único ==HTML Living Standard==.
+### 1.2 Evolución histórica: de SGML a HTML5
 
-==`<!DOCTYPE html>`== no es una etiqueta: es la **declaración** que activa el modo estándar y evita el *quirks mode* (navegadores de los 90).
+- **SGML (ISO 8879, 1986):** Metalenguaje estándar del que Tim Berners-Lee derivó la primera versión de HTML en el CERN (1991). De SGML heredó la sintaxis de etiquetas delimitadas por ángulos (`<...>`).
+- **HTML 4.01 (1999, W3C):** Consolidó la separación entre contenido y estilo, introduciendo las hojas de estilo CSS e iniciando la retirada de etiquetas meramente decorativas (`<font>`, `<center>`, `<blink>`).
+- **XHTML 1.0 (2000, W3C):** Reformulación estricta de HTML 4.01 bajo las reglas sintácticas de **XML 1.0** (*Extensible Markup Language*).
+- **El cisma de XHTML 2.0 y el nacimiento del WHATWG (2004):** El W3C intentó desarrollar XHTML 2.0 rompiendo la compatibilidad hacia atrás con la web existente. En respuesta, Apple, Mozilla y Opera fundaron el **WHATWG** (*Web Hypertext Application Technology Working Group*) para crear una evolución pragmática y compatible: **HTML5**.
+- **Publicación de HTML5 (2014, W3C) y acuerdo definitivo (2019):** El W3C reconoció al WHATWG como el organismo responsable del mantenimiento de la especificación, denominada formalmente **HTML Living Standard** (estándar vivo continuo sin numeración cerrada).
 
-### 1.3 Qué aporta HTML5
+---
 
-- **Semántica**: `header`, `nav`, `main`, `section`, `article`, `aside` y `footer` describen el papel del contenido en lugar de `div` genéricos.
-- **Formularios**: tipos `email`, `number`, `date`, `range` y atributos `required`, `pattern`, con validación nativa; ver [06-formularios-html5.md](06-formularios-html5.md).
-- **Multimedia nativa**: `<video>`, `<audio>` y `<canvas>`, sin plugins como Flash.
-- **APIs**: geolocalización, `localStorage`, *drag & drop*, `fetch` (territorio de JavaScript).
-- **Accesibilidad y SEO**: el significado lo entienden mejor lectores de pantalla y buscadores.
+### 1.3 HTML frente a XHTML: «Bien formado» vs «Válido» (Módulo 0373 - RA 1 y 2)
 
-### 1.4 Mito: "HTML5 = todo el stack moderno"
+Uno de los conceptos centrales del módulo de *Lenguajes de Marcas* (0373) es la comparativa técnica entre HTML clásico y XHTML:
 
-**HTML5 no es un framework: es solo el estándar de marcado.** Se cita para vender cursos con CSS3, JavaScript ES6 o APIs, pero eso es complemento. Tampoco existe **CSS3** como especificación separada (CSS crece por módulos): "HTML5 y CSS3" es marketing. Y HTML **no es lenguaje de programación** (no hay variables ni bucles) sino de **marcado**.
+```mermaid
+flowchart TD
+    subgraph HTML_Parser ["Parser HTML (Tolerante a fallos)"]
+        H_CODE["Código con error<br>&lt;p&gt;&lt;b&gt;Texto&lt;/p&gt;&lt;/b&gt;"]
+        H_PARSE["Motor HTML<br>(Algoritmo de recuperación de errores)"]
+        H_DOM["Árbol DOM reconstruido<br>(La página se muestra con advertencias)"]
+        H_CODE --> H_PARSE --> H_DOM
+    end
 
-!!! info "HTML5 en una frase"
-
-    - **Sí es** el estándar de marcado: define etiquetas, atributos y estructura del documento.
-    - **No es** CSS, JavaScript ni un framework: eso se añade después, en ficheros aparte.
-
-## 2. Anatomía de un documento HTML
-
-### 2.1 Plantilla completa (*boilerplate*)
-
-Memoriza este esqueleto: lo usarás en todos los ejercicios.
-
-```html title="index.html" hl_lines="1 4"
-<!DOCTYPE html> <!-- HTML5: declaración, primera línea -->
-<html lang="es"> <!-- Raíz; lang = idioma del contenido -->
-    <head>
-        <meta charset="UTF-8"> <!-- Codificación: ñ, tildes y € -->
-        <meta name="viewport" <!-- Responsivo: obligatorio en móvil -->
-              content="width=device-width, initial-scale=1.0">
-        <meta name="description" <!-- Descripción para buscadores -->
-              content="Blog de María sobre desarrollo web.">
-        <title>Blog de María · Desarrollo web</title> <!-- Título de la pestaña -->
-        <link rel="icon" href="favicon.svg"> <!-- Favicon -->
-        <link rel="stylesheet" href="css/estilos.css"> <!-- CSS externo -->
-        <meta property="og:title" content="Blog de María"> <!-- Al compartir -->
-        <meta property="og:description" content="Apuntes y proyectos."> <!-- en redes -->
-    </head>
-    <body>
-        <!-- Empieza aquí TODO el contenido visible -->
-        <header><h1>Mi blog de desarrollo web</h1></header>
-        <main><h2>Bienvenidos</h2><p>Mi primer artículo.</p></main> <!-- (1)! -->
-        <footer><p>&copy; 2026 María López</p></footer> <!-- (2)! -->
-    </body>
-</html>
+    subgraph XML_Parser ["Parser XML / XHTML (Estricto)"]
+        X_CODE["Código con error<br>&lt;p&gt;&lt;b&gt;Texto&lt;/p&gt;&lt;/b&gt;"]
+        X_PARSE["Motor XML estricto<br>(application/xhtml+xml)"]
+        X_ERR["XML Parsing Error<br>(Yellow Screen of Death / Bloqueo total)"]
+        X_CODE --> X_PARSE --> X_ERR
+    end
 ```
 
-1.  `<main>` concentra el contenido único de la página y **solo puede haber uno** visible.
-2.  `&copy;` es una entidad: con UTF-8 podrías escribir el símbolo © directamente.
+#### Reglas del «Documento bien formado» en XHTML / XML
 
-### 2.2 Qué hace cada parte
+Para que un documento sea considerado **bien formado** (*well-formed*) en XML/XHTML, debe cumplir taxativamente:
 
-`<html>` es la raíz; `<head>` guarda los metadatos (información *sobre* la página) y `<body>` el contenido visible (información *de* la página).
+1. **Cierre obligatorio de todos los elementos:** Todo elemento debe cerrarse explícitamente (`<p>...</p>`), y los elementos vacíos (*void elements*) deben cerrarse en sí mismos con una barra: `<img src="foto.jpg" alt="" />`, `<br />`, `<hr />`.
+2. **Minúsculas estrictas:** Los nombres de etiquetas y atributos deben escribirse obligatoriamente en minúsculas (`<table class="...">`, no `<TABLE CLASS="...">`).
+3. **Entrecomillado estricto de atributos:** Todos los valores de atributos deben ir entre comillas dobles o simples (`id="menu"`, nunca `id=menu`).
+4. **Prohibición de atributos booleanos minimizados:** En XHTML no existe la sintaxis minimizada. Debe escribirse `disabled="disabled"`, `checked="checked"`, `readonly="readonly"` o `required="required"`.
+5. **Anidamiento no cruzado:** Los elementos deben cerrarse en orden exactamente inverso a su apertura (`<p><strong>...</strong></p>`).
+6. **Elemento raíz único:** Todo el documento debe estar contenido en una única etiqueta raíz (`<html xmlns="http://www.w3.org/1999/xhtml">`).
 
-- **`charset`**: dentro de los primeros 1024 bytes, o aparecerán caracteres raros.
-- **`viewport`** es obligatorio en responsivo: sin él los móviles renderizan a ~980 px.
-- **`title`** es obligatorio, único por página y corto; **`description`** lo lee Google para el recuadro de resultados (SEO) y `og:title`/`og:description`, la vista al compartir en redes.
-- En `<body>`, contenedores semánticos y un ==`<main>`== único por página.
+#### Documento Bien Formado vs Documento Válido
 
-!!! warning "Error común"
+- **Documento bien formado (*Well-formed*):** Cumple con las reglas sintácticas universales del lenguaje (etiquetas cerradas, comillas en atributos, anidamiento correcto).
+- **Documento válido (*Valid*):** Además de estar bien formado, cumple con la estructura gramatical y semántica definida en una DTD (*Document Type Definition*) o en un esquema (Schema/RelaxNG).
 
-    - `<html>` sin `lang="es"`: el lector de pantalla anuncia con el acento equivocado (leerá "añadir" con fonética inglesa) y los buscadores malinterpretan el idioma.
-    - `<meta charset>` al final del `<head>` o codificación `iso-8859-1`: aparecen `Ã±` en lugar de `ñ` y `â‚¬` en lugar de `€`.
+#### Tipos MIME y modos de renderizado
 
-## 3. Elementos, etiquetas y atributos
+El comportamiento del navegador no depende únicamente del código escrito, sino de la cabecera HTTP `Content-Type` con la que el servidor entrega el archivo:
 
-### 3.1 Elemento, etiqueta y contenido
-
-La **etiqueta** (*tag*) es el texto entre ángulos (`<p>`, `</p>`); el **elemento** une apertura, contenido y cierre (`<p>Hola</p>`); el **atributo** va **solo** en la etiqueta de apertura.
-
-### 3.2 Elementos vacíos
-
-Un elemento **vacío** (*void*) no tiene contenido ni cierre: representa una acción o un recurso, no un contenedor.
-
-```html title="elementos-vacios.html"
-<img src="foto.jpg" alt="Equipo celebrando la copa">   <!-- recurso: imagen -->
-<br>                                                   <!-- salto de línea, uso raro -->
-<hr>                                                   <!-- separador temático -->
-<input type="email" name="correo">                     <!-- campo de formulario -->
-<meta charset="UTF-8">
-<link rel="stylesheet" href="estilos.css">
-```
-
-HTML5 admite el estilo XHTML `<img ... />`, pero **la convención es no escribir la barra**.
-
-### 3.3 Atributos: nombre, valor y booleanos
-
-- Siempre en la **etiqueta de apertura**, con formato `nombre="valor"` (comillas dobles por convención) y nombres en **minúsculas** (excepción heredada de SVG: `viewBox`).
-- Un mismo atributo **no puede repetirse** en una etiqueta.
-
-```html title="atributos.html" hl_lines="3 5"
-<a href="matricula.html" title="Inscripción al ciclo">Matricularme</a>
-
-<input type="text" name="apellido" required>    <!-- booleano: basta con estar presente -->
-<input type="text" name="dni" disabled>          <!-- booleano: deshabilitado de fábrica -->
-<input type="checkbox" name="acepto" checked>    <!-- booleano: marcado por defecto -->
-```
-
-Los ==atributos booleanos== no llevan valor: su presencia activa la propiedad, así que `required`, nunca `required="true"`. Habituales: `disabled`, `required`, `checked`, `selected`, `readonly`, `autofocus`. Entre los **universales** destacan `id` (único, el DNI del elemento) y `class` (repetible).
-
-!!! question "Autoevaluación: booleanos"
-
-    Un compañero escribe `<input type="text" name="dni" required="true">`. ¿Es correcto? ¿Y `<input type="checkbox" name="acepto" checked="false">`?
-
-    ??? success "Respuesta"
-
-        **No, en los dos casos.** Los booleanos **no llevan valor**: basta con que aparezcan (`required`, `checked`). La casilla con `checked="false"` seguiría marcada, porque el atributo *existe*.
-
-### 3.4 Anidamiento correcto
-
-HTML es jerárquico: los elementos forman un árbol. Regla de oro: ==lo que se abre de último, se cierra de primero==.
-
-```html title="anidamiento.html"
-<!-- CORRECTO: cierres en orden inverso -->
-<article>
-    <h2>Noticias del ciclo</h2>
-    <p>Estudiaremos <strong>HTML semántico</strong> esta semana.</p> <!-- (1)! -->
-</article>
-
-<!-- INCORRECTO: cierres cruzados -->
-<article>
-    <p>Estudiaremos <strong>HTML semántico.</p> <!-- (2)! -->
-</strong>
-```
-
-1.  `</strong>` se cierra **dentro** del `<p>`: el árbol queda como esperabas.
-2.  Aquí los cierres van en orden directo: el navegador "lo arregla", pero el árbol resultante no es este.
-
-El segundo ejemplo "funciona" porque los navegadores son tolerantes, pero el árbol es erróneo: CSS, JavaScript y lectores de pantalla trabajan con otra estructura.
-
-!!! failure "Anti-patrón prohibido: cierres cruzados"
-
-    - Dejar el código cruzado "porque se ve bien": el **árbol DOM** real **no es el que diseñaste**.
-    - Meter bloques (`<p>`, `<ul>`, `<h2>`) dentro de un `<p>`: el navegador los expulsa solo y el resultado no es el que esperabas.
-
-### 3.5 Mayúsculas y minúsculas
-
-**HTML no distingue mayúsculas**: `<P>`, `<p>` y `HREF="x"` son lo mismo (herencia de SGML). Aun así **se escribe en minúsculas**: es la convención de MDN y el W3C y, sobre todo, si un día se sirve como **XHTML/XML** sí las distinguirá y dejará de funcionar.
-
-!!! warning "Error común"
-
-    - Copiar código en mayúsculas (`<BODY CLASS="Menu">`): en HTML funciona, pero rompe la convención y fallaría en XHTML.
-    - Confiar en que "el navegador lo arregla" al anidar en cruz: el DOM resultante no es el que diseñaste.
-
-### 3.6 Bloque y línea: no es lo mismo que `display`
-
-| Comportamiento | Ejemplos | Efecto por defecto |
+| Característica | Servido como `text/html` (HTML estándar) | Servido como `application/xhtml+xml` (XHTML real) |
 |---|---|---|
-| **Bloque** (*block*) | `p`, `h1`-`h6`, `div`, `ul`, `li`, `section` | Todo el ancho, en línea nueva |
-| **Línea** (*inline*) | `a`, `strong`, `em`, `span`, `img`, `code` | Dentro del texto |
+| **Parser utilizado** | Parser HTML tolerante a errores | Parser XML estricto |
+| **Ante un error sintáctico** | El navegador intenta reparar el árbol DOM | Detiene el renderizado y muestra pantalla de error (*Yellow Screen of Death*) |
+| **Sintaxis de elementos vacíos** | `<img src="...">` o `<img src="..." />` | Obligatorio `<img src="..." />` |
+| **DOCTYPE requerido** | `<!DOCTYPE html>` (activa modo estándar) | DOCTYPE XML con DTD formal o declaración XML `<?xml version="1.0"?>` |
 
-Es la **semántica de partida** del elemento, no una propiedad CSS: con `display: block` conviertes un `<span>` en bloque y con `display: inline` un `<p>` en línea; por eso la respuesta a "¿es lo mismo que `display`?" es **no**: son capas distintas. Ojo: `img` es *inline* pero no es texto; `li`, de bloque. Los valores de `display` (`block`, `inline`, `inline-block`, `flex`, `grid`, `none`) se estudian en [../css/07-flujo-multicolumna-tablas-display.md](../css/07-flujo-multicolumna-tablas-display.md).
+=== "Declaración DOCTYPE en HTML5"
 
-## 4. Entidades de caracteres y codificación
+    ```html
+    <!DOCTYPE html>
+    ```
+    *No es una etiqueta XML ni requiere DTD externa. Es una instrucción para indicar al navegador que renderice en **modo estándar** (*no-quirks mode*).*
 
-### 4.1 Caracteres reservados
+=== "Declaración DOCTYPE en XHTML 1.0 Strict (Histórico)"
 
-El navegador interpreta `<`, `>` y `&` como parte del lenguaje; para mostrarlos como texto se usan ==entidades==:
+    ```html
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    ```
 
-| Se muestra | Entidad |
-|---|---|
-| `<` | `&lt;` |
-| `>` | `&gt;` |
-| `&` | `&amp;` |
-| `©` | `&copy;` (*copyright*) |
+---
 
-```html title="entidades.html"
-<p>Para enlazar CSS escribe <code>&lt;link rel="stylesheet"&gt;</code>.</p>
-<p>Aprende HTML y CSS &amp; JavaScript. &copy; 2026</p>
-```
+### 1.4 Qué aporta HTML5
 
-!!! example "Un `&amp;` en plena URL"
+- **Elementos semánticos estructurales:** `<header>`, `<nav>`, `<main>`, `<article>`, `<section>`, `<aside>`, `<footer>`.
+- **Formularios avanzados y validación nativa:** Tipos `email`, `number`, `date`, `url`, `range`, `color` y atributos declarativos `required`, `pattern`, `min`, `max`, `step`.
+- **Multimedia nativa sin plugins:** `<video>`, `<audio>` y soporte de subtítulos sincronizados con `<track>` (WebVTT).
+- **Lienzo gráfico y dibujo:** `<canvas>` (mapa de bits) y soporte nativo de SVG vectorial integrado en el DOM.
+- **APIs web del estándar:** Web Storage (`localStorage`), geolocalización, arrastrar y soltar (*drag & drop*), `fetch`, etc.
 
-    En `https://x.es/buscar?q=html&amp;orden=fecha` el navegador muestra un `&` simple, pero en el código el ampersand **va como entidad**: así el validador no lo confunde con el inicio de otra entidad.
+---
 
-### 4.2 El espacio no visible: `&nbsp;`
+## 2. Anatomía de un documento HTML5 moderno
 
-`&nbsp;` (*non-breaking space*) inserta un espacio que **impide el salto de línea**:
+### 2.1 Plantilla completa (*boilerplate*) profesional
 
-```html title="fecha-examen.html"
-<p>El examen será el 15&nbsp;de&nbsp;mayo a las 9:30&nbsp;h.</p>
-```
-
-Para "empujar" el diseño es un anti-patrón: eso lo resuelve CSS con `margin` y `padding` (ver [../css/03-modelo-de-caja.md](../css/03-modelo-de-caja.md)).
-
-### 4.3 ¿Y los acentos y la ñ?
-
-Con `charset="UTF-8"` **no necesitas ninguna entidad**: escribe los caracteres directamente.
-
-```html title="utf-8.html"
-<!-- CORRECTO: con UTF-8, acentos y ñ van "pelados" -->
-<p>Matrícula, diseño, lógica de programación y café.</p>
-<!-- VÁLIDO, pero innecesario: matr&iacute;cula, dise&ntilde;o, caf&eacute; -->
-```
-
-==Cuándo sí una entidad==: si el carácter es reservado (`<`, `>`, `&`: siempre obligatorio); si la herramienta no soporta UTF-8; si el texto debe mostrar la propia entidad; y `&nbsp;` para evitar saltos de línea. Error frecuente: guardar en VS Code como ANSI/ISO-8859-1 (*Archivo → Guardar con codificación → UTF-8*) y dejar un `&` suelto (`HTML & CSS` → `HTML &amp; CSS`).
-
-## 5. Validación y herramientas de desarrollo
-
-Que el código "funcione" no significa que sea **correcto**.
-
-### 5.1 Validador del W3C
-
-<https://validator.w3.org/> acepta **pegar el código**, **indicar la URL** o **subir el archivo**:
-
-=== "Pegar el código"
-
-    Pega el HTML completo en el área de texto: es lo habitual con fragmentos o con la práctica de clase.
-
-=== "URL"
-
-    Valida la página ya publicada: comprueba lo que hay en el servidor, no solo el archivo local.
-
-=== "Archivo"
-
-    Sube el `.html` desde el disco: es la opción habitual antes de entregar.
-
-Los mensajes son **errors** (etiqueta sin cerrar, `lang` ausente, `id` duplicado) o **warnings/notices** (posibles mejoras). Ejemplo:
-
-```text title="salida-validador.txt"
-Element “h1” not allowed as child of element “aside” in this context.
-```
-
-Es decir: un título principal dentro de un contenido tangencial, invisible en pantalla.
-
-### 5.2 Pestaña *Elements* de las herramientas de desarrollo
-
-Con `F12` (o `Ctrl+Shift+I`) inspeccionamos el ==árbol DOM real== que construyó el navegador, el que usan CSS y JavaScript:
-
-- **Elements**: árbol de nodos; compara lo que escribiste con lo que entendió el navegador.
-- **Styles / Computed**: qué reglas CSS ganan en la cascada.
-- **Problemas/Console**: errores de sintaxis y peticiones fallidas.
-- **Lighthouse**: auditoría de accesibilidad, SEO y rendimiento.
-
-Si un estilo "no te hace caso", comprueba en *Elements* si el nodo existe: casi siempre es un error de anidamiento, no de CSS.
-
-## 6. Ejemplo práctico: página mínima bien formada
-
-Matrícula de ciclo, cada línea comentada y sin estilos.
-
-```html title="matricula.html" hl_lines="12 17"
-<!DOCTYPE html> <!-- HTML5 -->
-<html lang="es"> <!-- Idioma: español -->
+```html title="index.html" hl_lines="1 2 4 5 6 7 8 13 14 17 21"
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8"> <!-- UTF-8: acentos y ñ -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsivo -->
-    <title>Matrícula DAW · Curso 2026-2027</title> <!-- Título de la pestaña -->
-    <link rel="icon" href="favicon.svg"> <!-- Favicon -->
-    <link rel="stylesheet" href="css/estilos.css"> <!-- CSS externo -->
+    <meta charset="UTF-8"> <!-- (1)! -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- (2)! -->
+    <title>Centro Integrado de FP · Ciclo DAW</title>
+    <meta name="description" content="Portal oficial de los ciclos de informática en Andalucía.">
+    <link rel="canonical" href="https://fp.juntadeandalucia.es/daw/">
+
+    <!-- Metadatos para Redes Sociales (Open Graph / Twitter Cards) -->
+    <meta property="og:title" content="Ciclo Superior DAW - Andalucía">
+    <meta property="og:description" content="Formación en Desarrollo de Aplicaciones Web.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fp.juntadeandalucia.es/daw/">
+    <meta property="og:image" content="https://fp.juntadeandalucia.es/daw/img/og-portada.jpg">
+
+    <!-- Optimización de recursos (Resource Hints) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="css/estilos.css">
+
+    <!-- PWA y Favicon -->
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0b5fff">
+
+    <!-- Canal de sindicación de contenidos (RA 6 - LMSGI) -->
+    <link rel="alternate" type="application/rss+xml" title="Noticias del Ciclo" href="feed.xml">
 </head>
-<body> <!-- Contenido visible -->
-    <header> <!-- Cabecera -->
-        <h1>Matrícula · Desarrollo de Aplicaciones Web</h1> <!-- Único h1 -->
-        <nav> <!-- Navegación -->
-            <ul><li><a href="index.html">Inicio</a></li><li><a href="horario.html">Horario</a></li></ul>
+<body>
+    <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+    <header>
+        <h1>Desarrollo de Aplicaciones Web</h1>
+        <nav aria-label="Navegación principal">
+            <ul>
+                <li><a href="index.html" aria-current="page">Inicio</a></li>
+                <li><a href="modulos.html">Módulos</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
         </nav>
     </header>
-    <main> <!-- Principal y único -->
-        <h2>Datos del alumno</h2> <!-- Encabezado de 2.º nivel -->
-        <p>Completa los campos para <strong>iniciar</strong> la matrícula.</p>
-        <form action="confirmacion.html" method="post"> <!-- Envía los datos -->
-            <label for="nombre">Nombre y apellidos:</label> <!-- (1)! -->
-            <input type="text" id="nombre" name="nombre" required> <!-- Obligatorio -->
-            <label for="correo">Correo electrónico:</label>
-            <input type="email" id="correo" name="correo" required> <!-- Validación nativa --><!-- (2)! -->
-            <button type="submit">Enviar solicitud</button>
-        </form>
+
+    <main id="contenido" tabindex="-1">
+        <article>
+            <header>
+                <h2>Bienvenida al curso 2026/2027</h2>
+                <p>Publicado por <cite>Jefatura de Estudios</cite> el <time datetime="2026-10-04">4 de octubre de 2026</time></p>
+            </header>
+            <p>Comienza el periodo lectivo de los módulos de primer y segundo curso.</p>
+        </article>
     </main>
-    <footer> <!-- Pie de página -->
-        <p>&copy; 2026 IES Ejemplo · Ciclo DAW</p> <!-- Entidad de copyright -->
+
+    <footer>
+        <p>&copy; 2026 Consejería de Desarrollo Educativo y FP · Junta de Andalucía</p>
     </footer>
 </body>
 </html>
 ```
 
-1.  El `for` del `<label>` coincide con el `id` del campo: al enfocar el texto se activa el input.
-2.  `type="email"` activa la validación nativa y el teclado adecuado en el móvil.
+1.  `meta charset="UTF-8"` debe figurar dentro de los primeros 1024 bytes del documento para evitar reinterpretaciones del juego de caracteres.
+2.  `meta viewport` es obligatorio para el diseño responsivo en dispositivos móviles.
 
-!!! success "Comprueba que…"
+---
 
-    - [ ] `<!DOCTYPE html>` en la primera línea.
-    - [ ] `lang` y `charset` declarados en el `<head>`.
-    - [ ] Un solo ==`<h1>`== y sin saltos de nivel.
-    - [ ] Etiquetas cerradas en orden inverso.
-    - [ ] Validador sin *errors*.
+### 2.2 Desglose funcional del `<head>` y del `<body>`
 
-Un horario de clase se tabula, no se lista: va en [05-tablas.md](05-tablas.md); practica en el [ejercicio 8 de 09-ejercicios.md](09-ejercicios.md).
+- **`<head>` (Metadatos):** Contiene información destinada al navegador, a los motores de búsqueda y a los servicios web. Nunca se muestra directamente en el lienzo visual de la página.
+  - `meta charset="UTF-8"`: Asegura la correcta representación de tildes, la letra eñe (`ñ`) y el símbolo del euro (`€`).
+  - `meta name="viewport"`: Desactiva el escalado simulado de escritorio en pantallas móviles y ajusta el ancho visual al dispositivo.
+  - `title`: Título único y descriptivo de la pestaña del navegador (clave para accesibilidad y SEO).
+  - `link rel="stylesheet"`: Vincula las hojas de estilo CSS externas.
+- **`<body>` (Cuerpo visible):** Contiene todo el contenido que los usuarios perciben, leen e interactúan a través de la pantalla o del sintetizador de voz.
+
+---
+
+### 2.3 Metadatos avanzados, rendimiento y SEO estructurado (Módulos 0373 y 0615)
+
+En los módulos de *Diseño de Interfaces Web* (0615) y *Lenguajes de Marcas* (0373 - RA 6), se exige optimizar la carga y la integración de datos:
+
+#### A. Sugerencias de recursos (*Resource Hints*)
+
+Permiten al navegador anticipar conexiones y descargas críticas:
+
+```html title="resource-hints.html"
+<!-- 1. Preconnect: Resuelve DNS y establece handshake TLS por adelantado -->
+<link rel="preconnect" href="https://api.ejemplo.es">
+
+<!-- 2. Dns-prefetch: Resuelve solo la IP en segundo plano -->
+<link rel="dns-prefetch" href="https://cdn.terceros.com">
+
+<!-- 3. Preload: Descarga inmediata con alta prioridad de un recurso crítico (fuente o hero image) -->
+<link rel="preload" href="fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+```
+
+#### B. Sindicación web y canales de contenidos (RA 6 - LMSGI)
+
+Para permitir a lectores de noticias o agregadores descubrir el canal de sindicación (**RSS/Atom**):
+
+```html
+<link rel="alternate" type="application/rss+xml" title="Canal RSS de Noticias" href="/rss.xml">
+```
+
+#### C. Datos estructurados con Schema.org y JSON-LD
+
+Permite a los motores de búsqueda comprender el significado exacto de entidades (cursos, personas, productos):
+
+```html title="schema-jsonld.html"
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Desarrollo de Aplicaciones Web",
+  "description": "Ciclo Formativo de Grado Superior en Informática en Andalucía",
+  "provider": {
+    "@type": "EducationalOrganization",
+    "name": "Consejería de Desarrollo Educativo y FP",
+    "sameAs": "https://www.juntadeandalucia.es"
+  }
+}
+</script>
+```
+
+---
+
+## 3. Elementos, etiquetas y atributos
+
+### 3.1 Diferencia entre etiqueta, elemento y atributo
+
+```text
+       ┌────────── Etiqueta de apertura ──────────┐
+       │             ┌─── Atributo ───┐            │
+       │             │ Nombre   Valor  │            │
+       ▼             ▼         ▼      ▼            ▼
+      <a            href="matricula.html"            >Solicitar plaza</a>
+                                                     ▲                ▲
+                                                     └── Contenido ───┤
+                                                                      │
+                                                          Etiqueta de cierre
+      └──────────────────────── Elemento completo ────────────────────┘
+```
+
+- **Etiqueta (*Tag*):** El texto delimitado por `<` y `>` (por ejemplo, `<a>` o `</a>`).
+- **Atributo (*Attribute*):** Información adicional que modifica o configura el elemento, situada **exclusivamente en la etiqueta de apertura**.
+- **Elemento (*Element*):** El conjunto completo formado por la etiqueta de apertura, sus atributos, el contenido interior y la etiqueta de cierre.
+
+---
+
+### 3.2 Elementos vacíos (*Void Elements*)
+
+Los elementos **vacíos** no pueden contener texto ni otros elementos hijos, por lo que carecen de etiqueta de cierre:
+
+```html title="elementos-vacios.html"
+<img src="foto.jpg" alt="Alumnado en el taller de desarrollo">
+<br>
+<hr>
+<input type="text" name="usuario" id="usuario">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/estilos.css">
+```
+
+!!! info "La barra de autocierre `/>` en HTML5"
+
+    En HTML5, escribir `<br />` o `<img src="..." />` es sintácticamente tolerado pero **innecesario**. La convención estándar oficial de HTML5 es omitir la barra final (`<br>`, `<img>`).
+
+---
+
+### 3.3 Atributos booleanos
+
+Un atributo booleano representa un valor verdadero/falso. Su mera **presencia** en la etiqueta de apertura establece el valor en verdadero:
+
+```html title="booleanos.html"
+<!-- CORRECTO en HTML5: la presencia activa la propiedad -->
+<input type="text" name="dni" required disabled>
+<input type="checkbox" name="acepto" checked>
+
+<!-- INCORRECTO: los booleanos no evalúan strings "false" -->
+<input type="checkbox" name="acepto" checked="false"> <!-- ¡Sigue estando MARCADO! -->
+```
+
+---
+
+### 3.4 Anidamiento y construcción del árbol DOM
+
+Los documentos HTML forman un árbol jerárquico (**DOM - Document Object Model**). La regla básica es: **lo que se abre de último debe cerrarse de primero**.
+
+```html title="anidamiento.html"
+<!-- CORRECTO: Árbol DOM balanceado -->
+<article>
+    <h2>Lenguajes de marcas</h2>
+    <p>El estándar oficial es <strong>HTML Living Standard</strong>.</p>
+</article>
+
+<!-- INCORRECTO (Cierres cruzados): Genera un DOM anómalo -->
+<p>El estándar oficial es <strong>HTML Living Standard.</p></strong>
+```
+
+---
+
+## 4. Entidades de caracteres y codificación
+
+### 4.1 Caracteres reservados en HTML
+
+Dado que `<`, `>`, `&` y las comillas forman parte de la sintaxis del lenguaje, para representarlos como texto literal se deben emplear **entidades de caracteres**:
+
+| Carácter literal | Entidad nombrada | Entidad numérica | Motivo de uso |
+|---|---|---|---|
+| `<` | `&lt;` (*less than*) | `&#60;` | Evita que el parser lo interprete como apertura de etiqueta |
+| `>` | `&gt;` (*greater than*) | `&#62;` | Evita confusiones en el cierre de etiquetas |
+| `&` | `&amp;` (*ampersand*) | `&#38;` | Evita que se interprete como inicio de una entidad |
+| `"` | `&quot;` (*quotation mark*) | `&#34;` | Para usar comillas dobles dentro del valor de un atributo |
+| `©` | `&copy;` | `&#169;` | Símbolo de copyright |
+| Espacio fijo | `&nbsp;` (*non-breaking space*) | `&#160;` | Espacio que impide el salto de línea automático |
+
+```html title="ejemplo-entidades.html"
+<!-- En código técnico se deben escapar los caracteres de marcado -->
+<p>Para crear un enlace usa la etiqueta <code>&lt;a href="..."&gt;</code>.</p>
+<p>Horario: Lunes a Viernes de 8:00&nbsp;h a 14:30&nbsp;h.</p>
+```
+
+---
+
+## 5. Herramientas de edición, desarrollo y validación (CE 2.c y 2.i)
+
+### 5.1 Entorno de desarrollo profesional
+
+- **VS Code:** Editor de referencia en el currículo de DAW/DAM.
+- **Emmet:** Motor de abreviaturas integrado para generación rápida de código:
+  - `!` + Tab $\rightarrow$ Genera el boilerplate completo de HTML5.
+  - `header>nav>ul>li*3>a` $\rightarrow$ Genera la estructura completa del menú en una sola pulsación.
+- **Linters estáticos:** Extensiones como *HTMLHint* o *axe Accessibility Linter* para detectar etiquetas sin cerrar o faltas de atributos de accesibilidad (`alt`, `lang`) en tiempo de escritura.
+
+---
+
+### 5.2 Validador oficial del W3C (*Nu HTML Checker*)
+
+La validación sintáctica es un criterio de evaluación obligatorio en los módulos 0373 y 0615. El servicio oficial se encuentra en <https://validator.w3.org/>:
+
+```text title="salida-validador-w3c.txt"
+Error: An "img" element must have an "alt" attribute, except under certain conditions.
+From line 42, column 5; to line 42, column 35
+<img src="logo.png" class="logo">
+```
+
+---
+
+### 5.3 Pestaña *Elements* y herramientas de desarrollo (DevTools)
+
+Pulsando `F12` o `Ctrl+Shift+I` se accede a las herramientas de desarrollo del navegador:
+- **Árbol DOM (*Elements*):** Permite inspeccionar el árbol en tiempo real y comprobar cómo ha resuelto el navegador las etiquetas mal formadas.
+- **Pestaña *Accessibility*:** Muestra el árbol de accesibilidad (**A11y Tree**), el rol de cada nodo y su nombre accesible.
+- **Auditorías (*Lighthouse*):** Informes automatizados de rendimiento, accesibilidad (WCAG), mejores prácticas y SEO.
+
+---
+
+## 6. Ejemplo práctico: página mínima bien formada y accesible
+
+Matrícula de ciclo formativo, cada línea comentada, semántica y validada.
+
+```html title="matricula.html" hl_lines="12 17"
+<!DOCTYPE html> <!-- HTML5: activa modo estándar -->
+<html lang="es"> <!-- Idioma declarado: español -->
+<head>
+    <meta charset="UTF-8"> <!-- Codificación universal -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsivo -->
+    <title>Matrícula DAW · Curso 2026-2027</title> <!-- Título de pestaña -->
+    <link rel="icon" href="favicon.svg" type="image/svg+xml"> <!-- Favicon -->
+    <link rel="stylesheet" href="css/estilos.css"> <!-- CSS externo -->
+</head>
+<body>
+    <header> <!-- Cabecera principal -->
+        <h1>Matrícula · Desarrollo de Aplicaciones Web</h1> <!-- Único h1 -->
+        <nav aria-label="Navegación del sitio"> <!-- Navegación -->
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="horario.html">Horario</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main> <!-- Contenido principal único -->
+        <h2>Datos del alumno/a</h2>
+        <p>Completa los campos para <strong>iniciar</strong> la solicitud de matrícula.</p>
+        
+        <form action="confirmacion.html" method="post">
+            <label for="nombre">Nombre y apellidos:</label> <!-- (1)! -->
+            <input type="text" id="nombre" name="nombre" required autocomplete="name">
+            
+            <label for="correo">Correo electrónico:</label>
+            <input type="email" id="correo" name="correo" required autocomplete="email"> <!-- (2)! -->
+            
+            <button type="submit">Enviar solicitud</button>
+        </form>
+    </main>
+
+    <footer> <!-- Pie de página -->
+        <p>&copy; 2026 IES Ejemplo · Ciclo DAW · Junta de Andalucía</p>
+    </footer>
+</body>
+</html>
+```
+
+1.  El atributo `for` del `<label>` coincide exactamente con el `id` del campo: al pulsar sobre el texto se transfiere el foco al control.
+2.  `type="email"` activa la validación nativa del navegador y despliega el teclado óptimo en pantallas táctiles.
+
+!!! success "Comprueba que tu código cumple los estándares"
+
+    - [ ] `<!DOCTYPE html>` figura en la primera línea.
+    - [ ] `lang` y `charset` están correctamente declarados en `<head>`.
+    - [ ] Existe un solo `<h1>` en el documento y la jerarquía no salta niveles.
+    - [ ] Todas las etiquetas se cierran en orden inverso a su apertura (árbol DOM balanceado).
+    - [ ] El validador del W3C no arroja *errors* ni *warnings* críticos.
+
+---
 
 ## 7. Claves para el examen
 
 !!! tip "Claves para el examen"
 
-    - `<!DOCTYPE html>` **no es una etiqueta**: activa el modo estándar; trío clave del `<head>`: `charset`, `viewport`, `title`.
-    - Olvidar `lang="es"` o `charset="UTF-8"` es lo más frecuente: verás `Ã±` y un lector con acento inglés.
-    - HTML5 ≠ "web moderna": HTML es solo el estándar de marcado y **CSS3 como especificación separada no existe**.
-    - Booleanos (`disabled`, `required`, `checked`) **no llevan valor**: su presencia ya activa la propiedad.
-    - HTML admite mayúsculas, pero **se escribe en minúsculas**: convención y compatibilidad con XHTML/XML.
-    - Anidamiento: **lo que se abre de último, se cierra de primero**, aunque el navegador lo "arregle".
-    - Bloque/línea no es lo mismo que `display`; entidades solo para `<`, `>`, `&` (más `&nbsp;`): con UTF-8 los acentos van directos. Valida en <https://validator.w3.org/>.
-
+    - `<!DOCTYPE html>` **no es una etiqueta**: es la declaración que activa el modo de renderizado estándar.
+    - **Diferencia HTML vs XHTML:** XHTML exige **cierre estricto de todos los elementos** (`<img ... />`), minúsculas obligatorias, entrecomillado de atributos y ausencia de booleanos minimizados (`disabled="disabled"`).
+    - **Tipos MIME:** `text/html` activa el parser tolerante de HTML; `application/xhtml+xml` activa el parser estricto XML (los errores detienen la carga).
+    - **Atributos booleanos en HTML5:** Se activan por presencia (`required`, `disabled`, `checked`), no evaluando `="true"` o `="false"`.
+    - **Tríada esencial del `<head>`:** `charset="UTF-8"`, `name="viewport"` y `<title>`.
+    - **Validación:** El código debe superar la validación del W3C sin errores sintácticos ni advertencias críticas de accesibilidad.
 
 !!! success "Practica esta unidad"
 
-    - Enunciados: [Ejercicios de la Unidad 1 — Introducción a HTML5](09-ejercicios.md#ej-u1) — cuatro retos (`U1.1` a `U1.4`) — del más básico al más avanzado.
-    - Comprueba tu trabajo con [las soluciones de esta unidad](10-ejercicios-soluciones.md#sol-u1).
-
-[^1]: El W3C publicó HTML5 como Recomendación el 28 de octubre de 2014; hoy la mantiene el WHATWG como *HTML Living Standard*.
+    - Enunciados: [Ejercicios de la Unidad 1 — Introducción a HTML5 y XHTML](09-ejercicios.md#ej-u1) (retos `U1.1` a `U1.4`).
+    - Soluciones: [Soluciones de la Unidad 1](10-ejercicios-soluciones.md#sol-u1).
 
 *[HTML]: HyperText Markup Language
+*[XHTML]: Extensible HyperText Markup Language
 *[SGML]: Standard Generalized Markup Language
+*[XML]: Extensible Markup Language
 *[W3C]: World Wide Web Consortium
+*[WHATWG]: Web Hypertext Application Technology Working Group
+*[DOM]: Document Object Model
+*[MIME]: Multipurpose Internet Mail Extensions

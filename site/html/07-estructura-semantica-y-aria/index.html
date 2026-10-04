@@ -268,6 +268,8 @@
       
         
       
+        
+      
     
     
     
@@ -311,6 +313,35 @@
 
             </label>
             <ul class="md-nav__list" data-md-scrollfix>
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../00-normativa-y-marco-curricular/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-book-open" viewBox="0 0 24 24"><path d="M12 5v16M20.001 19A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2 5 5 0 0 1 4-2z"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  00. Normativa y marco curricular
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
               
                 
                   
@@ -851,10 +882,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#9-relacion-con-la-clase-de-interfaces" class="md-nav__link">
+  <a href="#9-marco-legal-de-accesibilidad-y-relacion-con-la-clase-de-interfaces" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        9. Relación con la clase de interfaces
+        9. Marco legal de accesibilidad y relación con la clase de interfaces
       </span>
     </span>
   </a>
@@ -1840,10 +1871,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#9-relacion-con-la-clase-de-interfaces" class="md-nav__link">
+  <a href="#9-marco-legal-de-accesibilidad-y-relacion-con-la-clase-de-interfaces" class="md-nav__link">
     <span class="md-ellipsis">
       <span class="md-typeset">
-        9. Relación con la clase de interfaces
+        9. Marco legal de accesibilidad y relación con la clase de interfaces
       </span>
     </span>
   </a>
@@ -1923,12 +1954,14 @@
       
         
       
+        
+      
     
     
     
     
       <li class="md-path__item">
-        <a href="../01-introduccion-html5/" class="md-path__link">
+        <a href="../00-normativa-y-marco-curricular/" class="md-path__link">
           
   
   <span class="md-ellipsis">
@@ -2332,8 +2365,14 @@
 <p><em>Elements</em> → sub-pestaña <strong>Accessibility</strong>: verás los <strong>roles y nombres accesibles reales</strong>, no lo que tú crees haber escrito. Comprueba que <code>main</code>, <code>nav</code> y <code>aside</code> aparecen como <abbr title="región navegable de la página (banner, navigation, main, complementary, contentinfo) que el lector de pantalla puede listar y saltar.">landmark</abbr> y que Issues no señala problemas. El árbol <strong>no cambia</strong> con colores o tamaños: la <mark>semántica es independiente del CSS</mark> (→ <a href="../../css/13-accesibilidad-usabilidad/">../css/13-accesibilidad-usabilidad.md</a>).</p>
 <h3 id="82-lector-de-pantalla-y-teclado">8.2 Lector de pantalla y teclado</h3>
 <p>Windows: NVDA (gratuito y estándar en pruebas), Narrador o JAWS; macOS: VoiceOver (<code>Cmd + F5</code>). <strong>Prueba mínima</strong>: recorre la página solo con <strong>Tab</strong>, lista los encabezados (<code>h</code>) y usa los atajos de <abbr title="región navegable de la página (banner, navigation, main, complementary, contentinfo) que el lector de pantalla puede listar y saltar.">landmark</abbr> (<code>D</code> = <em>main</em>, <code>M</code> = <em>navigation</em>). Si no llegas a todo el contenido sin ratón, algo falla.</p>
-<h2 id="9-relacion-con-la-clase-de-interfaces">9. Relación con la clase de interfaces</h2>
-<p>Esta unidad es la parte <strong>HTML</strong> de la accesibilidad (estructura y nombres accesibles); la parte <strong>CSS</strong> está en la clase de interfaces → <a href="../../css/13-accesibilidad-usabilidad/">../css/13-accesibilidad-usabilidad.md</a>.</p>
+<h2 id="9-marco-legal-de-accesibilidad-y-relacion-con-la-clase-de-interfaces">9. Marco legal de accesibilidad y relación con la clase de interfaces</h2>
+<p>En España y la Unión Europea, la accesibilidad digital no es una recomendación estética opcional, sino una <strong>obligación legal estricta</strong> regulada por:</p>
+<ul>
+<li><strong>Real Decreto 1112/2018</strong>, de 7 de septiembre: Exige a las administraciones públicas y a empresas con financiación pública o servicios esenciales garantizar el nivel de adecuación <strong><abbr title="Web Content Accessibility Guidelines — pautas de accesibilidad del W3C citadas en los criterios 1.3.1 y 2.4.1.">WCAG</abbr> 2.1 nivel AA</strong>.</li>
+<li><strong>Norma UNE-EN 301549</strong>: Estándar europeo de requisitos de accesibilidad para productos y servicios TIC.</li>
+<li><strong>Módulo 0615 (DIW - RA 5) y Módulo 0488 (DI - RA 5):</strong> Exigen evaluar la conformidad de las interfaces mediante herramientas automáticas (WAVE, axe DevTools, Lighthouse) y manuales (recorrido completo por teclado y lectores de pantalla como NVDA o VoiceOver).</li>
+</ul>
+<p>Esta unidad cubre la capa <strong>HTML</strong> de la accesibilidad (estructura semántica, landmarks y nombres accesibles); la capa <strong>CSS</strong> (contraste cromático, tipografía adaptativa, foco visible y animaciones reducidas) se desarrolla en <a href="../../css/13-accesibilidad-usabilidad/">../css/13-accesibilidad-usabilidad.md</a>.</p>
 <h2 id="10-errores-frecuentes-y-claves-para-el-examen">10. Errores frecuentes y claves para el examen</h2>
 <div class="admonition warning">
 <p class="admonition-title">Error común</p>
