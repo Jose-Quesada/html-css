@@ -781,6 +781,60 @@ Soluciones completas de los **32 ejercicios por unidad** de [HTML 09 — Ejercic
 
 **Error frecuente:** fiarse de que "el navegador lo arregla": el árbol DOM resultante no es el que diseñaste y CSS, JavaScript y lectores de pantalla trabajan con ese otro árbol.
 
+#### U1.5 — Auditoría y reparación integral del esqueleto corporativo
+
+```html title="u1-5-solucion.html"
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page Oficial | IES F3</title>
+  
+  <!-- Soporte PWA y visualización -->
+  <meta name="theme-color" content="#1e40af">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  
+  <!-- Resource Hints (Aceleradores de rendimiento) -->
+  <link rel="preconnect" href="https://cdn.iesf3.es">
+  <link rel="preload" href="/fonts/roboto.woff2" as="font" type="font/woff2" crossorigin>
+  
+  <!-- Sindicación -->
+  <link rel="alternate" type="application/rss+xml" title="Noticias IES F3" href="/feed.xml">
+  
+  <!-- Datos Estructurados (Schema.org) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "IES F3",
+    "description": "Formación Profesional de Alto Rendimiento en Informática"
+  }
+  </script>
+</head>
+<body>
+  <h1 class="titulo_principal">Bienvenido al IES F3</h1>
+  <div>
+    <p>Formación Profesional de <strong>Alto Rendimiento.</strong></p>
+  </div>
+  <form action="/contacto" method="post">
+    <p>Acepto las condiciones: <input type="checkbox" name="terminos" checked></p>
+    <p><button type="submit" disabled>Enviar</button></p>
+  </form>
+</body>
+</html>
+```
+
+**Puntos clave:**
+
+- **HTML5 nativo y puro:** Eliminación absoluta de `xmlns` y `xml:lang` en favor de un simple `<html lang="es">`.
+- **Atributos booleanos modernos:** En HTML5, los atributos booleanos (`checked`, `disabled`, `required`) no necesitan valor; basta con su simple existencia.
+- **Rendimiento e Integración PWA:** Incorporación de `<link rel="preload">` y `<link rel="preconnect">` junto a metadatos PWA esenciales, elevando un marcado anticuado a los estándares web del 2026.
+- **Schema.org y SEO Semántico:** El uso de JSON-LD proporciona contexto claro y determinista para los motores de búsqueda, superando cualquier etiqueta meta antigua.
+
+**Error frecuente:** Conservar el cierre de las etiquetas vacías estilo XHTML (`/>`) o mantener el viejo charset de ISO-8859-1 que puede corromper caracteres españoles en un servidor moderno que sirva todo como UTF-8 por defecto.
+
 ### Unidad 2 — Texto y semántica de contenido {: #sol-u2 }
 
 #### U2.1 — Esquema de encabezados a contracorriente
@@ -953,6 +1007,63 @@ Soluciones completas de los **32 ejercicios por unidad** de [HTML 09 — Ejercic
 - El atributo `cite` guarda la URL para las máquinas y `<cite>` es la fuente visible dentro del bloque; `<q>` pone las comillas el navegador.
 
 **Error frecuente:** cita entre comillas escritas a mano y sin fuente, o `figcaption` calcado del `alt`.
+
+#### U2.5 — Maquetación semántica de un artículo científico-técnico
+
+```html title="u2-5-solucion.html"
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Análisis de la FP Informática</title>
+</head>
+<body>
+  <h1>Análisis de la FP Informática</h1>
+  <p>Publicado el <time datetime="2026-09-25">25 de septiembre de 2026</time>.</p>
+  
+  <h2>Requisitos de acceso y matriculación</h2>
+  <p>El proceso consta de varias fases clave.</p>
+  <ol>
+    <li>Solicitar plaza en la secretaría virtual.</li>
+    <li>
+      Aportar documentación oficial. Dentro de esta fase, es imprescindible entregar:
+      <ul>
+        <li>Fotocopia del DNI</li>
+        <li>Fotografía tamaño carnet</li>
+        <li>Certificado de notas</li>
+      </ul>
+    </li>
+    <li>Formalizar matrícula presencial.</li>
+  </ol>
+  
+  <h2>El módulo de Desarrollo de Interfaces</h2>
+  <p>El objetivo principal es aprender a diseñar interfaces <dfn><abbr title="Interfaz de Usuario">UI</abbr>/<abbr title="Experiencia de Usuario">UX</abbr></dfn>.</p>
+  
+  <h3>Evaluación y proyectos</h3>
+  <blockquote cite="https://www.w3.org/Press/1997/WAI-launch.html">
+    <p>Como dijo Tim Berners-Lee: <q>La Web es para todos</q>, y lo dijo en <time datetime="1997">1997</time>.</p>
+    <cite>Tim Berners-Lee</cite>
+  </blockquote>
+  <p>Basado en ese principio, los proyectos deben ser accesibles.</p>
+  
+  <h3>Herramientas de línea de comandos</h3>
+  <p>En clase usamos <code>git</code>. Para descargar un repositorio debes escribir <code>git clone</code> seguido de la URL. Si te equivocas, pulsa <kbd>Ctrl</kbd> + <kbd>C</kbd> para cancelar.</p>
+  
+  <hr>
+  
+  <p>El antiguo temario enseñaba <del>Flash</del>, pero ya ha sido sustituido por <ins>HTML5 y CSS</ins>.</p>
+</body>
+</html>
+```
+
+**Puntos clave:**
+
+- **Semántica pura sin CSS:** El uso de etiquetas como `<time>`, `<abbr>`, `<dfn>`, `<code>`, `<kbd>`, `<del>` e `<ins>` aporta una enorme riqueza de significado procesable para lectores de pantalla e indexadores, aunque en pantalla los cambios visuales parezcan sutiles.
+- **Anidamiento correcto de listas:** El `<ul>` hijo se encierra **dentro** del `<li>` de la fase 2. Es un error crítico colocar el `<ul>` entre dos etiquetas `<li>`, ya que el único hijo válido de `<ol>` o `<ul>` es un `<li>`.
+- **Citas ricas:** `<blockquote>` encapsula el párrafo y su bloque contextual, mientras que `<q>` se usa para la cita directa en línea (el navegador pondrá las comillas automáticas). `<cite>` referencia de manera visible al autor.
+
+**Error frecuente:** Asignar encabezados (como `<h4>`) simplemente para dar un tamaño visual menor, rompiendo la estructura del árbol (`h1 -> h2 -> h3`), y dejar listas desordenadas "flotando" fuera del `<li>` que las origina.
 
 ### Unidad 3 — Enlaces y recursos {: #sol-u3 }
 

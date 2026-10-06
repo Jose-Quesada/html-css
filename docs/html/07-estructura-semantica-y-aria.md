@@ -355,7 +355,7 @@ Esta unidad cubre la capa **HTML** de la accesibilidad (estructura semántica, l
 
 !!! success "Practica esta unidad"
 
-    - Enunciados: [Ejercicios de la Unidad 7 — Estructura semántica y ARIA](09-ejercicios.md#ej-u7) — cuatro retos (`U7.1` a `U7.4`) — del más básico al más avanzado.
+    - Enunciados: [Ejercicios de la Unidad 7 — Estructura semántica y ARIA](09-ejercicios.md#ejercicio-2-articulo-semantico) — cuatro retos (`U7.1` a `U7.4`) — del más básico al más avanzado.
     - Comprueba tu trabajo con [las soluciones de esta unidad](10-ejercicios-soluciones.md#sol-u7).
 
 *[ARIA]: Accessible Rich Internet Applications — roles y atributos que describen interfaces cuando el HTML nativo no llega.

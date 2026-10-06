@@ -433,7 +433,7 @@ Añade además *skip link*, `<header>` y `<footer>` (**sección 4.3**). Más pr�
 
 !!! success "Practica esta unidad"
 
-    - Enunciados: [Ejercicios de la Unidad 3 — Enlaces y recursos](09-ejercicios.md#ej-u3) — cuatro retos (`U3.1` a `U3.4`) — del más básico al más avanzado.
+    - Enunciados: [Ejercicios de la Unidad 3 — Enlaces y recursos](09-ejercicios.md#u51-clasificacion-de-la-liga) — cuatro retos (`U3.1` a `U3.4`) — del más básico al más avanzado.
     - Comprueba tu trabajo con [las soluciones de esta unidad](10-ejercicios-soluciones.md#sol-u3).
 
 *[URL]: Uniform Resource Locator

@@ -384,7 +384,7 @@ Para leer el estado desde JavaScript (→ [08-apis-html5.md](08-apis-html5.md)):
 
 !!! success "Practica esta unidad"
 
-    - Enunciados: [Ejercicios de la Unidad 6 — Formularios HTML5](09-ejercicios.md#ej-u6) — cuatro retos (`U6.1` a `U6.4`) — del más básico al más avanzado.
+    - Enunciados: [Ejercicios de la Unidad 6 — Formularios HTML5](09-ejercicios.md#u81-datos-en-el-marcado-con-data) — cuatro retos (`U6.1` a `U6.4`) — del más básico al más avanzado.
     - Comprueba tu trabajo con [las soluciones de esta unidad](10-ejercicios-soluciones.md#sol-u6).
 
 *[HTML]: HyperText Markup Language

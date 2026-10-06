@@ -326,7 +326,7 @@ Por qué nos importa en Interfaces: con ese esquema revisas en 10 segundos si la
 
 !!! success "Practica esta unidad"
 
-    - Enunciados: [Ejercicios de la Unidad 2 — Texto y semántica de contenido](09-ejercicios.md#ej-u2) — cuatro retos (`U2.1` a `U2.4`) — del más básico al más avanzado.
+    - Enunciados: [Ejercicios de la Unidad 2 — Texto y semántica de contenido](09-ejercicios.md#u41-video-informativo-con-poster-y-formatos) — cuatro retos (`U2.1` a `U2.4`) — del más básico al más avanzado.
     - Comprueba tu trabajo con [las soluciones de esta unidad](10-ejercicios-soluciones.md#sol-u2).
 
 *[HTML]: HyperText Markup Language

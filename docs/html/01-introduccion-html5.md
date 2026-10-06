@@ -453,7 +453,7 @@ Matrícula de ciclo formativo, cada línea comentada, semántica y validada.
 
 !!! success "Practica esta unidad"
 
-    - Enunciados: [Ejercicios de la Unidad 1 — Introducción a HTML5 y XHTML](09-ejercicios.md#ej-u1) (retos `U1.1` a `U1.4`).
+    - Enunciados: [Ejercicios de la Unidad 1 — Introducción a HTML5 y XHTML](09-ejercicios.md#u31-rutas-relativas-en-la-tienda) (retos `U1.1` a `U1.4`).
     - Soluciones: [Soluciones de la Unidad 1](10-ejercicios-soluciones.md#sol-u1).
 
 *[HTML]: HyperText Markup Language
