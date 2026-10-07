@@ -289,7 +289,7 @@ Si una tabla **no representa datos** (heredada de una plantilla de correo o de u
 <table role="presentation">
   <!-- Sin th y sin caption: se trata como una caja simple, como un div -->
   <tr>
-    <td><img src="icono.png" alt="Ajustes"></td>
+    <td><img src="https://dummyimage.com/200x200/ccc/000.png&text=icono.png" alt="Ajustes"></td>
     <td>Configuración de la cuenta</td>
   </tr>
 </table>

@@ -182,8 +182,8 @@ La etiqueta responsable es ==srcset==: **variantes + `sizes`** y el navegador el
 ### 4.1. `<img>` responsivo con `srcset` y `sizes`
 
 ```html title="imagen.html" hl_lines="2 3"
-<img src="foto-800.webp"
-     srcset="foto-400.webp 400w, foto-800.webp 800w, foto-1600.webp 1600w"
+<img src="https://dummyimage.com/800x600/ccc/000.png&text=foto-800.webp"
+     srcset="https://dummyimage.com/400x300/ccc/000.png&text=foto-400.webp 400w, https://dummyimage.com/800x600/ccc/000.png&text=foto-800.webp 800w, https://dummyimage.com/800x600/ccc/000.png&text=foto-1600.webp 1600w"
      sizes="(max-width: 600px) 100vw, 50vw"
      alt="Descripción" width="800" height="600" loading="lazy"> <!-- (1)! -->
 ```
@@ -198,8 +198,8 @@ La etiqueta responsable es ==srcset==: **variantes + `sizes`** y el navegador el
 ```html title="picture.html"
 <picture>
   <source media="(min-width: 900px)" srcset="hero-ancha.avif" type="image/avif">
-  <source srcset="hero-movil.webp" type="image/webp">
-  <img src="hero-movil.jpg" alt="" width="1600" height="900">
+  <source srcset="https://dummyimage.com/800x600/ccc/000.png&text=hero-movil.webp" type="image/webp">
+  <img src="https://dummyimage.com/800x600/ccc/000.png&text=hero-movil.jpg" alt="" width="1600" height="900">
 </picture>
 ```
 

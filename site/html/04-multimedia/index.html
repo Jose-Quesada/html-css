@@ -270,6 +270,8 @@
       
         
       
+        
+      
     
     
     
@@ -891,6 +893,35 @@
     
   
   09. Ejercicios
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-practicas/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-laptop" viewBox="0 0 24 24"><path d="M18 5a2 2 0 0 1 2 2v8.526a2 2 0 0 0 .212.897l1.068 2.127a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45l1.068-2.127A2 2 0 0 0 4 15.526V7a2 2 0 0 1 2-2zM20.054 15.987H3.946"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  11. Prácticas
 
     
   </span>
@@ -1822,6 +1853,8 @@
       
         
       
+        
+      
     
     
     
@@ -1927,7 +1960,7 @@
 </div>
 <h3 id="22-src-frente-a-source-multiple-y-contenido-de-respaldo">2.2 <code>src</code> frente a <code>&lt;source&gt;</code> múltiple y contenido de respaldo</h3>
 <div class="language-html highlight"><span class="filename">video-multipista.html</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">video</span> <span class="na">controls</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>       <span class="na">poster</span><span class="o">=</span><span class="s">"img/noticia-portada.jpg"</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>       <span class="na">poster</span><span class="o">=</span><span class="s">"https://dummyimage.com/800x600/ccc/000.png&amp;text=noticia-portada.jpg"</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>       <span class="na">width</span><span class="o">=</span><span class="s">"640"</span> <span class="na">height</span><span class="o">=</span><span class="s">"360"</span>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>       <span class="na">preload</span><span class="o">=</span><span class="s">"metadata"</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>       <span class="na">playsinline</span><span class="p">&gt;</span>
@@ -1942,7 +1975,7 @@
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
 </span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="cm">&lt;!-- Atajo con src directo: un único formato, sin &lt;source&gt; --&gt;</span>
 </span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="p">&lt;</span><span class="nt">video</span> <span class="na">controls</span> <span class="na">src</span><span class="o">=</span><span class="s">"video/noticia.mp4"</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>       <span class="na">poster</span><span class="o">=</span><span class="s">"img/noticia-portada.jpg"</span> <span class="na">width</span><span class="o">=</span><span class="s">"640"</span> <span class="na">height</span><span class="o">=</span><span class="s">"360"</span><span class="p">&gt;&lt;/</span><span class="nt">video</span><span class="p">&gt;</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>       <span class="na">poster</span><span class="o">=</span><span class="s">"https://dummyimage.com/800x600/ccc/000.png&amp;text=noticia-portada.jpg"</span> <span class="na">width</span><span class="o">=</span><span class="s">"640"</span> <span class="na">height</span><span class="o">=</span><span class="s">"360"</span><span class="p">&gt;&lt;/</span><span class="nt">video</span><span class="p">&gt;</span>
 </span></code></pre></div>
 <ol>
 <li>El orden importa: el navegador se queda con el <strong>primer <code>type</code> que entiende</strong>.</li>
@@ -2035,7 +2068,7 @@
 <p><code>&lt;audio&gt;</code> reproduce <strong>un solo fichero</strong>: no existe un atributo que apunte a varias pistas. Una <em>playlist</em> se construye con JavaScript, cambiando el valor de <code>src</code> (o del <code>&lt;source&gt;</code>) y llamando a <code>play()</code>, por ejemplo al pulsar el botón "Siguiente". Conviene usar <strong><code>&lt;button&gt;</code></strong> para esos controles y mantener siempre disponible un enlace de descarga, por si el script no carga.</p>
 <h2 id="5-accesibilidad-subtitulos-descripciones-y-transcripcion">5. Accesibilidad: subtítulos, descripciones y transcripción</h2>
 <h3 id="51-el-elemento-track">5.1 El elemento <code>&lt;track&gt;</code></h3>
-<div class="language-html highlight"><span class="filename">subtitulos.html</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">&lt;</span><span class="nt">video</span> <span class="na">controls</span> <span class="na">poster</span><span class="o">=</span><span class="s">"img/noticia-portada.jpg"</span> <span class="na">width</span><span class="o">=</span><span class="s">"640"</span> <span class="na">height</span><span class="o">=</span><span class="s">"360"</span> <span class="na">preload</span><span class="o">=</span><span class="s">"metadata"</span><span class="p">&gt;</span>
+<div class="language-html highlight"><span class="filename">subtitulos.html</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">&lt;</span><span class="nt">video</span> <span class="na">controls</span> <span class="na">poster</span><span class="o">=</span><span class="s">"https://dummyimage.com/800x600/ccc/000.png&amp;text=noticia-portada.jpg"</span> <span class="na">width</span><span class="o">=</span><span class="s">"640"</span> <span class="na">height</span><span class="o">=</span><span class="s">"360"</span> <span class="na">preload</span><span class="o">=</span><span class="s">"metadata"</span><span class="p">&gt;</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  <span class="p">&lt;</span><span class="nt">source</span> <span class="na">src</span><span class="o">=</span><span class="s">"video/noticia.mp4"</span> <span class="na">type</span><span class="o">=</span><span class="s">"video/mp4"</span><span class="p">&gt;</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  <span class="p">&lt;</span><span class="nt">source</span> <span class="na">src</span><span class="o">=</span><span class="s">"video/noticia.webm"</span> <span class="na">type</span><span class="o">=</span><span class="s">"video/webm"</span><span class="p">&gt;</span>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  <span class="cm">&lt;!-- Subtítulos en español, activados por defecto --&gt;</span>
@@ -2149,7 +2182,7 @@
 </span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>      <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>La consejería abre hoy el plazo para solicitar las becas de transporte y material.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 </span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>
 </span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>      <span class="p">&lt;</span><span class="nt">h2</span><span class="p">&gt;</span>Vídeo informativo<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
-</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>      <span class="p">&lt;</span><span class="nt">video</span> <span class="na">controls</span> <span class="na">poster</span><span class="o">=</span><span class="s">"img/becas-portada.jpg"</span> <span class="na">width</span><span class="o">=</span><span class="s">"640"</span> <span class="na">height</span><span class="o">=</span><span class="s">"360"</span> <span class="na">preload</span><span class="o">=</span><span class="s">"metadata"</span><span class="p">&gt;</span>
+</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>      <span class="p">&lt;</span><span class="nt">video</span> <span class="na">controls</span> <span class="na">poster</span><span class="o">=</span><span class="s">"https://dummyimage.com/800x600/ccc/000.png&amp;text=becas-portada.jpg"</span> <span class="na">width</span><span class="o">=</span><span class="s">"640"</span> <span class="na">height</span><span class="o">=</span><span class="s">"360"</span> <span class="na">preload</span><span class="o">=</span><span class="s">"metadata"</span><span class="p">&gt;</span>
 </span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>        <span class="p">&lt;</span><span class="nt">source</span> <span class="na">src</span><span class="o">=</span><span class="s">"video/becas.mp4"</span> <span class="na">type</span><span class="o">=</span><span class="s">"video/mp4"</span><span class="p">&gt;</span>
 </span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>        <span class="p">&lt;</span><span class="nt">source</span> <span class="na">src</span><span class="o">=</span><span class="s">"video/becas.webm"</span> <span class="na">type</span><span class="o">=</span><span class="s">"video/webm"</span><span class="p">&gt;</span>
 </span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>        <span class="p">&lt;</span><span class="nt">track</span> <span class="na">kind</span><span class="o">=</span><span class="s">"subtitles"</span> <span class="na">src</span><span class="o">=</span><span class="s">"video/becas-es.vtt"</span> <span class="na">srclang</span><span class="o">=</span><span class="s">"es"</span> <span class="na">label</span><span class="o">=</span><span class="s">"Español"</span> <span class="na">default</span><span class="p">&gt;</span>

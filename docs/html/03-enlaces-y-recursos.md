@@ -204,7 +204,7 @@ El lector de pantalla lista los enlaces **fuera de su contexto**: "haz clic aqu�
 <!-- Enlace-icono: aria-label aporta el nombre accesible -->
 <a href="cesta/eliminar-42.html"
    aria-label="Eliminar el producto Zapatillas Run 300 de la cesta">
-  <img src="img/papelera.svg" alt="" width="20" height="20">
+  <img src="https://dummyimage.com/200x200/ccc/000.png&text=papelera.svg" alt="" width="20" height="20">
 </a>
 ```
 
@@ -242,7 +242,7 @@ El foco **nunca se elimina**: solo se estiliza. La estrategia completa de *skip 
 ### 5.1 `alt`: informativa, neutra o vacía
 
 ```html title="alt.html"
-<img src="img/producto/zapatillas-800w.jpg"
+<img src="https://dummyimage.com/800x600/ccc/000.png&text=zapatillas-800w.jpg"
      alt="Zapatillas Run 300 azules vistas de perfil"
      width="800" height="600">
 ```
@@ -259,11 +259,11 @@ Un ==alt== informativo se redacta como **una línea**: si contiene texto, **desc
 
 ```html title="rendimiento.html"
 <!-- Imagen principal: carga prioritaria -->
-<img src="img/producto/zapatillas-800w.jpg" alt="Zapatillas Run 300 azules"
+<img src="https://dummyimage.com/800x600/ccc/000.png&text=zapatillas-800w.jpg" alt="Zapatillas Run 300 azules"
      width="800" height="600" loading="eager"> <!-- (1)! -->
 
 <!-- Fuera del pliegue: carga diferida -->
-<img src="img/producto/zapatillas-400w.jpg" alt="Zapatillas Run 300, suela de goma"
+<img src="https://dummyimage.com/400x300/ccc/000.png&text=zapatillas-400w.jpg" alt="Zapatillas Run 300, suela de goma"
      width="400" height="300" loading="lazy" decoding="async"> <!-- (2)! -->
 ```
 
@@ -278,7 +278,7 @@ Un ==alt== informativo se redacta como **una línea**: si contiene texto, **desc
 
 ```html title="figure.html"
 <figure>
-  <img src="img/producto/zapatillas-800w.jpg"
+  <img src="https://dummyimage.com/800x600/ccc/000.png&text=zapatillas-800w.jpg"
        alt="Zapatillas Run 300 azules sobre fondo blanco"
        width="800" height="600" loading="lazy" decoding="async">
   <figcaption>Zapatillas Run 300 · Color azul marino · Foto: estudio propio</figcaption>
@@ -292,10 +292,8 @@ Un ==alt== informativo se redacta como **una línea**: si contiene texto, **desc
 ### 6.1 `srcset` + `sizes`
 
 ```html title="srcset.html"
-<img src="img/producto/zapatillas-800w.jpg"
-     srcset="img/producto/zapatillas-400w.jpg 400w,
-             img/producto/zapatillas-800w.jpg 800w,
-             img/producto/zapatillas-1200w.jpg 1200w"
+<img src="https://dummyimage.com/800x600/ccc/000.png&text=zapatillas-800w.jpg"
+     srcset="https://dummyimage.com/400x300/ccc/000.png&text=zapatillas-400w.jpg 400w, https://dummyimage.com/800x600/ccc/000.png&text=zapatillas-800w.jpg 800w, https://dummyimage.com/1200x400/ccc/000.png&text=zapatillas-1200w.jpg 1200w"
      sizes="(max-width: 600px) 100vw,
             (max-width: 1000px) 50vw,
             400px"
@@ -305,13 +303,13 @@ Un ==alt== informativo se redacta como **una línea**: si contiene texto, **desc
 
 - Descriptores de ancho (`400w`, `800w`, `1200w`): tamaño real de cada fichero; el navegador elige el adecuado.
 - `sizes` traduce **dónde se colocará** en píxeles: `(max-width: 600px) 100vw` = todo el ancho hasta 600 px. Sin `sizes` se asume `100vw`.
-- `src` es **obligatorio como reserva**; también vale `srcset="foto.png 1x, foto@2x.png 2x"`.
+- `src` es **obligatorio como reserva**; también vale `srcset="https://dummyimage.com/800x600/ccc/000.png&text=foto.png 1x, https://dummyimage.com/800x600/ccc/000.png&text=foto%402x.png 2x"`.
 
 Los descriptores viven en ==srcset== y las medidas de colocación en `sizes`: **no se mezclan**.
 
 ??? note "Para saber más"
 
-    srcset admite además **descriptores de densidad**: `srcset="foto.png 1x, foto@2x.png 2x"`. En CSS el equivalente es `image-set()`, ver [../css/09-fondos-imagenes-decoracion.md](../css/09-fondos-imagenes-decoracion.md).
+    srcset admite además **descriptores de densidad**: `srcset="https://dummyimage.com/800x600/ccc/000.png&text=foto.png 1x, https://dummyimage.com/800x600/ccc/000.png&text=foto%402x.png 2x"`. En CSS el equivalente es `image-set()`, ver [../css/09-fondos-imagenes-decoracion.md](../css/09-fondos-imagenes-decoracion.md).
 
 ### 6.2 `picture` con `source`: formatos y recortes
 
@@ -319,12 +317,12 @@ Los descriptores viven en ==srcset== y las medidas de colocación en `sizes`: **
 <picture>
   <!-- Formatos modernos si el navegador los entiende -->
   <source srcset="img/producto/zapatillas.avif" type="image/avif">
-  <source srcset="img/producto/zapatillas.webp" type="image/webp">
+  <source srcset="https://dummyimage.com/800x600/ccc/000.png&text=zapatillas.webp" type="image/webp">
   <!-- Recorte vertical para móvil -->
   <source media="(max-width: 600px)"
-          srcset="img/producto/zapatillas-movil.jpg" type="image/jpeg"> <!-- (1)! -->
+          srcset="https://dummyimage.com/800x600/ccc/000.png&text=zapatillas-movil.jpg" type="image/jpeg"> <!-- (1)! -->
   <!-- Fallback y portador del alt -->
-  <img src="img/producto/zapatillas.jpg"
+  <img src="https://dummyimage.com/800x600/ccc/000.png&text=zapatillas.jpg"
        alt="Zapatillas Run 300 azules vistas de perfil"
        width="1200" height="800" loading="lazy"> <!-- (2)! -->
 </picture>
@@ -383,10 +381,8 @@ Con `sandbox` vacío se bloquea casi todo (scripts, formularios, ventanas) y los
   <h1>Zapatillas Run 300</h1>
 
   <figure>
-    <img src="../img/producto/zapatillas-800w.jpg"
-         srcset="../img/producto/zapatillas-400w.jpg 400w,
-                 ../img/producto/zapatillas-800w.jpg 800w,
-                 ../img/producto/zapatillas-1200w.jpg 1200w"
+    <img src="https://dummyimage.com/800x600/ccc/000.png&text=zapatillas-800w.jpg"
+         srcset="https://dummyimage.com/400x300/ccc/000.png&text=zapatillas-400w.jpg 400w, https://dummyimage.com/800x600/ccc/000.png&text=zapatillas-800w.jpg 800w, https://dummyimage.com/1200x400/ccc/000.png&text=zapatillas-1200w.jpg 1200w"
          sizes="(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 600px"
          alt="Zapatillas Run 300 azules vistas de perfil sobre fondo blanco"
          width="1200" height="800" loading="eager">
@@ -396,8 +392,8 @@ Con `sandbox` vacío se bloquea casi todo (scripts, formularios, ventanas) y los
   <figure>
     <picture>
       <source srcset="../img/producto/suela.avif" type="image/avif">
-      <source srcset="../img/producto/suela.webp" type="image/webp">
-      <img src="../img/producto/suela.jpg"
+      <source srcset="https://dummyimage.com/800x600/ccc/000.png&text=suela.webp" type="image/webp">
+      <img src="https://dummyimage.com/800x600/ccc/000.png&text=suela.jpg"
            alt="Detalle de la suela de goma con dibujo antideslizante"
            width="800" height="600" loading="lazy">
     </picture>

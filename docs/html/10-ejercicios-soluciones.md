@@ -121,17 +121,17 @@ Soluciones comentadas de los **42 retos** de [HTML 09 — Ejercicios prácticos]
       <article>
         <h3>Proyecto 1: Tienda Online</h3>
         <p>Interfaz de usuario para productos locales, con foco en móvil.</p>
-        <img src="tienda.png" alt="Portada de la tienda en un móvil" width="320" height="200"> <a href="#">Ver proyecto</a>
+        <img src="https://dummyimage.com/800x600/ccc/000.png&text=tienda.png" alt="Portada de la tienda en un móvil" width="320" height="200"> <a href="#">Ver proyecto</a>
       </article>
       <article>
         <h3>Proyecto 2: Gestión de Olivos</h3>
         <p>Panel de control con datos en tiempo real.</p>
-        <img src="olivos.png" alt="Gráficas de humedad del olivar" width="320" height="200"> <a href="#">Ver proyecto</a>
+        <img src="https://dummyimage.com/800x600/ccc/000.png&text=olivos.png" alt="Gráficas de humedad del olivar" width="320" height="200"> <a href="#">Ver proyecto</a>
       </article>
       <article>
         <h3>Proyecto 3: Blog de Gastronomía</h3>
         <p>Blog responsivo de recetas andaluzas.</p>
-        <img src="blog.png" alt="Lista de recetas con fotografías" width="320" height="200"> <a href="#">Ver proyecto</a>
+        <img src="https://dummyimage.com/800x600/ccc/000.png&text=blog.png" alt="Lista de recetas con fotografías" width="320" height="200"> <a href="#">Ver proyecto</a>
       </article>
     </section>
   </main>
@@ -141,7 +141,7 @@ Soluciones comentadas de los **42 retos** de [HTML 09 — Ejercicios prácticos]
     <p><a href="https://github.com/tuusuario" target="_blank" rel="noopener">GitHub</a></p>
     <p><a href="https://www.linkedin.com/in/tuusuario" target="_blank" rel="noopener">LinkedIn</a></p>
     <figure>
-      <img src="avatar.png" alt="Retrato de [Tu Nombre]" width="150" height="150">
+      <img src="https://dummyimage.com/200x200/ccc/000.png&text=avatar.png" alt="Retrato de [Tu Nombre]" width="150" height="150">
       <figcaption>Mi avatar profesional</figcaption>
     </figure>
   </aside>
@@ -183,7 +183,7 @@ Soluciones comentadas de los **42 retos** de [HTML 09 — Ejercicios prácticos]
         <p>Publicado por Laura García - <time datetime="2026-06-05">5 de junio de 2026</time></p>
       </header>
       <figure>
-        <img src="conferencia.jpg" alt="Auditorio lleno durante la ponencia" width="600" height="300">
+        <img src="https://dummyimage.com/800x600/ccc/000.png&text=conferencia.jpg" alt="Auditorio lleno durante la ponencia" width="600" height="300">
         <figcaption>Panorámica del auditorio en la ponencia inaugural.</figcaption>
       </figure>
       <section>
@@ -514,8 +514,8 @@ video.addEventListener('play', procesarFrame);
     <h1>Galería del ciclo</h1>
     <figure>
       <!-- srcset: versiones disponibles; sizes: ancho previsto en cada caso -->
-      <img src="taller-800.jpg"
-           srcset="taller-400.jpg 400w, taller-800.jpg 800w, taller-1600.jpg 1600w" <!-- (1)! -->
+      <img src="https://dummyimage.com/800x600/ccc/000.png&text=taller-800.jpg"
+           srcset="https://dummyimage.com/400x300/ccc/000.png&text=taller-400.jpg 400w, https://dummyimage.com/800x600/ccc/000.png&text=taller-800.jpg 800w, https://dummyimage.com/800x600/ccc/000.png&text=taller-1600.jpg 1600w" <!-- (1)! -->
            sizes="(max-width: 600px) 100vw, 50vw"
            width="800" height="533"
            alt="Alumnos soldando placas en el taller de electrónica">
@@ -524,7 +524,7 @@ video.addEventListener('play', procesarFrame);
     <p><a href="taller-1600.jpg" download="taller-1600.jpg">Descargar la foto en alta (JPG, 1,2 MB)</a></p>
     <figure>
       <!-- poster: imagen de portada; track: subtítulos accesibles -->
-      <video controls poster="promo-poster.jpg" width="640" height="360">
+      <video controls poster="https://dummyimage.com/800x600/ccc/000.png&text=promo-poster.jpg" width="640" height="360">
         <source src="promo.mp4" type="video/mp4">
         <track kind="subtitles" src="promo-es.vtt" srclang="es" label="Español" default> <!-- (2)! -->
         <track kind="subtitles" src="promo-en.vtt" srclang="en" label="English">
@@ -985,7 +985,7 @@ Soluciones completas de los **32 ejercicios por unidad** de [HTML 09 — Ejercic
   <p>Salida el <time datetime="2026-03-14T08:30">sábado 14 de marzo de 2026 a las 8:30</time> desde el parking de Ardales.</p>
   <p>La ruta tiene 7,7 km y el billete cuesta 10 €.</p>
   <figure>
-    <img src="caminito.jpg" alt="Pasarela metálica anclada a la pared del desfiladero" width="800" height="533">
+    <img src="https://dummyimage.com/800x600/ccc/000.png&text=caminito.jpg" alt="Pasarela metálica anclada a la pared del desfiladero" width="800" height="533">
     <!-- figcaption contextualiza; no repite el alt -->
     <figcaption>Tramo central sobre el desfiladero de los Gaitanes, a 100 m de altura.</figcaption>
   </figure>
@@ -1082,7 +1082,7 @@ Soluciones completas de los **32 ejercicios por unidad** de [HTML 09 — Ejercic
 <body>
   <header>
     <!-- Misma regla para el logotipo: subo y bajo a img/ -->
-    <img src="../img/logo.svg" alt="Logotipo de la tienda" width="120" height="40">
+    <img src="https://dummyimage.com/200x200/ccc/000.png&text=logo.svg" alt="Logotipo de la tienda" width="120" height="40">
     <a href="../index.html">Volver a la portada</a>
   </header>
   <main>
@@ -1235,13 +1235,13 @@ Soluciones completas de los **32 ejercicios por unidad** de [HTML 09 — Ejercic
   <main>
     <h1>Casa del Olivar · Jaén</h1>
     <!-- Decorativa: alt vacío para que el lector la salte -->
-    <img src="img/patron.jpg" alt="" width="1200" height="60" loading="eager">
+    <img src="https://dummyimage.com/800x600/ccc/000.png&text=patron.jpg" alt="" width="1200" height="60" loading="eager">
     <figure>
       <picture>
         <!-- El navegador recorre los source de arriba abajo -->
         <source srcset="img/patio.avif" type="image/avif">
-        <source srcset="img/patio.webp" type="image/webp">
-        <img src="img/patio-800.jpg"
+        <source srcset="https://dummyimage.com/800x600/ccc/000.png&text=patio.webp" type="image/webp">
+        <img src="https://dummyimage.com/800x600/ccc/000.png&text=patio-800.jpg"
              alt="Patio interior con arco de piedra y macetas de geranios"
              width="800" height="533" loading="eager">
       </picture>
@@ -1249,7 +1249,7 @@ Soluciones completas de los **32 ejercicios por unidad** de [HTML 09 — Ejercic
     </figure>
     <figure>
       <!-- Fuera del pliegue: carga diferida -->
-      <img src="img/habitacion-800.jpg"
+      <img src="https://dummyimage.com/800x600/ccc/000.png&text=habitacion-800.jpg"
            alt="Habitación doble con ventanales abiertos al valle"
            width="800" height="533" loading="lazy" decoding="async">
       <figcaption>Habitación doble con vistas al valle.</figcaption>
@@ -1297,7 +1297,7 @@ Soluciones completas de los **32 ejercicios por unidad** de [HTML 09 — Ejercic
     <h1>Jornada de puertas abiertas</h1>
     <!-- controls convierte la caja en reproductor; sin src: los source mandan -->
     <video controls
-           poster="img/jornada-portada.jpg"
+           poster="https://dummyimage.com/800x600/ccc/000.png&text=jornada-portada.jpg"
            width="640" height="360"
            preload="metadata">
       <!-- El navegador prueba los type de arriba abajo -->
@@ -1337,7 +1337,7 @@ Soluciones completas de los **32 ejercicios por unidad** de [HTML 09 — Ejercic
 <body>
   <main>
     <h1>Normas del taller de electrónica</h1>
-    <video controls poster="img/normas-portada.jpg" width="640" height="360" preload="metadata">
+    <video controls poster="https://dummyimage.com/800x600/ccc/000.png&text=normas-portada.jpg" width="640" height="360" preload="metadata">
       <source src="video/normas.mp4" type="video/mp4">
       <source src="video/normas.webm" type="video/webm">
       <!-- Captions: diálogo y efectos sonoros; default la deja activa al empezar -->
@@ -2076,7 +2076,7 @@ Welcome to the electronics workshop.
     </nav>
     <!-- Imagen decorativa (alt=""): el nombre del botón lo pone aria-label -->
     <button type="button" aria-label="Buscar en el catálogo">
-      <img src="lupa.svg" alt="">
+      <img src="https://dummyimage.com/800x600/ccc/000.png&text=lupa.svg" alt="">
     </button>
   </header>
   <main>

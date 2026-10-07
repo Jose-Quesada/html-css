@@ -9,7 +9,7 @@ fecha: "2026-09-29"
 
 # HTML 09 — Ejercicios prácticos
 
-Diez retos globales de semántica, tablas, formularios HTML5, multimedia y accesibilidad, más **cuatro retos por unidad** (del 1 al 8) al final del capítulo. Resuélvelos en orden y compara después tu trabajo con [Ver soluciones](10-ejercicios-soluciones.md).
+Diez retos globales de semántica, tablas, formularios HTML5, multimedia y accesibilidad, más **cuatro retos por unidad** (del 1 al 8) al final del capítulo. Resuélvelos en orden.
 
 !!! note "Cómo trabajar"
 
@@ -321,7 +321,7 @@ El grupo excursionista de la FP publica la salida al Caminito con la fecha en te
   <h1>Caminito del Rey: salida de este sábado</h1>
   <p>Salida el sábado 14 de marzo de 2026 a las 8:30 desde el parking de Ardales.</p>
   <p>La ruta tiene 7,7 km y el billete cuesta 10 €.</p>
-  <img src="caminito.jpg" alt="Pasarela metálica anclada a la pared del desfiladero">
+  <img src="https://dummyimage.com/800x600/ccc/000.png&text=caminito.jpg" alt="Pasarela metálica anclada a la pared del desfiladero">
   <p>Foto: tramo central sobre el desfiladero de los Gaitanes.</p>
   <p>"Es la obra civil más temeraria de su tiempo", dijo el ingeniero en 1905.</p>
   <p>El lema de la excursión: "miedo arriba, no mires abajo".</p>
@@ -420,7 +420,7 @@ tienda-ufro/                 <- raíz del sitio
 <link rel="stylesheet" href="estilos.css">
 <body>
   <header>
-    <img src="logo.svg" alt="Logotipo de la tienda">
+    <img src="https://dummyimage.com/200x200/ccc/000.png&text=logo.svg" alt="Logotipo de la tienda">
     <a href="index.html">Volver a la portada</a>
   </header>
   <main>
@@ -530,9 +530,9 @@ La ficha de un alojamiento anuncia un patrón decorativo que nadie necesita oír
 ```html title="u3-4-inicial.html"
 <main>
   <h1>Casa del Olivar · Jaén</h1>
-  <img src="img/patron.jpg">
-  <img src="img/patio-800.jpg" alt="Patio">
-  <img src="img/habitacion-800.jpg" alt="Habitación doble con vistas al valle">
+  <img src="https://dummyimage.com/800x600/ccc/000.png&text=patron.jpg">
+  <img src="https://dummyimage.com/800x600/ccc/000.png&text=patio-800.jpg" alt="Patio">
+  <img src="https://dummyimage.com/800x600/ccc/000.png&text=habitacion-800.jpg" alt="Habitación doble con vistas al valle">
   <p>Fotos: <a href="#">ver más</a></p>
   <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-3.80,37.77,-3.78,37.79"></iframe>
 </main>
@@ -566,7 +566,7 @@ El clip de la jornada de puertas abiertas se sirve en MP4 y WebM, pero la págin
 ```html title="u4-1-inicial.html"
 <main>
   <h1>Jornada de puertas abiertas</h1>
-  <video src="video/jornada.mp4" poster="img/jornada-portada.jpg"></video>
+  <video src="video/jornada.mp4" poster="https://dummyimage.com/800x600/ccc/000.png&text=jornada-portada.jpg"></video>
   <p>Grabación completa de la visita al centro.</p>
 </main>
 ```
@@ -593,7 +593,7 @@ El vídeo de las normas del taller necesita subtítulos en español para quien e
 **Código inicial**
 
 ```html title="u4-2-inicial.html"
-<video controls poster="img/normas-portada.jpg" width="640" height="360" preload="metadata">
+<video controls poster="https://dummyimage.com/800x600/ccc/000.png&text=normas-portada.jpg" width="640" height="360" preload="metadata">
   <source src="video/normas.mp4" type="video/mp4">
   <source src="video/normas.webm" type="video/webm">
   <p>No puedes reproducir este vídeo.
@@ -1077,7 +1077,7 @@ En la web de la biblioteca nadie sabe en qué página estás, ni siquiera el lec
         <li><a href="catalogo.html">Catálogo</a></li>
       </ul>
     </nav>
-    <button type="button"><img src="lupa.svg" alt=""></button>
+    <button type="button"><img src="https://dummyimage.com/800x600/ccc/000.png&text=lupa.svg" alt=""></button>
   </header>
   <main>
     <h2>Novedades de septiembre</h2>
@@ -1438,7 +1438,7 @@ La noticia de la conferencia de IA en Sevilla no distingue abreviaturas, no marc
   <article>
     <h2>Conferencia Internacional de IA en Sevilla</h2>
     <p>Publicado por Laura García - 5 de junio de 2026</p>
-    <img src="conferencia.jpg" alt="Sala llena durante la conferencia">
+    <img src="https://dummyimage.com/800x600/ccc/000.png&text=conferencia.jpg" alt="Sala llena durante la conferencia">
     <p>Sevilla acogerá la Conferencia Internacional de Inteligencia Artificial.
     "La tecnología debe estar al servicio de las personas", afirmó la directora.
     Cuenta con el apoyo de la agencia andaluza de innovación (ANDA).</p>
@@ -1630,7 +1630,7 @@ La galería del ciclo tiene enlaces "ver imagen" sueltos, imágenes sin `alt` ú
 <main id="galeria">
   <h1>Galería del ciclo</h1>
   <div>
-    <img src="taller-800.jpg">
+    <img src="https://dummyimage.com/800x600/ccc/000.png&text=taller-800.jpg">
     <p>Alumnos en el taller de electrónica</p>
     <a href="ver-imagen.html">Ver imagen</a>
   </div>
@@ -1647,7 +1647,7 @@ La galería del ciclo tiene enlaces "ver imagen" sueltos, imágenes sin `alt` ú
 - Añade `alt` descriptivo distinto de la leyenda: el `alt` describe la imagen, la leyenda la contextualiza.
 - Implementa `srcset` + `sizes` con ==versiones== de 400, 800 y 1600 px, e incluye `width` y `height`.
 - Añade un enlace de descarga con `download` que indique formato y peso.
-- Completa el `<video>` con `poster="promo-poster.jpg"` y dos `<track>`: `kind="subtitles" srclang="es" label="Español" default` y otro ==en inglés==.
+- Completa el `<video>` con `poster="https://dummyimage.com/800x600/ccc/000.png&text=promo-poster.jpg"` y dos `<track>`: `kind="subtitles" srclang="es" label="Español" default` y otro ==en inglés==.
 - Recorre la galería solo con `Tab`: el foco debe ser siempre visible.
 - Valida y comprueba que **no queda ninguna imagen sin `alt`**.
 

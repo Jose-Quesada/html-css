@@ -270,6 +270,8 @@
       
         
       
+        
+      
     
     
     
@@ -991,6 +993,35 @@
     
   
   09. Ejercicios
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-practicas/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-laptop" viewBox="0 0 24 24"><path d="M18 5a2 2 0 0 1 2 2v8.526a2 2 0 0 0 .212.897l1.068 2.127a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45l1.068-2.127A2 2 0 0 0 4 15.526V7a2 2 0 0 1 2-2zM20.054 15.987H3.946"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  11. Prácticas
 
     
   </span>
@@ -2022,6 +2053,8 @@
       
         
       
+        
+      
     
     
     
@@ -2123,7 +2156,7 @@
 <h4 id="reglas-del-documento-bien-formado-en-xhtml-xml">Reglas del «Documento bien formado» en <abbr title="Extensible HyperText Markup Language">XHTML</abbr> / <abbr title="Extensible Markup Language">XML</abbr></h4>
 <p>Para que un documento sea considerado <strong>bien formado</strong> (<em>well-formed</em>) en <abbr title="Extensible Markup Language">XML</abbr>/<abbr title="Extensible HyperText Markup Language">XHTML</abbr>, debe cumplir taxativamente:</p>
 <ol>
-<li><strong>Cierre obligatorio de todos los elementos:</strong> Todo elemento debe cerrarse explícitamente (<code>&lt;p&gt;...&lt;/p&gt;</code>), y los elementos vacíos (<em>void elements</em>) deben cerrarse en sí mismos con una barra: <code>&lt;img src="../foto.jpg" alt="" /&gt;</code>, <code>&lt;br /&gt;</code>, <code>&lt;hr /&gt;</code>.</li>
+<li><strong>Cierre obligatorio de todos los elementos:</strong> Todo elemento debe cerrarse explícitamente (<code>&lt;p&gt;...&lt;/p&gt;</code>), y los elementos vacíos (<em>void elements</em>) deben cerrarse en sí mismos con una barra: <code>&lt;img src="https://dummyimage.com/800x600/ccc/000.png&amp;text=foto.jpg" alt="" /&gt;</code>, <code>&lt;br /&gt;</code>, <code>&lt;hr /&gt;</code>.</li>
 <li><strong>Minúsculas estrictas:</strong> Los nombres de etiquetas y atributos deben escribirse obligatoriamente en minúsculas (<code>&lt;table class="..."&gt;</code>, no <code>&lt;TABLE CLASS="..."&gt;</code>).</li>
 <li><strong>Entrecomillado estricto de atributos:</strong> Todos los valores de atributos deben ir entre comillas dobles o simples (<code>id="menu"</code>, nunca <code>id=menu</code>).</li>
 <li><strong>Prohibición de atributos booleanos minimizados:</strong> En <abbr title="Extensible HyperText Markup Language">XHTML</abbr> no existe la sintaxis minimizada. Debe escribirse <code>disabled="disabled"</code>, <code>checked="checked"</code>, <code>readonly="readonly"</code> o <code>required="required"</code>.</li>
@@ -2322,7 +2355,7 @@
 <hr />
 <h3 id="32-elementos-vacios-void-elements">3.2 Elementos vacíos (<em>Void Elements</em>)</h3>
 <p>Los elementos <strong>vacíos</strong> no pueden contener texto ni otros elementos hijos, por lo que carecen de etiqueta de cierre:</p>
-<div class="language-html highlight"><span class="filename">elementos-vacios.html</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">"foto.jpg"</span> <span class="na">alt</span><span class="o">=</span><span class="s">"Alumnado en el taller de desarrollo"</span><span class="p">&gt;</span>
+<div class="language-html highlight"><span class="filename">elementos-vacios.html</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">"https://dummyimage.com/800x600/ccc/000.png&amp;text=foto.jpg"</span> <span class="na">alt</span><span class="o">=</span><span class="s">"Alumnado en el taller de desarrollo"</span><span class="p">&gt;</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">&lt;</span><span class="nt">hr</span><span class="p">&gt;</span>
 </span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">name</span><span class="o">=</span><span class="s">"usuario"</span> <span class="na">id</span><span class="o">=</span><span class="s">"usuario"</span><span class="p">&gt;</span>
@@ -2426,7 +2459,7 @@
 <p>La validación sintáctica es un criterio de evaluación obligatorio en los módulos 0373 y 0615. El servicio oficial se encuentra en <a href="https://validator.w3.org/">https://validator.w3.org/</a>:</p>
 <div class="language-text highlight"><span class="filename">salida-validador-w3c.txt</span><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Error: An "img" element must have an "alt" attribute, except under certain conditions.
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>From line 42, column 5; to line 42, column 35
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>&lt;img src="../logo.png" class="logo"&gt;
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>&lt;img src="https://dummyimage.com/200x200/ccc/000.png&amp;text=logo.png" class="logo"&gt;
 </span></code></pre></div>
 <hr />
 <h3 id="53-pestana-elements-y-herramientas-de-desarrollo-devtools">5.3 Pestaña <em>Elements</em> y herramientas de desarrollo (DevTools)</h3>

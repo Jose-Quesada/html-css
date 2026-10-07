@@ -72,7 +72,7 @@ flowchart TD
 
 Para que un documento sea considerado **bien formado** (*well-formed*) en XML/XHTML, debe cumplir taxativamente:
 
-1. **Cierre obligatorio de todos los elementos:** Todo elemento debe cerrarse explícitamente (`<p>...</p>`), y los elementos vacíos (*void elements*) deben cerrarse en sí mismos con una barra: `<img src="foto.jpg" alt="" />`, `<br />`, `<hr />`.
+1. **Cierre obligatorio de todos los elementos:** Todo elemento debe cerrarse explícitamente (`<p>...</p>`), y los elementos vacíos (*void elements*) deben cerrarse en sí mismos con una barra: `<img src="https://dummyimage.com/800x600/ccc/000.png&text=foto.jpg" alt="" />`, `<br />`, `<hr />`.
 2. **Minúsculas estrictas:** Los nombres de etiquetas y atributos deben escribirse obligatoriamente en minúsculas (`<table class="...">`, no `<TABLE CLASS="...">`).
 3. **Entrecomillado estricto de atributos:** Todos los valores de atributos deben ir entre comillas dobles o simples (`id="menu"`, nunca `id=menu`).
 4. **Prohibición de atributos booleanos minimizados:** En XHTML no existe la sintaxis minimizada. Debe escribirse `disabled="disabled"`, `checked="checked"`, `readonly="readonly"` o `required="required"`.
@@ -278,7 +278,7 @@ Permite a los motores de búsqueda comprender el significado exacto de entidades
 Los elementos **vacíos** no pueden contener texto ni otros elementos hijos, por lo que carecen de etiqueta de cierre:
 
 ```html title="elementos-vacios.html"
-<img src="foto.jpg" alt="Alumnado en el taller de desarrollo">
+<img src="https://dummyimage.com/800x600/ccc/000.png&text=foto.jpg" alt="Alumnado en el taller de desarrollo">
 <br>
 <hr>
 <input type="text" name="usuario" id="usuario">
@@ -366,7 +366,7 @@ La validación sintáctica es un criterio de evaluación obligatorio en los mód
 ```text title="salida-validador-w3c.txt"
 Error: An "img" element must have an "alt" attribute, except under certain conditions.
 From line 42, column 5; to line 42, column 35
-<img src="logo.png" class="logo">
+<img src="https://dummyimage.com/200x200/ccc/000.png&text=logo.png" class="logo">
 ```
 
 ---

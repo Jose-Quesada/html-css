@@ -268,6 +268,8 @@
       
         
       
+        
+      
     
     
     
@@ -590,6 +592,35 @@
     
   
   09. Ejercicios
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../html/11-practicas/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-laptop" viewBox="0 0 24 24"><path d="M18 5a2 2 0 0 1 2 2v8.526a2 2 0 0 0 .212.897l1.068 2.127a1 1 0 0 1-.9 1.45H3.62a1 1 0 0 1-.9-1.45l1.068-2.127A2 2 0 0 0 4 15.526V7a2 2 0 0 1 2-2zM20.054 15.987H3.946"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  11. Prácticas
 
     
   </span>
@@ -2448,8 +2479,8 @@
 <h2 id="4-integrar-imagenes-en-htmlcss-ra-4">4. Integrar imágenes en HTML+CSS (<abbr title="Resultado de Aprendizaje">RA</abbr> 4)</h2>
 <p>La etiqueta responsable es <mark>srcset</mark>: <strong>variantes + <code>sizes</code></strong> y el navegador elige.</p>
 <h3 id="41-img-responsivo-con-srcset-y-sizes">4.1. <code>&lt;img&gt;</code> responsivo con <code>srcset</code> y <code>sizes</code></h3>
-<div class="language-html highlight"><span class="filename">imagen.html</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">"foto-800.webp"</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="hll">     <span class="na">srcset</span><span class="o">=</span><span class="s">"foto-400.webp 400w, foto-800.webp 800w, foto-1600.webp 1600w"</span>
+<div class="language-html highlight"><span class="filename">imagen.html</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">"https://dummyimage.com/800x600/ccc/000.png&amp;text=foto-800.webp"</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="hll">     <span class="na">srcset</span><span class="o">=</span><span class="s">"https://dummyimage.com/400x300/ccc/000.png&amp;text=foto-400.webp 400w, https://dummyimage.com/800x600/ccc/000.png&amp;text=foto-800.webp 800w, https://dummyimage.com/800x600/ccc/000.png&amp;text=foto-1600.webp 1600w"</span>
 </span></span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="hll">     <span class="na">sizes</span><span class="o">=</span><span class="s">"(max-width: 600px) 100vw, 50vw"</span>
 </span></span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>     <span class="na">alt</span><span class="o">=</span><span class="s">"Descripción"</span> <span class="na">width</span><span class="o">=</span><span class="s">"800"</span> <span class="na">height</span><span class="o">=</span><span class="s">"600"</span> <span class="na">loading</span><span class="o">=</span><span class="s">"lazy"</span><span class="p">&gt;</span> <span class="cm">&lt;!-- (1)! --&gt;</span>
 </span></code></pre></div>
@@ -2465,8 +2496,8 @@
 <h3 id="42-picture-para-arte-direccional-y-formatos">4.2. <code>&lt;picture&gt;</code> para arte direccional y formatos</h3>
 <div class="language-html highlight"><span class="filename">picture.html</span><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">&lt;</span><span class="nt">picture</span><span class="p">&gt;</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>  <span class="p">&lt;</span><span class="nt">source</span> <span class="na">media</span><span class="o">=</span><span class="s">"(min-width: 900px)"</span> <span class="na">srcset</span><span class="o">=</span><span class="s">"hero-ancha.avif"</span> <span class="na">type</span><span class="o">=</span><span class="s">"image/avif"</span><span class="p">&gt;</span>
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>  <span class="p">&lt;</span><span class="nt">source</span> <span class="na">srcset</span><span class="o">=</span><span class="s">"hero-movil.webp"</span> <span class="na">type</span><span class="o">=</span><span class="s">"image/webp"</span><span class="p">&gt;</span>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>  <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">"hero-movil.jpg"</span> <span class="na">alt</span><span class="o">=</span><span class="s">""</span> <span class="na">width</span><span class="o">=</span><span class="s">"1600"</span> <span class="na">height</span><span class="o">=</span><span class="s">"900"</span><span class="p">&gt;</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>  <span class="p">&lt;</span><span class="nt">source</span> <span class="na">srcset</span><span class="o">=</span><span class="s">"https://dummyimage.com/800x600/ccc/000.png&amp;text=hero-movil.webp"</span> <span class="na">type</span><span class="o">=</span><span class="s">"image/webp"</span><span class="p">&gt;</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>  <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">"https://dummyimage.com/800x600/ccc/000.png&amp;text=hero-movil.jpg"</span> <span class="na">alt</span><span class="o">=</span><span class="s">""</span> <span class="na">width</span><span class="o">=</span><span class="s">"1600"</span> <span class="na">height</span><span class="o">=</span><span class="s">"900"</span><span class="p">&gt;</span>
 </span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="p">&lt;/</span><span class="nt">picture</span><span class="p">&gt;</span>
 </span></code></pre></div>
 <h3 id="43-object-fit-object-position">4.3. <code>object-fit</code> / <code>object-position</code></h3>

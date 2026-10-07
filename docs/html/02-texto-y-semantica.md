@@ -233,7 +233,7 @@ Cita de bloque; el atributo `cite` guarda la **URL de origen** (no la muestra). 
 </address>
 
 <figure>
-    <img src="entrega-proyectos.jpg" alt="Alumnado entregando los proyectos de fin de curso">
+    <img src="https://dummyimage.com/800x600/ccc/000.png&text=entrega-proyectos.jpg" alt="Alumnado entregando los proyectos de fin de curso">
     <figcaption>Entrega de proyectos, junio de 2026.</figcaption> <!-- (1)! -->
 </figure>
 

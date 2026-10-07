@@ -59,7 +59,7 @@ Flash, Silverlight o QuickTime exigían instalar un componente aparte, actualiza
 
 ```html title="video-multipista.html"
 <video controls
-       poster="img/noticia-portada.jpg"
+       poster="https://dummyimage.com/800x600/ccc/000.png&text=noticia-portada.jpg"
        width="640" height="360"
        preload="metadata"
        playsinline>
@@ -74,7 +74,7 @@ Flash, Silverlight o QuickTime exigían instalar un componente aparte, actualiza
 
 <!-- Atajo con src directo: un único formato, sin <source> -->
 <video controls src="video/noticia.mp4"
-       poster="img/noticia-portada.jpg" width="640" height="360"></video>
+       poster="https://dummyimage.com/800x600/ccc/000.png&text=noticia-portada.jpg" width="640" height="360"></video>
 ```
 
 1.  El orden importa: el navegador se queda con el **primer `type` que entiende**.
@@ -143,7 +143,7 @@ Nota: la compatibilidad cambia con cada versión de navegador, así que **verifi
 ### 5.1 El elemento `<track>`
 
 ```html title="subtitulos.html" hl_lines="5"
-<video controls poster="img/noticia-portada.jpg" width="640" height="360" preload="metadata">
+<video controls poster="https://dummyimage.com/800x600/ccc/000.png&text=noticia-portada.jpg" width="640" height="360" preload="metadata">
   <source src="video/noticia.mp4" type="video/mp4">
   <source src="video/noticia.webm" type="video/webm">
   <!-- Subtítulos en español, activados por defecto -->
@@ -242,7 +242,7 @@ El nativo es preferible **si controlas los ficheros**: `<video>` no arrastra coo
       <p>La consejería abre hoy el plazo para solicitar las becas de transporte y material.</p>
 
       <h2>Vídeo informativo</h2>
-      <video controls poster="img/becas-portada.jpg" width="640" height="360" preload="metadata">
+      <video controls poster="https://dummyimage.com/800x600/ccc/000.png&text=becas-portada.jpg" width="640" height="360" preload="metadata">
         <source src="video/becas.mp4" type="video/mp4">
         <source src="video/becas.webm" type="video/webm">
         <track kind="subtitles" src="video/becas-es.vtt" srclang="es" label="Español" default>
