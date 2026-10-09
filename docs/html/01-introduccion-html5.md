@@ -147,7 +147,7 @@ El comportamiento del navegador no depende únicamente del código escrito, sino
     <link rel="stylesheet" href="css/estilos.css">
 
     <!-- PWA y Favicon -->
-    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="https://dummyimage.com/200x200/ccc/000.png&text=favicon.svg" type="image/svg+xml">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#0b5fff">
 
@@ -190,14 +190,48 @@ El comportamiento del navegador no depende únicamente del código escrito, sino
 
 ---
 
-### 2.2 Desglose funcional del `<head>` y del `<body>`
+### 2.2 Desglose funcional paso a paso (Línea a línea)
 
-- **`<head>` (Metadatos):** Contiene información destinada al navegador, a los motores de búsqueda y a los servicios web. Nunca se muestra directamente en el lienzo visual de la página.
-  - `meta charset="UTF-8"`: Asegura la correcta representación de tildes, la letra eñe (`ñ`) y el símbolo del euro (`€`).
-  - `meta name="viewport"`: Desactiva el escalado simulado de escritorio en pantallas móviles y ajusta el ancho visual al dispositivo.
-  - `title`: Título único y descriptivo de la pestaña del navegador (clave para accesibilidad y SEO).
-  - `link rel="stylesheet"`: Vincula las hojas de estilo CSS externas.
-- **`<body>` (Cuerpo visible):** Contiene todo el contenido que los usuarios perciben, leen e interactúan a través de la pantalla o del sintetizador de voz.
+Para un alumno que parte de cero, un documento HTML puede parecer una sopa de etiquetas confusas. Analicemos qué hace cada línea de la plantilla y por qué es indispensable:
+
+#### 1. La declaración `<!DOCTYPE html>`
+- **No es una etiqueta HTML**, sino una **instrucción preliminar** para el motor de renderizado del navegador.
+- **¿Qué problema resuelve?** En los años 90 (la época de Internet Explorer y Netscape), no existían estándares comunes. Para no romper las webs antiguas, los navegadores inventaron dos modos de funcionamiento: el **Modo Quirks** (*modo de compatibilidad o caprichos*) y el **Modo Estándar**.
+- Si omites `<!DOCTYPE html>`, el navegador asume que tu página fue escrita en 1998 y activa el modo Quirks, calculando los tamaños del modelo de caja de forma errónea e ignorando las especificaciones modernas. Escribir `<!DOCTYPE html>` en la primerísima línea le ordena al navegador: *"renderiza esta página siguiendo rigurosamente los estándares web modernos de HTML5 y CSS3"*.
+
+#### 2. La raíz `<html lang="es">`
+- Es el nodo padre del que cuelgan todos los demás elementos del documento.
+- El atributo `lang="es"` indica el **idioma principal del contenido** (en este caso, español).
+- **Importancia crítica en Accesibilidad (A11y):** Los lectores de pantalla que utilizan las personas con discapacidad visual leen el código mediante un sintetizador de voz. Si no declaras `lang="es"`, el software asumirá el idioma por defecto del sistema operativo del usuario (a menudo inglés) y pronunciará las palabras en español con fonética inglesa, convirtiendo el texto en algo completamente ininteligible. Además, su presencia es una exigencia legal vinculante según el **Real Decreto 1112/2018** y la norma **UNE-EN 301549**.
+
+#### 3. El `<head>` (La mente del documento)
+Contiene los **metadatos**: información sobre el documento dirigida al navegador, los robots de búsqueda de Google y las redes sociales. **Nada de lo que pongas en el `<head>` se dibuja directamente en la pantalla** (salvo el título en la pestaña).
+
+- `<meta charset="UTF-8">`: Declara la tabla de codificación de caracteres universal UTF-8. Debe ubicarse **dentro de los primeros 1024 bytes** del archivo para que el navegador sepa cómo interpretar los bytes antes de empezar a leer texto; de lo contrario, las tildes, las eñes (`ñ`) y símbolos como el euro (`€`) se corromperán en pantalla mostrando caracteres extraños como `Ã±`.
+- `<meta name="viewport" content="width=device-width, initial-scale=1.0">`: Es la instrucción que hace que una web sea adaptable a móviles (*responsive*):
+    - `width=device-width`: Le dice al navegador que el ancho de la pantalla lógica debe coincidir con el ancho físico del dispositivo (390 px en un móvil, no 1920 px de un monitor).
+    - `initial-scale=1.0`: Establece el zoom inicial al 100% (escala 1:1).
+    - *¿Qué pasa si falta?* Los navegadores móviles asumen que la página es de escritorio antiguo de 980 px de ancho y la alejan con un zoom diminuto donde las letras parecen hormigas microscópicas.
+- `<title>`: El título que aparece en la pestaña del navegador, en la lista de marcadores/favoritos y como titular azul en los resultados de búsqueda de Google. Debe ser único, descriptivo y conciso para cada página.
+- `<meta name="description">`: Un resumen de 140-160 caracteres que los buscadores muestran como fragmento explicativo (*snippet*) debajo del enlace en sus resultados.
+- `<link rel="canonical">`: Indica a Google cuál es la URL original y oficial de esta página, evitando penalizaciones por "contenido duplicado" cuando se accede con `www`, sin `www`, con `http` o con parámetros de seguimiento.
+
+#### 4. Metadatos de Redes Sociales (Open Graph)
+Cuando compartes un enlace por WhatsApp, Telegram, Twitter o LinkedIn, la aplicación no descarga toda la web: busca las etiquetas con prefijo `og:` (*Open Graph*, protocolo creado originalmente por Facebook):
+
+- `og:title` y `og:description`: El titular y la entradilla que decoran la tarjeta visual.
+- `og:image`: La imagen destacada que acompaña al enlace.
+- `og:url` y `og:type`: La dirección canónica y el tipo de contenido (`website`, `article`, etc.).
+
+#### 5. PWA (Progressive Web Apps) y personalización móvil
+- `<link rel="manifest" href="manifest.json">`: Archivo JSON que describe cómo debe comportarse la web si el usuario decide "instalarla" en la pantalla de inicio de su teléfono móvil como si fuera una app nativa.
+- `<meta name="theme-color" content="#0b5fff">`: Colorea la barra superior del navegador en dispositivos móviles (Android/Chrome y Safari) con el color corporativo de la marca.
+
+#### 6. El `<body>` (El cuerpo visible de la página)
+Contiene todo lo que el usuario ve, lee, escucha y con lo que interactúa:
+
+- En la plantilla profesional se observa el uso de landmarks semánticos: `<header>` (cabecera), `<nav>` (menú), `<main>` (contenido central único), `<article>` (pieza editorial autónoma) y `<footer>` (pie de página).
+- El atributo `tabindex="-1"` en `<main id="contenido">`: Permite que el enlace de salto accesible (*skip link*) mueva programáticamente el foco del teclado al contenido principal sin que el usuario tenga que tabular innecesariamente.
 
 ---
 
@@ -353,8 +387,8 @@ Dado que `<`, `>`, `&` y las comillas forman parte de la sintaxis del lenguaje, 
 
 - **VS Code:** Editor de referencia en el currículo de DAW/DAM.
 - **Emmet:** Motor de abreviaturas integrado para generación rápida de código:
-  - `!` + Tab $\rightarrow$ Genera el boilerplate completo de HTML5.
-  - `header>nav>ul>li*3>a` $\rightarrow$ Genera la estructura completa del menú en una sola pulsación.
+    - `!` + Tab $\rightarrow$ Genera el boilerplate completo de HTML5.
+    - `header>nav>ul>li*3>a` $\rightarrow$ Genera la estructura completa del menú en una sola pulsación.
 - **Linters estáticos:** Extensiones como *HTMLHint* o *axe Accessibility Linter* para detectar etiquetas sin cerrar o faltas de atributos de accesibilidad (`alt`, `lang`) en tiempo de escritura.
 
 ---
@@ -374,6 +408,7 @@ From line 42, column 5; to line 42, column 35
 ### 5.3 Pestaña *Elements* y herramientas de desarrollo (DevTools)
 
 Pulsando `F12` o `Ctrl+Shift+I` se accede a las herramientas de desarrollo del navegador:
+
 - **Árbol DOM (*Elements*):** Permite inspeccionar el árbol en tiempo real y comprobar cómo ha resuelto el navegador las etiquetas mal formadas.
 - **Pestaña *Accessibility*:** Muestra el árbol de accesibilidad (**A11y Tree**), el rol de cada nodo y su nombre accesible.
 - **Auditorías (*Lighthouse*):** Informes automatizados de rendimiento, accesibilidad (WCAG), mejores prácticas y SEO.
@@ -391,7 +426,7 @@ Matrícula de ciclo formativo, cada línea comentada, semántica y validada.
     <meta charset="UTF-8"> <!-- Codificación universal -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsivo -->
     <title>Matrícula DAW · Curso 2026-2027</title> <!-- Título de pestaña -->
-    <link rel="icon" href="favicon.svg" type="image/svg+xml"> <!-- Favicon -->
+    <link rel="icon" href="https://dummyimage.com/200x200/ccc/000.png&text=favicon.svg" type="image/svg+xml"> <!-- Favicon -->
     <link rel="stylesheet" href="css/estilos.css"> <!-- CSS externo -->
 </head>
 <body>
@@ -429,6 +464,82 @@ Matrícula de ciclo formativo, cada línea comentada, semántica y validada.
 
 1.  El atributo `for` del `<label>` coincide exactamente con el `id` del campo: al pulsar sobre el texto se transfiere el foco al control.
 2.  `type="email"` activa la validación nativa del navegador y despliega el teclado óptimo en pantallas táctiles.
+
+---
+
+### 6.1 Explicación detallada: ¿Por qué se usa cada etiqueta y para qué sirve?
+
+A continuación se desglosa cada elemento y atributo presente en la plantilla `matricula.html`, justificando su presencia desde los puntos de vista de la arquitectura web, la accesibilidad (WCAG) y los estándares del W3C:
+
+#### 1. `<!DOCTYPE html>` — Activación del modo estándar
+- **¿Para qué sirve?** No es una etiqueta HTML, sino un preámbulo o declaración técnica obligatoria que debe figurar siempre en la primera línea absoluta del archivo.
+- **¿Por qué se usa aquí?** Le indica al motor de renderizado del navegador que debe interpretar el documento según la especificación estándar moderna (**HTML5 Living Standard**) y no en el modo de compatibilidad histórica (*Quirks Mode*). Sin esta línea, los navegadores emulan comportamientos erráticos de los años 90 (como el modelo de caja roto de Internet Explorer 5).
+
+#### 2. `<html lang="es">` — Raíz del documento e internacionalización
+- **¿Para qué sirve?** Es el contenedor raíz (*root*) de todo el árbol DOM. Todo el código de la página (a excepción del `<!DOCTYPE>`) vive dentro de él.
+- **¿Por qué se usa con el atributo `lang="es"`?**
+    - **Accesibilidad (Criterio WCAG 3.1.1):** Permite a los sintetizadores de voz y lectores de pantalla (como NVDA o VoiceOver) aplicar las reglas fonéticas y de pronunciación del castellano. Si no se declara, el sintetizador intentará leer el texto en el idioma predeterminado del sistema operativo (por ejemplo, en inglés con acento anglosajón ininteligible).
+    - **Traducción y tipografía:** Permite a los navegadores ofrecer traducción automática correcta y aplicar reglas de partición de palabras (*hyphenation*) y comillas tipográficas propias del español.
+
+#### 3. `<head>` y sus metadatos nucleares
+- **¿Para qué sirve `<head>`?** Es el contenedor de metainformación sobre el documento. Su contenido no es visible directamente en el lienzo (*canvas*) de la página web, pero es fundamental para el navegador, los motores de búsqueda y la seguridad.
+- **Desglose de sus etiquetas hijas:**
+    - **`<meta charset="UTF-8">`:** Define el juego de caracteres universal. Debe figurar entre los primeros 1024 bytes del documento para evitar que caracteres especiales (tildes, eñes, diéresis, símbolos matemáticos) se muestren como caracteres rotos o corruptos (*mojibake*).
+    - **`<meta name="viewport" content="width=device-width, initial-scale=1.0">`:** Activa el diseño responsivo en dispositivos móviles. Ordena al navegador del móvil que establezca el ancho del lienzo al ancho físico de la pantalla (`width=device-width`) y evite el zoom panorámico alejado (*desktop viewport*) por defecto.
+    - **`<title>`:** Es el único elemento del `<head>` cuyo texto es directamente percibido por el usuario. Aparece en la pestaña del navegador, en el historial de navegación, en los marcadores/favoritos y como título en los resultados de Google (SEO).
+    - **`<link rel="icon" ...>`:** Asocia el favicon (icono de pestaña o marcador). Se utiliza formato vectorial SVG para garantizar nitidez en cualquier densidad de pantalla (Retina, 4K).
+    - **`<link rel="stylesheet" href="css/estilos.css">`:** Vincula la hoja de estilos externa, respetando la **separación estricta de responsabilidades (SoC)**: el HTML solo define la estructura y el significado semántico; el CSS se encarga de la presentación visual.
+
+#### 4. `<body>` — El lienzo perceptible
+- **¿Para qué sirve?** Delimita todo el contenido perceptible que se renderiza visualmente en la ventana del navegador (texto, imágenes, menús, formularios).
+
+#### 5. `<header>` — Cabecera de contexto
+- **¿Para qué sirve?** Representa un contenedor introductorio o de navegación. Al ser hijo directo del `<body>`, actúa como el hito semántico (*landmark*) de cabecera general de la página web (`role="banner"` implícito).
+- **¿Por qué se usa aquí?** Agrupa el título principal del sitio y la barra de navegación primaria, aportando coherencia visual y estructural antes de entrar al contenido principal.
+
+#### 6. `<h1>` — Titular de máxima jerarquía
+- **¿Para qué sirve?** Identifica el tema o propósito principal de toda la página (*«Matrícula · Desarrollo de Aplicaciones Web»*).
+- **Regla de oro:** Solo debe existir **un único `<h1>` por página**. Proporciona el punto de anclaje inicial para el árbol de accesibilidad y es el factor de indexación temática más relevante para los motores de búsqueda.
+
+#### 7. `<nav aria-label="Navegación del sitio">` — Navegación estructurada
+- **¿Para qué sirve?** Delimita una sección que contiene enlaces de navegación importantes (`role="navigation"` implícito).
+- **¿Por qué se usa con `aria-label`?** Si una página llega a tener varios bloques `<nav>` (por ejemplo, menú principal, migas de pan y paginación), `aria-label` permite al lector de pantalla diferenciarlos claramente (anunciando *"Navegación del sitio, hito"*).
+- **¿Por qué usar `<ul>`, `<li>` y `<a>` dentro de `<nav>`?** Porque una barra de navegación es semánticamente una **lista no ordenada de destinos**. Los lectores de pantalla informan al usuario del número total de elementos que componen el menú (ej. *"Lista de 2 elementos"*), facilitando la orientación espacial sin necesidad de ver la pantalla.
+
+#### 8. `<main>` — El hito de contenido principal
+- **¿Para qué sirve?** Envuelve el contenido nuclear, exclusivo y no repetitivo del documento (`role="main"` implícito).
+- **Regla técnica:** Solo puede haber un único `<main>` visible por documento. Permite a los usuarios de productos de apoyo saltar directamente al contenido prescindiendo de cabeceras y barras laterales.
+
+#### 9. `<h2>` y `<p>` con `<strong>`
+- **`<h2>`:** Subdivide el contenido del `<main>` en una sección lógica (*«Datos del alumno/a»*). Mantiene la jerarquía estricta de encabezados (descendiendo ordenadamente de `<h1>` a `<h2>`).
+- **`<p>`:** Delimita un párrafo de texto ordinario.
+- **`<strong>`:** No es una simple negrita visual (para eso se usa CSS o `<b>`). Aporta **énfasis semántico e importancia**, alertando al sintetizador de voz para que module el tono o avise de la relevancia del término (*«iniciar»*).
+
+#### 10. `<form action="confirmacion.html" method="post">` — Interacción de datos
+- **¿Para qué sirve?** Delimita una región interactiva para recopilar datos del usuario y enviarlos a un servidor o a una página de destino.
+- **`action="confirmacion.html"`:** Especifica el recurso que procesará los datos enviados.
+- **`method="post"`:** Envía la información en el cuerpo de la petición HTTP, garantizando mayor privacidad y capacidad de carga que el método `get` (que expone los parámetros en la barra de direcciones URL).
+
+#### 11. `<label for="...">` y controles `<input>` — Accesibilidad en formularios
+- **`label for="nombre"`:** Etiqueta textual visible asociada al control.
+    - El valor del atributo `for` debe coincidir con el `id` del `<input>`.
+    - **Beneficio ergonómico y accesible:** Al hacer clic sobre el texto de la etiqueta, el foco se transfiere automáticamente a la casilla de entrada. En lectores de pantalla, al posicionarse en el campo se vocaliza automáticamente el nombre del campo.
+- **Atributos de los controles `<input>`:**
+    - `id="nombre"`: Identificador unívoco en el DOM necesario para la vinculación con el `<label>`.
+    - `name="nombre"`: Nombre del parámetro clave que viajará en la petición HTTP hacia el servidor (`nombre=Juan`).
+    - `required`: Atributo booleano de validación HTML5 que impide el envío del formulario si el campo está vacío.
+    - `autocomplete="name"` y `autocomplete="email"`: Indican al navegador el tipo de dato esperado para permitir el autorrelleno seguro con un solo clic.
+    - `type="email"`: Valida nativamente el formato de dirección electrónica y en teclados táctiles muestra la tecla `@` y el dominio `.com` de manera predeterminada.
+
+#### 12. `<button type="submit">` — Disparador de envío
+- **¿Para qué sirve?** Botón que activa la validación nativa del formulario y desencadena su envío al destino indicado en `action`.
+- **¿Por qué `type="submit"` explícito?** Aunque en HTML un `<button>` dentro de un `<form>` adopta `submit` por defecto, declararlo explícitamente evita ambigüedades con botones de acción JavaScript (`type="button"`) o de limpieza (`type="reset"`).
+
+#### 13. `<footer>` con entidad `&copy;`
+- **¿Para qué sirve `<footer>`?** Representa el pie de página o cierre del contexto (`role="contentinfo"` implícito cuando es hijo directo de `<body>`). Contiene información de autoría, derechos de reproducción, políticas y avisos legales.
+- **`&copy;`:** Entidad de carácter HTML que renderiza el símbolo de copyright `©` de forma estandarizada y segura.
+
+---
 
 !!! success "Comprueba que tu código cumple los estándares"
 

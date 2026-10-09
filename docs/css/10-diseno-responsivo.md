@@ -344,7 +344,270 @@ Soporte reciente (Chrome 111+, Firefox 151+, Safari 18+); aún en consolidación
     - [ ] `prefers-reduced-motion` y modo oscuro comprobados.
     - [ ] Lighthouse móvil sin regresiones de LCP.
 
-## 10. Errores comunes
+---
+
+## 10. Ejemplo práctico: portal de noticias con Container Queries y Media Queries de rango
+
+El siguiente ejemplo implementa una arquitectura responsiva moderna combinando la metodología **Mobile-First**, la sintaxis moderna de rango para Media Queries (`width >= 48em`), y el estándar de **Container Queries** (`@container`), permitiendo que las tarjetas de noticias se reconfiguren visualmente de formato vertical a apaisado según el ancho del contenedor en el que se ubiquen (sea en la columna principal o en una barra lateral estrecha).
+
+```html title="noticias-responsivo.html"
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diseño Responsivo · Portal de Noticias</title>
+  <link rel="stylesheet" href="css/responsivo.css">
+</head>
+<body>
+  <div class="layout-portal">
+    <header class="cabecera-portal">
+      <div class="marca">Diario Digital DAW</div>
+      <button type="button" class="btn-menu" aria-label="Abrir menú de navegación">☰</button>
+    </header>
+
+    <div class="rejilla-contenido">
+      <!-- Columna Principal ancha -->
+      <main class="columna-principal">
+        <h1 class="titular-seccion">Actualidad Tecnológica</h1>
+        
+        <div class="tarjeta-contenedor">
+          <article class="noticia-card">
+            <div class="noticia-card__media">
+              <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=700&q=80" 
+                   alt="Líneas de código y matriz digital en pantalla"
+                   width="600" height="400">
+            </div>
+            <div class="noticia-card__cuerpo">
+              <span class="noticia-card__categoria">Ciberseguridad</span>
+              <h2 class="noticia-card__titular">Nuevos protocolos de autenticación post-cuántica</h2>
+              <p class="noticia-card__resumen">
+                Los organismos de estandarización publican las directrices definitivas para blindar las comunicaciones bancarias e institucionales.
+              </p>
+              <a href="#" class="noticia-card__enlace">Leer artículo completo</a>
+            </div>
+          </article>
+        </div>
+      </main>
+
+      <!-- Barra Lateral estrecha: reutiliza EXACTAMENTE el mismo componente HTML -->
+      <aside class="columna-lateral">
+        <h2 class="titular-sidebar">Destacados</h2>
+        
+        <div class="tarjeta-contenedor">
+          <article class="noticia-card">
+            <div class="noticia-card__media">
+              <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=700&q=80" 
+                   alt="Placas de circuito y conexiones de fibra óptica"
+                   width="600" height="400">
+            </div>
+            <div class="noticia-card__cuerpo">
+              <span class="noticia-card__categoria">Infraestructura</span>
+              <h2 class="noticia-card__titular">Despliegue de nodos troncales de baja latencia</h2>
+              <p class="noticia-card__resumen">
+                Ampliación de centros de interconexión en el sur de Europa.
+              </p>
+              <a href="#" class="noticia-card__enlace">Leer más</a>
+            </div>
+          </article>
+        </div>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
+```
+
+```css title="css/responsivo.css"
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: #f8fafc;
+  color: #0f172a;
+  line-height: 1.5;
+}
+
+/* 1. Mobile-First Base (Móviles de 320px a 767px) */
+.layout-portal {
+  max-width: 76rem;
+  margin-inline: auto;
+  padding: 1rem;
+}
+
+.cabecera-portal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: 1rem;
+  border-bottom: 2px solid #0f172a;
+  margin-block-end: 1.5rem;
+}
+
+.marca {
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+/* Objetivo táctil mínimo de 44x44px según WCAG 2.5.5 */
+.btn-menu {
+  min-width: 44px;
+  min-height: 44px;
+  font-size: 1.5rem;
+  background: none;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.titular-seccion {
+  /* Tipografía fluida con clamp() */
+  font-size: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+  margin-block-end: 1.5rem;
+}
+
+.rejilla-contenido {
+  display: grid;
+  grid-template-columns: 1fr; /* 1 columna por defecto en móvil */
+  gap: 2rem;
+}
+
+/* 2. Media Queries con sintaxis de rango matemática moderna */
+/* A partir de 768px (tablets y pantallas medianas) */
+@media (width >= 48em) {
+  .layout-portal {
+    padding: 2rem;
+  }
+
+  .btn-menu {
+    display: none; /* Oculta botón hamburguesa en pantallas grandes */
+  }
+
+  .rejilla-contenido {
+    /* 2 columnas asimétricas: 65% para contenido principal y 35% para lateral */
+    grid-template-columns: 2fr 1fr;
+    gap: 2.5rem;
+  }
+}
+
+/* 3. Definición del contexto de contenedor (Container Queries) */
+.tarjeta-contenedor {
+  /* Declara que este contenedor será el marco de referencia de tamaño */
+  container-type: inline-size;
+  container-name: tarjeta-noticia;
+}
+
+/* Estilo por defecto del componente (tarjeta vertical estándar) */
+.noticia-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+}
+
+.noticia-card__media {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.noticia-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.noticia-card__cuerpo {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.noticia-card__categoria {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #0284c7;
+}
+
+.noticia-card__titular {
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+.noticia-card__resumen {
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.noticia-card__enlace {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  color: #0284c7;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+/* 4. Adaptación reactiva del componente según el ancho de SU PROPIO CONTENEDOR */
+@container tarjeta-noticia (width >= 450px) {
+  .noticia-card {
+    /* Si el contenedor mide 450px o más, pasa de vertical a horizontal apaisado */
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .noticia-card__media {
+    width: 40%; /* La foto ocupa el 40% a la izquierda */
+    aspect-ratio: 4 / 3;
+    flex-shrink: 0;
+  }
+
+  .noticia-card__cuerpo {
+    width: 60%;
+    padding: 1.5rem;
+  }
+
+  .noticia-card__titular {
+    font-size: 1.35rem;
+  }
+}
+```
+
+---
+
+### 10.1 Explicación detallada: ¿Por qué se usa cada propiedad y para qué sirve?
+
+A continuación se detalla la justificación técnica de la arquitectura responsiva empleada:
+
+#### 1. Enfoque Mobile-First estricto
+- **¿Por qué empezar desde el móvil?** El CSS declarado fuera de las media queries rige para pantallas pequeñas (320-480 px). Los teléfonos móviles cargan menos líneas de código y aplican el renderizado inicial sin sobreescrituras innecesarias. Conforme la pantalla crece, las reglas `@media (width >= 48em)` agregan columnas progresivamente.
+- **Sintaxis de rango (`width >= 48em`):** Sustituye la antigua y confusa sintaxis `(min-width: 48em)` por un operador relacional matemático directo y legible.
+
+#### 2. La revolución de las Container Queries (`@container`)
+- **La limitación histórica de las Media Queries:** Una Media Query clásica solo puede evaluar el ancho del **viewport entero**. No sabe si un componente está colocado en la columna principal de 900 px o en una barra lateral de 280 px.
+- **La solución con Container Queries:**
+    - Al declarar `container-type: inline-size` en `.tarjeta-contenedor`, le indicamos al navegador que monitorice el ancho de ese div específico.
+    - La regla `@container tarjeta-noticia (width >= 450px)` evalúa **el hueco físico donde vive la tarjeta**.
+    - **Resultado profesional:** En la columna principal, la tarjeta detecta que tiene más de 450 px de ancho y se dibuja apaisada (foto a la izquierda, texto a la derecha). En la barra lateral, la misma tarjeta exacta detecta que su contenedor solo mide 280 px y se renderiza en formato vertical compacto, **sin necesidad de duplicar clases ni crear componentes separados**.
+
+#### 3. Tamaño táctil accesible de 44×44 px (Criterio WCAG 2.5.5)
+- **`min-width: 44px; min-height: 44px;`:** Las directrices internacionales de accesibilidad establecen que los botones o enlaces interactivos en dispositivos móviles deben ofrecer un área táctil mínima de $44 \times 44\text{ px}$. Esto evita que personas con temblores o dedos grandes pulsen involuntariamente elementos contiguos.
+
+---
+
+## 11. Errores comunes
 
 | Error | Consecuencia | Solución |
 |---|---|---|

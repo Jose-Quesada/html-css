@@ -375,7 +375,7 @@ video.addEventListener('play', procesarFrame);
     <figure>
       <!-- Sin crossorigin, getImageData lanza un error de seguridad -->
       <video id="videoOriginal" crossorigin="anonymous" controls autoplay muted loop>
-        <source src="video_jaen.mp4" type="video/mp4">
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
         Tu navegador no soporta vídeo.
       </video>
       <figcaption>Entrada: Vídeo Original</figcaption>
@@ -521,13 +521,13 @@ video.addEventListener('play', procesarFrame);
            alt="Alumnos soldando placas en el taller de electrónica">
       <figcaption>Alumnos en el taller de electrónica.</figcaption>
     </figure>
-    <p><a href="taller-1600.jpg" download="taller-1600.jpg">Descargar la foto en alta (JPG, 1,2 MB)</a></p>
+    <p><a href="https://dummyimage.com/800x600/ccc/000.png&text=taller-1600.jpg" download="taller-1600.jpg">Descargar la foto en alta (JPG, 1,2 MB)</a></p>
     <figure>
       <!-- poster: imagen de portada; track: subtítulos accesibles -->
       <video controls poster="https://dummyimage.com/800x600/ccc/000.png&text=promo-poster.jpg" width="640" height="360">
-        <source src="promo.mp4" type="video/mp4">
-        <track kind="subtitles" src="promo-es.vtt" srclang="es" label="Español" default> <!-- (2)! -->
-        <track kind="subtitles" src="promo-en.vtt" srclang="en" label="English">
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+        <track kind="subtitles" src="https://interactive-examples.mdn.mozilla.net/media/examples/friday.vtt" srclang="es" label="Español" default> <!-- (2)! -->
+        <track kind="subtitles" src="https://interactive-examples.mdn.mozilla.net/media/examples/friday.vtt" srclang="en" label="English">
         Tu navegador no soporta la reproducción de vídeo.
       </video>
       <figcaption>Vídeo promocional del ciclo.</figcaption>
@@ -794,7 +794,7 @@ Soluciones completas de los **32 ejercicios por unidad** de [HTML 09 — Ejercic
   <!-- Soporte PWA y visualización -->
   <meta name="theme-color" content="#1e40af">
   <link rel="manifest" href="/manifest.json">
-  <link rel="apple-touch-icon" href="/icon-192.png">
+  <link rel="apple-touch-icon" href="https://dummyimage.com/800x600/ccc/000.png&text=icon-192.png">
   
   <!-- Resource Hints (Aceleradores de rendimiento) -->
   <link rel="preconnect" href="https://cdn.iesf3.es">
@@ -1094,7 +1094,7 @@ Soluciones completas de los **32 ejercicios por unidad** de [HTML 09 — Ejercic
     <!-- Mismo destino por raíz: no depende de la carpeta de la página -->
     <a href="/documentos/garantia-2-anios.pdf">La misma garantía por raíz</a>
     <!-- Ruta relativa completa: subo, bajo a img/ y entro en producto/ -->
-    <a href="../img/producto/zapatillas-1200w.jpg">Ver la foto en alta resolución</a>
+    <a href="https://dummyimage.com/1200x400/ccc/000.png&text=zapatillas-1200w.jpg">Ver la foto en alta resolución</a>
   </main>
   <footer>
     <p>&copy; 2026 Tienda UFRO</p>
@@ -1239,7 +1239,7 @@ Soluciones completas de los **32 ejercicios por unidad** de [HTML 09 — Ejercic
     <figure>
       <picture>
         <!-- El navegador recorre los source de arriba abajo -->
-        <source srcset="img/patio.avif" type="image/avif">
+        <source srcset="https://dummyimage.com/800x600/ccc/000.png&text=patio.avif" type="image/avif">
         <source srcset="https://dummyimage.com/800x600/ccc/000.png&text=patio.webp" type="image/webp">
         <img src="https://dummyimage.com/800x600/ccc/000.png&text=patio-800.jpg"
              alt="Patio interior con arco de piedra y macetas de geranios"
@@ -1254,7 +1254,7 @@ Soluciones completas de los **32 ejercicios por unidad** de [HTML 09 — Ejercic
            width="800" height="533" loading="lazy" decoding="async">
       <figcaption>Habitación doble con vistas al valle.</figcaption>
     </figure>
-    <p>Fotos: <a href="img/habitacion-800.jpg">Ver la habitación a tamaño completo</a></p>
+    <p>Fotos: <a href="https://dummyimage.com/800x600/ccc/000.png&text=habitacion-800.jpg">Ver la habitación a tamaño completo</a></p>
     <!-- title obligatorio: describe el marco para quien no lo ve -->
     <iframe
       src="https://www.openstreetmap.org/export/embed.html?bbox=-3.80,37.77,-3.78,37.79"
@@ -1301,11 +1301,11 @@ Soluciones completas de los **32 ejercicios por unidad** de [HTML 09 — Ejercic
            width="640" height="360"
            preload="metadata">
       <!-- El navegador prueba los type de arriba abajo -->
-      <source src="video/jornada.mp4" type="video/mp4">
-      <source src="video/jornada.webm" type="video/webm">
+      <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+      <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm">
       <!-- Respaldo: solo se ve si el navegador no reconoce <video> -->
       <p>Tu navegador no reproduce vídeo HTML5.
-         <a href="video/jornada.mp4">Descarga la grabación (MP4)</a>.</p>
+         <a href="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4">Descarga la grabación (MP4)</a>.</p>
     </video>
     <p>Grabación completa de la visita al centro.</p>
   </main>
@@ -1338,17 +1338,17 @@ Soluciones completas de los **32 ejercicios por unidad** de [HTML 09 — Ejercic
   <main>
     <h1>Normas del taller de electrónica</h1>
     <video controls poster="https://dummyimage.com/800x600/ccc/000.png&text=normas-portada.jpg" width="640" height="360" preload="metadata">
-      <source src="video/normas.mp4" type="video/mp4">
-      <source src="video/normas.webm" type="video/webm">
+      <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+      <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm">
       <!-- Captions: diálogo y efectos sonoros; default la deja activa al empezar -->
-      <track kind="captions" src="normas-es.vtt" srclang="es" label="Español" default>
+      <track kind="captions" src="https://interactive-examples.mdn.mozilla.net/media/examples/friday.vtt" srclang="es" label="Español" default>
       <!-- Subtitles: solo traduce la habla, sin efectos -->
-      <track kind="subtitles" src="normas-en.vtt" srclang="en" label="English">
+      <track kind="subtitles" src="https://interactive-examples.mdn.mozilla.net/media/examples/friday.vtt" srclang="en" label="English">
       <!-- Respaldo siempre después de las pistas -->
       <p>No puedes reproducir este vídeo.
-         <a href="video/normas.mp4">Descárgalo (MP4)</a>.</p>
+         <a href="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4">Descárgalo (MP4)</a>.</p>
     </video>
-    <p><a href="normas-es.vtt">Descargar los subtítulos en español (VTT)</a></p>
+    <p><a href="https://interactive-examples.mdn.mozilla.net/media/examples/friday.vtt">Descargar los subtítulos en español (VTT)</a></p>
   </main>
   <footer>
     <p>&copy; 2026 Instituto Maya</p>
@@ -1413,13 +1413,13 @@ Welcome to the electronics workshop.
     <h2>Episodio 7: los ciclos de Artes Gráficas</h2>
     <!-- preload="none": nada se descarga hasta pulsar play -->
     <audio controls preload="none">
-      <source src="audio/ep07.mp3" type="audio/mpeg">
-      <source src="audio/ep07.ogg" type="audio/ogg">
+      <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" type="audio/mpeg">
+      <source src="https://www.w3schools.com/html/horse.ogg" type="audio/ogg">
       <!-- Respaldo dentro del elemento, después de las pistas -->
       <p>Tu navegador no reproduce audio.
-         <a href="audio/ep07.mp3">Descarga el episodio (MP3)</a>.</p>
+         <a href="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3">Descarga el episodio (MP3)</a>.</p>
     </audio>
-    <p><a href="audio/ep07.mp3" download="fp-5-min-ep07.mp3">Descarga directa del episodio (MP3, 9,4 MB)</a></p>
+    <p><a href="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" download="fp-5-min-ep07.mp3">Descarga directa del episodio (MP3, 9,4 MB)</a></p>
     <!-- Transcripción en la propia página: texto legible sin reproducir nada -->
     <details>
       <summary>Transcripción completa del episodio</summary>
@@ -1459,7 +1459,7 @@ Welcome to the electronics workshop.
     <h1>Instituto Maya</h1>
     <!-- Fórmula válida de autoplay: muted + playsinline; decorativo: sin controls -->
     <video autoplay muted loop playsinline
-           src="video/banner-maya.webm"
+           src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm"
            width="960" height="400"
            preload="none"
            aria-hidden="true"></video>

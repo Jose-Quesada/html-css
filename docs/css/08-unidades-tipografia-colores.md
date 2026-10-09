@@ -319,8 +319,8 @@ Memoriza ==oklch()==: **luz %, croma y matiz en grados**.
 1. Define **1–2 colores de marca** en `oklch` (controlas luz/croma/tono por separado).
 2. Deriva escalas con `color-mix()` (50…950) o herramientas (Tailwind palette, OKLCH ramps).
 3. Verifica **contraste** de cada par texto/fondo contra WCAG:
-   - AA: 4.5:1 normal, 3:1 grande; AAA: 7:1 / 4.5:1.
-   - No-texto (bordes, iconos funcionales, gráficos): 3:1 (WCAG 1.4.11).
+    - AA: 4.5:1 normal, 3:1 grande; AAA: 7:1 / 4.5:1.
+    - No-texto (bordes, iconos funcionales, gráficos): 3:1 (WCAG 1.4.11).
 4. Prueba con **daltonismo** (simuladores: Stark, Polotno, browser extensions) y nunca uses color como única información (WCAG 1.4.1): añade icono/texto/patrón.
 5. Documenta la paleta como **tokens** (unidad 12).
 
@@ -345,7 +345,270 @@ Memoriza ==oklch()==: **luz %, croma y matiz en grados**.
 
     Un texto de 16 px con 3:1 **incumple WCAG 1.4.3**: fallo nivel AA en auditoría. Verifica los pares **texto y fondo juntos**, nunca los colores sueltos.
 
-## 15. Autoevaluación rápida
+---
+
+## 15. Ejemplo práctico: tarjeta de cotización con tipografía fluida, números tabulares y paleta OKLCH
+
+El siguiente ejemplo implementa una tarjeta financiera y de analítica que integra las técnicas más avanzadas de la unidad: tamaño de texto fluido con `clamp()`, números alineados sin oscilación mediante `font-variant-numeric: tabular-nums`, un sistema de color científicamente calibrado en el espacio perceptualmente uniforme **OKLCH**, y derivación de estados con `color-mix()`.
+
+```html title="cotizacion.html"
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tipografía y Color · Panel Financiero</title>
+  <link rel="stylesheet" href="css/tokens.css">
+</head>
+<body>
+  <main class="escenario">
+    <article class="tarjeta-finanzas">
+      <header class="tarjeta-finanzas__cabecera">
+        <span class="ticker">IBEX35 · TECH</span>
+        <h1 class="titulo-fluido">Índice Cloud Ibérico</h1>
+      </header>
+
+      <div class="caja-precio">
+        <span class="precio-actual">14.892,40&nbsp;€</span>
+        <span class="variacion variacion--positiva" aria-label="Subida de 2.45%">+2,45% ↑</span>
+      </div>
+
+      <p class="prosa-analisis">
+        El volumen de negociación supera los 420 millones de euros impulsado por el sector de computación en la nube y ciberseguridad.
+      </p>
+
+      <table class="tabla-metricas">
+        <caption class="sr-only">Detalle de valores estadísticos de la sesión</caption>
+        <thead>
+          <tr>
+            <th scope="col">Métrica</th>
+            <th scope="col">Valor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Máximo diario</th>
+            <td class="num-tabular">14.930,15</td>
+          </tr>
+          <tr>
+            <th scope="row">Mínimo diario</th>
+            <td class="num-tabular">14.710,80</td>
+          </tr>
+          <tr>
+            <th scope="row">Volumen (títulos)</th>
+            <td class="num-tabular">1.849.200</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button type="button" class="btn-operar">Comprar participaciones</button>
+    </article>
+  </main>
+</body>
+</html>
+```
+
+```css title="css/tokens.css"
+/* 1. Tokens de diseño: Paleta OKLCH y tipografía */
+:root {
+  /* Color de marca en espacio perceptualmente uniforme OKLCH (Luminosidad, Croma, Matiz) */
+  --marca-base: oklch(0.55 0.22 260);
+  
+  /* Derivaciones armónicas automáticas con color-mix() */
+  --marca-hover: color-mix(in oklch, var(--marca-base), black 12%);
+  --marca-suave: color-mix(in oklch, var(--marca-base) 15%, white);
+  --color-positivo: oklch(0.62 0.19 145);
+  --color-positivo-fondo: color-mix(in oklch, var(--color-positivo) 12%, white);
+
+  --color-fondo: oklch(0.98 0.01 250);
+  --color-superficie: #ffffff;
+  --color-texto-base: oklch(0.2 0.03 260);
+  --color-texto-muted: oklch(0.48 0.03 260);
+  --color-borde: oklch(0.9 0.01 260);
+
+  /* Sistema tipográfico */
+  --fuente-interfaz: system-ui, -apple-system, sans-serif;
+  --fuente-mono: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--fuente-interfaz);
+  background-color: var(--color-fondo);
+  color: var(--color-texto-base);
+  min-height: 100dvh; /* Altura dinámica que descuenta barras del navegador móvil */
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+  line-height: 1.6;
+}
+
+.tarjeta-finanzas {
+  background-color: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: 1.25rem;
+  padding: 2.25rem;
+  max-width: 28rem;
+  width: 100%;
+  box-shadow: 0 10px 15px -3px oklch(0.2 0.03 260 / 0.06);
+}
+
+.ticker {
+  font-family: var(--fuente-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--marca-base);
+  background-color: var(--marca-suave);
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+  letter-spacing: 0.05em;
+}
+
+/* 2. Titular con escala fluida clamp() */
+.titulo-fluido {
+  /* clamp(mínimo, valor preferido según viewport, máximo) */
+  font-size: clamp(1.4rem, 1rem + 2vw, 2.1rem);
+  line-height: 1.2;
+  margin-block: 0.75rem 1rem;
+  letter-spacing: -0.02em;
+}
+
+.caja-precio {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-block-end: 1rem;
+}
+
+.precio-actual {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.variacion {
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.375rem;
+}
+
+.variacion--positiva {
+  color: var(--color-positivo);
+  background-color: var(--color-positivo-fondo);
+}
+
+/* 3. Longitud de lectura controlada con unidades ch */
+.prosa-analisis {
+  color: var(--color-texto-muted);
+  font-size: 0.95rem;
+  max-width: 45ch; /* Longitud máxima ergonómica para lectura continuada */
+  margin-block-end: 1.5rem;
+}
+
+/* 4. Tabla de datos numéricos con tabular-nums */
+.tabla-metricas {
+  width: 100%;
+  border-collapse: collapse;
+  margin-block-end: 1.75rem;
+  font-size: 0.9rem;
+}
+
+.tabla-metricas th,
+.tabla-metricas td {
+  padding-block: 0.6rem;
+  border-bottom: 1px solid var(--color-borde);
+}
+
+.tabla-metricas th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--color-texto-muted);
+}
+
+/* Dígitos de ancho uniforme para evitar desalineación de cifras */
+.num-tabular {
+  text-align: right;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-texto-base);
+}
+
+/* 5. Botón interactivo con variantes OKLCH */
+.btn-operar {
+  width: 100%;
+  padding-block: 0.85rem;
+  background-color: var(--marca-base);
+  color: #ffffff;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.btn-operar:hover {
+  background-color: var(--marca-hover);
+}
+
+.btn-operar:focus-visible {
+  outline: 2px solid var(--marca-base);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+```
+
+---
+
+### 15.1 Explicación detallada: ¿Por qué se usa cada propiedad y para qué sirve?
+
+A continuación se explican los fundamentos científicos y de diseño detrás de cada propiedad utilizada:
+
+#### 1. Tipografía fluida con `clamp(1.4rem, 1rem + 2vw, 2.1rem)`
+- **¿Para qué sirve?** Sustituye decenas de reglas `@media` por una sola función matemática fluida.
+- **Cómo opera:**
+    - `1.4rem`: Límite inferior garantizado; el titular nunca será más pequeño que este valor en pantallas móviles minúsculas.
+    - `1rem + 2vw`: Ecuación de cálculo dinámico donde el texto escala gradualmente a medida que la ventana gráfica (`vw`) se ensancha.
+    - `2.1rem`: Límite superior; detiene el crecimiento para que el título no sea desproporcionado en pantallas de escritorio gigantes.
+
+#### 2. Dígitos monoespaciados con `font-variant-numeric: tabular-nums`
+- **¿Qué problema resuelve?** En tipografías proporcionales comunes, el número "1" es mucho más estrecho que el número "8". Al mostrar tablas de cotizaciones o relojes numéricos, las columnas bailan horizontalmente y los números no se alinean verticalmente por el punto decimal.
+- **La solución técnica:** `tabular-nums` activa una característica tipográfica OpenType que fuerza a que **todos los números del 0 al 9 compartan exactamente la misma anchura física**, manteniendo las columnas de datos alineadas con precisión milimétrica sin cambiar a una fuente de código monospaciada completa.
+
+#### 3. El modelo de color perceptualmente uniforme `oklch()`
+- **¿Por qué es superior a `rgb()` y `hsl()`?**
+    - En el espacio RGB y HSL tradicional, cambiar el matiz manteniendo la misma luminosidad numérica altera el brillo que el ojo humano realmente percibe (un amarillo puro al 50% de luz parece cegadoramente brillante, mientras que un azul al 50% parece oscuro).
+    - **OKLCH** resuelve esto: su eje de Luminosidad ($L$) es perceptualmente uniforme. Un 60% de luz en azul tiene exactamente el mismo brillo percibido que un 60% en verde, permitiendo diseñar interfaces con un contraste predecible y rigurosamente accesible.
+
+#### 4. Mezclas armónicas con `color-mix(in oklch, ...)`
+- **¿Para qué sirve?** Permite calcular colores derivados en tiempo real en el navegador sin herramientas externas ni variables hardcodeadas.
+- **Ejemplo en el código:**
+    - `color-mix(in oklch, var(--marca-base), black 12%)` oscurece sutilmente el color para el estado `:hover`.
+    - `color-mix(in oklch, var(--marca-base) 15%, white)` crea un fondo pastel translúcido para el badge corporativo manteniendo la misma familia cromática.
+
+#### 5. Altura de ventana dinámica: `100dvh`
+- **¿Qué problema previene en teléfonos móviles?** La unidad clásica `100vh` calcula la altura de la pantalla incluyendo el espacio que ocupan las barras de navegación de Safari o Chrome en iOS/Android, provocando que los botones del fondo queden cortados y requieran scroll forzado. La unidad `100dvh` (*Dynamic Viewport Height*) descuenta en tiempo real la altura de dichas barras del sistema.
+
+---
+
+## 16. Autoevaluación rápida
 
 1. ¿Por qué `rem` es mejor que `em` para espaciado global? ¿Y cuándo sí conviene `em`?
 2. Explica `svh/dvh/lvh` con el caso de la URL bar en iOS.

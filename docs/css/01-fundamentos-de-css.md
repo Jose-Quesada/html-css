@@ -39,6 +39,21 @@ JS    → comportamiento (CÓMO actúa)
 | **Impresión y otros medios** | Con `@media` el mismo documento puede verse bien en pantalla, imprimirse o leerse. |
 | **Reutilización** | La misma hoja sirve a varios documentos; varias hojas pueden combinarse. |
 
+### 1.1. ¿Cómo funciona CSS por debajo? (El pipeline de renderizado)
+
+Para un estudiante que parte de cero, CSS parece a menudo «magia impredecible»: escribes una regla y a veces se aplica y a veces no. Entender qué hace el motor del navegador internamente desmitifica este proceso por completo:
+
+1. **Construcción del DOM (Document Object Model):** El navegador lee los bytes HTML, los tokeniza y crea un árbol en memoria con cada etiqueta (`<html>`, `<body>`, `<article>`, etc.).
+2. **Construcción del CSSOM (CSS Object Model):** De forma paralela, el navegador descarga y analiza las hojas de estilo (`<link>`, `<style>` y estilos de usuario/navegador). Crea otro árbol donde cada nodo tiene las reglas que le afectan.
+3. **Fusión en el Árbol de Renderizado (*Render Tree*):** El navegador cruza el DOM con el CSSOM. **Cuidado:** los nodos con `display: none` o etiquetas que no se muestran (como `<head>`, `<meta>`, `<script>`) **no forman parte del Render Tree**. En cambio, elementos con `visibility: hidden` sí están en el Render Tree porque ocupan espacio visual.
+4. **Cálculo de Geometría (*Layout* o *Reflow*):** El navegador determina la posición y dimensiones exactas en píxeles de cada caja en la pantalla (`width`, `height`, coordenadas relativas al viewport).
+5. **Pintado (*Paint* o *Repaint*):** El motor convierte los elementos geométricos en píxeles reales dibujados en capas (colores de fondo, textos, sombras, bordes).
+6. **Composición (*Composite*):** Si hay varias capas (generadas por aceleración gráfica con GPU, `transform` o `opacity`), la GPU las superpone en el orden correcto para proyectarlas en la pantalla.
+
+!!! tip "Por qué importa a un desarrollador"
+
+    Entender este pipeline es vital para el rendimiento: cambiar un `width` o `margin` obliga al navegador a recalcular **Layout + Paint + Composite** (costoso), mientras que animar un `transform` o `opacity` solo ejecuta **Composite** directamente en la GPU (fluido a 60/120 fps).
+
 !!! failure "Anti-patrón: estilos directos"
 
     Usar atributos presentacionales obsoletos (`<font>`, `<center>`, `align="..."`) o estilos en línea para todo. El currículo (**RA 2**, CE b–c) distingue explícitamente *estilos directos* de *hojas externas*: los directos son la excepción (personalización puntual, email marketing), no la norma.
@@ -84,8 +99,8 @@ La ==sintaxis== es simple: **selector más bloque de declaraciones**, y el naveg
 - **Declaración**: par `propiedad: valor` terminado por **punto y coma** `;`.
 - **Comentario**: `/* así */` (no existe comentario de línea).
 - **At-rule**: reglas que empiezan por `@` (`@media`, `@import`, `@keyframes`, `@font-face`, `@layer`…). Tienen dos formas:
-  - *con bloque* (`@media (min-width: 600px) { … }`)
-  - *con prefijo/sufijo* (`@import url("otro.css");`)
+    - *con bloque* (`@media (min-width: 600px) { … }`)
+    - *con prefijo/sufijo* (`@import url("otro.css");`)
 
 ### 3.2. Errores de sintaxis y su efecto
 
@@ -163,9 +178,9 @@ Es la **forma recomendada**: la ==hoja externa== concentra en uno o varios fiche
 - Separación total de contenidos.
 - Orden de aparición importa para la cascada (igual especificidad → gana la última).
 - Atributos útiles:
-  - `media="print"` / `media="screen and (min-width: 768px)"`: aplica solo si la consulta es cierta (evita transferir CSS innecesario).
-  - `disabled="true"`: hoja desactivada (base técnica de las **hojas alternativas**, ver 4.5).
-  - `rel="preload" as="style"` + intercambio: patrón anti render-blocking (unidad 14).
+    - `media="print"` / `media="screen and (min-width: 768px)"`: aplica solo si la consulta es cierta (evita transferir CSS innecesario).
+    - `disabled="true"`: hoja desactivada (base técnica de las **hojas alternativas**, ver 4.5).
+    - `rel="preload" as="style"` + intercambio: patrón anti render-blocking (unidad 14).
 
 ### 4.4. `@import`
 
@@ -206,46 +221,82 @@ Tres mecanismos históricos/prácticos:
     - Valor único dinámico → **estilo en línea**, solo si no se puede resolver con CSS.
     - Reglas compartidas entre hojas → `@import`, aunque por **rendimiento** conviene repetir `<link>`.
 
-## 5. La cascada
+## 5. La cascada: ¿Quién gana cuando hay conflicto?
 
-Cuando varias declaraciones aplican a la misma propiedad de un mismo elemento, el navegador resuelve el conflicto mediante la ==cascada== en **tres fases** (Cascade L5/L6):
+El nombre de CSS proviene precisamente de la palabra **Cascada**. En una web real, un elemento HTML (como un botón o un párrafo) puede verse afectado por decenas de reglas escritas en diferentes archivos, estilos por defecto del navegador o estilos en línea. Cuando dos o más reglas definen la **misma propiedad** (por ejemplo, `color: blue` vs `color: red`), el navegador no puede mostrar ambos: necesita un algoritmo estricto para desempatar.
+
+Ese algoritmo procesa el conflicto en **tres fases secuenciales** (especificación *CSS Cascading and Inheritance Level 5/6*):
+
+```text title="flujo-cascada.txt"
+Conflicto de propiedades
+   │
+   ▼
+¿Tienen distinto Origen o Importancia? ──(SÍ)──► Gana el origen más prioritario
+   │ (NO)
+   ▼
+¿Pertenecen a distintas @layer?        ──(SÍ)──► Gana la capa con prioridad
+   │ (NO)
+   ▼
+¿Tienen distinta Especificidad?        ──(SÍ)──► Gana el selector más específico
+   │ (NO)
+   ▼
+Orden en el código                     ────────► Gana la última declaración leída
+```
 
 ### Fase 1 — Origen e importancia
 
-Orden de prioridad (de menor a mayor):
+El navegador clasifica el origen del código en tres procedencias:
 
-1. **Estilos del agente de usuario** (user-agent): defaults del navegador (p. ej., `h1` grande y negrita).
-2. **Estilos del autor normales** (tu CSS).
-3. **Estilos del usuario normales** (personalizaciones del visitante, p. ej., extensiones de lectura).
-4. **Estilos del autor con `!important`**.
-5. **Estilos del usuario con `!important`** (los más fuertes).
+1. **Agente de usuario (*User-Agent*):** Son los estilos que trae Firefox, Chrome o Safari de fábrica (por ejemplo, que los enlaces sean azules y subrayados, o que `<h1>` tenga `font-size: 2em`).
+2. **Usuario:** Estilos personalizados que el visitante ha configurado en su navegador o mediante extensiones (muy habitual en personas con baja visión que fuerzan tipografías legibles o alto contraste).
+3. **Autor:** El código CSS que tú escribes como programador web.
 
-**Regla mnemotécnica**: `!important` del autor > normal del usuario > normal del autor > user-agent. Y `!important` del usuario lo aplasta todo.
+El orden de victoria (de menor a mayor fuerza) es:
+
+1. **Estilos del agente de usuario** (los más débiles; cualquier CSS tuyo los pisa).
+2. **Estilos del usuario normales** (preferencias generales del visitante).
+3. **Estilos del autor normales** (tu código habitual en `.css`).
+4. **Estilos del autor con `!important`** (fuerza bruta en tu CSS).
+5. **Estilos del usuario con `!important`** (los reyes absolutos; diseñados por el W3C para que una persona con discapacidad visual siempre pueda imponer su tamaño de letra o contraste sobre la decisión de cualquier desarrollador).
+
+**Regla nemotécnica:** `!important` del usuario > `!important` del autor > autor normal > usuario normal > navegador por defecto.
 
 ### Fase 2 — Capas (`@layer`)
 
-Las reglas dentro de `@layer` tienen **menor prioridad** que las no capadas, y entre capas gana la **última declarada**. Se estudia a fondo en la unidad 12.
+Si el origen y la importancia son idénticos, entran en juego las capas introducidas en CSS moderno (`@layer`). Las reglas dentro de capas tienen **menor prioridad** que el CSS tradicional sin capas, y entre distintas capas gana siempre la que se declaró más tarde. Esto permite importar librerías externas (como Bootstrap o Tailwind) en una capa baja y asegurarte de que tus propios estilos las sobrescriban sin pelearte con la especificidad (se detalla en la unidad 12).
 
 ### Fase 3 — Especificidad y orden
 
-Gana la declaración con **mayor especificidad**; a igual especificidad, **la última en aparecer** en el código fuente.
+Si las declaraciones están en el mismo origen y en la misma capa, la cascada pasa a evaluar la **especificidad del selector**. Y si dos selectores tienen exactamente el mismo peso matemático, se aplica la regla más sencilla: **gana el último que aparece en el documento**.
 
-## 6. Especificidad
+---
 
-La ==especificidad== es el **desempate** de la cascada: a igual origen y capa, gana el selector más concreto.
+## 6. Especificidad: La balanza de los selectores
 
-### 6.1. Cálculo clásico (modelo numérico)
+La ==especificidad== es la puntuación o peso que el navegador asigna a un selector. Determina cuán "preciso" o "concreto" es el selector al apuntar a un elemento.
 
-Se asigna una puntuación `(A, B, C, I)`:
+### 6.1. El modelo de puntuación `(I, A, B, C)`
 
-| Componente | Cuenta |
-|---|---|
-| **I** | Declaración en línea (`style=""`) |
-| **A** | Selectores ID (`#id`) |
-| **B** | Clases (`.clase`), pseudo-clases (`:hover`) y selectores de atributo (`[href]`) |
-| **C** | Tipos/etiquetas (`div`, `h1`) y pseudo-elementos (`::before`) |
+Para evitar ambigüedades, el W3C define la especificidad como una tupla de cuatro columnas: **`(Inline, ID, Clase/Atributo/Pseudo-clase, Tipo/Pseudo-elemento)`**:
 
-Se comparan componente a componente, de izquierda a derecha: **nunca hay llevada** (100 tipos no superan a 1 ID).
+| Columna | Nombre | ¿Qué elementos puntúa? | Ejemplo |
+|---|---|---|---|
+| **I** | Estilo en línea | Declaraciones puestas en el HTML con el atributo `style="..."`. | `<p style="...">` |
+| **A** | Identificadores (ID) | Cada selector que empiece por almohadilla `#`. | `#menu`, `#login-form` |
+| **B** | Clases, atributos y pseudo-clases | Clases (`.btn`), atributos (`[type="text"]`, `[required]`) y pseudo-clases (`:hover`, `:focus`, `:nth-child()`). | `.tarjeta`, `[disabled]`, `:hover` |
+| **C** | Tipos y pseudo-elementos | Nombres de etiquetas HTML (`p`, `div`, `h1`) y pseudo-elementos (`::before`, `::after`). | `h1`, `li`, `::before` |
+
+!!! danger "La regla sagrada: ¡Nunca hay llevada matemática!"
+
+    Muchos alumnos principiantes piensan que la especificidad es un número decimal (por ejemplo, pensar que `(0, 1, 0)` es 10 y `(0, 0, 1)` es 1). **Esto es un error crítico.** 
+    
+    Las columnas se comparan **de izquierda a derecha**:
+    
+    - Un valor mayor en la columna **I** aplasta a cualquier cantidad en **A, B o C**.
+    - Un valor mayor en la columna **A** (un solo `#id`) gana a un millón de clases juntas `(0, 1000, 0)`.
+    - Un valor mayor en la columna **B** (una clase) gana a cualquier cantidad de etiquetas HTML `(0, 0, 50)`.
+    
+    No existe la "llevada": diez selectores de etiqueta jamás equivaldrán ni superarán a una sola clase.
 
 ### 6.2. Ejemplos trabajados
 
@@ -281,27 +332,42 @@ Se comparan componente a componente, de izquierda a derecha: **nunca hay llevada
 
     Pensar que `!important` «gana siempre». Pierde ante un `!important` de **hoja de usuario** y, dentro del mismo origen, sigue sometiéndose a **especificidad** y **orden**.
 
-## 7. Herencia
+## 7. Herencia: El ADN visual entre padres e hijos
 
-La ==herencia== hace que algunas propiedades bajen solas de padre a hijo; saber cuáles evita repetir la misma regla en cada bloque.
+La ==herencia== en CSS es el mecanismo por el cual ciertas propiedades aplicadas a un elemento padre se transmiten automáticamente a todos sus descendientes en el árbol DOM.
 
-### 7.1. Qué se hereda
+### 7.1. ¿Por qué algunas propiedades se heredan y otras no?
 
-Solo algunas propiedades son **heredables** (las de tipografía y texto en general): `color`, `font-*`, `line-height`, `letter-spacing`, `text-align`, `visibility`, `cursor`…
+Para entenderlo sin memorizar listas interminables, piensa en el **sentido común del diseño**:
 
-**No heredables** (típicas de caja/borde/fondo): `margin`, `padding`, `border`, `background`, `width`, `height`, `position`, `display`…
+- **Propiedades tipográficas y de texto (SÍ se heredan por defecto):**
+    - Ejemplos: `color`, `font-family`, `font-size`, `line-height`, `letter-spacing`, `text-align`, `cursor`.
+    - *¿Por qué?* Si defines en el `<body>` que la tipografía de tu web es `font-family: 'Segoe UI', sans-serif` y el color es gris oscuro, esperas que todos los párrafos, listas, títulos y span de la página utilicen esa misma fuente sin tener que escribirlo cien veces.
+- **Propiedades de caja y geometría (NO se heredan por defecto):**
+    - Ejemplos: `margin`, `padding`, `border`, `background`, `width`, `height`, `position`, `display`.
+    - *¿Por qué?* Imagina el desastre si el borde o el padding se heredasen: le pondrías `border: 2px solid red` a un `<section>` ¡y automáticamente cada `<p>`, `<strong>`, `<a>` e `<img>` dentro del section tendría su propio borde rojo individual! Las cajas hijas deben mantener su independencia espacial[^1].
 
-La lista completa y oficial está en MDN («Inherited» en cada referencia de propiedad)[^1].
+!!! note "La excepción de los controles de formulario"
 
-### 7.2. Palabras clave de herencia
+    Elementos como `<input>`, `<button>`, `<textarea>` y `<select>` **no heredan** la tipografía del `<body>` por defecto en las hojas de estilo del navegador (user-agent). Por eso es una práctica estándar en cualquier proyecto añadir:
+    ```css
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: inherit;
+    }
+    ```
 
-| Keyword | Efecto |
+### 7.2. Palabras clave universales de herencia
+
+CSS proporciona cuatro palabras clave universales que pueden asignarse a **cualquier propiedad** para alterar deliberadamente este comportamiento:
+
+| Palabra clave | Significado y uso práctico |
 |---|---|
-| `initial` | Restablece la propiedad a su valor inicial definido en la spec (**rompe la herencia**). |
-| `inherit` | Fuerza a tomar el valor del padre (útil en propiedades no heredables). |
-| `unset` | Equivale a `inherit` si la propiedad es heredable, o a `initial` si no lo es. |
-| `revert` | Descarta tu declaración y vuelve al valor anterior en la cascada (del usuario o user-agent). |
-| `revert-layer` | Como `revert`, pero solo hasta la capa anterior (con `@layer`). |
+| `inherit` | **Fuerza la herencia:** Hace que el elemento tome el valor exacto de su padre directo, incluso si la propiedad normalmente no se hereda (ej: `border: inherit;` o `font-family: inherit;` en botones). |
+| `initial` | **Valor original de fábrica de la W3C:** Devuelve la propiedad al valor especificado en el estándar internacional (ej: en `color` suele ser negro; en `display` suele ser `inline`). **Cuidado:** `initial` rompe la herencia por completo. |
+| `unset` | **Comportamiento natural:** Actúa como `inherit` si la propiedad es de las que se heredan por naturaleza (como el texto), y actúa como `initial` si es una propiedad que no se hereda (como los márgenes). |
+| `revert` | **Deshace tus estilos y vuelve a la cascada previa:** Ignora los estilos del autor y adopta el valor que le otorgaba la hoja de estilos del navegador o del usuario. Muy útil para devolver un `<button>` o un `<dialog>` a su apariencia nativa. |
+| `revert-layer` | Igual que `revert`, pero solo retrocede a la capa anterior de `@layer`. |
 
 ### 7.3. Reset y normalize
 
@@ -354,7 +420,219 @@ El CE h pide ==herramientas de validación== de hojas de estilo: aquí están la
 
 > **Claves para el examen**: el criterio «se han utilizado herramientas de validación de hojas de estilos» se cubre citando Jigsaw + stylelint + DevTools, y sabiendo qué detecta cada uno.
 
-## 10. Resumen de la unidad
+---
+
+## 10. Ejemplo práctico: tarjeta de componente con cascada, herencia y reset controlado
+
+El siguiente ejemplo integra todos los conceptos fundamentales de la unidad: separación de responsabilidades mediante archivo externo, reset con capas de cascada (`@layer`), diseño basado en tokens/variables semánticas, herencia natural y forzada en controles de interfaz, y resolución limpia de especificidad sin necesidad de recurrir al destructivo `!important`.
+
+```html title="tarjeta-curso.html"
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fundamentos de CSS · Tarjeta de Módulo</title>
+  <!-- Inclusión recomendada por estándar: enlace externo no bloqueante -->
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <main class="contenedor">
+    <article class="tarjeta tarjeta--destacada">
+      <header class="tarjeta__cabecera">
+        <span class="badge">DAW · 1.º Curso</span>
+        <h2 class="tarjeta__titulo">Lenguajes de Marcas</h2>
+      </header>
+      
+      <p class="tarjeta__descripcion">
+        Aprende a estructurar documentos con HTML5 semántico y a estilizarlos con CSS moderno, cascada predecible y accesibilidad universal.
+      </p>
+
+      <footer class="tarjeta__pie">
+        <span class="tarjeta__horas">96 horas lectivas</span>
+        <button type="button" class="btn btn--primario">Ver temario</button>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>
+```
+
+```css title="css/estilos.css"
+/* 1. Capa de reset: prioridad mínima en la cascada */
+@layer reset {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    min-height: 100vh;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Excepción clásica de formularios: forzar herencia */
+  button, input, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+  }
+}
+
+/* 2. Capa base y tokens de diseño */
+@layer tema {
+  :root {
+    --color-fondo: #f8fafc;
+    --color-superficie: #ffffff;
+    --color-texto: #0f172a;
+    --color-texto-secundario: #475569;
+    --color-primario: #0284c7;
+    --color-primario-hover: #0369a1;
+    --color-borde: #e2e8f0;
+    --color-destacado: #38bdf8;
+    
+    --fuente-principal: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --radio-borde: 0.75rem;
+    --sombra-tarjeta: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  }
+
+  body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: var(--fuente-principal);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+  }
+}
+
+/* 3. Capa de componentes */
+@layer componentes {
+  .tarjeta {
+    background-color: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-borde);
+    box-shadow: var(--sombra-tarjeta);
+    max-width: 24rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* Modificador de especificidad limpia (0, 2, 0) */
+  .tarjeta.tarjeta--destacada {
+    border-color: var(--color-destacado);
+    border-width: 2px;
+  }
+
+  .badge {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 0.25rem 0.625rem;
+    background-color: #e0f2fe;
+    color: #0369a1;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 9999px;
+  }
+
+  .tarjeta__titulo {
+    font-size: 1.35rem;
+    color: var(--color-texto);
+    line-height: 1.25;
+  }
+
+  .tarjeta__descripcion {
+    color: var(--color-texto-secundario);
+    font-size: 0.95rem;
+  }
+
+  .tarjeta__pie {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-borde);
+  }
+
+  .tarjeta__horas {
+    font-size: 0.85rem;
+    color: var(--color-texto-secundario);
+    font-weight: 600;
+  }
+
+  .btn {
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+  }
+
+  .btn--primario {
+    background-color: var(--color-primario);
+    color: #ffffff;
+  }
+
+  .btn--primario:hover {
+    background-color: var(--color-primario-hover);
+  }
+
+  .btn:focus-visible {
+    outline: 2px solid var(--color-primario);
+    outline-offset: 2px;
+  }
+}
+```
+
+---
+
+### 10.1 Explicación detallada: ¿Por qué se usa cada propiedad y para qué sirve?
+
+A continuación se detalla la justificación técnica y de arquitectura CSS empleada en cada bloque:
+
+#### 1. Inclusión externa `<link rel="stylesheet">`
+- **¿Para qué sirve?** Vincula el documento HTML con la hoja de estilos externa `css/estilos.css`.
+- **¿Por qué se usa aquí?** Es la regla fundamental de la **separación estricta de responsabilidades (SoC)**. Permite que el archivo CSS sea cacheado por el navegador tras la primera descarga, compartiendo los estilos en cientos de páginas sin transferir bytes duplicados y evitando la mala práctica de estilos en línea (`style="..."`).
+
+#### 2. Declaración de capas de cascada `@layer`
+- **¿Para qué sirve?** Organiza las reglas en capas lógicas explícitas: `@layer reset`, `@layer tema` y `@layer componentes`.
+- **Comportamiento en la cascada:** Las capas declaradas después tienen mayor prioridad que las anteriores. Esto resuelve de raíz el problema clásico del CSS: una regla de componente en `@layer componentes` siempre ganará a un selector de reset en `@layer reset`, independientemente de la especificidad numérica de cada selector.
+
+#### 3. Reset universal y modelo de caja
+- **`*, *::before, *::after`:** Selector universal ampliado a pseudoelementos.
+- **`box-sizing: border-box`:** Cambia el modelo de caja de fábrica del W3C (`content-box`) a `border-box`. Garantiza que al aplicar `padding` o `border` a cualquier caja, su ancho total (`width`) no crezca inesperadamente, eliminando desbordamientos horizontales.
+- **`margin: 0; padding: 0;`:** Elimina los márgenes erráticos que los distintos motores de navegador inyectan por defecto en títulos, listas y párrafos.
+
+#### 4. Herencia natural y la regla `inherit` en controles
+- **Herencia en `body`:** Propiedades como `color`, `font-family` y `line-height` declaradas en el `<body>` se propagan automáticamente en cascada a todos los elementos hijos (títulos, párrafos, spans).
+- **Forzado de herencia en `button, input, select, textarea`:**
+    - Los controles de formulario son una **excepción histórica**: la hoja de estilos nativa del navegador (*user-agent stylesheet*) les asigna su propia tipografía de sistema (`system font`) ignorando al padre.
+    - Al declarar `font-family: inherit; font-size: inherit; color: inherit;`, obligamos a los botones a adoptar la tipografía corporativa del proyecto de forma limpia.
+
+#### 5. Tokens semánticos en `:root`
+- **¿Para qué sirve?** `:root` representa el elemento raíz (`<html>`) con la máxima jerarquía del documento.
+- **Variables CSS (`--color-*`, `--fuente-*`):** Permiten centralizar la paleta de colores y tokens de espaciado. Si el cliente solicita cambiar el color corporativo principal, solo se edita el valor de `--color-primario` en una sola línea, propagándose instantáneamente por toda la aplicación.
+
+#### 6. Especificidad y cascada en `.tarjeta` y `.tarjeta.tarjeta--destacada`
+- **Especificidad de `.tarjeta`:** Una clase simple tiene un peso de `(0, 1, 0)`.
+- **Especificidad de `.tarjeta.tarjeta--destacada`:** Al encadenar dos clases, su especificidad se eleva limpiamente a `(0, 2, 0)`.
+- **Sin `!important`:** El borde azul destacado sobreescribe al borde gris estándar de forma estrictamente matemática y predecible. No se utiliza `!important`, evitando deudas técnicas que bloqueen futuras variaciones de diseño.
+
+#### 7. Accesibilidad visual con `:focus-visible`
+- **`outline: 2px solid var(--color-primario)` con `outline-offset: 2px`:** Proporciona un anillo de enfoque nítido y separado visualmente del botón cuando el usuario navega mediante teclado (<kbd>Tab</kbd>). Cumple con el criterio de conformidad **WCAG 2.4.7 (Foco visible)** sin perjudicar la estética cuando un usuario hace clic con el ratón.
+
+---
+
+## 11. Resumen de la unidad
 
 1. CSS separa **presentación** de estructura: mantenibilidad, consistencia, accesibilidad, rendimiento.
 2. Sintaxis: `selector { prop: valor; }`; at-rules con `@`; el navegador **ignora** lo que no entiende (tolerancia → mejora progresiva).
@@ -372,7 +650,7 @@ El CE h pide ==herramientas de validación== de hojas de estilo: aquí están la
     - [ ] Distingo `initial`, `inherit`, `unset` y `revert`.
     - [ ] Valido con **Jigsaw** y **stylelint** y depuro con **DevTools**.
 
-## 11. Autoevaluación rápida
+## 12. Autoevaluación rápida
 
 1. ¿Por qué `@import` es peor que varios `<link>`?
 2. Calcula la especificidad de `#main article .post:not(.borrador):hover h2::first-line`.

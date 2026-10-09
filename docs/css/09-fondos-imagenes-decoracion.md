@@ -45,7 +45,7 @@ Domina ==background-size==: `cover` **llena recortando**, `contain` **cabe enter
 
 ```css title="hero.css" hl_lines="2"
 .hero {
-  background: #0b1020 url("/img/fondo.jpg") center / cover no-repeat fixed;
+  background: #0b1020 url("https://dummyimage.com/800x600/ccc/000.png&text=fondo.jpg") center / cover no-repeat fixed;
 }
 ```
 
@@ -56,7 +56,7 @@ Orden libre, pero: la **primera** longitud = position, la **segunda** = size (se
 ```css title="capas.css"
 .textura {
   background-image:
-    url("ruido.svg"),                       /* capa 1 (encima) (1)! */
+    url("https://dummyimage.com/800x600/ccc/000.png&text=ruido.svg"),                       /* capa 1 (encima) (1)! */
     radial-gradient(circle at 20% 20%, rgb(255 0 0 / .2), transparent 50%),
     linear-gradient(#222, #111);            /* capa base */
   background-size: 200px, auto, auto;       /* por capa, mismo orden (2)! */
@@ -197,7 +197,7 @@ La etiqueta responsable es ==srcset==: **variantes + `sizes`** y el navegador el
 
 ```html title="picture.html"
 <picture>
-  <source media="(min-width: 900px)" srcset="hero-ancha.avif" type="image/avif">
+  <source media="(min-width: 900px)" srcset="https://dummyimage.com/800x600/ccc/000.png&text=hero-ancha.avif" type="image/avif">
   <source srcset="https://dummyimage.com/800x600/ccc/000.png&text=hero-movil.webp" type="image/webp">
   <img src="https://dummyimage.com/800x600/ccc/000.png&text=hero-movil.jpg" alt="" width="1600" height="900">
 </picture>
@@ -236,7 +236,7 @@ La etiqueta responsable es ==srcset==: **variantes + `sizes`** y el navegador el
 ```css title="fondos.css"
 .pixel-art { image-rendering: pixelated; }   /* o crisp-edges */
 .fondo-adaptable {
-  background-image: image-set(url("fondo-1x.png") 1x, url("fondo-2x.png") 2x);
+  background-image: image-set(url("https://dummyimage.com/800x600/ccc/000.png&text=fondo-1x.png") 1x, url("https://dummyimage.com/800x600/ccc/000.png&text=fondo-2x.png") 2x);
 }
 ```
 
@@ -346,7 +346,7 @@ A diferencia de clip (dúo todo/nada), mask trabaja con **alfa**:
   mask-size: 100% 100%;
 }
 .mascara-img {
-  mask: url("logo.svg") center / contain no-repeat;
+  mask: url("https://dummyimage.com/200x200/ccc/000.png&text=logo.svg") center / contain no-repeat;
   /* el contenido solo se ve donde el logo es opaco */
 }
 ```
@@ -406,7 +406,217 @@ body::before {
 
     Las texturas **inline en `data:`** ahorran una petición, pero inflan el HTML: para gráficos grandes, mejor un archivo aparte con **caché** y `background-size` ajustado.
 
-## 9. Errores comunes
+---
+
+## 9. Ejemplo práctico: banner inmersivo con degradado multicapa, efecto vidrio y recorte `clip-path`
+
+El siguiente ejemplo combina los recursos gráficos y decorativos más potentes de CSS moderno: composición de fondos multicapa mediante degradados angulares y radiales, tarjetas con efecto de vidrio esmerilado (*glassmorphism*) mediante `backdrop-filter` con alternativa accesible para transparencias reducidas, y etiquetas con recorte poligonal mediante `clip-path`.
+
+```html title="hero-banner.html"
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fondos y Decoración · Banner Inmersivo</title>
+  <link rel="stylesheet" href="css/decoracion.css">
+</head>
+<body>
+  <section class="banner-hero">
+    <!-- Capa de imagen de fondo optimizada -->
+    <div class="banner-hero__fondo">
+      <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1400&q=80" 
+           alt="" role="presentation" class="imagen-fondo">
+    </div>
+
+    <!-- Panel flotante de vidrio (Glassmorphism) -->
+    <div class="tarjeta-vidrio">
+      <span class="insignia-angulo">Exposición 2026</span>
+      <h1 class="tarjeta-vidrio__titulo">Vanguardia Digital &amp; Arte Generativo</h1>
+      <p class="tarjeta-vidrio__texto">
+        Una experiencia interactiva donde los algoritmos y la creatividad humana convergen en instalaciones inmersivas.
+      </p>
+      
+      <div class="tarjeta-vidrio__acciones">
+        <a href="#entradas" class="btn btn--resplandor">Reservar Entrada</a>
+        <a href="#visita" class="btn btn--fantasma">Ver Programa</a>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
+```
+
+```css title="css/decoracion.css"
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #ffffff;
+  background-color: #09090b;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+/* 1. Contenedor con degradado multicapa superpuesto */
+.banner-hero {
+  position: relative;
+  width: 100%;
+  max-width: 64rem;
+  min-height: 34rem;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 3rem;
+  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+
+  /* Multicapa: 1. Resplandor radial superior + 2. Velo oscuro inferior */
+  background:
+    radial-gradient(circle at 80% 20%, rgb(56 189 248 / 0.35) 0%, transparent 50%),
+    linear-gradient(135deg, rgb(15 23 42 / 0.9) 0%, rgb(15 23 42 / 0.5) 100%);
+}
+
+/* 2. Imagen de fondo tratada con modos de mezcla y filtros */
+.banner-hero__fondo {
+  position: absolute;
+  inset: 0;
+  z-index: -1; /* Envía la imagen detrás del degradado del contenedor */
+}
+
+.imagen-fondo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.65) saturate(1.2); /* Ajuste de tono cinematográfico */
+  display: block;
+}
+
+/* 3. Tarjeta Glassmorphism (Vidrio esmerilado) */
+.tarjeta-vidrio {
+  max-width: 32rem;
+  background-color: rgb(255 255 255 / 0.1); /* Blanco semitransparente al 10% */
+  backdrop-filter: blur(16px) saturate(1.5); /* Desenfoque del fondo en tiempo real */
+  -webkit-backdrop-filter: blur(16px) saturate(1.5); /* Prefijo para Safari */
+  border: 1px solid rgb(255 255 255 / 0.2); /* Borde sutil reflectante */
+  border-radius: 1rem;
+  padding: 2.25rem;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3);
+}
+
+/* Alternativa accesible para usuarios que solicitan reducción de transparencia */
+@media (prefers-reduced-transparency: reduce) {
+  .tarjeta-vidrio {
+    background-color: #0f172a;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* 4. Insignia con recorte geométrico duro (clip-path) */
+.insignia-angulo {
+  display: inline-block;
+  background: linear-gradient(90deg, #38bdf8, #818cf8);
+  color: #0f172a;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 1.25rem 0.35rem 0.85rem;
+  margin-block-end: 1rem;
+  /* Recorte poligonal: bisel a 45 grados en la esquina derecha */
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 100%, 0 100%);
+}
+
+.tarjeta-vidrio__titulo {
+  font-size: 2rem;
+  line-height: 1.15;
+  margin-block-end: 1rem;
+  font-weight: 800;
+}
+
+.tarjeta-vidrio__texto {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #cbd5e1;
+  margin-block-end: 1.75rem;
+}
+
+.tarjeta-vidrio__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.btn {
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+/* Botón con sombra de resplandor difuso */
+.btn--resplandor {
+  background-color: #38bdf8;
+  color: #0f172a;
+  box-shadow: 0 0 20px rgb(56 189 248 / 0.4);
+}
+
+.btn--resplandor:hover {
+  background-color: #7dd3fc;
+  box-shadow: 0 0 30px rgb(56 189 248 / 0.65);
+  transform: translateY(-1px);
+}
+
+.btn--fantasma {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid rgb(255 255 255 / 0.3);
+}
+
+.btn--fantasma:hover {
+  background-color: rgb(255 255 255 / 0.1);
+  border-color: #ffffff;
+}
+```
+
+---
+
+### 9.1 Explicación detallada: ¿Por qué se usa cada propiedad y para qué sirve?
+
+A continuación se detalla la función de cada técnica decorativa y sus consideraciones de rendimiento:
+
+#### 1. Composición de fondos multicapa en `background`
+- **¿Cómo funciona el apilamiento de capas?** En la propiedad abreviada `background`, las capas se definen separadas por comas. **La primera capa de la lista es la que se dibuja más arriba** (más cerca del usuario), y las siguientes se sitúan debajo.
+- **En el ejemplo:**
+    - Capa 1: `radial-gradient(circle at 80% 20%, ...)` dibuja un haz luminoso azul cielo en la esquina superior derecha que se difumina hacia `transparent`.
+    - Capa 2: `linear-gradient(135deg, ...)` aplica una capa de tinte oscuro diagonal para que el texto blanco siempre tenga un contraste óptimo contra la fotografía.
+
+#### 2. `backdrop-filter: blur(16px)` vs. `filter: blur(16px)`
+- **La diferencia crucial:**
+    - `filter`: Desenfoca el **propio elemento** y todo su contenido interior (si se aplica a la tarjeta, el texto del título también se volvería borroso e ilegible).
+    - `backdrop-filter`: Deja el texto y los botones interiores completamente nítidos y **solo desenfoca lo que se encuentra físicamente detrás de la tarjeta** en el árbol de renderizado.
+- **Rendimiento:** Requiere cómputo de la GPU. Por ello se aplica sobre una sola tarjeta flotante y nunca dentro de una lista de 500 elementos de un catálogo.
+
+#### 3. Adaptabilidad de accesibilidad con `@media (prefers-reduced-transparency: reduce)`
+- **Inclusión accesible:** Muchas personas con discapacidades visuales o dificultades de procesamiento cognitivo no pueden leer cómodamente textos sobre fondos translúcidos o con ruido visual. Esta media query detecta si el usuario ha solicitado "Reducir transparencia" en los ajustes de accesibilidad de su sistema operativo (macOS, Windows o iOS) y conmuta inmediatamente el fondo a un color plano opaco (`#0f172a`).
+
+#### 4. Recorte vectorial con `clip-path: polygon(...)`
+- **¿Para qué sirve?** Recorta físicamente la caja del elemento siguiendo coordenadas vectoriales exactas.
+- **En la insignia:** `polygon(0 0, calc(100% - 12px) 0, 100% 100%, 0 100%)` genera un corte biselado dinámico en la esquina superior derecha que se adapta a cualquier longitud de texto. A diferencia de trucos con pseudoelementos y rotaciones, `clip-path` no añade nodos extra al DOM.
+
+---
+
+## 10. Errores comunes
 
 | Error | Síntoma | Solución |
 |---|---|---|

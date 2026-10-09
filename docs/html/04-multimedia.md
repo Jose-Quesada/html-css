@@ -37,23 +37,30 @@ Flash, Silverlight o QuickTime exigían instalar un componente aparte, actualiza
 
 ## 2. El elemento `<video>`
 
-### 2.1 Atributos principales
+### 2.1 Atributos principales explicados en detalle
 
-| Atributo | Descripción |
-|---|---|
-| `controls` | Muestra la barra de reproducción (play, tiempo, volumen, pantalla completa). |
-| `src` | Ruta directa al fichero; atajo cuando solo sirves un formato. |
-| `poster` | Imagen que se ve mientras carga el vídeo o hasta que se pulsa play. |
-| `width` / `height` | Reservan el espacio en píxeles y evitan saltos de diseño (CLS). |
-| `preload` | `none` (no descarga nada), `metadata` (duración y pistas), `auto` (todo el fichero). |
-| `autoplay` | Inicia solo; los navegadores **solo lo permiten con `muted`**. |
-| `loop` | Reinicia el vídeo al finalizar. |
-| `muted` | Silencia el audio por defecto. |
-| `playsinline` | En iOS reproduce dentro de la página en vez de a pantalla completa. |
+Para un alumno que aprende HTML5, la etiqueta `<video>` se controla mediante una combinación de atributos booleanos y de configuración que determinan la interfaz y el comportamiento de red:
+
+| Atributo | Tipo | Función y Comportamiento |
+|---|---|---|
+| `controls` | Booleano | **Indispensable.** Muestra los controles nativos del navegador (botón play/pausa, barra de progreso, volumen, selector de pistas y pantalla completa). Sin él, el vídeo es solo un fotograma estático sin interactividad. |
+| `src` | URL | Ruta directa al archivo multimedia. Solo se utiliza cuando se ofrece un único formato garantizado (atajo rápido). |
+| `poster` | URL | Imagen que se muestra antes de reproducir el vídeo o mientras se descarga el primer fotograma. Debe coincidir con la relación de aspecto del vídeo para evitar saltos visuales. |
+| `width` / `height` | Píxeles | Reservan el espacio físico en la cuadrícula de maquetación, evitando el salto de página (**CLS - Cumulative Layout Shift**). |
+| `preload` | Enumerado | Controla la política de descarga previa: `none`, `metadata` o `auto`. |
+| `autoplay` | Booleano | Inicia la reproducción de forma automática. **Los navegadores lo bloquean por seguridad si no va acompañado de `muted`**. |
+| `muted` | Booleano | Inicia el vídeo con el volumen silenciado (audio en cero). Requisito para permitir `autoplay`. |
+| `loop` | Booleano | Reinicia la reproducción continuamente desde el segundo cero al llegar al final. |
+| `playsinline` | Booleano | En navegadores móviles (especialmente Safari en iOS), fuerza la reproducción dentro del flujo del diseño web, impidiendo que el sistema operativo lo abra a pantalla completa obligatoria. |
+
+#### ¿Qué valor elegir en `preload`?
+- **`preload="none"`:** El navegador **no descarga ni un solo byte** del archivo de vídeo hasta que el usuario pulsa deliberadamente el botón de reproducción. Es la opción obligatoria cuando una página contiene múltiples vídeos o episodios de podcast, evitando colapsar el ancho de banda del usuario.
+- **`preload="metadata"`:** El navegador descarga únicamente la cabecera del archivo: duración total, dimensiones en píxeles y pistas de subtítulos disponibles, pero sin precargar el flujo de vídeo. Es el **equilibrio perfecto** para la mayoría de webs, permitiendo que la barra de tiempo se dibuje correctamente sin consumir datos excesivos.
+- **`preload="auto"`:** Indica al navegador que descargue el vídeo completo de forma anticipada tan pronto como se cargue la página web, asumiendo que el usuario lo verá con certeza. Debe evitarse en móviles.
 
 !!! info "El atributo imprescindible: controls"
 
-    Un `<video>` sin ==controls== es **solo una caja**: no hay barra, ni atajos de teclado, ni control de volumen. Es lo primero que se revisa en examen (y el error más frecuente).
+    Un `<video>` sin ==controls== es **solo una caja muda**: no hay botón de play, ni barra de desplazamiento, ni teclado (barra espaciadora para pausar, flechas para avanzar/retroceder), ni control de volumen. Es lo primero que se revisa en un examen técnico y el fallo más habitual de los principiantes.
 
 ### 2.2 `src` frente a `<source>` múltiple y contenido de respaldo
 
@@ -64,16 +71,16 @@ Flash, Silverlight o QuickTime exigían instalar un componente aparte, actualiza
        preload="metadata"
        playsinline>
   <!-- El navegador recorre los <source> de arriba abajo y carga el primero que entienda -->
-  <source src="video/noticia.mp4" type="video/mp4"> <!-- (1)! -->
-  <source src="video/noticia.webm" type="video/webm">
-  <source src="video/noticia.ogv" type="video/ogg">
+  <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4"> <!-- (1)! -->
+  <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm">
+  <source src="https://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg">
   <!-- Fallback interno: solo se ve si el navegador no reconoce <video> -->
   <p>Tu navegador no reproduce vídeo HTML5. <!-- (2)! -->
-     <a href="video/noticia.mp4">Descarga el clip (MP4)</a>.</p>
+     <a href="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4">Descarga el clip (MP4)</a>.</p>
 </video>
 
 <!-- Atajo con src directo: un único formato, sin <source> -->
-<video controls src="video/noticia.mp4"
+<video controls src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
        poster="https://dummyimage.com/800x600/ccc/000.png&text=noticia-portada.jpg" width="640" height="360"></video>
 ```
 
@@ -87,7 +94,7 @@ Cuando usas varios `<source>`, **no** repitas la ruta en `src` del `<video>`: el
 ```html title="autoplay.html" hl_lines="2"
 <!-- Cabecera decorativa: autoplay SOLO es aceptado con el sonido silenciado -->
 <video autoplay muted loop playsinline
-       src="video/banner-tienda.webm"
+       src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm"
        width="960" height="400"
        aria-hidden="true"></video>
 ```
@@ -122,14 +129,14 @@ Nota: la compatibilidad cambia con cada versión de navegador, así que **verifi
 ```html title="podcast.html" hl_lines="2"
 <!-- Podcast: varios formatos y descarga de respaldo -->
 <audio controls preload="none">
-  <source src="audio/podcast-clase.mp3" type="audio/mpeg">
-  <source src="audio/podcast-clase.ogg" type="audio/ogg">
+  <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" type="audio/mpeg">
+  <source src="https://www.w3schools.com/html/horse.ogg" type="audio/ogg">
   <p>Tu navegador no soporta el elemento de audio.
-     <a href="audio/podcast-clase.mp3">Descarga el episodio</a>.</p>
+     <a href="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3">Descarga el episodio</a>.</p>
 </audio>
 
 <!-- Atajo con src directo -->
-<audio controls src="audio/podcast-clase.mp3"></audio>
+<audio controls src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3"></audio>
 ```
 
 `<audio>` admite los mismos atributos de reproducción que `<video>` (`controls`, `autoplay`, `loop`, `muted`, `preload`), pero no tiene `poster` ni `playsinline`. El atributo ==preload== es el que decide **cuánto se descarga** antes de pulsar play: con `none` el navegador no baja nada hasta que se pulsa play, lo recomendable si tienes **varios audios** en la misma página.
@@ -140,55 +147,82 @@ Nota: la compatibilidad cambia con cada versión de navegador, así que **verifi
 
 ## 5. Accesibilidad: subtítulos, descripciones y transcripción
 
-### 5.1 El elemento `<track>`
+### 5.1 El elemento `<track>`: Subtítulos y pistas de accesibilidad
 
-```html title="subtitulos.html" hl_lines="5"
-<video controls poster="https://dummyimage.com/800x600/ccc/000.png&text=noticia-portada.jpg" width="640" height="360" preload="metadata">
-  <source src="video/noticia.mp4" type="video/mp4">
-  <source src="video/noticia.webm" type="video/webm">
-  <!-- Subtítulos en español, activados por defecto -->
-  <track kind="subtitles" src="video/noticia-es.vtt" srclang="es" label="Español" default> <!-- (1)! -->
-  <!-- Descripción hablada de lo que ocurre en pantalla -->
-  <track kind="descriptions" src="video/noticia-es-desc.vtt" srclang="es" label="Descripción de audio">
+HTML5 incorpora el elemento hijo `<track>` para asociar pistas de texto temporizadas (*timed text tracks*) a un reproductor de `<video>` o `<audio>`. Su uso es un **requisito legal vinculante en España y Europa** (Directiva 2016/2102 y Real Decreto 1112/2018 para el sector público y Ley 11/2023 para el sector privado).
+
+```html title="subtitulos.html" hl_lines="5 7"
+<video controls 
+       poster="https://dummyimage.com/800x600/ccc/000.png&text=noticia-portada.jpg" 
+       width="640" height="360" 
+       preload="metadata"
+       crossorigin="anonymous">
+  <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+  <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm">
+  
+  <!-- 1. Subtítulos para sordos en español (activados al iniciar) -->
+  <track kind="captions" src="https://interactive-examples.mdn.mozilla.net/media/examples/friday.vtt" 
+         srclang="es" label="Español (CC)" default> <!-- (1)! -->
+         
+  <!-- 2. Subtítulos traducidos al inglés (opcionales) -->
+  <track kind="subtitles" src="https://interactive-examples.mdn.mozilla.net/media/examples/friday.vtt" 
+         srclang="en" label="English">
+         
+  <!-- 3. Audiodescripción hablada para personas con baja visión -->
+  <track kind="descriptions" src="https://interactive-examples.mdn.mozilla.net/media/examples/friday.vtt" 
+         srclang="es" label="Descripción de audio">
+         
   <p>Tu navegador no reproduce vídeo HTML5.</p>
 </video>
 ```
 
-1.  `default` deja esa pista **activada al empezar**, sin que nadie abra el menú.
+1.  `default`: Activa automáticamente esta pista al iniciar el reproductor sin que el usuario tenga que seleccionarla a mano en el menú de subtítulos.
 
-| `kind` | Qué muestra | Para quién |
-|---|---|---|
-| `subtitles` | Diálogo traducido o en otro idioma | Personas que no hablan el idioma del vídeo |
-| `captions` | Diálogo + efectos sonoros ((pasos), música) | Personas sordas o sin sonido |
-| `descriptions` | Descripción hablada de la acción en pantalla | Personas con baja visión |
-| `chapters` | Puntos de navegación por secciones | Navegación rápida |
-| `metadata` | Datos para scripts | Procesado con JavaScript |
+#### Los 5 tipos de pista (`kind`): ¿Cuándo se usa cada uno?
 
-Toda pista se declara con ==\<track\>== **dentro** de `<video>` o `<audio>`. Obligatorio en toda pista: `srclang` (idioma) y `label` (nombre visible en el menú de subtítulos); `default` marca la pista activada al empezar. Las pistas deben subirse al **mismo origen** que la página (o con cabeceras CORS correctas).
+| Valor de `kind` | Qué contiene | Público destinatario | Ejemplo de contenido |
+|---|---|---|---|
+| `captions` | **Diálogo íntegro + efectos sonoros relevantes** (*Closed Captions / CC*) | Personas sordas, con hipoacusia o usuarios en entornos sin sonido (oficinas, transporte) | `[Música de suspense]`, `[Pasos aproximándose]`, `¡Cuidado!` |
+| `subtitles` | **Traducción del diálogo hablado** | Personas que no dominan el idioma original del vídeo | Traduce una conversación en inglés al español. No incluye efectos sonoros. |
+| `descriptions` | **Descripción textual de lo que ocurre visualmente en pantalla** | Personas ciegas o con baja visión | El sintetizador de voz lee lo que pasa en silencios: *"El profesor abre la consola de Linux y escribe el comando."* |
+| `chapters` | **Marcas de tiempo de navegación por capítulos** | Todos los usuarios | Permite al reproductor dibujar marcas en la barra de tiempo (*"00:00 Introducción", "04:15 Demostración"*). |
+| `metadata` | **Datos estructurados invisibles para el usuario** | Scripts de JavaScript | Coordenadas, información de productos que aparecen en pantalla para tiendas interactivas. |
 
-!!! question "Autoevaluación: ¿qué tipo de pista?"
+#### Atributos indispensables de `<track>`:
+- **`src`:** URL al archivo con extensión `.vtt`.
+- **`srclang`:** Código de idioma en formato BCP 47 (ej. `es`, `en`, `fr`). **Obligatorio** si `kind="subtitles"`.
+- **`label`:** Título legible que aparece en el menú desplegable del reproductor (ej. *"Español"*, *"Inglés con subtítulos"*).
+- **`default`:** Booleano. Solo puede haber **un único `<track>` con `default`** en todo el elemento `<video>`.
+- **Atención a la seguridad (CORS):** El archivo `.vtt` debe estar alojado en el mismo dominio que la página web. Si está en un servidor externo, el servidor debe emitir la cabecera HTTP `Access-Control-Allow-Origin: *` y el `<video>` debe incluir el atributo `crossorigin="anonymous"`; si no se cumple, el navegador **bloqueará en silencio los subtítulos** y el botón de subtítulos no aparecerá.
 
-    Un vídeo muda en el que solo se oyen pasos, música y ruido de fondo, dirigido a **personas sordas**. ¿Qué `kind` eliges y por qué no basta `subtitles`?
+---
 
-    ??? success "Respuesta"
+### 5.2 Estructura del fichero WebVTT (`.vtt`)
 
-        `kind="captions"`: recoge **diálogo y efectos sonoros** ((pasos), música). `subtitles` solo **traduce la habla**; el sonido ambiente quedaría fuera.
-
-### 5.2 Fichero `.vtt` de ejemplo
+WebVTT (*Web Video Text Tracks*) es el estándar oficial del W3C para subtítulos en la web. Es un **fichero de texto plano** con codificación **UTF-8**:
 
 ```vtt title="noticia-es.vtt"
 WEBVTT
 
 1
 00:00:00.000 --> 00:00:04.500
-Hoy se publica la nueva convocatoria de becas.
+Hoy se publica la nueva convocatoria de becas de formación.
 
 2
 00:00:04.500 --> 00:00:09.200
+[Música institucional de fondo]
 El plazo de solicitud permanece abierto hasta el 30 de octubre.
+
+3
+00:00:09.500 --> 00:00:14.000
+<v Consejera>Animamos a todo el alumnado de FP a participar.</v>
 ```
 
-El formato WebVTT es **texto plano**: empieza con la cabecera **`WEBVTT`**, después se numeran los bloques con sus tiempos en `HH:MM:SS.mmm --> HH:MM:SS.mmm` y el texto del subtítulo. Se guarda con extensión `.vtt` y se enlaza desde `<track>`.
+#### Reglas de sintaxis de WebVTT:
+1. **La primera línea debe ser siempre `WEBVTT`**: Si hay un espacio, un salto de línea previo o un carácter extraño antes de `WEBVTT`, el archivo será rechazado por el navegador.
+2. **Identificador del bloque (*Cue identifier*):** Un número o etiqueta opcional (ej. `1`, `2`).
+3. **Línea de tiempo (*Cue timings*):** Formato estricto `HH:MM:SS.mmm --> HH:MM:SS.mmm` (horas, minutos, segundos y milisegundos separados por un punto). La flecha debe ser exactamente `-->` con un espacio a cada lado.
+4. **Voz o personaje con `<v Nombre>`:** Permite indicar quién habla en ese subtítulo, lo cual puede estilizarse con CSS mediante la pseudoclase `::cue`.
 
 ### 5.3 Transcripción en la página y WCAG
 
@@ -243,22 +277,22 @@ El nativo es preferible **si controlas los ficheros**: `<video>` no arrastra coo
 
       <h2>Vídeo informativo</h2>
       <video controls poster="https://dummyimage.com/800x600/ccc/000.png&text=becas-portada.jpg" width="640" height="360" preload="metadata">
-        <source src="video/becas.mp4" type="video/mp4">
-        <source src="video/becas.webm" type="video/webm">
-        <track kind="subtitles" src="video/becas-es.vtt" srclang="es" label="Español" default>
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm">
+        <track kind="subtitles" src="https://interactive-examples.mdn.mozilla.net/media/examples/friday.vtt" srclang="es" label="Español" default>
         <p>Tu navegador no reproduce vídeo HTML5.
-           <a href="video/becas.mp4">Descarga el clip</a>.</p>
+           <a href="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4">Descarga el clip</a>.</p>
       </video>
-      <p><a href="video/becas-es.vtt">Descargar los subtítulos (VTT)</a></p>
+      <p><a href="https://interactive-examples.mdn.mozilla.net/media/examples/friday.vtt">Descargar los subtítulos (VTT)</a></p>
     </article>
 
     <article>
       <h2>Podcast: la beca en 5 minutos</h2>
       <audio controls preload="none">
-        <source src="audio/becas-ep07.mp3" type="audio/mpeg">
-        <source src="audio/becas-ep07.ogg" type="audio/ogg">
+        <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" type="audio/mpeg">
+        <source src="https://www.w3schools.com/html/horse.ogg" type="audio/ogg">
         <p>Tu navegador no reproduce audio.
-           <a href="audio/becas-ep07.mp3">Descarga el episodio</a>.</p>
+           <a href="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3">Descarga el episodio</a>.</p>
       </audio>
 
       <details>
@@ -276,6 +310,53 @@ El nativo es preferible **si controlas los ficheros**: `<video>` no arrastra coo
 ```
 
 1.  El `<details>` guarda la transcripción completa: **texto legible** sin reproducir nada (WCAG 1.2.1).
+
+---
+
+### 7.1 Explicación detallada: ¿Por qué se usa cada etiqueta y para qué sirve?
+
+A continuación se profundiza en las razones técnicas, de diseño y de accesibilidad universal que motivan la elección de cada elemento multimedia y sus atributos en `noticia-completa.html`:
+
+#### 1. `<video>` — El reproductor de vídeo nativo HTML5
+- **¿Para qué sirve?** Incrusta un flujo de vídeo directamente en el navegador sin necesitar complementos externos de terceros (como el antiguo Flash Player).
+- **Desglose de sus atributos esenciales:**
+    - **`controls`:** Habilita la interfaz nativa de reproducción del navegador (barra de progreso, botón de reproducción/pausa, control de volumen, selector de pistas y botón de pantalla completa). Sin este atributo booleano, el vídeo parecería una imagen estática congelada a menos que se programen botones personalizados en JavaScript. Además, los controles nativos garantizan navegación accesible por teclado mediante <kbd>Espacio</kbd> y flechas de dirección.
+    - **`poster="..."`:** Imagen fija que se muestra en el reproductor antes de que el usuario pulse "Play" o mientras el vídeo se descarga. Evita un rectángulo negro vacío en el diseño visual de la web y comunica visualmente de qué trata el clip.
+    - **`width="640"` y `height="360"`:** Fijan la relación de aspecto espacial (16:9). El navegador reserva el hueco exacto en el diseño antes de cargar el primer fotograma del archivo multimedia, previniendo el desplazamiento no deseado del contenido (*Cumulative Layout Shift - CLS*).
+    - **`preload="metadata"`:** Optimización crítica de rendimiento y ahorro de datos. Indica al navegador que **solo descargue la cabecera del archivo** (duración total, dimensiones y pistas disponibles), sin descargar los megabytes del vídeo hasta que el usuario decida reproducirlo voluntariamente.
+
+#### 2. `<source>` — Negociación de códecs y formatos en vídeo
+- **¿Para qué sirve?** Ofrece fuentes alternativas del mismo contenido multimedia para que el navegador escoja la primera que sea compatible con su motor interno de decodificación.
+- **¿Por qué se ponen en este orden (`mp4` y luego `webm`)?**
+    - `type="video/mp4"`: Contenedor universalmente compatible con todos los sistemas operativos y dispositivos móviles (códec H.264 / AAC).
+    - `type="video/webm"`: Formato abierto y libre de derechos impulsado para la web con alta compresión (códec VP8/VP9 o AV1).
+    - El atributo `type` es vital porque le ahorra al navegador tener que hacer una petición de red a ciegas: lee el tipo MIME y, si no lo soporta, pasa inmediatamente al siguiente `<source>` sin malgastar conexiones HTTP.
+
+#### 3. `<track>` — Accesibilidad auditiva mediante pistas de texto (WebVTT)
+- **¿Para qué sirve?** Sincroniza pistas de texto temporalizadas con la línea de tiempo del vídeo o audio.
+- **Desglose de sus atributos clave:**
+    - **`kind="subtitles"`:** Especifica que el archivo contiene la traducción o transcripción del diálogo hablado. Otros valores posibles son `captions` (incluye efectos sonoros como *«música épica»* para personas sordas), `descriptions` (audiodescripción) o `chapters` (capítulos de navegación).
+    - **`src="..."`:** Ruta al archivo estandarizado con formato **WebVTT** (`.vtt`), que contiene las marcas de tiempo (`00:00:01.000 --> 00:00:04.000`) y el texto correspondiente.
+    - **`srclang="es"`:** Código de idioma internacional (BCP 47) de los subtítulos (español).
+    - **`label="Español"`:** Nombre amigable y legible que aparecerá en el menú de selección de idiomas del reproductor visual.
+    - **`default`:** Indica al navegador que active esta pista automáticamente por defecto si las preferencias de accesibilidad del usuario no especifican otro idioma preferente.
+
+#### 4. Texto de fallback dentro de `<video>` y `<audio>`
+- **¿Para qué sirve?** El texto y los enlaces situados al final de `<video>` y `<audio>` son ignorados por los navegadores modernos, pero **se muestran si el navegador es muy antiguo o tiene deshabilitada la reproducción multimedia**.
+- **Buena práctica:** Incluir un enlace directo de descarga del archivo (`<a href="...">Descarga el clip</a>`) asegura que cualquier usuario pueda consumir la información en un reproductor de escritorio externo si su navegador presenta incompatibilidades.
+
+#### 5. `<audio controls preload="none">` — El reproductor de sonido
+- **¿Para qué sirve?** Incrusta sonido o podcasts directamente en la página web.
+- **`controls`:** Muestra la botonera básica de sonido accesible por teclado.
+- **`preload="none"`:** Como se trata de un podcast complementario situado al final de la página, esta directiva indica al navegador que **no gaste ni un solo byte de conexión a internet** en este archivo de audio hasta que el usuario decida expresamente hacer clic en el botón de reproducción.
+
+#### 6. `<details>` y `<summary>` — Transcripción textual accesible (Criterio WCAG 1.2.1)
+- **¿Para qué sirven?** Crean un componente interactivo desplegable nativo sin necesidad de escribir ni una sola línea de JavaScript ni CSS.
+    - `<summary>`: Representa el encabezado o etiqueta visible del desplegable (*«Transcripción completa del episodio»*).
+    - El contenido interior de `<details>` permanece oculto por defecto y se despliega limpiamente al hacer clic sobre el `<summary>`.
+- **Importancia fundamental en Accesibilidad (WCAG Nivel A):** El criterio de conformidad WCAG 1.2.1 exige que todo contenido exclusivamente sonoro (un podcast, un discurso) disponga de una **alternativa basada en texto completa**. Las personas con discapacidad auditiva o aquellos usuarios que navegan en entornos ruidosos o en una biblioteca sin auriculares pueden pulsar sobre el desplegable y leer íntegramente la conversación sin perderse nada.
+
+---
 
 ## 8. Errores frecuentes y claves del examen
 

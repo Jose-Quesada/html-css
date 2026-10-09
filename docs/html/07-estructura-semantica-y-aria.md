@@ -40,23 +40,23 @@ Con `<div>` hay que añadir a mano `role`, `tabindex` y JavaScript: **reescribir
 
 ## 2. Elementos de sección
 
-### 2.1 Los siete elementos y su significado
+### 2.1 Los siete elementos estructurales y sus *landmarks*
 
-| Elemento | Significado | Landmark implícito |
-|---|---|---|
-| `<header>` | Cabecera de la página **o de un bloque** | `banner` **solo** si es hijo directo de `<body>` |
-| `<nav>` | Bloque de navegación | `navigation` |
-| `<main>` | Contenido **único y principal** | `main` |
-| `<article>` | Contenido independiente (entrada, ficha, comentario) | — |
-| `<section>` | Agrupación **temática**, normalmente con encabezado | — (con nombre accesible → `region`) |
-| `<aside>` | Contenido complementario o tangencial | `complementary` |
-| `<footer>` | Pie de la página **o de un bloque** | `contentinfo` **solo** si es hijo directo de `<body>` |
+Para comprender los elementos semánticos de HTML5, los alumnos deben entender primero el concepto de **punto de referencia o *landmark***:
 
-Matices de examen: **`<main>` es único**; **`header`/`footer` anidados** en `article` o `section` **no** son `banner`/`contentinfo`; **`nav`** solo para navegación real.
+> **Analogía pedagógica:** Imagina entrar a un aeropuerto o una estación de tren grande. No lees cada cartel ni cada puerta una por una; buscas los carteles grandes de orientación: *"Facturación"*, *"Puertas de embarque"*, *"Recogida de equipajes"*.
+> 
+> En la web ocurre exactamente lo mismo: una persona ciega no lee la página de arriba abajo como un documento de Word. Utiliza atajos de teclado de su lector de pantalla (como pulsar la tecla ++d++ o ++m++) para **saltar directamente de una sección mayor a otra**. Los *landmarks* son esos grandes carteles de orientación.
 
-!!! info "Qué es un landmark"
-
-    Región de la página que el lector de pantalla puede **listar y saltar** con un atajo (`D` → *main*, `M` → *navigation*). No se crea con CSS: lo define el **elemento** y su **posición** en el árbol. De la tabla, cinco elementos lo traen implícito; `article` no, y `section` solo si recibe un nombre accesible → `region`.
+| Elemento HTML | Significado semántico | *Landmark* ARIA implícito | Regla de uso estricta |
+|---|---|---|---|
+| `<header>` | Cabecera introductoria de la página o de una sección | `banner` (solo si es hijo directo de `<body>`) | Contiene logos, eslóganes y títulos principales. No confundir con `<head>`. |
+| `<nav>` | Bloque con enlaces de navegación importantes | `navigation` | Solo para menús principales, índices o paginaciones; **nunca** para listas de enlaces sueltas del pie. |
+| `<main>` | Contenido central, exclusivo y principal de la página | `main` | **Estrictamente ÚNICO por página**. No puede haber dos elementos `<main>` visibles a la vez. |
+| `<article>` | Contenido autocontenido e independiente | — | Aquello que tendría sentido por sí solo si se publicara en un feed RSS o en otra web (noticia, post, producto, comentario). |
+| `<section>` | Agrupación temática genérica de contenido | `region` (solo si tiene un encabezado y nombre accesible) | Debe incluir un encabezado (`<h2>`-`<h6>`). Si solo necesitas una caja para estilizar con CSS, usa `<div>`. |
+| `<aside>` | Contenido tangencial o complementario | `complementary` | Barras laterales, glosarios, enlaces relacionados, publicidad o biografías cortas del autor. |
+| `<footer>` | Pie de página o cierre de un bloque | `contentinfo` (solo si es hijo directo de `<body>`) | Información de copyright, autoría, enlaces legales y datos de contacto corporativos. |
 
 ### 2.2 `section` vs `div`: el criterio
 
@@ -135,6 +135,54 @@ Bloque con ==tema propio y encabezado propio== (suena a "sección de…") → `<
 2.  `tabindex="-1"` enfoca `<main>` **sin** añadirlo al recorrido del Tab, que es justo lo que necesita el saltador.
 
 Los landmarks quedan así: `header` → `banner`, `nav` → `navigation`, `main` → `main`, `aside` → `complementary`, `footer` final → `contentinfo`; el `div.rejilla` es ==solo maquetación== (→ [../css/06-grid.md](../css/06-grid.md)). Es el esqueleto del ejercicio del **portafolio semántico** (→ [09-ejercicios.md](09-ejercicios.md)).
+
+---
+
+### 3.1 Explicación detallada: ¿Por qué se usa cada etiqueta y para qué sirve?
+
+A continuación se detalla la función de cada contenedor semántico y atributo de accesibilidad ARIA presentes en la plantilla estructural `estructura.html`:
+
+#### 1. `<a class="skip-link" href="#contenido">` — El enlace de salto (*Skip Link*)
+- **¿Para qué sirve?** Es un enlace accesible colocado como el **primerísimo elemento hijo de `<body>`**.
+- **¿Por qué es obligatorio en accesibilidad (Criterio WCAG 2.4.1)?**
+    - Permite a los usuarios que navegan exclusivamente con teclado o pulsadores saltarse los bloques de contenido repetitivos (como el logotipo y menús de 20 enlaces) con una sola pulsación de la tecla <kbd>Intro</kbd>.
+    - Visualmente se oculta fuera de la pantalla mediante CSS y solo se hace visible cuando recibe el foco del teclado (`:focus`).
+
+#### 2. `<header class="cabecera">` — Hito `role="banner"`
+- **¿Para qué sirve?** Al ser hijo directo del `<body>`, los navegadores le asignan automáticamente el rol de accesibilidad `banner`.
+- **¿Por qué se usa aquí?** Actúa como el encabezado global de todo el sitio web, acogiendo la identidad corporativa (`<h1>` con enlace) y la barra de navegación principal.
+
+#### 3. `<nav aria-label="Principal">` y `aria-current="page"`
+- **`aria-label="Principal"`:** Diferencia este menú de navegación de otros posibles menús secundarios que existan en la página (como un menú de pie de página o un índice temático).
+- **`aria-current="page"`:**
+    - Se coloca en el enlace que apunta a la página en la que el usuario se encuentra actualmente.
+    - El lector de pantalla avisa explícitamente: *"Inicio, página actual, enlace"*. Esto evita desorientación en personas ciegas que no pueden percibir el cambio de color visual del enlace activo.
+
+#### 4. `<div class="rejilla">` — Contenedor neutro para CSS Grid
+- **¿Para qué sirve?** Es un contenedor `<div>` sin valor semántico.
+- **¿Por qué es legítimo su uso aquí?** Porque su único propósito es servir de envoltorio (*wrapper*) para aplicar maquetación visual bidimensional con CSS (`display: grid`), dividiendo la pantalla entre el área de contenido principal y la barra lateral sin interferir en la jerarquía semántica.
+
+#### 5. `<main id="contenido" tabindex="-1">` — Hito principal y recepción de foco
+- **`id="contenido"`:** Es el ancla de destino del enlace de salto inicial (`href="#contenido"`).
+- **`tabindex="-1"`:**
+    - Permite que el elemento `<main>` reciba el foco mediante JavaScript o por salto de enlace de hipertexto, pero **sin añadirlo a la secuencia de tabulación manual**.
+    - Resuelve un error clásico de los navegadores: garantiza que, tras pulsar el enlace de salto, la siguiente pulsación de la tecla <kbd>Tab</kbd> avance hacia el primer enlace o botón del artículo, y no vuelva a saltar hacia arriba al menú.
+
+#### 6. `<article>`, `<section aria-labelledby="ejemplos">` y `<footer>` interno
+- **`<article>`:** Encapsula la entrada completa del blog como una entidad temática autónoma.
+- **`<section aria-labelledby="ejemplos">`:**
+    - Subdivide el artículo en un bloque temático coherente.
+    - Mediante `aria-labelledby="ejemplos"`, reutiliza el texto del encabezado `<h3>` como su nombre accesible, transformando la sección en un hito navegable identificado (*"Región: Ejemplos de etiquetas"*).
+- **`<footer>` dentro de `<article>`:** Cierra el post con metadatos específicos (etiquetas y categorías). A diferencia del footer del body, este footer local no genera un landmark global `contentinfo`.
+
+#### 7. `<aside class="barra-lateral">` — Hito `role="complementary"`
+- **¿Para qué sirve?** Aloja contenido tangencialmente relacionado con el documento (entradas recomendadas, enlaces a temas afines, widgets informativos).
+- **Accesibilidad:** Los lectores de pantalla reconocen que este bloque no forma parte del flujo de lectura principal y permiten al usuario omitirlo si solo desea leer el artículo.
+
+#### 8. `<footer class="pie">` — Hito `role="contentinfo"`
+- **¿Para qué sirve?** Pie de página corporativo del sitio web. Contiene el copyright y el enlace al aviso legal obligatorio.
+
+---
 
 ## 4. El *skip link*
 
@@ -232,68 +280,81 @@ ARIA es un **añadido** para lo que HTML no puede expresar; la ==regla de oro== 
 | `role="dialog"` | Ventana modal creada por tu código | `<dialog>` |
 | `role="alert"` | Error que debe anunciarse de inmediato | `<output>` + `aria-live="assertive"` |
 
-### 6.3 `aria-label` vs `aria-labelledby` vs `aria-describedby`
+### 6.3 `aria-label` vs. `aria-labelledby` vs. `aria-describedby`
 
-| Atributo | ¿Forma el nombre accesible? | Cuándo se lee | Para qué sirve |
-|---|---|---|---|
-| `aria-label` | **Sí** | Al enfocar/anunciar | Nombre donde **no hay texto visible** |
-| `aria-labelledby` | **Sí** (lo toma de otro `id`) | Igual que `aria-label` | Unir el nombre a un **texto ya existente** |
-| `aria-describedby` | **No**: es **descripción** | **Después** del nombre | Ayuda, instrucción o error largo |
+En los exámenes y en el desarrollo real, una de las mayores confusiones es cuándo usar cada uno de estos tres atributos de nombres accesibles:
 
-```html title="nombres-accesibles.html"
-<button type="button" aria-label="Eliminar el borrador">🗑️</button> <!-- (1)! -->
+#### 1. `aria-label` (Poner nombre cuando NO hay texto visible)
+- **Cuándo se usa:** En botones o enlaces que solo contienen un icono, un emoji o una imagen vectorial, y que por tanto carecen de texto legible.
+- **Efecto:** Le asigna una etiqueta invisible que el lector de pantalla pronunciará directamente:
+```html
+<!-- El usuario vidente ve una papelera; el usuario ciego escucha "Eliminar producto" -->
+<button type="button" aria-label="Eliminar producto de la cesta">🗑️</button>
+```
+- **Regla:** Nunca uses `aria-label` si el elemento ya tiene texto visible (`<button>Guardar</button>`), porque `aria-label` **machaca y sustituye** el texto visible en el árbol de accesibilidad.
 
-<section aria-labelledby="tit-promo">
-  <h2 id="tit-promo">Oferta de matrícula</h2>
-  <button type="button">Ver condiciones</button>
+#### 2. `aria-labelledby` (Reutilizar un texto que ya existe en la pantalla)
+- **Cuándo se usa:** Cuando el nombre que quieres darle a una sección o campo ya está escrito en otro lugar de la página (por ejemplo, en un encabezado `<h2>`).
+- **Cómo funciona:** Recibe el `id` del elemento que tiene el texto:
+```html
+<section aria-labelledby="tit-ofertas">
+  <h2 id="tit-ofertas">Ofertas especiales del mes</h2>
+  <!-- Todo este bloque queda bautizado con el texto del h2 -->
 </section>
-
-<label for="dni">NIF</label>
-<input id="dni" required aria-describedby="ayuda-dni"> <!-- (2)! -->
-<p id="ayuda-dni">Ejemplo: 12345678Z.</p>
 ```
 
-1.  `aria-label` aporta **nombre** donde no hay texto visible: el emoji se anuncia completo como "Eliminar el borrador".
+#### 3. `aria-describedby` (Información adicional de ayuda o error)
+- **Cuándo se usa:** **NO da nombre al control**, sino que añade una **descripción secundaria o instrucción de ayuda**.
+- **Comportamiento del lector de pantalla:** El lector primero anuncia el nombre del campo, luego hace una pequeña pausa, y después lee la descripción:
+```html
+<label for="clave">Contraseña:</label>
+<input type="password" id="clave" name="clave" aria-describedby="requisitos-clave">
+<p id="requisitos-clave">Debe tener al menos 8 caracteres, una mayúscula y un número.</p>
+```
 
-2.  `aria-describedby` aporta **descripción**: se anuncia después del nombre y **no** forma parte de él.
+> **Jerarquía de resolución del Nombre Accesible:**
+> El navegador busca en este orden estricto: `aria-labelledby` $\rightarrow$ `aria-label` $\rightarrow$ Texto visible interior $\rightarrow$ `title`. El atributo `aria-describedby` **nunca forma parte del nombre**, solo aporta información complementaria.
 
-> **Orden del nombre accesible:** `aria-labelledby` → `aria-label` → texto visible → `title`. ==`aria-describedby`== **nunca** sustituye al nombre.
+---
 
 ### 6.4 `aria-expanded`, `aria-hidden` y `aria-current`
 
-```html
-<!-- estado de un desplegable: sincronízalo SIEMPRE con el JS -->
-<button type="button" aria-expanded="false" aria-controls="menu">Cursos ▾</button>
-<ul id="menu" hidden> ... </ul>
-<span aria-hidden="true">★</span>   <!-- decorativo junto a texto -->
-<a href="/" aria-current="page">Inicio</a>   <!-- "estás aquí" -->
-```
-
-`hidden` / `display: none` → **no existe** para nadie (ni foco, ni ratón, ni lector); `aria-hidden="true"` → sigue visible y clicable pero **no se anuncia**, y si además es enfocable creas un *foco fantasma*. `aria-expanded` es **solo informativo**: si tu JS no lo actualiza, anuncia mentiras (con `<details>` lo gestiona el navegador).
-
-### 6.5 `aria-live`: regiones que anuncian cambios
-
-Marcaste con ==`aria-live`== la región que debe **reanunciarse** cuando su contenido cambia; sin esa marca, el lector de pantalla no se entera de nada.
-
-| Valor | Comportamiento | Ejemplo típico |
+| Atributo | Estado que comunica | Ejemplo de uso |
 |---|---|---|
-| `aria-live="polite"` | Espera su turno; **no interrumpe** | "Cambios guardados", resultados |
-| `aria-live="assertive"` | **Interrumpe** lo que se esté leyendo | Error de validación |
-| `aria-live="off"` | No anuncia nada (por defecto) | — |
+| `aria-expanded="true/false"` | Si un acordeón o menú desplegable está actualmente abierto o cerrado. **Debe sincronizarse con JavaScript en cada clic**. | `<button aria-expanded="false" aria-controls="submenú">Menú</button>` |
+| `aria-hidden="true"` | **Oculta el elemento al lector de pantalla**, pero lo mantiene 100% visible para los usuarios de ratón. | Iconos decorativos, estrellas de adorno: `<span aria-hidden="true">★</span>` |
+| `aria-current="page"` | Indica que un enlace es la **página activa en la que se encuentra el usuario actualmente**. | `<a href="/contacto" aria-current="page">Contacto</a>` |
+
+---
+
+### 6.5 `aria-live`: Regiones dinámicas que anuncian cambios (SPA y AJAX)
+
+En aplicaciones web modernas (como las que se desarrollan en Angular, React o con JavaScript asíncrono), cuando el usuario realiza una acción no se recarga la página completa. Si un mensaje de éxito aparece en verde en pantalla (*"Tu solicitud se ha guardado correctamente"*), un usuario vidente lo lee al instante. Sin embargo, para una persona ciega, **el lector de pantalla no emite ningún sonido porque el foco no se ha movido**, dejándola con la duda de si la operación tuvo éxito.
+
+Para solucionar este grave problema de accesibilidad existen las **Live Regions** mediante el atributo `aria-live`:
+
+| Valor | Comportamiento del lector de pantalla | Cuándo usarlo |
+|---|---|---|
+| `aria-live="polite"` | **Educado:** Espera pacientemente a que termine la frase que esté leyendo antes de anunciar la novedad. | Confirmaciones no críticas: *"Mensaje enviado"*, *"3 artículos añadidos al carrito"*, resultados de búsqueda. |
+| `aria-live="assertive"` | **Asertivo / Urgente:** Interrumpe de inmediato cualquier frase que esté diciendo para alertar al usuario. | Errores graves del sistema, caídas de conexión o pérdida inminente de sesión por tiempo. |
+| `aria-live="off"` | Desactivado (comportamiento por defecto). | Regiones estáticas normales. |
 
 ```html title="aviso-en-vivo.html"
-<p id="aviso" role="status" aria-live="polite" aria-atomic="true"></p>
-<button onclick="guardar()">Guardar</button>
+<!-- role="status" equivale automáticamente a aria-live="polite" aria-atomic="true" -->
+<div id="notificacion" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<button type="button" onclick="guardarDatos()">Guardar borrador</button>
 
 <script>
-function guardar() {
-  // role="status" = aria-live="polite": no interrumpe
-  document.getElementById('aviso').textContent = 'Cambios guardados ✓';
+function guardarDatos() {
+  // Al inyectar texto aquí, el lector de pantalla lo anunciará automáticamente al usuario
+  document.getElementById('notificacion').textContent = 'Borrador guardado con éxito a las 18:45.';
 }
 </script>
 ```
 
-`aria-atomic="true"` lee **toda** la región; `role="alert"` es el equivalente *assertive* (errores reales).
+- **`aria-atomic="true"`:** Fuerza al sintetizador a leer **todo el contenido completo del contenedor**, en lugar de leer solo las letras o palabras que hayan cambiado.
+- Para alertas críticas de error, `role="alert"` equivale automáticamente a `aria-live="assertive"`.
 
 ## 7. Cuándo NO usar ARIA (anti-patrones)
 
@@ -339,6 +400,7 @@ Esta unidad cubre la capa **HTML** de la accesibilidad (estructura semántica, l
 !!! warning "Error común"
 
     Los tres fallos que más se corrigen en la práctica:
+    
     - **Dos `<main>`** en la página (contenido y pie, o contenido y modal): solo puede haber **uno visible**; para el otro usa `<section>` o `<div>`.
     - **Elegir el encabezado por el tamaño visual** (`<h4>` porque "queda más pequeño" o varias `<h1>` porque el diseño las pide): el nivel es **estructural**, el tamaño es CSS.
     - **ARIA de más**: `aria-label` redundante con el texto visible, `role="navigation"` sobre `<nav>`, `aria-expanded` que nadie actualiza. Más ARIA no significa más accesibilidad.

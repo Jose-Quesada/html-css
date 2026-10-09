@@ -191,14 +191,14 @@ El equipo directivo te entrega el código base de la futura *landing page* del i
 - **Actualiza el DOCTYPE y la raíz:** Cambia la primera línea al estándar HTML5 (`<!DOCTYPE html>`). Limpia la etiqueta `<html>` de `xmlns` y namespaces, dejando únicamente `lang="es"`.
 - **Limpia y completa el trío clave del `<head>`:** Convierte la codificación a `<meta charset="UTF-8">` (recuerda guardar el fichero en este formato en VS Code), añade el `<meta name="viewport">` y mejora el `<title>`.
 - **Añade metadatos avanzados (`<head>`):**
-  - Integra un *Resource Hint* `<link rel="preload">` simulando la precarga de la fuente principal (`/fonts/roboto.woff2` como `font`). Ordena al navegador descargar la fuente /fonts/roboto.woff2 de forma anticipada e inmediata, antes de procesar los estilos CSS que la reclaman. Esto evita el parpadeo de texto sin estilo (FOUT) y acelera el renderizado visual de la página. Al precargar fuentes (as="font"), el estándar exige añadir el atributo `crossorigin`.
-  - Añade soporte PWA básico: `<meta name="theme-color">` y un `<link rel="manifest" href="/manifest.json">`. Dota a la página web de propiedades de Progressive Web App para dispositivos móviles. La etiqueta `<meta name="theme-color">` colorea la barra de estado y de navegación del navegador con el color corporativo de la web, mientras que `<link rel="manifest" href="/manifest.json">` vincula el manifiesto de la aplicación que describe los iconos, el nombre instalable y el modo de pantalla completa.
-  - Habilita el autodescubrimiento de noticias añadiendo un `<link rel="alternate">` para un feed RSS (`/feed.xml`). Habilita la sindicación de contenidos para que lectores de noticias y navegadores detecten automáticamente el canal de novedades en `/feed.xml` mediante el tipo MIME `application/rss+xml` sin que el visitante tenga que buscar el enlace manualmente.
-  - Introduce un bloque de datos estructurados `<script type="application/ld+json">` (Schema.org) declarando el nombre ("IES F3") y la descripción del centro. Proporciona a los motores de búsqueda un bloque de datos en formato JSON para que comprendan de forma inequívoca la identidad de la página. Al catalogar la entidad como un centro educativo (`EducationalOrganization` o `School`) con su nombre "IES F3" y su descripción, los buscadores pueden generar resultados enriquecidos (*rich snippets*).
+    - Integra un *Resource Hint* `<link rel="preload">` simulando la precarga de la fuente principal (`/fonts/roboto.woff2` como `font`). Ordena al navegador descargar la fuente /fonts/roboto.woff2 de forma anticipada e inmediata, antes de procesar los estilos CSS que la reclaman. Esto evita el parpadeo de texto sin estilo (FOUT) y acelera el renderizado visual de la página. Al precargar fuentes (as="font"), el estándar exige añadir el atributo `crossorigin`.
+    - Añade soporte PWA básico: `<meta name="theme-color">` y un `<link rel="manifest" href="/manifest.json">`. Dota a la página web de propiedades de Progressive Web App para dispositivos móviles. La etiqueta `<meta name="theme-color">` colorea la barra de estado y de navegación del navegador con el color corporativo de la web, mientras que `<link rel="manifest" href="/manifest.json">` vincula el manifiesto de la aplicación que describe los iconos, el nombre instalable y el modo de pantalla completa.
+    - Habilita el autodescubrimiento de noticias añadiendo un `<link rel="alternate">` para un feed RSS (`/feed.xml`). Habilita la sindicación de contenidos para que lectores de noticias y navegadores detecten automáticamente el canal de novedades en `/feed.xml` mediante el tipo MIME `application/rss+xml` sin que el visitante tenga que buscar el enlace manualmente.
+    - Introduce un bloque de datos estructurados `<script type="application/ld+json">` (Schema.org) declarando el nombre ("IES F3") y la descripción del centro. Proporciona a los motores de búsqueda un bloque de datos en formato JSON para que comprendan de forma inequívoca la identidad de la página. Al catalogar la entidad como un centro educativo (`EducationalOrganization` o `School`) con su nombre "IES F3" y su descripción, los buscadores pueden generar resultados enriquecidos (*rich snippets*).
 - **Auditoría de sintaxis y anidamiento:**
-  - Pasa todas las etiquetas a minúsculas.
-  - Corrige el cierre cruzado de `<p>` y `<strong>`.
-  - Elimina las barras finales `/` de los elementos vacíos (`<meta>`, `<input>`) y corrige los valores redundantes de los atributos booleanos (`checked="checked"` → `checked`).
+    - Pasa todas las etiquetas a minúsculas.
+    - Corrige el cierre cruzado de `<p>` y `<strong>`.
+    - Elimina las barras finales `/` de los elementos vacíos (`<meta>`, `<input>`) y corrige los valores redundantes de los atributos booleanos (`checked="checked"` → `checked`).
 - **Valida:** Pega el resultado final en <https://validator.w3.org/> y asegúrate de conseguir **0 errores**.
 
 **Pista:** HTML5 es determinista con los errores, pero no debes abusar de su flexibilidad. Para los datos estructurados, guíate con un bloque genérico de tipo `"@type": "EducationalOrganization"`.
@@ -376,12 +376,12 @@ El equipo de orientación quiere publicar un extenso artículo sobre el currícu
 - **Jerarquía y fechas:** Asegúrate de que los encabezados sigan el orden lógico sin saltos. Convierte el "Publicado el 25 de septiembre..." en un párrafo que utilice la etiqueta `<time>` con su atributo `datetime` correcto.
 - **Listas anidadas:** Convierte el párrafo de las fases de matriculación en una lista ordenada (`<ol>`). Dentro del paso "Aportar documentación oficial", anida una lista desordenada (`<ul>`) con los tres documentos requeridos.
 - **Términos y abreviaturas:**
-  - Envuelve "UI" y "UX" en etiquetas `<abbr>` con el atributo `title` que contenga su significado ("Interfaz de Usuario", etc.).
-  - Marca "UI/UX" como la definición de un concepto usando `<dfn>`.
+    - Envuelve "UI" y "UX" en etiquetas `<abbr>` con el atributo `title` que contenga su significado ("Interfaz de Usuario", etc.).
+    - Marca "UI/UX" como la definición de un concepto usando `<dfn>`.
 - **Citas avanzadas:** Envuelve la frase de Tim Berners-Lee en un `<blockquote>` (no olvides que debe llevar un `<p>` dentro) y anida un `<q>` si lo consideras adecuado. Pon el año o autor en un `<cite>`.
 - **Informática y comandos:**
-  - Marca `git` y `git clone` con la etiqueta `<code>`.
-  - Envuelve el atajo `Ctrl + C` en etiquetas `<kbd>`.
+    - Marca `git` y `git clone` con la etiqueta `<code>`.
+    - Envuelve el atajo `Ctrl + C` en etiquetas `<kbd>`.
 - **Ediciones de documento:** Marca la palabra "Flash" como texto eliminado o tachado (`<del>` o `<s>` dependiendo del contexto semántico de borrado) y "HTML5 y CSS" como texto insertado (`<ins>`) o de fuerte importancia.
 - **Separación visual:** Introduce un salto de temática antes del último párrafo utilizando un `<hr>`.
 - **Validación:** Comprueba la sintaxis final en W3C para garantizar **0 errores**.
@@ -566,7 +566,7 @@ El clip de la jornada de puertas abiertas se sirve en MP4 y WebM, pero la págin
 ```html title="u4-1-inicial.html"
 <main>
   <h1>Jornada de puertas abiertas</h1>
-  <video src="video/jornada.mp4" poster="https://dummyimage.com/800x600/ccc/000.png&text=jornada-portada.jpg"></video>
+  <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" poster="https://dummyimage.com/800x600/ccc/000.png&text=jornada-portada.jpg"></video>
   <p>Grabación completa de la visita al centro.</p>
 </main>
 ```
@@ -594,10 +594,10 @@ El vídeo de las normas del taller necesita subtítulos en español para quien e
 
 ```html title="u4-2-inicial.html"
 <video controls poster="https://dummyimage.com/800x600/ccc/000.png&text=normas-portada.jpg" width="640" height="360" preload="metadata">
-  <source src="video/normas.mp4" type="video/mp4">
-  <source src="video/normas.webm" type="video/webm">
+  <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+  <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm">
   <p>No puedes reproducir este vídeo.
-     <a href="video/normas.mp4">Descárgalo (MP4)</a>.</p>
+     <a href="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4">Descárgalo (MP4)</a>.</p>
 </video>
 ```
 
@@ -638,7 +638,7 @@ El podcast del ciclo se sirve en un solo formato, descarga el fichero antes de q
 <main>
   <h1>Podcast: la FP en 5 minutos</h1>
   <h2>Episodio 7: los ciclos de Artes Gráficas</h2>
-  <audio src="audio/ep07.mp3" controls></audio>
+  <audio src="https://interactive-examples.mdn.mozilla.net/media/cc0-audio/t-rex-roar.mp3" controls></audio>
   <p>Episodio 7: qué se estudia y qué salidas tiene.</p>
 </main>
 ```
@@ -1526,7 +1526,7 @@ El `<video>` será la fuente de píxeles y el `<canvas>` un render paralelo: mue
 
 **Tarea:**
 
-- Completa el `<video>` con `<source src="video_jaen.mp4" type="video/mp4">`, ==texto de respaldo== y `controls`, `muted`, `loop`, `autoplay`, `crossorigin="anonymous"`.
+- Completa el `<video>` con `<source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">`, ==texto de respaldo== y `controls`, `muted`, `loop`, `autoplay`, `crossorigin="anonymous"`.
 - Con `getContext('2d', { willReadFrequently: true })` obtén el contexto de dibujo.
 - Escribe `procesarFrame()`: `drawImage` → `getImageData` → luminancia `0.2126*R + 0.7152*G + 0.0722*B` recorriendo el array **de 4 en 4** → `putImageData` → `requestAnimationFrame`.
 - Lanza el bucle en el evento `play` y no trabajes con el vídeo ==en pausa==.
@@ -1635,7 +1635,7 @@ La galería del ciclo tiene enlaces "ver imagen" sueltos, imágenes sin `alt` ú
     <a href="ver-imagen.html">Ver imagen</a>
   </div>
   <div>
-    <video src="promo.mp4" controls></video>
+    <video src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" controls></video>
     <p>Vídeo promocional del ciclo</p>
   </div>
 </main>

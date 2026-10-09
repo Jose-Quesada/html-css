@@ -217,51 +217,99 @@ El ==`required`== **bloquea el envío** hasta que el campo tenga valor; `readonl
 
 ## 5. El resto de controles
 
-### 5.1 `select`, `optgroup` y `selected`
+### 5.1 Menús desplegables: `select`, `optgroup` y `selected`
+
+El elemento `<select>` genera un menú desplegable de opciones. Es el control adecuado cuando el usuario debe elegir un valor entre una lista cerrada y no queremos saturar la interfaz con docenas de botones de opción (*radio buttons*):
 
 ```html title="ciclo.html"
 <label for="ciclo">Ciclo formativo</label>
 <select id="ciclo" name="ciclo" required>
-  <optgroup label="Grado medio">
-    <option value="smr">Sistemas microinformáticos y redes</option>
+  <!-- Opción de marcador de posición (placeholder) no seleccionable -->
+  <option value="" disabled selected>-- Elige un ciclo formativo --</option>
+  
+  <optgroup label="Grado Medio (Familia Informática)">
+    <option value="smr">SMR - Sistemas Microinformáticos y Redes</option>
   </optgroup>
-  <optgroup label="Grado superior">
-    <option value="daw" selected>Desarrollo de aplicaciones web</option>
+  
+  <optgroup label="Grado Superior (Familia Informática)">
+    <option value="dam">DAM - Desarrollo de Aplicaciones Multiplataforma</option>
+    <option value="daw">DAW - Desarrollo de Aplicaciones Web</option>
+    <option value="asir">ASIR - Administración de Sistemas Informáticos en Red</option>
   </optgroup>
 </select>
 ```
 
-- Lo que se envía es **`value`**; sin `value`, se envía el texto.
-- **`selected`** precarga y **`optgroup`** agrupa con un subtítulo.
-- `required` exige elegir: por eso se añade `<option value="" disabled selected>Elige una opción</option>`.
+#### Aspectos fundamentales para el alumnado:
+1. **El valor real vs. El texto visible:** El texto entre `<option>` y `</option>` es lo que lee el usuario en pantalla. Sin embargo, lo que se envía al servidor es estrictamente el atributo **`value`** (en este ejemplo, si el usuario elige DAW, al servidor le llegará el parámetro `ciclo=daw`). Si omites el atributo `value`, el navegador enviará la cadena de texto completa.
+2. **Cómo hacer un `select` obligatorio con `required`:** Como un menú desplegable siempre tiene una opción seleccionada por defecto, para que `required` funcione se debe incluir una primera opción con valor vacío (`value=""`), desactivada (`disabled`) y marcada como seleccionada inicialmente (`selected`). Si el usuario intenta enviar el formulario sin cambiarla, el navegador bloqueará el envío.
+3. **Agrupación lógica con `<optgroup>`:** Permite organizar listas largas en categorías visualmente separadas con un encabezado en negrita (atributo `label`). Los encabezados de `<optgroup>` son puramente informativos y no se pueden seleccionar.
 
-### 5.2 `textarea`
+---
+
+### 5.2 Texto multilínea: `textarea`
+
+Cuando el usuario necesita escribir párrafos extensos (mensajes de contacto, comentarios o biografías), se utiliza `<textarea>`:
 
 ```html title="observaciones.html"
-<label for="obs">Observaciones</label>
-<textarea id="obs" name="obs" rows="4" cols="60" maxlength="500"
-          placeholder="Necesito adaptación de horario..."></textarea>
+<label for="obs">Observaciones o adaptaciones necesarias:</label>
+<textarea id="obs" name="obs" 
+          rows="5" cols="60" 
+          maxlength="500" 
+          placeholder="Escribe aquí si necesitas adaptación de puesto o cualquier otra petición..."></textarea>
 ```
 
-`rows`/`cols` fijan el tamaño inicial y `maxlength` limita los caracteres; el texto va **entre las etiquetas**: no usa `value`.
+- **No usa atributo `value`:** A diferencia de `<input>`, el texto inicial de un `<textarea>` se coloca directamente **entre la etiqueta de apertura y la de cierre**.
+- `rows` y `cols` definen el tamaño inicial visible en líneas y caracteres aproximados, aunque en la práctica profesional sus dimensiones siempre se controlan con CSS (`width`, `height`, `min-height`).
+- La propiedad CSS `resize: vertical;` es una buena práctica recomendada para permitir que el usuario estire la caja hacia abajo sin romper el ancho de la maquetación.
 
-### 5.3 `output`, `progress` y `meter`
+---
 
-- **`<output>`**: resultado **calculado** (media de las notas, total de la cesta).
-- **`<progress>`**: avance de una **tarea** hacia una meta: `<progress value="3" max="4">` (sin `value` queda indeterminado); subida de archivo, paso 3 de 4.
-- **`<meter>`**: medida con **umbral** que se colorea sola: `<meter value="6,7" low="5" high="8">` (nota, espacio en disco, batería).
+### 5.3 Indicadores visuales: `<progress>` vs. `<meter>`
 
-Clave: `progress` es **cómo va** una operación; `meter` es **en qué estado** está una cantidad.
+Estos dos elementos HTML5 suelen confundirse con frecuencia porque ambos dibujan una barra de nivel en pantalla. Sin embargo, su significado semántico es completamente diferente:
 
-### 5.4 `<button>`: `type="submit"`, `reset` o `button`
+| Elemento | Qué representa | Dinamismo | Ejemplo de uso |
+|---|---|---|---|
+| `<progress>` | El avance de una **tarea en el tiempo** hacia su finalización | Dinámico (en proceso) | Descarga de un archivo (45%), paso 3 de un asistente de registro de 5 pasos |
+| `<meter>` | Una **medición estática** de una cantidad conocida dentro de un intervalo | Medición puntual | Nivel de batería (80%), espacio ocupado en disco (85 GB de 100), nota de un examen (7.5 sobre 10) |
+
+```html title="indicadores.html"
+<!-- 1. Progress: Tarea en progreso hacia un 100% -->
+<label for="subida">Progreso de la subida del currículum:</label>
+<progress id="subida" max="100" value="70">70%</progress>
+
+<!-- 2. Meter: Calificación con umbrales de aprobado y notable -->
+<label for="calificacion">Calificación del examen:</label>
+<meter id="calificacion" min="0" max="10" low="5" high="8.5" optimum="10" value="7.5">7.5 sobre 10</meter>
+```
+
+- **El superpoder de `<meter>`:** Al definir los atributos `low` (umbral bajo), `high` (umbral alto) y `optimum` (el valor ideal), el navegador **colorea automáticamente la barra**: verde si está cerca del óptimo, amarillo si entra en zona de precaución, y rojo si cae en zona crítica (por ejemplo, disco casi lleno o batería en mínimos).
+
+---
+
+### 5.4 El elemento `<button>` y la trampa de su `type` por defecto
+
+En HTML moderno se prefiere siempre el elemento `<button>` frente al clásico `<input type="submit">`, ya que `<button>` permite anidar contenido enriquecido en su interior (iconos SVG, imágenes o texto formateado).
 
 ```html title="botones.html"
-<button type="submit">Enviar matrícula</button>        <!-- envía el form -->
-<button type="reset">Borrar todo</button>              <!-- valores iniciales -->
-<button type="button" id="vista">Vista previa</button> <!-- solo con JS -->
+<!-- Envía los datos del formulario al servidor -->
+<button type="submit">
+  <img src="https://dummyimage.com/200x200/ccc/000.png&text=enviar.svg" alt="" width="16" height="16">
+  Enviar matrícula
+</button>
+
+<!-- Restablece todos los campos a sus valores de fábrica -->
+<button type="reset">Borrar formulario</button>
+
+<!-- Botón neutral para interactuar exclusivamente con JavaScript -->
+<button type="button" id="btnCalcular">Calcular media</button>
 ```
 
-⚠ El **valor por defecto de `<button>` es `submit`, no `button`** (igual que `<input type="submit">`): un botón "Calcular media" **sin `type`** envía el formulario sin querer. **Escribe siempre `type`**.
+!!! danger "La trampa mortal de `<button>` sin atributo type"
+
+    En la especificación HTML5, **el valor por defecto de `<button>` es `type="submit"`, NO `type="button"`**.
+    
+    Si un alumno crea un botón para abrir un modal o calcular una operación con JavaScript y escribe `<button id="calc">Calcular</button>` (omitiendo el atributo `type`), al hacer clic sobre él **el navegador enviará y recargará toda la página de golpe**, perdiendo todos los datos introducidos. Escribe siempre de forma explícita `type="button"` en cualquier botón controlado por scripts.
 
 ## 6. Validación nativa de HTML5
 
@@ -360,6 +408,71 @@ Para leer el estado desde JavaScript (→ [08-apis-html5.md](08-apis-html5.md)):
 2.  `required` en la casilla de normativa: **si no se marca, el navegador bloquea el envío**.
 
 `label`+`id` y `name` en cada campo, validación nativa y `POST` para los datos personales.
+
+---
+
+### 8.1 Explicación detallada: ¿Por qué se usa cada etiqueta y para qué sirve?
+
+A continuación se realiza un análisis exhaustivo de la arquitectura de este formulario de matrícula, detallando la función de cada elemento, sus atributos de validación nativa y las directrices de accesibilidad (WCAG 2.1):
+
+#### 1. `<form action="/matricula" method="post" enctype="multipart/form-data">`
+- **`action="/matricula"`:** Ruta del punto de conexión (*endpoint*) en el servidor que recibirá y procesará la petición con los datos del alumno.
+- **`method="post"`:**
+    - Es **estrictamente obligatorio** para formularios con información sensible o personal (nombres, DNI, correos electrónicos).
+    - A diferencia de `method="get"` (que adjunta los datos en texto plano a la URL, dejándolos expuestos en el historial del navegador, marcadores y logs del proxy), `POST` viaja encapsulado dentro del cuerpo (*payload*) de la petición HTTP.
+- **`enctype="multipart/form-data"`:**
+    - Por defecto, los formularios codifican los datos como `application/x-www-form-urlencoded`. Este formato es incapaz de transmitir archivos binarios.
+    - Como el formulario incluye un campo para adjuntar el currículum vitae (`<input type="file">`), declarar `enctype="multipart/form-data"` es **imprescindible para que el archivo binario viaje en fragmentos al servidor**. Si se olvida, el servidor solo recibirá el nombre del archivo en texto pero no su contenido.
+
+#### 2. `<fieldset>` y `<legend>` — Agrupación semántica y orientación contextual
+- **`<fieldset>`:** Agrupa visual y semánticamente controles de formulario estrechamente relacionados (por ejemplo, el bloque de "Datos personales" y el bloque de "Turno de matrícula").
+- **`<legend>`:** Proporciona el título accesible del grupo.
+- **Impacto directo en lectores de pantalla:**
+    - Cuando un usuario con discapacidad visual entra en el grupo de radios del turno, el software no dice únicamente *"Radio botón Mañana"*, sino que anuncia el contexto completo: *"Turno de matrícula, Mañana, botón de selección 1 de 2"*.
+    - Esto resuelve el problema de desorientación cuando varios campos tienen opciones parecidas.
+
+#### 3. `<label for="...">` — El ancla accesible de cada control
+- **¿Para qué sirve?** Asocia de forma vinculante un texto legible con su respectivo campo de entrada.
+- **Mecanismo técnico:** El valor de `for` debe ser idéntico al `id` del campo correspondiente (`<label for="nombre">` ↔ `<input id="nombre">`).
+- **Ergonomía:** Agranda el área interactiva de pulsación. Al pulsar sobre el texto de la etiqueta en un teléfono móvil, el cursor se sitúa de inmediato en la caja de texto o marca el radio botón, mejorando drásticamente la usabilidad motriz (Criterio WCAG 2.5.5).
+
+#### 4. Controles `<input>` y sus atributos avanzados de validación
+- **`id` vs. `name`:**
+    - `id`: Identificador único en el cliente (DOM), necesario para asociar el `<label>`, aplicar estilos CSS y manipular con JavaScript.
+    - `name`: Nombre de la variable que viaja al servidor en el envío (`nombre=Ana&dni=12345678Z`). **Un campo sin atributo `name` no se envía al servidor jamás**.
+- **`autocomplete="name"` y `autocomplete="email"`:** Cumplen con el criterio de conformidad **WCAG 1.3.5 (Identificación del propósito del campo)**. Permiten a los gestores de contraseñas y al propio navegador autocompletar la información del usuario con total seguridad.
+- **`pattern="[0-9]{8}[A-Za-z]"` y `title="..."`:**
+    - Aplica una expresión regular nativa en el cliente: exige exactamente 8 dígitos seguidos de una letra.
+    - El atributo `title` aporta el mensaje explicativo que el navegador muestra en una burbuja flotante nativa si el usuario introduce un formato incorrecto.
+- **`aria-describedby="pista-dni"`:**
+    - Vincula programáticamente el campo con el elemento `<span id="pista-dni">`.
+    - Cuando el lector de pantalla sitúa el foco en la casilla del DNI, lee primero el nombre del campo (*"DNI/NIE"*), luego el tipo de dato y, a continuación, vocaliza la pista de ayuda (*"Ejemplo: 12345678Z"*), guiando al usuario antes de que cometa un error.
+- **`type="date"`:** Despliega un selector de calendario nativo adaptado al sistema operativo y garantiza que la fecha viaje formateada en estándar `AAAA-MM-DD`.
+- **`type="radio"`:**
+    - Permite elegir **una sola opción exclusiva entre varias**.
+    - La exclusión mutua se logra porque ambos radios comparten exactamente el mismo atributo `name="turno"`, pero tienen diferentes atributos `value` (`value="manana"` y `value="tarde"`).
+
+#### 5. `<textarea>` — Entrada de texto multilínea
+- **¿Para qué sirve?** A diferencia de `<input type="text">` (que es de una sola línea), `<textarea>` permite escribir párrafos extensos (observaciones del alumno).
+- **Atributos:**
+    - `rows="4"` y `cols="60"`: Definen las dimensiones visuales iniciales del área en caracteres/filas.
+    - `maxlength="500"`: Límite estricto en el navegador que impide escribir más de 500 caracteres.
+    - `placeholder="..."`: Muestra una pista en gris claro. *Nota:* Nunca sustituye al `<label>`.
+
+#### 6. `<input type="file" accept="...">` — Carga segura de documentos
+- **¿Para qué sirve?** Abre el selector de archivos del sistema operativo para que el alumno adjunte un fichero.
+- **`accept=".pdf, application/pdf"`:** Filtra los archivos visibles en el diálogo de selección, impidiendo que el usuario se equivoque y adjunte archivos de imagen o formatos no permitidos.
+
+#### 7. `<input type="checkbox" required>` — Consentimiento legal explícito
+- **¿Para qué sirve?** Casilla de verificación binaria (marcada / desmarcada).
+- **`required` en checkbox:** Obliga legal y técnicamente al usuario a marcar la casilla de aceptación de términos antes de que el navegador permita enviar el formulario.
+
+#### 8. `<button type="submit">` y `<button type="reset">`
+- **`<button type="submit">`:** Botón principal de acción que desencadena la validación de todos los campos `required` y `pattern`, y envía los datos.
+- **`<button type="reset">`:** Botón secundario que restablece todos los controles del formulario a sus valores originales en blanco.
+- **Regla:** Declarar explícitamente `type="submit"` evita que el navegador confunda botones secundarios con disparadores de envío involuntarios.
+
+---
 
 ## 9. Claves para el examen y errores frecuentes
 

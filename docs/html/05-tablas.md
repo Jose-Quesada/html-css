@@ -242,6 +242,8 @@ Para un lector de pantalla una tabla sin semántica es una lista de números sue
 - **`caption`**: nombre de la tabla; se anuncia al entrar.
 - **`th`**: identifica qué celda "define" a las demás.
 - ==`scope`== marca la **dirección** del encabezado (`col` o `row`), para vincular cada dato con su fila y su columna.
+    - scope="col" (Columna): Le indica a la tecnología asistencial que ese encabezado rige y da significado a todas las celdas que se encuentran verticalmente debajo de él.  
+    - scope="row" (Fila): Le especifica que ese encabezado  define el contexto de todas las celdas que están horizontalmente a su derecha en esa misma fila.  
 - **`abbr`**: abreviatura para no deletrear frases largas repetidas en cada celda.
 
 No es opcional: se exige en **WCAG 1.3.1 (Información y relaciones)** y **4.1.2 (Nombre, rol, valor)**, de la clase de interfaces (→ [07-estructura-semantica-y-aria.md](07-estructura-semantica-y-aria.md)).
@@ -385,11 +387,57 @@ Una tabla ancha no cabe en una pantalla de 360 px. La solución estándar es **m
 
 Todo lo visto junto: `caption`, `scope` en las dos dimensiones, `abbr` en la cabecera larga y `tfoot` con la media.
 
+---
+
+### 7.1 Explicación detallada: ¿Por qué se usa cada etiqueta y para qué sirve?
+
+A continuación se realiza una disección técnica de cada etiqueta y atributo de la tabla `acta.html`, explicando su función en la estructura de datos tabulares y su impacto directo en la navegación accesible para personas con discapacidad visual:
+
+#### 1. `<table>` — El contenedor semántico de datos tabulares
+- **¿Para qué sirve?** Define un bloque estructurado para organizar datos en filas y columnas bidimensionales.
+- **¿Por qué se usa aquí y cuál es la regla de oro?**
+    - Se usa exclusivamente porque la información que mostramos es **genuinamente tabular** (una matriz relacional de notas por asignatura y evaluación).
+    - **Regla estricta:** Está terminantemente prohibido utilizar `<table>` para maquetar el diseño de una interfaz (crear columnas de texto, menús o tarjetas). Las tablas solo deben contener datos; el diseño visual se construye con CSS (Flexbox y Grid).
+
+#### 2. `<caption>` — El título accesible obligatorio de la tabla
+- **¿Para qué sirve?** Representa el título formal y la descripción sucinta de la tabla (*«Notas de evaluación — 1.º DAW A, 1.er trimestre»*). Debe ser siempre el **primer hijo directo** de la etiqueta `<table>`.
+- **Importancia crítica en Accesibilidad (WCAG 1.3.1):**
+    - Cuando un usuario con lector de pantalla aterriza en una tabla, el software anuncia inmediatamente el contenido de `<caption>` junto con las dimensiones de la tabla (*"Tabla: Notas de evaluación, 5 columnas, 4 filas"*).
+    - Esto permite al estudiante ciego decidir en menos de un segundo si la tabla le interesa o si prefiere saltarla con una tecla, sin tener que escuchar obligatoriamente las decenas de números de cada celda.
+
+#### 3. `<thead>`, `<tbody>` y `<tfoot>` — División estructural en tres zonas
+- **`<thead>` (Cabecera):** Agrupa las filas (`<tr>`) que contienen las etiquetas de cabecera de las columnas (`<th>`).
+- **`<tbody>` (Cuerpo de datos):** Contiene el grueso de filas con los datos reales de los módulos profesionales.
+- **`<tfoot>` (Pie o totales):** Agrupa las filas de resumen, estadísticas, totales o medias.
+- **Ventajas de esta separación:**
+    - **Impresión en papel (*Print CSS*):** Si la tabla tiene 200 filas y se imprime en varias páginas, el navegador repite automáticamente el bloque `<thead>` en la parte superior de cada folio y el `<tfoot>` en la inferior.
+    - **Tablas con scroll vertical:** Permite fijar la cabecera arriba con CSS (`position: sticky`) mientras los datos de `<tbody>` se desplazan libremente.
+
+#### 4. `<tr>` — Fila de tabla (*Table Row*)
+- **¿Para qué sirve?** Delimita cada una de las líneas horizontales de la cuadrícula. No puede contener texto directamente; solo puede albergar celdas `<th>` o `<td>`.
+
+#### 5. `<th>` con `scope="col"` y `scope="row"` — Celdas de encabezado dimensionales
+- **¿Para qué sirve `<th>`?** Define una celda de encabezado (*Table Header*). Visualmente el navegador la muestra en negrita y centrada por defecto, pero su auténtica función es semántica.
+- **El atributo `scope` (Bidimensionalidad accesible):**
+    - **`scope="col"` (En la fila de `<thead>`):** Indica que ese encabezado rige verticalmente para **todas las celdas de esa columna**. Por ejemplo, `<th scope="col">Proyecto</th>` indica que cualquier nota situada debajo pertenece al proyecto.
+    - **`scope="row"` (En la primera celda de cada fila):** Indica que ese encabezado rige horizontalmente para **todas las celdas de esa fila**. Por ejemplo, `<th scope="row">Lenguajes de marcas</th>`.
+- **La experiencia de usuario con lector de pantalla:** Gracias a `scope`, cuando una persona ciega navega por la cuadrícula con las flechas del teclado y se sitúa sobre la celda `8,5`, el lector de pantalla no se limita a decir "ocho coma cinco", sino que vocaliza el contexto completo: *"Lenguajes de marcas, 2.ª eval., 8,5"*. Sin `scope`, los números quedan completamente descontextualizados e incomprensibles.
+
+#### 6. `abbr="Final"` en cabecera — Abreviatura para lectores de pantalla
+- **¿Para qué sirve?** Proporciona una versión resumida o abreviada del texto de un encabezado largo.
+- **¿Por qué se usa aquí?** En la última columna, el texto visible es *"Nota final"*. El atributo `abbr="Final"` ordena a las tecnologías de asistencia que, al recorrer las celdas inferiores de esa columna, utilicen la palabra corta *"Final"* en vez de repetir la frase larga una y otra vez, agilizando enormemente la velocidad de escucha del estudiante.
+
+#### 7. `<td>` — Celdas de datos estándar (*Table Data*)
+- **¿Para qué sirve?** Contiene los valores numéricos o informativos ordinarios del informe (las calificaciones numéricas). Cada `<td>` hereda automáticamente la asociación semántica con el `<th>` de su columna y el `<th>` de su fila.
+
+---
+
 ## 8. Errores frecuentes y claves para el examen
 
 !!! warning "Error común"
 
     Los tres fallos que más se corrigen en la práctica:
+    
     - **Usar `<table>` para maquetar** (cabecera, menú, tarjetas): eso es trabajo de Flexbox y Grid → [../css/05-flexbox.md](../css/05-flexbox.md), [../css/06-grid.md](../css/06-grid.md).
     - **`<th>` sin `scope`** (o un `<th>` decorativo en negrita): el lector no vincula la celda con su fila o su columna.
     - **Olvidar `<caption>`**: la tabla queda sin título accesible y hay que adivinar su propósito leyendo celda a celda.

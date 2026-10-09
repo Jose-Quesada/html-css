@@ -53,41 +53,51 @@ Propiedades de atajo: `box-shadow` (fuera de la caja pero dentro del «área de 
 
 ## 2. `box-sizing`: el cambio que lo cambia todo
 
-### 2.1. `content-box` (default histórico)
+### 2.1. `content-box` (el comportamiento histórico por defecto)
 
-`width` define solo el contenido:
+En el modelo tradicional de CSS, cuando escribes `width: 300px`, le estás diciendo al navegador: *«Haz que el área del **contenido de texto** mida 300px»*.
 
-```text title="content-box.txt"
-ancho total = width + padding-left + padding-right + border-left + border-right
+Si luego añades relleno interior (`padding: 20px`) y un borde (`border: 10px solid black`), el navegador suma esas capas hacia el exterior como capas de una cebolla:
+
+```text title="content-box-calculo.txt"
+Ancho visual real = width + padding-izq + padding-der + border-izq + border-der
+Ancho visual real = 300px + 20px        + 20px        + 10px       + 10px = 360px
 ```
 
-### 2.2. `border-box` (el estándar de facto moderno)
+**El problema para el desarrollador:** Si intentabas crear dos columnas al `50%` de ancho y a una le ponías un poco de padding o borde, la suma superaba el `100%` y la segunda columna saltaba a la línea inferior destrozando la maquetación.
 
-`width` define la caja **incluyendo** padding y borde:
+### 2.2. `border-box` (el estándar moderno intuitivo)
 
-```text title="border-box.txt"
-ancho total = width   (ya incluye padding y border)
+Con `box-sizing: border-box`, el valor de `width: 300px` pasa a ser el **tamaño exterior total de la caja** (hasta el borde exterior).
+
+Si declaras `width: 300px`, `padding: 20px` y `border: 10px`, la caja medirá **exactamente 300px**. El navegador encoge el contenido interior automáticamente para que todo quepa dentro de los 300px:
+
+```text title="border-box-calculo.txt"
+Ancho visual real = width = 300px
+(El contenido interior se reduce a: 300px - 20px - 20px - 10px - 10px = 240px)
 ```
 
 !!! example "Reset universal recomendado"
 
     ```css title="reset.css" hl_lines="3"
-    /* Reset universal recomendado */
+    /* Reset universal recomendado en todos los proyectos web */
     *, *::before, *::after {                /* (1)! */
       box-sizing: border-box;               /* (2)! */
     }
     ```
 
-    1.  Cubre también los pseudo-elementos generados por CSS.
-    2.  Con ==`box-sizing`== en `border-box`, el `width` declarado es el **ancho total** de la caja.
+    1.  El selector universal `*` junto con los pseudo-elementos garantiza que absolutamente todas las cajas de la web se comporten de forma predecible.
+    2.  Con ==`box-sizing: border-box`==, el `width` que defines en tus estilos coincide exactamente con los píxeles reales que la caja ocupa en pantalla.
 
-> **Claves para el examen**: con `border-box`, si declaras `width: 300px; padding: 20px; border: 5px solid`, la caja mide 300 px en total. Con `content-box`, mediría 350 px. Pregunta típica: calcular el ancho resultante en ambos modos.
+> **Claves para el examen**: 
+> - Con `content-box`, `width` mide solo el contenido (el padding y el borde **se suman por fuera**).
+> - Con `border-box`, `width` mide hasta el borde (el padding y el borde **se restan por dentro**).
+> - El margen (`margin`) **nunca** forma parte de `width` en ninguno de los dos modelos; el margen siempre es espacio exterior entre cajas vecinas.
 
-### 2.3. ¿Por qué `border-box`?
+### 2.3. ¿Por qué se utiliza siempre `border-box` en la industria?
 
-- Los cálculos a mano **coinciden con lo que ves**.
-- Evita sorpresas al añadir padding a elementos de ancho fijo.
-- Es la premisa de casi todos los frameworks y design systems.
+- **Cero sorpresas matemáticas:** Si una columna debe medir el `50%` o `300px`, mide exactamente eso, sin importar si luego decides cambiar el padding de `10px` a `24px`.
+- **Compatibilidad con sistemas de diseño:** Todos los frameworks modernos (Bootstrap, Tailwind, etc.) y sistemas de cuadrícula asumen `border-box` como premisa indispensable.
 
 ## 3. Dimensiones: `width` y `height`
 
@@ -95,12 +105,12 @@ ancho total = width   (ya incluye padding y border)
 
 - **Longitudes**: `px`, `rem`, `%`, `vw/vh`, `ch`, `clamp()`…
 - **`auto`** (default):
-  - En bloque horizontal: llena el contenedor (menos padding/borde propios).
-  - En vertical: crece con el contenido.
+    - En bloque horizontal: llena el contenedor (menos padding/borde propios).
+    - En vertical: crece con el contenido.
 - **Palabras clave intrínsecas** (solo `width`/`height` en ciertos contextos):
-  - `min-content`: el más estrecho posible sin romper contenido.
-  - `max-content`: el más ancho posible en una línea.
-  - ==`fit-content`==: `min(max(min-content, disponible), max-content)` → «lo justo».
+    - `min-content`: el más estrecho posible sin romper contenido.
+    - `max-content`: el más ancho posible en una línea.
+    - ==`fit-content`==: `min(max(min-content, disponible), max-content)` → «lo justo».
 
 ```css title="estilos.css"
 .etiqueta { width: fit-content; }      /* se ajusta al texto */
@@ -160,33 +170,38 @@ Mantiene proporción entre anchura y altura:
 
 ### 4.2. Colapso de márgenes (margin collapsing) ⚠️
 
-Es uno de los conceptos **más examinados** del CSS clásico: el ==colapso de márgenes==.
+El ==colapso de márgenes== es uno de los comportamientos que más confunde a los estudiantes de desarrollo web cuando empiezan a maquetar.
 
-**Regla**: cuando dos márgenes verticales de bloques en el mismo BFC se tocan, **no se suman**: se colapsan en uno solo, cuyo valor es el **máximo** (en valor absoluto) de los implicados.
+#### ¿Por qué diablos inventó el W3C el colapso de márgenes?
+Tiene un origen puramente **editorial y tipográfico**. En un libro o artículo de periódico, si un título tiene un margen inferior de `20px` y el párrafo siguiente tiene un margen superior de `16px`, el tipógrafo no quiere un hueco descomunal de `36px` entre ellos; quiere una separación armónica de `20px` (el mayor de los dos). El navegador implementa esta regla por defecto para el texto en flujo normal.
 
-Casos:
+#### La regla básica
+Cuando dos márgenes verticales pertenecientes a elementos en bloque en el mismo contexto de formato se tocan directamente, **no se suman**: se funden en un único margen común cuyo tamaño es el **máximo** de los márgenes implicados.
 
-1. **Entre hermanos consecutivos**:
+```text title="colapso-hermanos.txt"
+<p style="margin-bottom: 30px;">Párrafo 1</p>
+<p style="margin-top: 20px;">Párrafo 2</p>
 
-```css title="estilos.css"
-p { margin: 1rem 0; }
-/* <p>A</p><p>B</p> → el espacio entre A y B es 1rem, no 2rem */
+Espacio real resultante entre ambos = Max(30px, 20px) = 30px (¡NO 50px!)
 ```
 
-2. **Padre-hijo (sin separación)**: si el padre no tiene padding/borde superior ni `overflow` distinto de visible, el margen superior del hijo «sale» del padre:
+#### Los tres escenarios donde ocurre:
 
-```css title="estilos.css"
-section { }            /* sin padding-top ni border-top */
-section > p:first-child { margin-top: 2rem; }
-/* El section entero baja 2rem: el margen «escapa» */
-```
+1. **Entre hermanos consecutivos en el flujo:**
+   Como en el ejemplo anterior, el margen inferior del primer hermano y el margen superior del segundo se tocan y colapsan al mayor.
 
-3. **Vacío**: dos elementos vacíos con margen colapsan igualmente.
-4. **Márgenes opuestos signos**: `1rem` + `-2rem` → colapsan a `-1rem`.
+2. **Entre padre e hijo (el caso del «margen que escapa»):**
+   Si un elemento contenedor `<section>` no tiene borde superior (`border-top: 0`) ni relleno superior (`padding-top: 0`), y su primer hijo `<p>` tiene `margin-top: 40px`, **el margen del hijo atraviesa al padre**. Como no hay nada físico que los separe, los márgenes de padre e hijo se tocan y colapsan juntos. El resultado visual es que ¡todo el `<section>` se desplaza hacia abajo 40px en la ventana, en lugar de separarse el párrafo dentro del section!
 
-!!! warning "Error común"
+3. **Bloques vacíos:**
+   Si un elemento `<div>` está completamente vacío y no tiene altura ni padding ni bordes, su propio `margin-top` y `margin-bottom` colapsan entre sí.
 
-    Sumar los márgenes de dos párrafos vecinos pensando que el hueco son `4rem`. En vertical **no se suman**: colapsan al **mayor** de los dos. Para un `4rem` real, declara `margin: 2rem 0` en ambos o separa con `padding`/`border`.
+4. **Márgenes de signos opuestos:**
+   Si un margen es positivo (`30px`) y el otro es negativo (`-10px`), el cálculo matemático es su suma algebraica: `30px + (-10px) = 20px`.
+
+!!! warning "Error crítico de examen y de maquetación"
+
+    Pensar que los márgenes horizontales (`margin-left` y `margin-right`) colapsan. **FALSO:** Los márgenes horizontales **NUNCA colapsan**; si pones dos botones inline-block con `margin-right: 10px` y `margin-left: 10px`, la separación siempre es `20px`. El colapso solo ocurre en el eje **vertical** de elementos en bloque.
 
 **No colapsan** cuando:
 
@@ -337,7 +352,210 @@ El ==centrado== es el patrón que más se repite:
 }
 ```
 
-## 9. Errores comunes (repaso)
+---
+
+## 9. Ejemplo práctico: tarjeta de producto con modelo de caja moderno, `aspect-ratio` y contención BFC
+
+El siguiente ejemplo implementa una tarjeta de producto de comercio electrónico profesional donde cada capa del modelo de caja (`content`, `padding`, `border`, `margin`) y las propiedades de dimensionamiento moderno se articulan para evitar desplazamientos de diseño (CLS), colapsos inesperados de márgenes y roturas por textos extensos.
+
+```html title="tarjeta-producto.html"
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modelo de Caja · Tarjeta de Producto</title>
+  <link rel="stylesheet" href="css/caja.css">
+</head>
+<body>
+  <main class="escaparate">
+    <article class="caja-producto">
+      <div class="caja-producto__media">
+        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80" 
+             alt="Auriculares inalámbricos premium negros sobre fondo gris"
+             width="800" height="450">
+        <span class="caja-producto__etiqueta">Nuevo</span>
+      </div>
+
+      <div class="caja-producto__cuerpo">
+        <h2 class="caja-producto__titulo">Auriculares Pro Wireless NC</h2>
+        <p class="caja-producto__descripcion">
+          Cancelación de ruido adaptativa con 40 horas de autonomía y transductores de titanio de alta fidelidad.
+        </p>
+
+        <div class="caja-producto__precio-fila">
+          <span class="caja-producto__precio">189,99&nbsp;€</span>
+          <span class="caja-producto__iva">IVA incl.</span>
+        </div>
+
+        <button type="button" class="caja-producto__boton">Añadir a la cesta</button>
+      </div>
+    </article>
+  </main>
+</body>
+</html>
+```
+
+```css title="css/caja.css"
+/* 1. Reset universal del modelo de caja */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: #f8fafc;
+  color: #0f172a;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+/* 2. Contenedor con BFC y control de dimensiones */
+.caja-producto {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  overflow: hidden; /* Evita que la imagen sobresalga de las esquinas redondeadas */
+  display: flow-root; /* Crea un nuevo BFC: aísla márgenes internos de externos */
+  max-width: 22rem; /* Ancho máximo para evitar tarjetas desproporcionadas */
+  width: 100%; /* Adaptable a pantallas más estrechas */
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.08);
+}
+
+/* 3. Media con relación de aspecto estricta anti-CLS */
+.caja-producto__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9; /* Reserva el espacio exacto antes de descargar la imagen */
+  background-color: #e2e8f0; /* Fondo placeholder durante la carga */
+}
+
+.caja-producto__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ajusta la fotografía recortando excesos sin deformar */
+  display: block; /* Elimina el espacio fantasma inferior de los inline */
+}
+
+.caja-producto__etiqueta {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background-color: rgb(15 23 42 / 0.85);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 9999px;
+}
+
+/* 4. Padding interior y ritmo vertical lógico */
+.caja-producto__cuerpo {
+  padding: 1.25rem;
+}
+
+.caja-producto__titulo {
+  font-size: 1.25rem;
+  line-height: 1.3;
+  margin-block-end: 0.5rem; /* Margen lógico inferior */
+  color: #0f172a;
+}
+
+.caja-producto__descripcion {
+  font-size: 0.9rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin-block-end: 1.25rem;
+  max-width: 50ch; /* Limita la longitud visual de la línea a un máximo de 50 caracteres */
+}
+
+/* 5. Fila de precio con márgenes alineados */
+.caja-producto__precio-fila {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-block-end: 1.25rem;
+}
+
+.caja-producto__precio {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.caja-producto__iva {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+/* 6. Botón de acción con modelo de caja expandido */
+.caja-producto__boton {
+  display: block;
+  width: 100%;
+  padding-block: 0.75rem;
+  padding-inline: 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #0284c7;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.caja-producto__boton:hover {
+  background-color: #0369a1;
+}
+
+.caja-producto__boton:focus-visible {
+  outline: 2px solid #0284c7;
+  outline-offset: 2px;
+}
+```
+
+---
+
+### 9.1 Explicación detallada: ¿Por qué se usa cada propiedad y para qué sirve?
+
+A continuación se realiza una disección técnica de cada regla y valor del modelo de caja aplicados en la tarjeta:
+
+#### 1. `box-sizing: border-box` en el reset
+- **¿Para qué sirve?** Modifica la ecuación fundamental del modelo de caja del navegador.
+- **Fórmula matemática estándar (`content-box`):**
+  $$\text{Ancho total} = \text{width} + \text{padding} + \text{border}$$
+- **Fórmula con `border-box`:**
+  $$\text{Ancho total} = \text{width}$$
+- **Por qué es indispensable aquí:** Cuando a `.caja-producto__boton` le asignamos `width: 100%` y un `padding-inline: 1.25rem`, con `content-box` el botón se saldría lateralmente de la tarjeta por $2 \times 1.25\text{ rem} = 2.5\text{ rem}$. Con `border-box`, el navegador encoge el área de contenido para que la suma total coincida exactamente con el 100% del contenedor.
+
+#### 2. `display: flow-root` y contención BFC
+- **¿Para qué sirve?** Establece un nuevo **Contexto de Formateo de Bloque** (*Block Formatting Context - BFC*).
+- **El problema que previene:** Evita el fenómeno del **colapso de márgenes verticales**. En CSS ordinario, el margen superior del primer hijo (`margin-top`) se escapa fuera del contenedor padre, empujando toda la tarjeta hacia abajo. Al declarar `flow-root`, los márgenes interiores quedan estrictamente confinados dentro de los límites de la tarjeta.
+
+#### 3. `aspect-ratio: 16 / 9` frente al Cumulative Layout Shift (CLS)
+- **¿Para qué sirve?** Fuerza una relación dimensional constante entre anchura y altura sin necesidad de esperar a que la imagen se descargue de internet.
+- **Importancia en rendimiento (*Core Web Vitals*):** En conexiones lentas, el navegador calcula inmediatamente la altura del contenedor (`altura = ancho * 9 / 16`). Cuando la fotografía finalmente termina de cargarse, no se produce ningún salto brusco en la interfaz, eliminando el CLS.
+
+#### 4. `object-fit: cover` y `display: block` en imágenes
+- **`object-fit: cover`:** Escala la imagen para llenar todo el marco de 16:9, recortando sutilmente los sobrantes sin distorsionar ni estirar la proporción original de la fotografía.
+- **`display: block`:** Por defecto, los elementos `<img>` son de tipo `inline-block`, por lo que el navegador les reserva un espacio inferior de 3 o 4 píxeles para acomodar la línea base tipográfica (*descender space*). Convertirla en bloque elimina ese espacio fantasma.
+
+#### 5. Propiedades lógicas de dirección (`margin-block-end`, `padding-inline`)
+- **¿Por qué usarlas frente a `margin-bottom` o `padding-left/right`?**
+- Respetan la internacionalización moderna (*i18n*). Si la web se visualiza en un idioma con escritura de derecha a izquierda (árabe, hebreo) o vertical (japonés tradicional), el navegador adapta los márgenes y rellenos automáticamente sin necesidad de reescribir hojas de estilo separadas.
+
+#### 6. Legibilidad óptima con unidades de caracteres (`max-width: 50ch`)
+- **¿Para qué sirve?** Fija el ancho máximo del párrafo a la anchura de 50 caracteres del glifo "0" de la tipografía activa.
+- **Justificación ergonómica:** La investigación tipográfica demuestra que las líneas de lectura con más de 65-75 caracteres provocan fatiga visual y pérdida de foco al saltar de renglón. Acotar a `50ch` garantiza una lectura cómoda y descansada.
+
+---
+
+## 10. Errores comunes (repaso)
 
 | Error | Síntoma | Causa/solución |
 |---|---|---|
@@ -354,7 +572,7 @@ El ==centrado== es el patrón que más se repite:
     - [ ] Explico **qué** colapsa, **cuándo** no y **dos soluciones** (BFC y anulación).
     - [ ] Elijo el `overflow` adecuado y reproduzco centrado, full-bleed y caja 16:9.
 
-## 10. Autoevaluación rápida
+## 11. Autoevaluación rápida
 
 1. Con `content-box`: `width: 200px; padding: 10px; border: 2px`. ¿Cuánto mide la caja? ¿Y con `border-box`?
 2. Dos párrafos con `margin: 2rem 0` seguidos: ¿cuánto espacio hay entre ellos? ¿Cómo harías que fueran 4 rem?

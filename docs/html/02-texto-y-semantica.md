@@ -154,59 +154,103 @@ Los menús son listas de enlaces: `<nav>` + `<ul>` + `<li>` + `<a>`, tal como se
 
 ==`<strong>`== marca **importancia** (advertencias, avisos críticos) y `<em>` marca **énfasis** (la palabra que se pronunciaría con fuerza). Ambos son **semánticos**: el navegador los pinta en negrita y cursiva, pero su valor real está en que lector de pantalla y buscadores lo interpretan como "esto importa". ==La negrita visual se consigue con CSS==, no eligiendo etiquetas.
 
-### 4.2 Cuándo usar cada elemento
+### 4.2 Explicación detallada de los elementos en línea semánticos
 
-| Elemento | Cuándo se usa | Ejemplo |
-|---|---|---|
-| `strong` | Texto de importancia real | **Alerta**: plazo cerrado |
-| `em` | Énfasis en la pronunciación | Esto es *fundamental* |
-| `mark` | Resaltar por relevancia (búsqueda, nota) | <mark>Pendiente</mark> |
-| `small` | Letra pequeña legal o lateral | <small>Oferta no acumulable</small> |
-| `del` | Texto **eliminado** (precio viejo, corrección) | ~~120 €~~ |
-| `ins` | Texto **insertado** (nuevo precio) | 99 € |
-| `abbr` | Siglas con expansiones | `title="Diseño de Interfaces Web"` |
-| `cite` | Título de una obra citada | *El paz en las palabras* |
-| `q` | Cita corta **en línea** | «medir antes de cortar» |
-| `blockquote` | Cita larga de bloque | ver sección 5 |
-| `sub` / `sup` | Índices y notas al pie | H<sub>2</sub>O, 10<sup>2</sup> |
-| `time` | Fecha u hora legible + `datetime` | <time datetime="2026-06-15">15 de junio</time> |
-| `dfn` | Definición del término que se explica | *selector* |
-| `code`/`pre` | Código de ordenador | ver sección 4.3 |
+Para un alumno principiante, la regla de oro es: **nunca elijas una etiqueta HTML por cómo se ve en pantalla**, sino por **qué significa su contenido**. La apariencia visual siempre es responsabilidad de CSS.
+
+A continuación se detalla la función real de cada etiqueta semántica en línea:
+
+#### 1. `<time>` y el atributo `datetime`: Fechas legibles por máquinas
+Un humano comprende expresiones como *"ayer"*, *"el próximo viernes"* o *"12/04/2026"*. Sin embargo, un motor de búsqueda, un calendario o un lector de pantalla se confunden (por ejemplo, ¿`12/04` es el 12 de abril o el 4 de diciembre?).
+
+- El texto entre las etiquetas es lo que lee el usuario humano: `<time datetime="2026-10-15">15 de octubre</time>`.
+- El atributo obligatorio `datetime` proporciona la fecha exacta en formato estándar internacional **ISO 8601**:
+    - Solo fecha: `datetime="2026-10-15"` (`AAAA-MM-DD`).
+    - Fecha y hora: `datetime="2026-10-15T09:30"` (`AAAA-MM-DDTHH:MM`).
+    - Solo año: `datetime="2026"`.
+- **Beneficio real:** Permite que los móviles sugieran automáticamente "Añadir a Google Calendar" al tocar la fecha y que Google muestre la fecha exacta en los resultados de búsqueda.
+
+#### 2. `<abbr>`: Abreviaturas y siglas accesibles
+Identifica una sigla o acrónimo y proporciona su significado expandido mediante el atributo `title`:
+```html
+<p>El ciclo de <abbr title="Desarrollo de Aplicaciones Web">DAW</abbr> tiene alta empleabilidad.</p>
+```
+
+- **Comportamiento:** En navegadores visuales suele mostrar un suave subrayado punteado y un recuadro de ayuda (*tooltip*) al pasar el cursor del ratón.
+- **Accesibilidad:** Los lectores de pantalla anuncian la expansión completa a personas que no conocen la terminología técnica.
+
+#### 3. `<del>` e `<ins>`: Historial de cambios y precios de oferta
+Representan ediciones en un documento legal o en una tienda online:
+
+- `<del>`: Texto **eliminado o tachado** que ya no está vigente (*deleted*).
+- `<ins>`: Texto **insertado o añadido** que lo sustituye (*inserted*).
+```html
+<p>Precio de matrícula: <del>150 €</del> <ins>95 €</ins> (oferta de lanzamiento).</p>
+```
+Semánticamente indican a los motores de indexación que hubo una modificación editorial, y los lectores de pantalla leen expresamente *"Eliminado: 150 euros. Insertado: 95 euros"*.
+
+#### 4. `<mark>`: Texto resaltado contextualmente
+Representa un fragmento de texto marcado o resaltado por su **relevancia contextual en ese momento**, exactamente igual que un rotulador fluorescente amarillo.
+
+- **Caso de uso típico:** Cuando un usuario busca una palabra en una web y el buscador devuelve la lista de resultados resaltando en amarillo el término coincidente.
+- **Diferencia con `<strong>`:** `<strong>` marca algo que es intrínsecamente importante por sí mismo (como una advertencia de peligro); `<mark>` solo señala que es relevante para la acción actual del usuario.
+
+#### 5. `<sub>` y `<sup>`: Subíndices y superíndices
+- `<sub>` (*Subscript*): Texto desplazado hacia abajo en tamaño reducido. Indispensable para fórmulas químicas: `H<sub>2</sub>O`.
+- `<sup>` (*Superscript*): Texto desplazado hacia arriba. Se utiliza para potencias matemáticas (`x<sup>2</sup>`), notas al pie (`documento<sup>[1]</sup>`) o abreviaturas ordinales (`1.<sup>er</sup> curso`).
+
+#### 6. `<dfn>`: Definición de términos
+Envuelve el **término exacto que se está definiendo por primera vez** en un texto técnico:
+```html
+<p>Un <dfn>algoritmo</dfn> es un conjunto ordenado y finito de instrucciones para resolver un problema.</p>
+```
+Los navegadores y robots de indexación asocian la definición de todo el párrafo directamente al término envuelto en `<dfn>`.
+
+#### 7. Citas: `<q>` vs `<blockquote>` vs `<cite>` (El gran dilema de examen)
+HTML distingue con precisión matemática entre la cita y su autoría:
+
+- `<q>`: Para citas cortas integradas **en línea dentro de un párrafo**. El navegador añade automáticamente las comillas tipográficas adecuadas según el atributo `lang` del documento (en español usará comillas latinas `« »` o inglesas `" "`). **Nunca debes escribir las comillas a mano si usas `<q>`**, o saldrán duplicadas.
+- `<blockquote>`: Para citas extensas de **bloque** (ocupan su propio espacio separado, con márgenes).
+- El atributo `cite="..."`: Es un atributo HTML opcional que se coloca dentro de `<blockquote>` o `<q>`. Contiene la **URL de origen digital de la cita** para las máquinas (es invisible en pantalla).
+- La etiqueta `<cite>`: Es un elemento HTML en línea que sirve para nombrar el **título de la obra citada** (un libro, una película, un artículo de investigación) o la autoría humana visible:
+```html
+<blockquote cite="https://es.wikipedia.org/wiki/Tim_Berners-Lee">
+  <p>El poder de la Web está en su universalidad. El acceso para todos, independientemente de la discapacidad, es un aspecto esencial.</p>
+</blockquote>
+<p>— <cite>Tim Berners-Lee</cite>, creador de la World Wide Web.</p>
+```
+
+#### 8. `<small>`: Texto accesorio o descargos legales
+No significa simplemente "letra de tamaño pequeño" (eso es CSS `font-size: 0.8rem`). Semánticamente se reserva para la "letra pequeña" legal: avisos de derechos de autor (*copyright*), descargos de responsabilidad o condiciones de privacidad.
+
+---
 
 ### 4.3 Código técnico: `code`, `pre`, `kbd`, `samp`, `var`
 
-**`<code>`**
-: texto de programación **en línea**.
+Cuando escribimos documentación de software, tutoriales o apuntes informáticos, HTML proporciona cinco etiquetas especializadas que los navegadores renderizan por defecto con tipografía monoespaciada:
 
-**`<pre>`**
-: bloque con **espaciado y saltos preservados** (envolver siempre un `<code>` dentro).
-
-**`<kbd>`**
-: tecla o combinación de teclas que teclea la persona usuaria.
-
-**`<samp>`**
-: salida de muestra de un programa.
-
-**`<var>`**
-: variable matemática o de programación.
+| Etiqueta | Función conceptual | Ejemplo de uso |
+|---|---|---|
+| `<code>` | Fragmento de código o sintaxis de programación **en línea** | Para declarar variables en JS usa <code>const</code> o <code>let</code>. |
+| `<pre>` | Bloque con **espacios en blanco y saltos de línea preservados** | Bloques de código fuente completos (siempre debe envolver a un `<code>` en su interior). |
+| `<kbd>` | Tecla física o atajo de teclado que debe pulsar el usuario | Pulsa <kbd>Ctrl</kbd> + <kbd>C</kbd> para copiar. |
+| `<samp>` | Salida o respuesta que devuelve un programa o terminal | El servidor respondió: <samp>200 OK</samp>. |
+| `<var>` | Variable matemática o parámetro formal en programación | Si la variable <var>x</var> es mayor que 10... |
 
 ```html title="codigo-tecnico.html"
-<p>Pulsa <kbd>Ctrl</kbd> + <kbd>S</kbd> para guardar el archivo.</p>
-<p>Salida esperada: <samp>Validación superada</samp></p>
-<p>Si <var>n</var> es 0, el bucle no se ejecuta.</p>
+<p>Para formatear el disco duro, escribe el comando <code>format C:</code> en la consola y presiona la tecla <kbd>Enter</kbd>.</p>
+<p>Salida esperada en la terminal: <samp>Operación completada con éxito</samp>.</p>
+<p>El área de un círculo se calcula como: Área = π × <var>r</var><sup>2</sup>.</p>
 
-<pre><code>&lt;nav&gt;
-  &lt;ul&gt;
-    &lt;li&gt;&lt;a href="index.html"&gt;Inicio&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/nav&gt;</code></pre>
+<!-- Bloque completo de código: pre preserva tabulaciones y saltos de línea -->
+<pre><code>function saludar(nombre) {
+    console.log("Hola, " + nombre);
+}</code></pre>
 ```
-
-También en línea: `<q>` para citas breves, `<abbr>` para siglas, `<time datetime="2026-10-10">` para fechas legibles por la máquina, `<del>`/`<ins>` para correcciones y `<sub>`/`<sup>` para índices.
 
 !!! warning "Error común"
 
-    - Usar `<strong>` o `<em>` **solo porque el diseño pide negrita o cursiva**: eso es CSS (`font-weight`, `font-style`). Si no hay importancia real, usa un `<span>` con clase y estílalo.
+    Usar `<strong>` o `<em>` **solo porque el diseño pide negrita o cursiva**: eso es CSS (`font-weight`, `font-style`). Si no hay importancia o énfasis real, usa un `<span>` con clase y dale estilos en tu archivo CSS.
 
 ## 5. Elementos de agrupación de texto
 
@@ -280,6 +324,74 @@ Cita de bloque; el atributo `cite` guarda la **URL de origen** (no la muestra). 
 ```
 
 Todo vive dentro de un ==`<article>`== autónomo, que se entiende sin el resto de la página. Fíjate en la jerarquía (`h1` → `h2` → `h3`), en que la fecha legible lleva su `datetime` y en que la cita tiene su fuente.
+
+---
+
+### 6.1 Explicación detallada: ¿Por qué se usa cada etiqueta y para qué sirve?
+
+A continuación se analiza en profundidad la justificación semántica y técnica de cada etiqueta y atributo empleado en el artículo de blog `articulo.html`:
+
+#### 1. `<article>` — El contenedor autónomo e independiente
+- **¿Para qué sirve?** Representa una unidad de contenido completa, autocontenida y distribuible por sí misma (`role="article"` implícito).
+- **¿Por qué se usa aquí en vez de un `<section>` o un `<div>`?**
+    - Si este bloque se extrajera de la web y se publicara en un lector de RSS, en un agregador de noticias o se enviara por boletín electrónico (*newsletter*), **sigue teniendo perfecto sentido y comprensión completa** por sí mismo.
+    - Un `<section>` solo divide temas genéricos dentro de un documento mayor; `<article>` indica expresamente una publicación independiente (artículo de blog, noticia, ficha de producto, post en un foro).
+    - Un `<div>` no transmite ninguna información semántica a los lectores de pantalla ni a los motores de búsqueda.
+
+#### 2. `<header>` — La cabecera del artículo
+- **¿Para qué sirve?** Agrupa los elementos introductorios o metadatos de apertura de una sección o artículo.
+- **¿Por qué se usa dentro del `<article>`?**
+    - A diferencia del `<header>` principal del sitio (que es hijo de `<body>` y actúa como `role="banner"`), un `<header>` dentro de un `<article>` delimita específicamente la **cabecera editorial del post**, agrupando el titular, la firma del autor y la fecha de publicación antes del cuerpo del texto.
+
+#### 3. `<h1>` — Título nuclear del artículo
+- **¿Para qué sirve?** Es el titular principal del artículo (*«Cómo organizar los apuntes de DAW»*).
+- **¿Por qué se usa aquí?** Proporciona la etiqueta accesible primordial para el hito del artículo. Cuando un usuario de lector de pantalla pulsa la tecla rápida <kbd>H</kbd> para navegar por encabezados, este `<h1>` le comunica de inmediato el tema central de la lectura.
+
+#### 4. `<cite>` — Referencia a la autoría o fuente
+- **¿Para qué sirve?** Representa el título o la referencia a la fuente de una obra intelectual (un libro, un ensayo, una investigación o la persona autora de la pieza).
+- **¿Por qué se usa en `<cite>Ana Ruiz</cite>`?** Identifica formalmente la autoría del texto. Aunque visualmente el navegador lo renderice en cursiva por defecto, su valor radica en la semántica: permite a algoritmos de indexación identificar a la creadora del contenido.
+
+#### 5. `<time datetime="2026-09-29">` — Tiempo legible por humanos y máquinas
+- **¿Para qué sirve?** Traduce una fecha u hora a un formato estándar comprensible tanto para personas como para ordenadores.
+- **¿Por qué es imprescindible el atributo `datetime`?**
+    - El texto visible para el usuario es *"29 de septiembre de 2026"*, un formato lingüístico agradable pero difícil de procesar por programas informáticos.
+    - El atributo `datetime="2026-09-29"` codifica la fecha según la norma internacional **ISO 8601** (`AAAA-MM-DD`).
+    - **Beneficios prácticos:** Permite a los navegadores ofrecer la opción de *"Añadir al calendario"* con un clic, a los motores de búsqueda saber con exactitud cuándo se publicó la noticia para ponderar su frescura en los resultados, y a los lectores de pantalla vocalizar la fecha de manera inequívoca.
+
+#### 6. Jerarquía de encabezados: `<h2>` y `<h3>`
+- **¿Para qué sirven?** Establecen el árbol de contenidos (*outline*) del documento.
+- **¿Por qué se usan secuencialmente?**
+    - `<h2>` abre la sección principal de recomendaciones (*«Tres claves»*).
+    - `<h3>` se abre para un subapartado específico (*«Plantilla mínima»*) que depende conceptualmente del bloque anterior.
+    - **Regla estricta:** Nunca se debe saltar de `<h1>` a `<h3>` directamente por motivos puramente estéticos (por querer una letra más pequeña). El tamaño de fuente es responsabilidad exclusiva de CSS; la jerarquía de etiquetas representa la lógica del contenido.
+
+#### 7. `<ol>` y `<li>` — Lista ordenada con secuencia cronológica o prioritaria
+- **¿Para qué sirve `<ol>`?** Define una **lista ordenada** (*ordered list*).
+- **¿Por qué no se usa `<ul>` (lista con viñetas)?** Porque las tres claves siguen un orden lógico o enumerativo de pasos. El navegador numera automáticamente cada elemento (`1.`, `2.`, `3.`) y el lector de pantalla anuncia expresamente: *"Elemento de lista 1 de 3"*, permitiendo al estudiante comprender la secuencia y el progreso de la lectura.
+
+#### 8. `<strong>` vs. `<mark>` — Diferenciación semántica de énfasis
+- **`<strong>` (en *encabezado*):** Comunica **importancia seria o urgencia** en el contenido. Altera el tono del lector de pantalla para remarcar su gravedad conceptual.
+- **`<mark>` (en *marcador*):** Representa un **resaltado de relevancia contextual** (el equivalente digital a pasar un rotulador fluorescente amarillo por encima de un texto en papel).
+    - No significa que el autor original considere esa palabra más importante que las demás; significa que es relevante para la atención inmediata del lector o en una búsqueda activa.
+
+#### 9. `<blockquote cite="...">` — Cita en bloque con procedencia
+- **¿Para qué sirve `<blockquote>`?** Delimita un bloque de texto citado procedente de una fuente externa o de otro autor.
+- **¿Por qué lleva el atributo `cite`?** Contiene la URL completa del documento original (`https://www.ies.example.es/blog`). Aunque este atributo no se muestra visualmente en pantalla por defecto, aporta trazabilidad legal y bibliográfica a nivel de metadatos del DOM. Dentro de la cita, el texto se estructura formalmente mediante etiquetas de párrafo `<p>`.
+
+#### 10. `<pre>` y `<code>` — Fragmentos de código fuente
+- **`<pre>` (*Preformatted text*):** Le indica al navegador que respete fielmente todos los espacios en blanco, tabulaciones y saltos de línea literales que contiene, mostrándolos en una tipografía de ancho fijo (*monospace*).
+- **`<code>`:** Marca semánticamente que el texto contenido es código de programación o marcado informático.
+- **¿Por qué se usan juntos `<pre><code>`?** Porque representan un bloque de código completo multilínea.
+- **Escape de entidades:** Para mostrar etiquetas HTML dentro de `<code>` sin que el navegador intente ejecutarlas, los caracteres `<` y `>` se reemplazan obligatoriamente por sus entidades seguras: `&lt;` (*less than*) y `&gt;` (*greater than*).
+
+#### 11. `<small>` — Letra pequeña editorial y legal
+- **¿Para qué sirve?** En HTML5, `<small>` no es un simple reductor visual de tamaño tipográfico; representa comentarios secundarios, descargos de responsabilidad legal, copyright o condiciones de licencia (*"Publicado con fines educativos..."*).
+
+#### 12. `<footer>` y `<span>` — Cierre del artículo y etiquetas temáticas
+- **`<footer>` dentro del `<article>`:** Cierra el bloque editorial, acogiendo los metadatos de categorización y etiquetas (*tags*) del artículo.
+- **`<span>`:** Elemento en línea genérico sin significado semántico propio. Se utiliza aquí para encapsular cada etiqueta temáticas (`#html`, `#fp`), permitiendo posteriormente aplicarles estilos visuales independientes mediante clases CSS (por ejemplo, aspecto de pastilla o *badge*) sin alterar la estructura del párrafo.
+
+---
 
 ## 7. Cómo extraer el esquema de una página
 

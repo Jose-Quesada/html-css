@@ -493,6 +493,58 @@ Aplicación cliente completa con persistencia local, sanitización y manejo defe
 </html>
 ```
 
+---
+
+### 9.1 Explicación detallada: ¿Por qué se usa cada etiqueta y para qué sirve?
+
+A continuación se examina minuciosamente la arquitectura de la mini-aplicación `notas.html`, desglosando los elementos del marcado HTML5, sus atributos de interacción y la lógica de consumo de la API Web Storage:
+
+#### 1. `<main>` y `<h1>` — Contenedor de la aplicación
+- **`<main>`:** Delimita el núcleo funcional de la aplicación interactiva, aislándola de cabeceras o barras externas.
+- **`<h1>`:** Título de primer nivel que define la identidad del software (*«Mis Notas de Clase»*).
+
+#### 2. `<form id="formNota">` — Captura accesible de datos
+- **¿Para qué sirve?** Aunque la aplicación no envía datos a ningún servidor PHP o Node.js externo, se utiliza un elemento `<form>` nativo.
+- **¿Por qué usar `<form>` si todo se gestiona con JavaScript en el cliente?**
+    - **Usabilidad nativa por teclado:** Al envolver el campo y el botón en un `<form>`, el usuario puede escribir la nota y pulsar directamente la tecla <kbd>Intro</kbd> para guardarla. Si solo se usara un `<input>` y un `<div>` con evento de clic, habría que programar a mano listeners para detectar la tecla `Enter`.
+    - **Validación nativa:** Permite aprovechar los atributos de validación de HTML5 (`required`, `maxlength`) antes de que el script procese el contenido.
+- **`e.preventDefault()` en JavaScript:** Es la instrucción clave que intercepta el evento de envío, impidiendo que el navegador recargue la página en blanco.
+
+#### 3. `<label for="textoNota">` e `<input id="textoNota">`
+- **`<label for="textoNota">`:** Garantiza que el campo de texto disponga de nombre accesible para lectores de pantalla y amplíe la superficie táctil de activación.
+- **Atributos de validación del `<input>`:**
+    - `id="textoNota"`: Permite la vinculación con el `label` y la captura directa desde JavaScript con `document.getElementById('textoNota')`.
+    - `name="textoNota"`: Identifica semánticamente el control.
+    - `required`: Impide que se guarden notas vacías activando la burbuja de aviso del navegador si el campo no contiene texto.
+    - `maxlength="100"`: Regla de contención de datos en el cliente que restringe la longitud a 100 caracteres, protegiendo el espacio disponible en `localStorage` y garantizando que las tarjetas de notas no desborden la interfaz.
+    - `placeholder="..."`: Proporciona un ejemplo ilustrativo de lo que se espera que el usuario escriba.
+
+#### 4. `<section aria-labelledby="tit-lista">` y `<ul id="listaNotas">`
+- **`<section aria-labelledby="tit-lista">`:**
+    - Delimita la región donde se muestran las notas guardadas.
+    - Mediante `aria-labelledby="tit-lista"`, se asocia semánticamente con el encabezado `<h2 id="tit-lista">Listado de tareas</h2>`, creando un hito accesible anunciado por los sintetizadores de voz.
+- **`<ul id="listaNotas">`:**
+    - Semánticamente, las tareas o anotaciones constituyen una **lista no ordenada de elementos**.
+    - Servirá como contenedor vacío que el motor de JavaScript poblará reactivamente mediante `innerHTML`.
+    - Los lectores de pantalla anunciarán cuántas notas hay almacenadas (ej. *"Lista de 4 elementos"*), aportando orden estructurado a la interfaz.
+
+#### 5. Componentes dinámicos generados: `<li>`, `<span>` y `<button>`
+- **`<li>`:** Representa cada una de las notas individuales dentro de la lista.
+- **`<span>`:** Encapsula el texto de la anotación, separándolo del botón de borrado para facilitar la estilización con CSS (por ejemplo, alineación con Flexbox).
+- **`<button type="button" data-indice="..." aria-label="...">`:**
+    - `type="button"`: Esencial para evitar que este botón actúe como disparador de envío de formulario involuntario.
+    - `data-indice="${indice}"`: **Atributo de datos personalizado (Custom Data Attribute)** de HTML5. Almacena la posición de la nota en el array para que el script sepa exactamente cuál debe borrar al pulsar la cruz.
+    - `aria-label="Eliminar ${nota}"`: **Accesibilidad crítica**. Visualmente el botón solo muestra una cruz (`✕`), lo que para un usuario de lector de pantalla sería ininteligible. `aria-label` proporciona un nombre accesible descriptivo (ej. *"Eliminar Repasar selectores de CSS"*).
+
+#### 6. Arquitectura JavaScript y Web Storage (`localStorage`)
+- **`CLAVE_STORAGE`:** Constante que define el identificador bajo el cual se guardan los datos en el dominio del navegador.
+- **`localStorage.getItem()` y `JSON.parse()` con `try/catch`:** Manejo defensivo contra datos corruptos. Como `localStorage` solo almacena cadenas de texto plano (*strings*), es necesario serializar con `JSON.stringify()` al guardar y deserializar con `JSON.parse()` al recuperar.
+- **Delegación de eventos en `lista.addEventListener('click', ...)`:**
+    - En lugar de añadir un escuchador de eventos a cada botón individual conforme se crea la nota (lo cual malgasta memoria), se asigna **un único listener al elemento padre `<ul>`**.
+    - Al hacer clic, se verifica si el elemento pulsado es un botón (`e.target.tagName === 'BUTTON'`), se lee `e.target.dataset.indice` y se actualiza el almacenamiento.
+
+---
+
 !!! success "Checklist previo a producción con Web Storage"
 
     - [ ] ¿El dato almacenado es **no confidencial**? (Nada de contraseñas, DNIs o datos sensibles).

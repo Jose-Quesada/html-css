@@ -371,7 +371,234 @@ El ajuste que lo cambia todo es ==prefers-reduced-motion==:
     - [ ] **`prefers-reduced-motion`** incluido y probado en el SO.
     - [ ] Sin parpadeos > 3/s y `will-change` **retirado** al terminar.
 
-## 8. Errores comunes
+---
+
+## 8. Ejemplo práctico: tarjeta interactiva con elevación 3D, indicador de carga y accesibilidad vestibular
+
+El siguiente ejemplo implementa microinteracciones de alto rendimiento renderizadas íntegramente en la GPU (utilizando solo `transform` y `opacity`): una tarjeta con perspectiva y efecto de elevación 3D, un spinner de carga sincronizado con `@keyframes`, y la salvaguarda obligatoria de accesibilidad mediante `@media (prefers-reduced-motion: reduce)`.
+
+```html title="interacciones.html"
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transiciones y Animaciones · Interfaz Interactiva</title>
+  <link rel="stylesheet" href="css/animaciones.css">
+</head>
+<body>
+  <main class="escenario">
+    <article class="tarjeta-3d">
+      <div class="tarjeta-3d__contenido">
+        <header class="tarjeta-3d__cabecera">
+          <span class="icono-flotante">🚀</span>
+          <h2>Aceleración por GPU</h2>
+        </header>
+
+        <p>
+          Animaciones a 60 FPS fluidas mediante transformaciones geométricas compuestas en hardware, sin bloqueos del hilo principal.
+        </p>
+
+        <div class="zona-carga">
+          <!-- Indicador de carga animado por keyframes -->
+          <div class="spinner" role="status" aria-label="Sincronizando estado"></div>
+          <span class="estado-texto">Sincronizando nodo...</span>
+        </div>
+
+        <button type="button" class="btn-interactivo">Desplegar Servicio</button>
+      </div>
+    </article>
+  </main>
+</body>
+</html>
+```
+
+```css title="css/animaciones.css"
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: #0f172a;
+  color: #f8fafc;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+/* 1. Contenedor de perspectiva tridimensional */
+.escenario {
+  perspective: 1000px; /* Profundidad óptica para transformaciones 3D */
+}
+
+/* 2. Tarjeta con microinteracción de elevación y rotación */
+.tarjeta-3d {
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  border: 1px solid #334155;
+  border-radius: 1.25rem;
+  max-width: 24rem;
+  padding: 2.25rem;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+
+  /* Solo animamos propiedades baratas: transform y box-shadow */
+  /* Curva de rebote sutil: cubic-bezier */
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+  transform-style: preserve-3d;
+}
+
+/* Hover accesible: elevación en el eje Z y rotación suave */
+.tarjeta-3d:hover {
+  transform: translateY(-8px) rotateX(4deg) scale(1.02);
+  border-color: #0284c7;
+  box-shadow: 0 25px 30px -5px rgb(2 132 199 / 0.25);
+}
+
+.tarjeta-3d__cabecera {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-block-end: 1rem;
+}
+
+.icono-flotante {
+  font-size: 1.75rem;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.tarjeta-3d:hover .icono-flotante {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.tarjeta-3d h2 {
+  font-size: 1.3rem;
+  color: #ffffff;
+}
+
+.tarjeta-3d p {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-block-end: 1.5rem;
+}
+
+/* 3. Indicador animado continuo (@keyframes) */
+.zona-carga {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-block-end: 1.75rem;
+}
+
+.spinner {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 3px solid #334155;
+  border-top-color: #38bdf8;
+  border-radius: 50%;
+  
+  /* Animación continua infinita */
+  animation: girar 1s linear infinite;
+}
+
+@keyframes girar {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.estado-texto {
+  font-size: 0.85rem;
+  color: #38bdf8;
+  font-weight: 500;
+}
+
+/* 4. Botón interactivo con microinteracciones de pulsación */
+.btn-interactivo {
+  width: 100%;
+  padding: 0.85rem 1.5rem;
+  background-color: #0284c7;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.btn-interactivo:hover {
+  background-color: #0369a1;
+}
+
+.btn-interactivo:active {
+  /* Efecto háptico visual: retroceso elástico al hacer clic */
+  transform: scale(0.97);
+}
+
+.btn-interactivo:focus-visible {
+  outline: 2px solid #38bdf8;
+  outline-offset: 2px;
+}
+
+/* 5. Accesibilidad obligatoria: Desactivación de movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    /* Reduce la duración a un instante imperceptible para evitar mareos */
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .tarjeta-3d:hover {
+    transform: none; /* Elimina balanceos y zooms tridimensionales */
+  }
+
+  .spinner {
+    border-top-color: #38bdf8; /* Mantiene la visibilidad del icono estático */
+  }
+}
+```
+
+---
+
+### 8.1 Explicación detallada: ¿Por qué se usa cada propiedad y para qué sirve?
+
+A continuación se analizan las razones técnicas de rendimiento y accesibilidad que sustentan el código:
+
+#### 1. Rendimiento y la regla de oro: solo animar `transform` y `opacity`
+- **¿Por qué nunca se debe animar `top`, `left`, `width` o `margin`?**
+    - Modificar `width` o `top` obliga al motor del navegador a recalcular la geometría de toda la página (**fase de Layout o Reflow**) y repintar los píxeles (**fase de Paint**), provocando caídas drásticas de fotogramas por segundo (*jank* o tirones) en dispositivos móviles.
+    - Por el contrario, `transform` y `opacity` se procesan exclusivamente en la **fase de Composición (GPU)** sin alterar el flujo del DOM. Permiten transiciones perfectas a 60 o 120 FPS sin sobrecargar la CPU.
+
+#### 2. Curva elástica `cubic-bezier(0.34, 1.56, 0.64, 1)`
+- **¿Para qué sirve?** Sustituye las curvas monótonas por defecto (`ease` o `linear`) por una curva de aceleración física. El valor $1.56$ supera el 100% de la trayectoria, provocando un sutil "sobreimpulso" o rebote elástico (*overshoot*) que otorga una sensación orgánica y táctil de material físico a la tarjeta.
+
+#### 3. Animación infinita `@keyframes girar` con `linear`
+- **¿Por qué `linear` para el spinner?** A diferencia de las transiciones de botones (que requieren desaceleración natural), un indicador de carga o spinner debe rotar a **velocidad angular estrictamente constante** (`linear infinite`) para transmitir la sensación psicológica de que el proceso en segundo plano se ejecuta de forma ininterrumpida y uniforme.
+
+#### 4. Microinteracción de pulsación con `:active` y `scale(0.97)`
+- **¿Qué aporta a la experiencia de usuario (UX)?** Proporciona retroalimentación táctil inmediata (*affordance*). Cuando el usuario pulsa el ratón o toca la pantalla, la reducción del 3% en escala confirma visualmente que la orden ha sido registrada por la interfaz antes de que el servidor responda.
+
+#### 5. El criterio de conformidad WCAG 2.3.3 (`prefers-reduced-motion`)
+- **Impacto médico de accesibilidad:** Millones de personas padecen trastornos vestibulares del oído interno (vértigo, mareos, náuseas y migrañas) desencadenados por elementos visuales que se desplazan, escalan o rotan en la pantalla sin su control. El bloque `@media (prefers-reduced-motion: reduce)` no es un adorno estético; es un requisito legal y ético imprescindible para aprobar cualquier proyecto técnico en producción.
+
+---
+
+## 9. Errores comunes
 
 | Error | Síntoma | Solución |
 |---|---|---|

@@ -190,28 +190,50 @@ Valores adicionales de content: `space-between`, `space-around`, `space-evenly`,
     - `place-items` → el **contenido en su celda**; `place-content` → **las pistas** (solo si no lo llenan).
     - ==`place-items`== `: center` centra en los dos ejes en una línea.
 
-## 6. Responsivo SIN media queries: `auto-fit` vs `auto-fit`… ¡y `auto-fill`!
+## 6. Responsivo SIN media queries: La fórmula mágica `auto-fit` vs `auto-fill`
 
-El patrón de galería fluida más usado del mundo:
+Uno de los mayores hitos de CSS Grid es permitir crear rejillas responsivas (que se adaptan automáticamente desde móviles hasta pantallas panorámicas de 4K) **sin escribir una sola media query**.
+
+### 6.1. Disección de la fórmula mágica
 
 ```css title="galeria-fluida.css" hl_lines="3"
 .galeria {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
 }
 ```
 
-¿Qué hace? Crea tantas columnas de «mínimo 240px» como quepan; el sobrante se reparte (`1fr`).
+¿Qué está ocurriendo aquí paso a paso?
 
-Diferencia clave (pregunta de examen):
+1. **`repeat(...)`:** Le dice al navegador que cree tantas columnas como determine el primer parámetro.
+2. **`minmax(250px, 1fr)`:** Cada columna tiene un tamaño elástico:
+    - **Mínimo:** Nunca medirá menos de `250px` (a menos que la pantalla del móvil sea más pequeña).
+    - **Máximo:** `1fr`, lo que significa que si sobra espacio libre en la fila, las columnas se expanden proporcionalmente para llenar la pantalla sin dejar huecos en blanco.
+3. **`auto-fit` vs `auto-fill` (El cálculo dinámico de columnas):**
+    - El navegador mide el ancho disponible del contenedor.
+    - Divide ese ancho entre `250px` (teniendo en cuenta los gaps).
+    - En una pantalla móvil de `360px` cabe **1 columna** $\rightarrow$ se muestra a ancho completo.
+    - En una tablet de `800px` caben **3 columnas** de ~260px.
+    - En un monitor de `1920px` caben **7 columnas**.
+    - ¡Todo ocurre de forma 100% automática y fluida sin `@media (max-width: ...)`!
 
-| Valor | Comportamiento cuando sobra espacio |
-|---|---|
-| `auto-fill` | Mantiene **columnas vacías** (reserva huecos). Útil si vas a añadir items después o quieres «slots». |
-| `auto-fit` | **Colapsa** las columnas vacías y estira las ocupadas. El look «galería elástica» clásico. |
+### 6.2. La gran diferencia: ¿Cuándo usar `auto-fit` y cuándo `auto-fill`?
 
-Variante con límite superior: `repeat(auto-fit, minmax(min(240px, 100%), 1fr))` → evita desbordes en pantras muy estrechas (el `min()` protege el mínimo).
+La diferencia solo se nota cuando **tienes muy pocos elementos** (por ejemplo, solo 2 tarjetas) en una pantalla muy ancha (donde cabrían 5):
+
+| Valor | ¿Qué hace si sobran huecos? | Resultado visual |
+|---|---|---|
+| `auto-fit` | **Colapsa a cero las columnas vacías** y estira las columnas que tienen tarjetas. | Las 2 tarjetas se ensanchan ocupando el 50% de la pantalla cada una. **Es el comportamiento deseado en el 95% de las galerías.** |
+| `auto-fill` | **Mantiene las columnas vacías** creadas en la estructura (reserva los huecos invisibles a la derecha). | Las 2 tarjetas miden exactamente 250px a la izquierda y el resto de la fila queda vacía como si esperase a que insertes más elementos. |
+
+!!! tip "El truco definitivo para móviles muy estrechos"
+
+    Si un móvil mide `320px` de pantalla y tu mínimo es `minmax(350px, 1fr)`, aparecerá una barra de scroll horizontal no deseada. Para blindar el diseño contra cualquier pantalla, usa la función `min()`:
+    ```css
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+    ```
+    Si el contenedor mide menos de 250px, el mínimo se adapta al `100%` de la pantalla móvil y nunca desborda.
 
 !!! warning "Error común"
 
@@ -345,8 +367,310 @@ No son rivales: lo normal es **grid fuera, flex dentro**. El mismo bloque de dos
     .layout { display: flex; gap: 1rem; }
     ```
 
+---
 
-## 11. Errores comunes
+## 11. Ejemplo práctico: dashboard administrativo con Grid Areas, pistas fluidas y Subgrid
+
+El siguiente ejemplo implementa la arquitectura completa de un panel de control profesional bidimensional (2D): maquetación de página con áreas semánticas (`grid-template-areas`), cuadrícula de widgets adaptable sin media queries (`repeat(auto-fit, minmax(...))`), widgets multidimensionales con `span`, y alineación interna de tarjetas mediante `subgrid`.
+
+```html title="dashboard.html"
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Grid · Panel de Control Empresarial</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <div class="pantalla-grid">
+    <!-- 1. Cabecera superior -->
+    <header class="area-cabecera">
+      <div class="logo">CloudMetrics</div>
+      <div class="usuario">Admin · Centro de Datos</div>
+    </header>
+
+    <!-- 2. Barra lateral de navegación -->
+    <aside class="area-sidebar">
+      <nav aria-label="Navegación del panel">
+        <ul>
+          <li><a href="#" class="activo">Métricas</a></li>
+          <li><a href="#">Servidores</a></li>
+          <li><a href="#">Seguridad</a></li>
+          <li><a href="#">Ajustes</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- 3. Contenido principal con sub-rejillas -->
+    <main class="area-principal">
+      <h1>Estado de la Infraestructura</h1>
+
+      <section class="rejilla-widgets">
+        <!-- Tarjeta KPI 1 -->
+        <article class="widget widget-kpi">
+          <span class="widget-kpi__icono">⚡</span>
+          <div class="widget-kpi__datos">
+            <span class="widget-kpi__valor">99.98%</span>
+            <span class="widget-kpi__etiqueta">Disponibilidad SLA</span>
+          </div>
+        </article>
+
+        <!-- Tarjeta KPI 2 -->
+        <article class="widget widget-kpi">
+          <span class="widget-kpi__icono">🛡️</span>
+          <div class="widget-kpi__datos">
+            <span class="widget-kpi__valor">0</span>
+            <span class="widget-kpi__etiqueta">Incidentes Críticos</span>
+          </div>
+        </article>
+
+        <!-- Widget de Gráfica expandido (2 columnas) -->
+        <article class="widget widget-grafica">
+          <h2>Rendimiento de Servidores (Últimas 24h)</h2>
+          <div class="grafica-placeholder">
+            [Visualización de tráfico y consumo de CPU]
+          </div>
+        </article>
+
+        <!-- Tarjeta con Subgrid para alinear títulos y pies -->
+        <article class="widget widget-alerta">
+          <h3>Copia de Seguridad Semanal</h3>
+          <p>Completada con éxito en almacenamiento frío S3. Total: 1.4 TB transferidos.</p>
+          <button type="button" class="btn">Ver reporte</button>
+        </article>
+      </section>
+    </main>
+
+    <!-- 4. Pie de página del dashboard -->
+    <footer class="area-pie">
+      <p>&copy; 2026 CloudMetrics Platform · Entorno Seguro</p>
+    </footer>
+  </div>
+</body>
+</html>
+```
+
+```css title="css/dashboard.css"
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: #f1f5f9;
+  color: #0f172a;
+  line-height: 1.5;
+}
+
+/* 1. Grid 2D de pantalla completa mediante áreas nominadas */
+.pantalla-grid {
+  display: grid;
+  min-height: 100dvh;
+  /* 2 columnas: barra lateral fija y contenido absorbente */
+  grid-template-columns: 16rem 1fr;
+  /* 3 filas: cabecera automática, cuerpo flexible, pie automático */
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "cabecera cabecera"
+    "sidebar  principal"
+    "pie      pie";
+}
+
+/* Asignación directa de cada región semántica */
+.area-cabecera {
+  grid-area: cabecera;
+  background-color: #0f172a;
+  color: #ffffff;
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.area-sidebar {
+  grid-area: sidebar;
+  background-color: #ffffff;
+  border-right: 1px solid #e2e8f0;
+  padding: 1.5rem 1rem;
+}
+
+.area-sidebar ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.area-sidebar a {
+  display: block;
+  text-decoration: none;
+  color: #475569;
+  padding: 0.6rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+}
+
+.area-sidebar a.activo,
+.area-sidebar a:hover {
+  background-color: #e0f2fe;
+  color: #0284c7;
+}
+
+.area-principal {
+  grid-area: principal;
+  padding: 2rem;
+}
+
+.area-principal h1 {
+  font-size: 1.75rem;
+  margin-block-end: 1.5rem;
+}
+
+.area-pie {
+  grid-area: pie;
+  background-color: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* 2. Rejilla de widgets fluida sin media queries */
+.rejilla-widgets {
+  display: grid;
+  /* Fórmula auto-fit: crea columnas de mínimo 240px que se expanden a 1fr */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 1.5rem;
+  grid-auto-rows: minmax(8rem, auto);
+}
+
+.widget {
+  background-color: #ffffff;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+}
+
+/* 3. Colocación específica con span */
+.widget-kpi {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.widget-kpi__icono {
+  font-size: 2rem;
+  background: #f8fafc;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.widget-kpi__valor {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.widget-kpi__etiqueta {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+/* Widget ancho que ocupa 2 columnas completas */
+.widget-grafica {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.widget-grafica h2 {
+  font-size: 1.15rem;
+  margin-block-end: 1rem;
+}
+
+.grafica-placeholder {
+  flex: 1;
+  min-height: 8rem;
+  background-color: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 0.5rem;
+  display: grid;
+  place-items: center; /* Centrado bidimensional perfecto */
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.widget-alerta {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.widget-alerta h3 {
+  font-size: 1.1rem;
+  margin-block-end: 0.5rem;
+}
+
+.widget-alerta p {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-block-end: 1rem;
+}
+
+.btn {
+  align-self: flex-start;
+  padding: 0.5rem 1rem;
+  background-color: #0284c7;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+```
+
+---
+
+### 11.1 Explicación detallada: ¿Por qué se usa cada propiedad y para qué sirve?
+
+A continuación se analizan en profundidad las decisiones técnicas de CSS Grid implementadas en este panel:
+
+#### 1. `grid-template-areas` y maquetación visual 2D
+- **¿Para qué sirve?** Permite definir el mapa bidimensional del documento como si fuera un dibujo ASCII en texto plano.
+- **Ventaja de mantenibilidad:** Asignar `grid-area: cabecera`, `grid-area: sidebar`, etc., desacopla el orden del HTML de su disposición física. Si en pantallas móviles queremos mover la barra lateral debajo del contenido, basta con reescribir una única media query reordenando las cadenas de texto a `"cabecera" "principal" "sidebar" "pie"`.
+
+#### 2. Dimensionamiento de pistas: `grid-template-rows: auto 1fr auto`
+- **¿Cómo funciona?**
+    - La primera fila (`cabecera`) y la última (`pie`) miden exactamente lo que pida su contenido interno (`auto`).
+    - La fila central (`1fr`) absorbe **la totalidad de la fracción de espacio sobrante de la pantalla** (`100dvh`), garantizando que el pie de página quede siempre anclado abajo sin recurrir a posicionamiento fijo forzado.
+
+#### 3. La fórmula responsiva mágica: `repeat(auto-fit, minmax(min(100%, 15rem), 1fr))`
+- **¿Qué problema resuelve?** Crea una cuadrícula de tarjetas perfectamente fluida que pasa automáticamente de 4 columnas a 3, a 2 o a 1 sola **sin escribir una sola media query**.
+- **Desglose de cada función:**
+    - `auto-fit`: Rellena la fila con tantas columnas como quepan y colapsa las pistas vacías sobrantes, expandiendo las existentes para cubrir el ancho disponible.
+    - `minmax(..., 1fr)`: Garantiza que cada tarjeta mida como mínimo 15 rem (~240 px) y como máximo una fracción equitativa `1fr`.
+    - `min(100%, 15rem)`: Cláusula de seguridad para teléfonos móviles muy estrechos (por ejemplo, pantallas de 320 px). Si 15 rem supera el ancho de la pantalla, la tarjeta adopta el 100% de la ventana, eliminando el desbordamiento horizontal.
+
+#### 4. Expansión selectiva de celdas con `grid-column: span 2`
+- **¿Para qué sirve?** Hace que el widget de la gráfica ocupe el ancho de dos columnas de la rejilla, destacando visualmente la información analítica sobre los indicadores KPI unitarios.
+
+#### 5. Centrado bidimensional con `place-items: center`
+- **¿Para qué sirve?** Es la propiedad abreviada que equivale a declarar simultáneamente:
+  ```css
+  justify-items: center; /* Alineación horizontal en el eje en línea */
+  align-items: center;   /* Alineación vertical en el eje de bloque */
+  ```
+- **Resultado:** Centra el texto del marcador de posición en medio de la caja con una sola línea de código limpia.
+
+---
+
+## 12. Errores comunes
 
 | Error | Síntoma | Solución |
 |---|---|---|

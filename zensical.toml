@@ -78,6 +78,7 @@ nav = [
     { "13. Accesibilidad y usabilidad" = "css/13-accesibilidad-usabilidad.md" },
     { "14. Rendimiento y buenas prácticas" = "css/14-rendimiento-buenas-practicas.md" },
     { "15. Ejercicios, glosario y recursos" = "css/15-ejercicios-glosario-recursos.md" },
+    { "16. Prácticas" = "css/16-practicas.md" },
   ] },
 ]
 
