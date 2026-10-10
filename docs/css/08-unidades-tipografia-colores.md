@@ -23,6 +23,19 @@ Toda medida CSS es una **magnitud más una unidad**.
 
 ### 1. Clasificación general
 
+Toda medida en CSS se divide en familias según cuál sea su **marco de referencia**:
+
+```mermaid
+flowchart TD
+    UNIDADES["Sistemas de Unidades en CSS"]
+
+    UNIDADES --> ABS["1. Absolutas / Físicas<br>px (píxel CSS de 1/96 in)<br>❌ No escalan con el zoom de texto"]
+    UNIDADES --> REL_FONT["2. Relativas a Tipografía<br>rem (:root) y em (elemento actual)<br>✅ Garantizan accesibilidad WCAG 1.4.4"]
+    UNIDADES --> REL_VIEW["3. Relativas al Viewport<br>vw, vh, dvh (Dynamic Viewport)<br>Adaptadas a la ventana de navegación"]
+    UNIDADES --> REL_CONT["4. Relativas a Contenedor<br>cqw, cqh (Container Queries)<br>Adaptadas al tamaño del componente"]
+    UNIDADES --> REL_GRID["5. Distribución Grid<br>fr (Fracción del espacio sobrante)"]
+```
+
 | Familia | Ejemplos | Uso típico |
 |---|---|---|
 | Absolutas (físicas) | `px`, `cm`, `mm`, `in`, `pt`, `pc`, `Q` | `px` es la referencia práctica de pantalla. |
@@ -351,229 +364,233 @@ Memoriza ==oklch()==: **luz %, croma y matiz en grados**.
 
 El siguiente ejemplo implementa una tarjeta financiera y de analítica que integra las técnicas más avanzadas de la unidad: tamaño de texto fluido con `clamp()`, números alineados sin oscilación mediante `font-variant-numeric: tabular-nums`, un sistema de color científicamente calibrado en el espacio perceptualmente uniforme **OKLCH**, y derivación de estados con `color-mix()`.
 
-```html title="cotizacion.html"
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tipografía y Color · Panel Financiero</title>
-  <link rel="stylesheet" href="css/tokens.css">
-</head>
-<body>
-  <main class="escenario">
-    <article class="tarjeta-finanzas">
-      <header class="tarjeta-finanzas__cabecera">
-        <span class="ticker">IBEX35 · TECH</span>
-        <h1 class="titulo-fluido">Índice Cloud Ibérico</h1>
-      </header>
+=== "HTML"
 
-      <div class="caja-precio">
-        <span class="precio-actual">14.892,40&nbsp;€</span>
-        <span class="variacion variacion--positiva" aria-label="Subida de 2.45%">+2,45% ↑</span>
-      </div>
+    ```html title="cotizacion.html"
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Tipografía y Color · Panel Financiero</title>
+      <link rel="stylesheet" href="css/tokens.css">
+    </head>
+    <body>
+      <main class="escenario">
+        <article class="tarjeta-finanzas">
+          <header class="tarjeta-finanzas__cabecera">
+            <span class="ticker">IBEX35 · TECH</span>
+            <h1 class="titulo-fluido">Índice Cloud Ibérico</h1>
+          </header>
+    
+          <div class="caja-precio">
+            <span class="precio-actual">14.892,40&nbsp;€</span>
+            <span class="variacion variacion--positiva" aria-label="Subida de 2.45%">+2,45% ↑</span>
+          </div>
+    
+          <p class="prosa-analisis">
+            El volumen de negociación supera los 420 millones de euros impulsado por el sector de computación en la nube y ciberseguridad.
+          </p>
+    
+          <table class="tabla-metricas">
+            <caption class="sr-only">Detalle de valores estadísticos de la sesión</caption>
+            <thead>
+              <tr>
+                <th scope="col">Métrica</th>
+                <th scope="col">Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Máximo diario</th>
+                <td class="num-tabular">14.930,15</td>
+              </tr>
+              <tr>
+                <th scope="row">Mínimo diario</th>
+                <td class="num-tabular">14.710,80</td>
+              </tr>
+              <tr>
+                <th scope="row">Volumen (títulos)</th>
+                <td class="num-tabular">1.849.200</td>
+              </tr>
+            </tbody>
+          </table>
+    
+          <button type="button" class="btn-operar">Comprar participaciones</button>
+        </article>
+      </main>
+    </body>
+    </html>
+    ```
 
-      <p class="prosa-analisis">
-        El volumen de negociación supera los 420 millones de euros impulsado por el sector de computación en la nube y ciberseguridad.
-      </p>
+=== "CSS"
 
-      <table class="tabla-metricas">
-        <caption class="sr-only">Detalle de valores estadísticos de la sesión</caption>
-        <thead>
-          <tr>
-            <th scope="col">Métrica</th>
-            <th scope="col">Valor</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Máximo diario</th>
-            <td class="num-tabular">14.930,15</td>
-          </tr>
-          <tr>
-            <th scope="row">Mínimo diario</th>
-            <td class="num-tabular">14.710,80</td>
-          </tr>
-          <tr>
-            <th scope="row">Volumen (títulos)</th>
-            <td class="num-tabular">1.849.200</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <button type="button" class="btn-operar">Comprar participaciones</button>
-    </article>
-  </main>
-</body>
-</html>
-```
-
-```css title="css/tokens.css"
-/* 1. Tokens de diseño: Paleta OKLCH y tipografía */
-:root {
-  /* Color de marca en espacio perceptualmente uniforme OKLCH (Luminosidad, Croma, Matiz) */
-  --marca-base: oklch(0.55 0.22 260);
-  
-  /* Derivaciones armónicas automáticas con color-mix() */
-  --marca-hover: color-mix(in oklch, var(--marca-base), black 12%);
-  --marca-suave: color-mix(in oklch, var(--marca-base) 15%, white);
-  --color-positivo: oklch(0.62 0.19 145);
-  --color-positivo-fondo: color-mix(in oklch, var(--color-positivo) 12%, white);
-
-  --color-fondo: oklch(0.98 0.01 250);
-  --color-superficie: #ffffff;
-  --color-texto-base: oklch(0.2 0.03 260);
-  --color-texto-muted: oklch(0.48 0.03 260);
-  --color-borde: oklch(0.9 0.01 260);
-
-  /* Sistema tipográfico */
-  --fuente-interfaz: system-ui, -apple-system, sans-serif;
-  --fuente-mono: ui-monospace, "SF Mono", "Cascadia Code", monospace;
-}
-
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: var(--fuente-interfaz);
-  background-color: var(--color-fondo);
-  color: var(--color-texto-base);
-  min-height: 100dvh; /* Altura dinámica que descuenta barras del navegador móvil */
-  display: grid;
-  place-items: center;
-  padding: 1.5rem;
-  line-height: 1.6;
-}
-
-.tarjeta-finanzas {
-  background-color: var(--color-superficie);
-  border: 1px solid var(--color-borde);
-  border-radius: 1.25rem;
-  padding: 2.25rem;
-  max-width: 28rem;
-  width: 100%;
-  box-shadow: 0 10px 15px -3px oklch(0.2 0.03 260 / 0.06);
-}
-
-.ticker {
-  font-family: var(--fuente-mono);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--marca-base);
-  background-color: var(--marca-suave);
-  padding: 0.25rem 0.6rem;
-  border-radius: 9999px;
-  letter-spacing: 0.05em;
-}
-
-/* 2. Titular con escala fluida clamp() */
-.titulo-fluido {
-  /* clamp(mínimo, valor preferido según viewport, máximo) */
-  font-size: clamp(1.4rem, 1rem + 2vw, 2.1rem);
-  line-height: 1.2;
-  margin-block: 0.75rem 1rem;
-  letter-spacing: -0.02em;
-}
-
-.caja-precio {
-  display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
-  margin-block-end: 1rem;
-}
-
-.precio-actual {
-  font-size: 2rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  font-variant-numeric: tabular-nums;
-}
-
-.variacion {
-  font-size: 0.85rem;
-  font-weight: 700;
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.375rem;
-}
-
-.variacion--positiva {
-  color: var(--color-positivo);
-  background-color: var(--color-positivo-fondo);
-}
-
-/* 3. Longitud de lectura controlada con unidades ch */
-.prosa-analisis {
-  color: var(--color-texto-muted);
-  font-size: 0.95rem;
-  max-width: 45ch; /* Longitud máxima ergonómica para lectura continuada */
-  margin-block-end: 1.5rem;
-}
-
-/* 4. Tabla de datos numéricos con tabular-nums */
-.tabla-metricas {
-  width: 100%;
-  border-collapse: collapse;
-  margin-block-end: 1.75rem;
-  font-size: 0.9rem;
-}
-
-.tabla-metricas th,
-.tabla-metricas td {
-  padding-block: 0.6rem;
-  border-bottom: 1px solid var(--color-borde);
-}
-
-.tabla-metricas th {
-  text-align: left;
-  font-weight: 500;
-  color: var(--color-texto-muted);
-}
-
-/* Dígitos de ancho uniforme para evitar desalineación de cifras */
-.num-tabular {
-  text-align: right;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  color: var(--color-texto-base);
-}
-
-/* 5. Botón interactivo con variantes OKLCH */
-.btn-operar {
-  width: 100%;
-  padding-block: 0.85rem;
-  background-color: var(--marca-base);
-  color: #ffffff;
-  border: none;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.15s ease;
-}
-
-.btn-operar:hover {
-  background-color: var(--marca-hover);
-}
-
-.btn-operar:focus-visible {
-  outline: 2px solid var(--marca-base);
-  outline-offset: 2px;
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}
-```
+    ```css title="css/tokens.css"
+    /* 1. Tokens de diseño: Paleta OKLCH y tipografía */
+    :root {
+      /* Color de marca en espacio perceptualmente uniforme OKLCH (Luminosidad, Croma, Matiz) */
+      --marca-base: oklch(0.55 0.22 260);
+      
+      /* Derivaciones armónicas automáticas con color-mix() */
+      --marca-hover: color-mix(in oklch, var(--marca-base), black 12%);
+      --marca-suave: color-mix(in oklch, var(--marca-base) 15%, white);
+      --color-positivo: oklch(0.62 0.19 145);
+      --color-positivo-fondo: color-mix(in oklch, var(--color-positivo) 12%, white);
+    
+      --color-fondo: oklch(0.98 0.01 250);
+      --color-superficie: #ffffff;
+      --color-texto-base: oklch(0.2 0.03 260);
+      --color-texto-muted: oklch(0.48 0.03 260);
+      --color-borde: oklch(0.9 0.01 260);
+    
+      /* Sistema tipográfico */
+      --fuente-interfaz: system-ui, -apple-system, sans-serif;
+      --fuente-mono: ui-monospace, "SF Mono", "Cascadia Code", monospace;
+    }
+    
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: var(--fuente-interfaz);
+      background-color: var(--color-fondo);
+      color: var(--color-texto-base);
+      min-height: 100dvh; /* Altura dinámica que descuenta barras del navegador móvil */
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+      line-height: 1.6;
+    }
+    
+    .tarjeta-finanzas {
+      background-color: var(--color-superficie);
+      border: 1px solid var(--color-borde);
+      border-radius: 1.25rem;
+      padding: 2.25rem;
+      max-width: 28rem;
+      width: 100%;
+      box-shadow: 0 10px 15px -3px oklch(0.2 0.03 260 / 0.06);
+    }
+    
+    .ticker {
+      font-family: var(--fuente-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--marca-base);
+      background-color: var(--marca-suave);
+      padding: 0.25rem 0.6rem;
+      border-radius: 9999px;
+      letter-spacing: 0.05em;
+    }
+    
+    /* 2. Titular con escala fluida clamp() */
+    .titulo-fluido {
+      /* clamp(mínimo, valor preferido según viewport, máximo) */
+      font-size: clamp(1.4rem, 1rem + 2vw, 2.1rem);
+      line-height: 1.2;
+      margin-block: 0.75rem 1rem;
+      letter-spacing: -0.02em;
+    }
+    
+    .caja-precio {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      margin-block-end: 1rem;
+    }
+    
+    .precio-actual {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      font-variant-numeric: tabular-nums;
+    }
+    
+    .variacion {
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.375rem;
+    }
+    
+    .variacion--positiva {
+      color: var(--color-positivo);
+      background-color: var(--color-positivo-fondo);
+    }
+    
+    /* 3. Longitud de lectura controlada con unidades ch */
+    .prosa-analisis {
+      color: var(--color-texto-muted);
+      font-size: 0.95rem;
+      max-width: 45ch; /* Longitud máxima ergonómica para lectura continuada */
+      margin-block-end: 1.5rem;
+    }
+    
+    /* 4. Tabla de datos numéricos con tabular-nums */
+    .tabla-metricas {
+      width: 100%;
+      border-collapse: collapse;
+      margin-block-end: 1.75rem;
+      font-size: 0.9rem;
+    }
+    
+    .tabla-metricas th,
+    .tabla-metricas td {
+      padding-block: 0.6rem;
+      border-bottom: 1px solid var(--color-borde);
+    }
+    
+    .tabla-metricas th {
+      text-align: left;
+      font-weight: 500;
+      color: var(--color-texto-muted);
+    }
+    
+    /* Dígitos de ancho uniforme para evitar desalineación de cifras */
+    .num-tabular {
+      text-align: right;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: var(--color-texto-base);
+    }
+    
+    /* 5. Botón interactivo con variantes OKLCH */
+    .btn-operar {
+      width: 100%;
+      padding-block: 0.85rem;
+      background-color: var(--marca-base);
+      color: #ffffff;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+    
+    .btn-operar:hover {
+      background-color: var(--marca-hover);
+    }
+    
+    .btn-operar:focus-visible {
+      outline: 2px solid var(--marca-base);
+      outline-offset: 2px;
+    }
+    
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+    }
+    ```
 
 ---
 

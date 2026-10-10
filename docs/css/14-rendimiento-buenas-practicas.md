@@ -21,16 +21,14 @@ El CSS afecta al rendimiento en tres frentes: **bloqueo del render** (aparece ta
 
 Cómo el navegador pinta la primera pantalla (==CRP==):
 
-```text title="crp.txt"
-HTML → DOM          CSS → CSSOM
-              \     /
-                Render Tree
-                   ↓
-                Layout (geometría)
-                   ↓
-                Paint (píxeles por capa)
-                   ↓
-              Composite (composición GPU)
+```mermaid
+flowchart TD
+    HTML["HTML ➔ Árbol DOM"] --> RT["Render Tree (Árbol de renderizado)<br>Fusión de nodos visibles y estilos computados"]
+    CSS["CSS ➔ Árbol CSSOM<br>(Bloquea el render hasta completarse)"] --> RT
+
+    RT --> LAYOUT["Layout / Reflow (Geometría)<br>Coste Computacional ALTO: width, height, margin, flex, grid"]
+    LAYOUT --> PAINT["Paint / Repaint (Pintura de píxeles)<br>Coste MEDIO: color, background-color, border, box-shadow"]
+    PAINT --> COMPOSITE["Composite (Composición por GPU)<br>Coste MÍNIMO (60/120 fps): transform, opacity"]
 ```
 
 Hechos clave:
@@ -260,150 +258,154 @@ Objetivos «bueno»: LCP < 2.5 s, CLS < 0.1, INP < 200 ms[^1].
 
 El siguiente ejemplo implementa la estrategia completa de rendimiento recomendada por la W3C y los equipos de rendimiento web de Google (para lograr puntuación 100/100 en Lighthouse): separación de **CSS crítico inline** (< 14 KB en `<head>`) para un *First Contentful Paint* (FCP) instantáneo, **carga no bloqueante** de la hoja secundaria diferida mediante `rel="preload"`, contención de renderizado fuera de pantalla con `content-visibility: auto` y reserva de dimensiones con `contain-intrinsic-size` para erradicar el *Cumulative Layout Shift* (CLS).
 
-```html title="landing-rendimiento.html"
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rendimiento Web Extremo · Core Web Vitals 100</title>
+=== "HTML"
 
-  <!-- 1. Preconexión a CDN de recursos estáticos -->
-  <link rel="preconnect" href="https://images.unsplash.com">
-
-  <!-- 2. Precarga de la fuente principal de la marca -->
-  <link rel="preload" href="fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin>
-
-  <!-- 3. CSS Crítico: Directamente inline en el head para renderizado inmediato sin bloqueos -->
-  <style>
-    /* Reset mínimo crítico */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    ```html title="landing-rendimiento.html"
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Rendimiento Web Extremo · Core Web Vitals 100</title>
     
-    body {
-      font-family: system-ui, -apple-system, sans-serif;
-      background-color: #0f172a;
-      color: #f8fafc;
-      line-height: 1.5;
-    }
+      <!-- 1. Preconexión a CDN de recursos estáticos -->
+      <link rel="preconnect" href="https://images.unsplash.com">
+    
+      <!-- 2. Precarga de la fuente principal de la marca -->
+      <link rel="preload" href="fonts/inter-variable.woff2" as="font" type="font/woff2" crossorigin>
+    
+      <!-- 3. CSS Crítico: Directamente inline en el head para renderizado inmediato sin bloqueos -->
+      <style>
+        /* Reset mínimo crítico */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+          font-family: system-ui, -apple-system, sans-serif;
+          background-color: #0f172a;
+          color: #f8fafc;
+          line-height: 1.5;
+        }
+    
+        .hero {
+          min-height: 85vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 2rem 1.5rem;
+          max-width: 64rem;
+          margin-inline: auto;
+        }
+    
+        .hero__titular {
+          font-size: clamp(2rem, 1.2rem + 3.5vw, 3.5rem);
+          font-weight: 800;
+          line-height: 1.15;
+          margin-block-end: 1rem;
+        }
+    
+        .hero__lead {
+          color: #94a3b8;
+          font-size: 1.15rem;
+          max-width: 55ch;
+          margin-block-end: 2rem;
+        }
+    
+        .hero__imagen-marco {
+          width: 100%;
+          aspect-ratio: 16 / 9; /* Cero CLS garantizado */
+          background-color: #1e293b;
+          border-radius: 1rem;
+          overflow: hidden;
+        }
+    
+        .hero__imagen {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+      </style>
+    
+      <!-- 4. Carga diferida no bloqueante de la hoja de estilos completa -->
+      <link rel="preload" href="css/diferido.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+      <noscript><link rel="stylesheet" href="css/diferido.css"></noscript>
+    </head>
+    <body>
+      <!-- Contenido Above-The-Fold (Primer pantallazo inmediato) -->
+      <header class="hero">
+        <h1 class="hero__titular">Plataforma de Datos en Tiempo Real</h1>
+        <p class="hero__lead">
+          Infraestructura distribuida con latencia sub-milisegundo y auditoría continua de integridad.
+        </p>
+    
+        <div class="hero__imagen-marco">
+          <!-- Imagen prioritaria LCP: cargada con eager y fetchpriority="high" -->
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" 
+               alt="Panel analítico de métricas en tiempo real"
+               width="1200" height="675"
+               loading="eager"
+               fetchpriority="high"
+               class="hero__imagen">
+        </div>
+      </header>
+    
+      <!-- Contenido Below-The-Fold optimizado con content-visibility -->
+      <main class="secciones-secundarias">
+        <section class="seccion-masiva">
+          <h2>Módulos de Cómputo Distribuidos</h2>
+          <p>
+            Esta sección se sitúa por debajo del pliegue. Mediante <code>content-visibility: auto</code>, el motor del navegador omite por completo su renderizado y cálculo de diseño geométrico hasta que el usuario se desplaza hacia ella.
+          </p>
+        </section>
+    
+        <section class="seccion-masiva">
+          <h2>Almacenamiento Concurrente</h2>
+          <p>
+            Persistencia replicada en clústeres redundantes con respaldo criptográfico en tiempo real.
+          </p>
+        </section>
+      </main>
+    </body>
+    </html>
+    ```
 
-    .hero {
-      min-height: 85vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 2rem 1.5rem;
+=== "CSS"
+
+    ```css title="css/diferido.css"
+    /* Estilos secundarios cargados de forma asíncrona (no bloquean el primer render) */
+    
+    .secciones-secundarias {
       max-width: 64rem;
       margin-inline: auto;
+      padding: 3rem 1.5rem;
     }
-
-    .hero__titular {
-      font-size: clamp(2rem, 1.2rem + 3.5vw, 3.5rem);
-      font-weight: 800;
-      line-height: 1.15;
-      margin-block-end: 1rem;
-    }
-
-    .hero__lead {
-      color: #94a3b8;
-      font-size: 1.15rem;
-      max-width: 55ch;
+    
+    /* Optimización revolucionaria de rendimiento: content-visibility */
+    .seccion-masiva {
+      /* Salta el cálculo de layout y pintado mientras el elemento está fuera del viewport */
+      content-visibility: auto;
+      /* Altura estimada para que la barra de scroll del navegador no dé saltos bruscos */
+      contain-intrinsic-size: auto 350px;
+    
+      background-color: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 1rem;
+      padding: 2.5rem;
       margin-block-end: 2rem;
     }
-
-    .hero__imagen-marco {
-      width: 100%;
-      aspect-ratio: 16 / 9; /* Cero CLS garantizado */
-      background-color: #1e293b;
-      border-radius: 1rem;
-      overflow: hidden;
+    
+    .seccion-masiva h2 {
+      font-size: 1.5rem;
+      color: #38bdf8;
+      margin-block-end: 0.75rem;
     }
-
-    .hero__imagen {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    
+    .seccion-masiva p {
+      color: #cbd5e1;
+      font-size: 1rem;
+      line-height: 1.6;
     }
-  </style>
-
-  <!-- 4. Carga diferida no bloqueante de la hoja de estilos completa -->
-  <link rel="preload" href="css/diferido.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="css/diferido.css"></noscript>
-</head>
-<body>
-  <!-- Contenido Above-The-Fold (Primer pantallazo inmediato) -->
-  <header class="hero">
-    <h1 class="hero__titular">Plataforma de Datos en Tiempo Real</h1>
-    <p class="hero__lead">
-      Infraestructura distribuida con latencia sub-milisegundo y auditoría continua de integridad.
-    </p>
-
-    <div class="hero__imagen-marco">
-      <!-- Imagen prioritaria LCP: cargada con eager y fetchpriority="high" -->
-      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" 
-           alt="Panel analítico de métricas en tiempo real"
-           width="1200" height="675"
-           loading="eager"
-           fetchpriority="high"
-           class="hero__imagen">
-    </div>
-  </header>
-
-  <!-- Contenido Below-The-Fold optimizado con content-visibility -->
-  <main class="secciones-secundarias">
-    <section class="seccion-masiva">
-      <h2>Módulos de Cómputo Distribuidos</h2>
-      <p>
-        Esta sección se sitúa por debajo del pliegue. Mediante <code>content-visibility: auto</code>, el motor del navegador omite por completo su renderizado y cálculo de diseño geométrico hasta que el usuario se desplaza hacia ella.
-      </p>
-    </section>
-
-    <section class="seccion-masiva">
-      <h2>Almacenamiento Concurrente</h2>
-      <p>
-        Persistencia replicada en clústeres redundantes con respaldo criptográfico en tiempo real.
-      </p>
-    </section>
-  </main>
-</body>
-</html>
-```
-
-```css title="css/diferido.css"
-/* Estilos secundarios cargados de forma asíncrona (no bloquean el primer render) */
-
-.secciones-secundarias {
-  max-width: 64rem;
-  margin-inline: auto;
-  padding: 3rem 1.5rem;
-}
-
-/* Optimización revolucionaria de rendimiento: content-visibility */
-.seccion-masiva {
-  /* Salta el cálculo de layout y pintado mientras el elemento está fuera del viewport */
-  content-visibility: auto;
-  /* Altura estimada para que la barra de scroll del navegador no dé saltos bruscos */
-  contain-intrinsic-size: auto 350px;
-
-  background-color: #1e293b;
-  border: 1px solid #334155;
-  border-radius: 1rem;
-  padding: 2.5rem;
-  margin-block-end: 2rem;
-}
-
-.seccion-masiva h2 {
-  font-size: 1.5rem;
-  color: #38bdf8;
-  margin-block-end: 0.75rem;
-}
-
-.seccion-masiva p {
-  color: #cbd5e1;
-  font-size: 1rem;
-  line-height: 1.6;
-}
-```
+    ```
 
 ---
 

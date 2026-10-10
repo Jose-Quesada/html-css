@@ -684,6 +684,8 @@
       
         
       
+        
+      
     
     
     
@@ -1602,6 +1604,35 @@
   
   
     <li class="md-nav__item">
+      <a href="../15-ejercicios-soluciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  15. Ejercicios: soluciones
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../16-practicas/" class="md-nav__link">
         
   
@@ -2104,6 +2135,8 @@
       
         
       
+        
+      
     
     
     
@@ -2153,6 +2186,20 @@
 </tr>
 </tbody>
 </table>
+<pre class="mermaid"><code>flowchart TD
+    subgraph TRANSICIONES ["Transiciones CSS (Micro-interacciones A ➔ B)"]
+        T_EVT["Disparador: Evento del usuario (:hover, :focus, toggle de clase)"]
+        T_EST["Interpola de forma fluida entre DOS estados fijos (Inicial ➔ Final)"]
+        T_DUR["Se resuelve en una sola pasada de tiempo (duration + timing-function)"]
+        T_EVT --&gt; T_EST --&gt; T_DUR
+    end
+
+    subgraph ANIMACIONES ["Animaciones @keyframes (Secuencias multi-estado)"]
+        A_EVT["Disparador: Carga de página, scroll o clase activa"]
+        A_EST["Define fotogramas clave porcentuales: 0% ➔ 25% ➔ 50% ➔ 100%"]
+        A_DUR["Control avanzado: iterations (infinite), direction (alternate), play-state"]
+        A_EVT --&gt; A_EST --&gt; A_DUR
+    end</code></pre>
 <div class="admonition note">
 <p class="admonition-title">Conocimientos previos</p>
 <ul>
@@ -2523,15 +2570,23 @@
 <p>Sin él, al añadir <code>.abierto</code> el navegador parte del estilo ya aplicado (sin transición). Soporte: Chrome 117+, Firefox 129+, Safari 17.5+.</p>
 <h2 id="6-view-transitions-api-transiciones-entre-vistas">6. View Transitions API (transiciones entre vistas)</h2>
 <p>Permite transicionar <strong>entre dos estados completos del documento</strong> (navegación <abbr title="Single Page Application">SPA</abbr> o <abbr title="Multi Page Application">MPA</abbr> con progressive enhancement):</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">CSS</label><label for="__tabbed_1_2">JavaScript</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="language-css highlight"><span class="filename">vista.css</span><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">::</span><span class="nd">view-transition-old</span><span class="o">(</span><span class="nt">root</span><span class="o">),</span>
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="p">::</span><span class="nd">view-transition-new</span><span class="o">(</span><span class="nt">root</span><span class="o">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">animation-duration</span><span class="p">:</span><span class="w"> </span><span class="mf">.3</span><span class="kt">s</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 </span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
 </span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="p">.</span><span class="nc">tarjeta</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">view-transition-name</span><span class="p">:</span><span class="w"> </span><span class="n">tarjeta-principal</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 </span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="c">/* ese elemento hace morphing entre vistas (shared element) */</span>
 </span></code></pre></div>
+</div>
+<div class="tabbed-block">
 <div class="language-js highlight"><span class="filename">app.js</span><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1">// JS mínimo para activar (MPA):</span>
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nb">document</span><span class="p">.</span><span class="nx">startViewTransition</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">navegar</span><span class="p">());</span>
 </span></code></pre></div>
+</div>
+</div>
+</div>
 <ul>
 <li>Pseudo-elementos: <code>::view-transition-old/new/group/root</code>, <code>::view-transition-image-pair</code>.</li>
 <li>Soporte: Chrome 111+, Firefox 144+, Safari 18+.</li>
@@ -2569,6 +2624,9 @@
 <hr />
 <h2 id="8-ejemplo-practico-tarjeta-interactiva-con-elevacion-3d-indicador-de-carga-y-accesibilidad-vestibular">8. Ejemplo práctico: tarjeta interactiva con elevación 3D, indicador de carga y accesibilidad vestibular</h2>
 <p>El siguiente ejemplo implementa microinteracciones de alto rendimiento renderizadas íntegramente en la GPU (utilizando solo <code>transform</code> y <code>opacity</code>): una tarjeta con perspectiva y efecto de elevación 3D, un spinner de carga sincronizado con <code>@keyframes</code>, y la salvaguarda obligatoria de accesibilidad mediante <code>@media (prefers-reduced-motion: reduce)</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">HTML</label><label for="__tabbed_2_2">CSS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="language-html highlight"><span class="filename">interacciones.html</span><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
 </span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
@@ -2603,6 +2661,8 @@
 </span><span id="__span-17-32"><a id="__codelineno-17-32" name="__codelineno-17-32" href="#__codelineno-17-32"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </span><span id="__span-17-33"><a id="__codelineno-17-33" name="__codelineno-17-33" href="#__codelineno-17-33"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></code></pre></div>
+</div>
+<div class="tabbed-block">
 <div class="language-css highlight"><span class="filename">css/animaciones.css</span><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="o">*,</span><span class="w"> </span><span class="o">*</span><span class="p">::</span><span class="nd">before</span><span class="o">,</span><span class="w"> </span><span class="o">*</span><span class="p">::</span><span class="nd">after</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span><span class="k">box-sizing</span><span class="p">:</span><span class="w"> </span><span class="kc">border-box</span><span class="p">;</span>
 </span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">  </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
@@ -2761,6 +2821,9 @@
 </span><span id="__span-18-156"><a id="__codelineno-18-156" name="__codelineno-18-156" href="#__codelineno-18-156"></a><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-18-157"><a id="__codelineno-18-157" name="__codelineno-18-157" href="#__codelineno-18-157"></a><span class="p">}</span>
 </span></code></pre></div>
+</div>
+</div>
+</div>
 <hr />
 <h3 id="81-explicacion-detallada-por-que-se-usa-cada-propiedad-y-para-que-sirve">8.1 Explicación detallada: ¿Por qué se usa cada propiedad y para qué sirve?</h3>
 <p>A continuación se analizan las razones técnicas de rendimiento y accesibilidad que sustentan el código:</p>

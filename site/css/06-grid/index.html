@@ -684,6 +684,8 @@
       
         
       
+        
+      
     
     
     
@@ -1635,6 +1637,35 @@
   
   
     <li class="md-nav__item">
+      <a href="../15-ejercicios-soluciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  15. Ejercicios: soluciones
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../16-practicas/" class="md-nav__link">
         
   
@@ -2170,6 +2201,8 @@
       
         
       
+        
+      
     
     
     
@@ -2249,6 +2282,19 @@
 </span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  fila2 │  celda │  celda │  celda │
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        └────────┴────────┴────────┘
 </span></code></pre></div>
+<pre class="mermaid"><code>flowchart TD
+    subgraph CONTAINER ["Grid Container (display: grid)"]
+        direction TB
+        subgraph TRACKS ["Pistas (Grid Tracks)"]
+            COLS["Pistas de Columna (Verticales)&lt;br&gt;grid-template-columns: 200px 1fr 1fr"]
+            ROWS["Pistas de Fila (Horizontales)&lt;br&gt;grid-template-rows: auto 100px"]
+        end
+        subgraph ANATOMIA ["Componentes estructurales"]
+            LINES["Líneas divisorias (Grid Lines)&lt;br&gt;Numeradas desde 1 (o negativas desde el final -1)"]
+            CELLS["Celdas unitarias (Grid Cells)&lt;br&gt;Intersección de 1 fila × 1 columna"]
+            AREAS["Áreas con nombre (Grid Areas)&lt;br&gt;Zonas rectangulares (header, main, sidebar)"]
+        end
+    end</code></pre>
 <h2 id="2-definir-la-cuadricula-explicita">2. Definir la cuadrícula explícita</h2>
 <h3 id="21-grid-template-columns-grid-template-rows">2.1. <code>grid-template-columns</code> / <code>grid-template-rows</code></h3>
 <div class="language-css highlight"><span class="filename">plantilla-explicita.css</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">.</span><span class="nc">g</span><span class="w"> </span><span class="p">{</span>
@@ -2605,6 +2651,9 @@ Si el contenedor mide menos de 250px, el mínimo se adapta al <code>100%</code> 
 <hr />
 <h2 id="11-ejemplo-practico-dashboard-administrativo-con-grid-areas-pistas-fluidas-y-subgrid">11. Ejemplo práctico: dashboard administrativo con Grid Areas, pistas fluidas y Subgrid</h2>
 <p>El siguiente ejemplo implementa la arquitectura completa de un panel de control profesional bidimensional (2D): maquetación de página con áreas semánticas (<code>grid-template-areas</code>), cuadrícula de widgets adaptable sin media queries (<code>repeat(auto-fit, minmax(...))</code>), widgets multidimensionales con <code>span</code>, y alineación interna de tarjetas mediante <code>subgrid</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">HTML</label><label for="__tabbed_2_2">CSS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="language-html highlight"><span class="filename">dashboard.html</span><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
 </span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
 </span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
@@ -2681,6 +2730,8 @@ Si el contenedor mide menos de 250px, el mínimo se adapta al <code>100%</code> 
 </span><span id="__span-21-74"><a id="__codelineno-21-74" name="__codelineno-21-74" href="#__codelineno-21-74"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </span><span id="__span-21-75"><a id="__codelineno-21-75" name="__codelineno-21-75" href="#__codelineno-21-75"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></code></pre></div>
+</div>
+<div class="tabbed-block">
 <div class="language-css highlight"><span class="filename">css/dashboard.css</span><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="o">*,</span><span class="w"> </span><span class="o">*</span><span class="p">::</span><span class="nd">before</span><span class="o">,</span><span class="w"> </span><span class="o">*</span><span class="p">::</span><span class="nd">after</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span><span class="k">box-sizing</span><span class="p">:</span><span class="w"> </span><span class="kc">border-box</span><span class="p">;</span>
 </span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">  </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
@@ -2863,6 +2914,9 @@ Si el contenedor mide menos de 250px, el mínimo se adapta al <code>100%</code> 
 </span><span id="__span-22-180"><a id="__codelineno-22-180" name="__codelineno-22-180" href="#__codelineno-22-180"></a><span class="w">  </span><span class="k">cursor</span><span class="p">:</span><span class="w"> </span><span class="kc">pointer</span><span class="p">;</span>
 </span><span id="__span-22-181"><a id="__codelineno-22-181" name="__codelineno-22-181" href="#__codelineno-22-181"></a><span class="p">}</span>
 </span></code></pre></div>
+</div>
+</div>
+</div>
 <hr />
 <h3 id="111-explicacion-detallada-por-que-se-usa-cada-propiedad-y-para-que-sirve">11.1 Explicación detallada: ¿Por qué se usa cada propiedad y para qué sirve?</h3>
 <p>A continuación se analizan en profundidad las decisiones técnicas de CSS Grid implementadas en este panel:</p>

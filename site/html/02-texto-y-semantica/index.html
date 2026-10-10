@@ -1265,6 +1265,8 @@
       
         
       
+        
+      
     
     
     
@@ -1760,6 +1762,35 @@
     
   
   15. Ejercicios, glosario y recursos
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/15-ejercicios-soluciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  15. Ejercicios: soluciones
 
     
   </span>
@@ -2500,6 +2531,19 @@
 <li>Un único <code>&lt;h1&gt;</code> y niveles encadenados: ese es el esquema que leerá una máquina.</li>
 <li>Aquí hay dos <code>&lt;h1&gt;</code> y se salta de <code>h2</code> a <code>h4</code>: el esquema queda roto.</li>
 </ol>
+<pre class="mermaid"><code>flowchart TD
+    subgraph ARBOL_CORRECTO ["Estructura Accesible Válida (Árbol continuo)"]
+        C_H1["&amp;lt;h1&amp;gt; Horario de DAW (Tema principal)"] --&gt; C_H2_A["&amp;lt;h2&amp;gt; Lunes"]
+        C_H1 --&gt; C_H2_B["&amp;lt;h2&amp;gt; Martes"]
+        C_H2_A --&gt; C_H3_A1["&amp;lt;h3&amp;gt; Sesión Mañana"]
+        C_H2_A --&gt; C_H3_A2["&amp;lt;h3&amp;gt; Sesión Tarde"]
+    end
+
+    subgraph ARBOL_INCORRECTO ["Estructura Rota (Anti-patrón de accesibilidad)"]
+        I_H1["&amp;lt;h1&amp;gt; Horario"] 
+        I_H1_BIS["&amp;lt;h1&amp;gt; Lunes (&amp;lt;h1&amp;gt; duplicado)"]
+        I_H1_BIS -. "❌ Salto de nivel prohibido" .-&gt; I_H4["&amp;lt;h4&amp;gt; Mañana (Faltan h2 y h3)"]
+    end</code></pre>
 <p>El texto del encabezado debe <strong>resumir</strong> lo que viene después ("Tipos de listas", no "Otra cosa más"). <code>h5</code> y <code>h6</code> casi nunca se usan en una web real, y el tamaño lo decide CSS, no el nivel.</p>
 <h3 id="12-por-que-importa-lectores-de-pantalla-y-seo">1.2 Por qué importa: lectores de pantalla y <abbr title="Search Engine Optimization">SEO</abbr></h3>
 <ul>

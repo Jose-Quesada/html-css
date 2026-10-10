@@ -55,6 +55,28 @@ Para distribuir bloques usa **Flexbox** (una dimensión) → [../css/05-flexbox.
 
 ## 2. Estructura semántica completa
 
+Para garantizar la accesibilidad y correcta lectura por tecnologías asistivas, una tabla de datos debe seguir un orden estructural estricto de elementos jerárquicos:
+
+```mermaid
+flowchart TD
+    TBL["&lt;table&gt;<br>(Contenedor matriz de datos)"]
+    
+    TBL --> CAP["&lt;caption&gt;<br>Título accesible de la tabla<br>(Primer hijo obligatorio)"]
+    TBL --> THD["&lt;thead&gt;<br>Cabecera superior"]
+    TBL --> TBD["&lt;tbody&gt;<br>Cuerpo de datos principal"]
+    TBL --> TFT["&lt;tfoot&gt;<br>Pie de totales / resumen"]
+
+    THD --> TR_H["&lt;tr&gt; (Fila de cabecera)"]
+    TR_H --> TH_COL["&lt;th scope='col'&gt;<br>Encabezados de columna"]
+
+    TBD --> TR_B["&lt;tr&gt; (Filas de registros)"]
+    TR_B --> TH_ROW["&lt;th scope='row'&gt;<br>Identificador de fila"]
+    TR_B --> TD_VAL["&lt;td&gt; Dato atómico"]
+
+    TFT --> TR_F["&lt;tr&gt; (Fila de resumen)"]
+    TR_F --> TD_TOT["&lt;td&gt; Totales / Medias"]
+```
+
 ### 2.1 Elementos que forman una tabla
 
 | Etiqueta | Función |

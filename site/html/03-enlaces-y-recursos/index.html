@@ -1401,6 +1401,8 @@
       
         
       
+        
+      
     
     
     
@@ -1896,6 +1898,35 @@
     
   
   15. Ejercicios, glosario y recursos
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/15-ejercicios-soluciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  15. Ejercicios: soluciones
 
     
   </span>
@@ -2928,6 +2959,9 @@
 <p><code>aria-label</code> <strong>sobrescribe</strong> el texto visible: debe coincidir con lo que <strong>se ve en pantalla</strong>. En la imagen interior el <code>alt</code> queda <strong>vacío</strong>.</p>
 <h3 id="43-foco-visible-y-skip-link">4.3 Foco visible y <em>skip link</em></h3>
 <p>Este código ilustra una de las técnicas de accesibilidad (<strong>A11y</strong>) más ingeniosas y fundamentales en el desarrollo web: el <strong>Skip Link</strong> (enlace de salto). Sirve para resolver un problema de usabilidad muy frustrante para las personas que navegan utilizando el teclado (con la tecla <kbd>Tab</kbd>) o un lector de pantalla.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">HTML</label><label for="__tabbed_1_2">CSS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="language-html highlight"><span class="filename">skip-link.html</span><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>  <span class="cm">&lt;!-- Primer enlace del documento: atajo directo al contenido --&gt;</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>  <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;skip-link&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#contenido&quot;</span><span class="p">&gt;</span>Saltar al contenido principal<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
@@ -2941,6 +2975,8 @@
 </span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>  <span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
 </span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </span></code></pre></div>
+</div>
+<div class="tabbed-block">
 <div class="language-css highlight"><span class="filename">foco.css</span><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c">/* Regla de oro: el foco nunca se elimina (outline: none sin alternativa está prohibido) */</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nt">a</span><span class="p">:</span><span class="nd">focus-visible</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">outline</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="kt">px</span><span class="w"> </span><span class="kc">solid</span><span class="w"> </span><span class="mh">#0b5fff</span><span class="p">;</span><span class="w"> </span><span class="k">outline-offset</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="kt">px</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
@@ -2964,6 +3000,9 @@
 </span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a><span class="w">  </span><span class="k">box-shadow</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">4</span><span class="kt">px</span><span class="w"> </span><span class="mi">12</span><span class="kt">px</span><span class="w"> </span><span class="nb">rgba</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.15</span><span class="p">);</span>
 </span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a><span class="p">}</span>
 </span></code></pre></div>
+</div>
+</div>
+</div>
 <h4 id="que-problema-resuelve">¿Qué problema resuelve?</h4>
 <p>En la mayoría de las páginas web modernas, la cabecera (<code>&lt;header&gt;</code>) contiene menús de navegación (<code>&lt;nav&gt;</code>) con decenas de enlaces, buscadores y desplegables. Si una persona usuaria que navega con teclado entra a tu web, tendría que <strong>pulsar la tecla <kbd>Tab</kbd> 20 o 30 veces en cada página nueva</strong> solo para atravesar el menú y llegar al texto que realmente quiere leer.</p>
 <h4 id="como-funciona-paso-a-paso-segun-el-codigo">Cómo funciona (paso a paso según el código)</h4>
@@ -3092,6 +3131,14 @@
 <hr />
 <h2 id="6-imagen-responsive-srcset-sizes-y-picture">6. Imagen responsive: <code>srcset</code>, <code>sizes</code> y <code>picture</code></h2>
 <p>En la web moderna, los usuarios acceden desde pantallas con tamaños muy dispares (desde un reloj inteligente o un móvil de 360 px hasta monitores 4K de 3840 px) y con densidades de píxeles muy diferentes (pantallas normales 1x vs. pantallas Retina/HiDPI de 2x y 3x). Servir la misma imagen pesada de 2000 px a todos los usuarios es una aberración de rendimiento.</p>
+<pre class="mermaid"><code>flowchart TD
+    DECISION["¿Qué reto técnico necesitas resolver?"]
+
+    DECISION --&gt;|Misma imagen a diferentes anchos o densidades Retina| RESOLUCION["Resolución Adaptativa&lt;br&gt;(Mismo encuadre visual)"]
+    DECISION --&gt;|Cambio de formato o recorte diferente según pantalla| DIRECCION["Formatos / Dirección de Arte&lt;br&gt;(Reglas estrictas impuestas)"]
+
+    RESOLUCION ==&gt; USE_SRCSET["✅ Solución: &amp;lt;img srcset='...' sizes='...'&amp;gt;&lt;br&gt;El navegador calcula el DPR y descarga la imagen óptima"]
+    DIRECCION ==&gt; USE_PICTURE["✅ Solución: &amp;lt;picture&amp;gt; + &amp;lt;source&amp;gt;&lt;br&gt;Negociación de formatos (AVIF/WebP) y recortes por media query"]</code></pre>
 <h3 id="61-srcset-sizes-resolucion-adaptativa-inteligente">6.1 <code>srcset</code> + <code>sizes</code>: Resolución adaptativa inteligente</h3>
 <p>Esta técnica permite ofrecer al navegador un abanico de imágenes a diferentes resoluciones para que él mismo elija y descargue automáticamente la más eficiente según el dispositivo del usuario.</p>
 <div class="language-html highlight"><span class="filename">srcset.html</span><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;https://dummyimage.com/800x600/ccc/000.png&amp;text=zapatillas-800w.jpg&quot;</span>

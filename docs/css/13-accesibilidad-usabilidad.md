@@ -31,6 +31,16 @@ Los cuatro principios se recuerdan por sus siglas: ==POUR==.
 - **Nivel de conformidad**: A (mínimo) → AA (objetivo habitual profesional y contractual) → AAA (máximo, no siempre viable).
 - Cada **criterio de éxito** tiene número (p. ej., 1.4.3) y nivel.
 
+```mermaid
+flowchart TD
+    POUR["Principios WCAG 2.2 y Aplicación en CSS"]
+
+    POUR --> P["1. Perceptible<br>Contraste mínimo 4.5:1 (1.4.3)<br>Contraste UI 3:1 (1.4.11)<br>Uso no exclusivo del color"]
+    POUR --> O["2. Operable<br>Foco visible :focus-visible (2.4.7)<br>Tamaño de objetivo táctil (2.5.8)<br>prefers-reduced-motion (2.3.3)"]
+    POUR --> U["3. Comprensible<br>Diseño coherente y predecible<br>Mensajes de error visuales claros<br>Jerarquía visual sin ambigüedades"]
+    POUR --> R["4. Robusto<br>Reflow y zoom 200% (1.4.4 / 1.4.10)<br>Modos de alto contraste (forced-colors)<br>Compatibilidad con tecnologías asistivas"]
+```
+
 Los criterios que **CSS implementa directamente** son los que trabajamos aquí; el más preguntado es ==1.4.3 (contraste)==.
 
 !!! info "Qué significa certificar AA"
@@ -312,259 +322,263 @@ Limitación fundamental: **lo automático detecta ~30–40% de los problemas**. 
 
 El siguiente ejemplo implementa un formulario de soporte ciudadano con plena conformidad **WCAG 2.1 Nivel AA**: navegación fluida por teclado con enlace de salto (*skip link*), la técnica canónica `.visually-hidden` para instrucciones destinadas exclusivamente a lectores de pantalla, indicadores de foco de alto contraste que no tapan el contenido, validación de errores independiente del color y compatibilidad con el modo de contraste forzado del sistema operativo (`forced-colors`).
 
-```html title="soporte-accesible.html"
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accesibilidad Universal · Formulario de Trámite</title>
-  <link rel="stylesheet" href="css/accesibilidad.css">
-</head>
-<body>
-  <!-- 1. Enlace de salto accesible (Skip Link) -->
-  <a href="#contenido-principal" class="skip-link">Saltar directamente al formulario</a>
+=== "HTML"
 
-  <main id="contenido-principal" class="contenedor-tramite" tabindex="-1">
-    <header class="tramite-cabecera">
-      <h1>Consulta de Expediente Ciudadano</h1>
-      <p>Servicio de atención al usuario de la sede electrónica.</p>
-    </header>
+    ```html title="soporte-accesible.html"
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Accesibilidad Universal · Formulario de Trámite</title>
+      <link rel="stylesheet" href="css/accesibilidad.css">
+    </head>
+    <body>
+      <!-- 1. Enlace de salto accesible (Skip Link) -->
+      <a href="#contenido-principal" class="skip-link">Saltar directamente al formulario</a>
+    
+      <main id="contenido-principal" class="contenedor-tramite" tabindex="-1">
+        <header class="tramite-cabecera">
+          <h1>Consulta de Expediente Ciudadano</h1>
+          <p>Servicio de atención al usuario de la sede electrónica.</p>
+        </header>
+    
+        <form class="formulario" novalidate>
+          <!-- Campo 1: Identificador -->
+          <div class="campo-grupo">
+            <label for="expediente" class="campo-label">
+              Número de Expediente
+              <span class="campo-obligatorio" aria-hidden="true">*</span>
+              <span class="visually-hidden">(campo obligatorio)</span>
+            </label>
+            <input type="text" id="expediente" name="expediente" class="campo-control" 
+                   aria-describedby="pista-expediente" required>
+            <span id="pista-expediente" class="campo-ayuda">Formato: 4 dígitos, guion y letra mayúscula (ej: 2026-X).</span>
+          </div>
+    
+          <!-- Campo 2: Notificaciones y casilla accesible -->
+          <div class="campo-grupo">
+            <label class="control-check">
+              <input type="checkbox" id="avisos" name="avisos" class="check-input">
+              <span class="check-etiqueta">Deseo recibir confirmación telemática por SMS</span>
+            </label>
+          </div>
+    
+          <!-- Campo con estado de error visible no dependiente de color -->
+          <div class="campo-grupo campo-grupo--error">
+            <label for="telefono" class="campo-label">Teléfono de contacto</label>
+            <input type="tel" id="telefono" name="telefono" class="campo-control" 
+                   aria-invalid="true" aria-describedby="error-telefono">
+            <span id="error-telefono" class="mensaje-error" role="alert">
+              <span aria-hidden="true" class="icono-error">⚠️</span>
+              El número de teléfono debe constar de 9 dígitos numéricos sin espacios.
+            </span>
+          </div>
+    
+          <div class="formulario-acciones">
+            <button type="submit" class="btn btn--primario">Registrar Consulta</button>
+          </div>
+        </form>
+      </main>
+    </body>
+    </html>
+    ```
 
-    <form class="formulario" novalidate>
-      <!-- Campo 1: Identificador -->
-      <div class="campo-grupo">
-        <label for="expediente" class="campo-label">
-          Número de Expediente
-          <span class="campo-obligatorio" aria-hidden="true">*</span>
-          <span class="visually-hidden">(campo obligatorio)</span>
-        </label>
-        <input type="text" id="expediente" name="expediente" class="campo-control" 
-               aria-describedby="pista-expediente" required>
-        <span id="pista-expediente" class="campo-ayuda">Formato: 4 dígitos, guion y letra mayúscula (ej: 2026-X).</span>
-      </div>
+=== "CSS"
 
-      <!-- Campo 2: Notificaciones y casilla accesible -->
-      <div class="campo-grupo">
-        <label class="control-check">
-          <input type="checkbox" id="avisos" name="avisos" class="check-input">
-          <span class="check-etiqueta">Deseo recibir confirmación telemática por SMS</span>
-        </label>
-      </div>
-
-      <!-- Campo con estado de error visible no dependiente de color -->
-      <div class="campo-grupo campo-grupo--error">
-        <label for="telefono" class="campo-label">Teléfono de contacto</label>
-        <input type="tel" id="telefono" name="telefono" class="campo-control" 
-               aria-invalid="true" aria-describedby="error-telefono">
-        <span id="error-telefono" class="mensaje-error" role="alert">
-          <span aria-hidden="true" class="icono-error">⚠️</span>
-          El número de teléfono debe constar de 9 dígitos numéricos sin espacios.
-        </span>
-      </div>
-
-      <div class="formulario-acciones">
-        <button type="submit" class="btn btn--primario">Registrar Consulta</button>
-      </div>
-    </form>
-  </main>
-</body>
-</html>
-```
-
-```css title="css/accesibilidad.css"
-/* 1. Reset accesible y variables de alto contraste */
-:root {
-  --color-fondo: #f8fafc;
-  --color-superficie: #ffffff;
-  --color-texto: #0f172a;
-  --color-muted: #475569;
-  --color-borde: #64748b; /* Contraste 4.6:1 contra blanco (cumple WCAG 1.4.11) */
-  --color-primario: #0284c7;
-  --color-foco: #1d4ed8;
-  --color-error: #b91c1c; /* Rojo oscuro con contraste 5.5:1 */
-  --color-error-fondo: #fef2f2;
-}
-
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: system-ui, -apple-system, sans-serif;
-  background-color: var(--color-fondo);
-  color: var(--color-texto);
-  line-height: 1.6;
-  padding: 1.5rem;
-}
-
-/* 2. Skip Link: Invisible por defecto, prominente al recibir foco */
-.skip-link {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  padding: 0.75rem 1.25rem;
-  background-color: #0f172a;
-  color: #ffffff;
-  font-weight: 700;
-  text-decoration: underline;
-  border-radius: 0.375rem;
-  z-index: 1000;
-  transform: translateY(-200%);
-  transition: transform 0.2s ease;
-}
-
-.skip-link:focus-visible {
-  transform: translateY(0);
-  outline: 3px solid #38bdf8;
-  outline-offset: 3px;
-}
-
-/* 3. Técnica oficial .visually-hidden (solo para lectores de pantalla) */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
-/* 4. Estructura del formulario */
-.contenedor-tramite {
-  max-width: 36rem;
-  margin-inline: auto;
-  background-color: var(--color-superficie);
-  border: 1px solid #cbd5e1;
-  border-radius: 1rem;
-  padding: 2.5rem;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
-}
-
-.tramite-cabecera {
-  margin-block-end: 2rem;
-}
-
-.tramite-cabecera h1 {
-  font-size: 1.75rem;
-  margin-block-end: 0.5rem;
-}
-
-.campo-grupo {
-  margin-block-end: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.campo-label {
-  font-weight: 600;
-  color: var(--color-texto);
-}
-
-.campo-obligatorio {
-  color: var(--color-error);
-  font-weight: 700;
-}
-
-.campo-control {
-  width: 100%;
-  min-height: 44px; /* Tamaño táctil mínimo */
-  padding: 0.6rem 0.85rem;
-  border: 1.5px solid var(--color-borde);
-  border-radius: 0.375rem;
-  font-size: 1rem;
-  font-family: inherit;
-  color: var(--color-texto);
-}
-
-/* 5. Indicador de foco visible de alto contraste (WCAG 2.4.7 y 2.4.11) */
-.campo-control:focus-visible,
-.btn:focus-visible,
-.check-input:focus-visible {
-  outline: 3px solid var(--color-foco);
-  outline-offset: 2px;
-  border-color: var(--color-foco);
-}
-
-.campo-ayuda {
-  font-size: 0.85rem;
-  color: var(--color-muted);
-}
-
-/* 6. Tratamiento de error accesible (No depende solo del color) */
-.campo-grupo--error .campo-control {
-  border-color: var(--color-error);
-  border-width: 2px;
-  background-color: var(--color-error-fondo);
-}
-
-.mensaje-error {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--color-error);
-}
-
-/* 7. Casilla de verificación accesible */
-.control-check {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  cursor: pointer;
-  min-height: 44px;
-}
-
-.check-input {
-  width: 1.25rem;
-  height: 1.25rem;
-  cursor: pointer;
-}
-
-/* 8. Botón accesible */
-.btn {
-  min-height: 44px;
-  padding: 0.75rem 1.75rem;
-  background-color: var(--color-primario);
-  color: #ffffff;
-  border: none;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.btn:hover {
-  background-color: #0369a1;
-}
-
-/* 9. Modo de Alto Contraste del Sistema Operativo (forced-colors) */
-@media (forced-colors: active) {
-  .campo-control,
-  .btn,
-  .skip-link {
-    /* Fuerza bordes de sistema visibles en modo blanco/negro de Windows */
-    border: 2px solid ButtonText;
-  }
-
-  .campo-control:focus-visible,
-  .btn:focus-visible {
-    outline: 3px solid Highlight;
-    outline-offset: 3px;
-  }
-
-  .campo-grupo--error .campo-control {
-    border-color: Mark;
-  }
-}
-```
+    ```css title="css/accesibilidad.css"
+    /* 1. Reset accesible y variables de alto contraste */
+    :root {
+      --color-fondo: #f8fafc;
+      --color-superficie: #ffffff;
+      --color-texto: #0f172a;
+      --color-muted: #475569;
+      --color-borde: #64748b; /* Contraste 4.6:1 contra blanco (cumple WCAG 1.4.11) */
+      --color-primario: #0284c7;
+      --color-foco: #1d4ed8;
+      --color-error: #b91c1c; /* Rojo oscuro con contraste 5.5:1 */
+      --color-error-fondo: #fef2f2;
+    }
+    
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: var(--color-fondo);
+      color: var(--color-texto);
+      line-height: 1.6;
+      padding: 1.5rem;
+    }
+    
+    /* 2. Skip Link: Invisible por defecto, prominente al recibir foco */
+    .skip-link {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      padding: 0.75rem 1.25rem;
+      background-color: #0f172a;
+      color: #ffffff;
+      font-weight: 700;
+      text-decoration: underline;
+      border-radius: 0.375rem;
+      z-index: 1000;
+      transform: translateY(-200%);
+      transition: transform 0.2s ease;
+    }
+    
+    .skip-link:focus-visible {
+      transform: translateY(0);
+      outline: 3px solid #38bdf8;
+      outline-offset: 3px;
+    }
+    
+    /* 3. Técnica oficial .visually-hidden (solo para lectores de pantalla) */
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+    
+    /* 4. Estructura del formulario */
+    .contenedor-tramite {
+      max-width: 36rem;
+      margin-inline: auto;
+      background-color: var(--color-superficie);
+      border: 1px solid #cbd5e1;
+      border-radius: 1rem;
+      padding: 2.5rem;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+    }
+    
+    .tramite-cabecera {
+      margin-block-end: 2rem;
+    }
+    
+    .tramite-cabecera h1 {
+      font-size: 1.75rem;
+      margin-block-end: 0.5rem;
+    }
+    
+    .campo-grupo {
+      margin-block-end: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    
+    .campo-label {
+      font-weight: 600;
+      color: var(--color-texto);
+    }
+    
+    .campo-obligatorio {
+      color: var(--color-error);
+      font-weight: 700;
+    }
+    
+    .campo-control {
+      width: 100%;
+      min-height: 44px; /* Tamaño táctil mínimo */
+      padding: 0.6rem 0.85rem;
+      border: 1.5px solid var(--color-borde);
+      border-radius: 0.375rem;
+      font-size: 1rem;
+      font-family: inherit;
+      color: var(--color-texto);
+    }
+    
+    /* 5. Indicador de foco visible de alto contraste (WCAG 2.4.7 y 2.4.11) */
+    .campo-control:focus-visible,
+    .btn:focus-visible,
+    .check-input:focus-visible {
+      outline: 3px solid var(--color-foco);
+      outline-offset: 2px;
+      border-color: var(--color-foco);
+    }
+    
+    .campo-ayuda {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+    }
+    
+    /* 6. Tratamiento de error accesible (No depende solo del color) */
+    .campo-grupo--error .campo-control {
+      border-color: var(--color-error);
+      border-width: 2px;
+      background-color: var(--color-error-fondo);
+    }
+    
+    .mensaje-error {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-error);
+    }
+    
+    /* 7. Casilla de verificación accesible */
+    .control-check {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      min-height: 44px;
+    }
+    
+    .check-input {
+      width: 1.25rem;
+      height: 1.25rem;
+      cursor: pointer;
+    }
+    
+    /* 8. Botón accesible */
+    .btn {
+      min-height: 44px;
+      padding: 0.75rem 1.75rem;
+      background-color: var(--color-primario);
+      color: #ffffff;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    
+    .btn:hover {
+      background-color: #0369a1;
+    }
+    
+    /* 9. Modo de Alto Contraste del Sistema Operativo (forced-colors) */
+    @media (forced-colors: active) {
+      .campo-control,
+      .btn,
+      .skip-link {
+        /* Fuerza bordes de sistema visibles en modo blanco/negro de Windows */
+        border: 2px solid ButtonText;
+      }
+    
+      .campo-control:focus-visible,
+      .btn:focus-visible {
+        outline: 3px solid Highlight;
+        outline-offset: 3px;
+      }
+    
+      .campo-grupo--error .campo-control {
+        border-color: Mark;
+      }
+    }
+    ```
 
 ---
 

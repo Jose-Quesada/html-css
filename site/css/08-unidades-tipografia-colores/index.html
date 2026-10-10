@@ -684,6 +684,8 @@
       
         
       
+        
+      
     
     
     
@@ -1552,6 +1554,35 @@
   
   
     <li class="md-nav__item">
+      <a href="../15-ejercicios-soluciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  15. Ejercicios: soluciones
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../16-practicas/" class="md-nav__link">
         
   
@@ -2004,6 +2035,8 @@
       
         
       
+        
+      
     
     
     
@@ -2043,6 +2076,15 @@
 <h2 id="parte-a-unidades">PARTE A · UNIDADES</h2>
 <p>Toda medida CSS es una <strong>magnitud más una unidad</strong>.</p>
 <h3 id="1-clasificacion-general">1. Clasificación general</h3>
+<p>Toda medida en CSS se divide en familias según cuál sea su <strong>marco de referencia</strong>:</p>
+<pre class="mermaid"><code>flowchart TD
+    UNIDADES["Sistemas de Unidades en CSS"]
+
+    UNIDADES --&gt; ABS["1. Absolutas / Físicas&lt;br&gt;px (píxel CSS de 1/96 in)&lt;br&gt;❌ No escalan con el zoom de texto"]
+    UNIDADES --&gt; REL_FONT["2. Relativas a Tipografía&lt;br&gt;rem (:root) y em (elemento actual)&lt;br&gt;✅ Garantizan accesibilidad WCAG 1.4.4"]
+    UNIDADES --&gt; REL_VIEW["3. Relativas al Viewport&lt;br&gt;vw, vh, dvh (Dynamic Viewport)&lt;br&gt;Adaptadas a la ventana de navegación"]
+    UNIDADES --&gt; REL_CONT["4. Relativas a Contenedor&lt;br&gt;cqw, cqh (Container Queries)&lt;br&gt;Adaptadas al tamaño del componente"]
+    UNIDADES --&gt; REL_GRID["5. Distribución Grid&lt;br&gt;fr (Fracción del espacio sobrante)"]</code></pre>
 <table>
 <thead>
 <tr>
@@ -2651,6 +2693,9 @@
 <hr />
 <h2 id="15-ejemplo-practico-tarjeta-de-cotizacion-con-tipografia-fluida-numeros-tabulares-y-paleta-oklch">15. Ejemplo práctico: tarjeta de cotización con tipografía fluida, números tabulares y paleta OKLCH</h2>
 <p>El siguiente ejemplo implementa una tarjeta financiera y de analítica que integra las técnicas más avanzadas de la unidad: tamaño de texto fluido con <code>clamp()</code>, números alineados sin oscilación mediante <code>font-variant-numeric: tabular-nums</code>, un sistema de color científicamente calibrado en el espacio perceptualmente uniforme <strong>OKLCH</strong>, y derivación de estados con <code>color-mix()</code>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">HTML</label><label for="__tabbed_1_2">CSS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="language-html highlight"><span class="filename">cotizacion.html</span><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
@@ -2706,6 +2751,8 @@
 </span><span id="__span-9-53"><a id="__codelineno-9-53" name="__codelineno-9-53" href="#__codelineno-9-53"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </span><span id="__span-9-54"><a id="__codelineno-9-54" name="__codelineno-9-54" href="#__codelineno-9-54"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></code></pre></div>
+</div>
+<div class="tabbed-block">
 <div class="language-css highlight"><span class="filename">css/tokens.css</span><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c">/* 1. Tokens de diseño: Paleta OKLCH y tipografía */</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="c">/* Color de marca en espacio perceptualmente uniforme OKLCH (Luminosidad, Croma, Matiz) */</span>
@@ -2871,6 +2918,9 @@
 </span><span id="__span-10-163"><a id="__codelineno-10-163" name="__codelineno-10-163" href="#__codelineno-10-163"></a><span class="w">  </span><span class="k">border</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 </span><span id="__span-10-164"><a id="__codelineno-10-164" name="__codelineno-10-164" href="#__codelineno-10-164"></a><span class="p">}</span>
 </span></code></pre></div>
+</div>
+</div>
+</div>
 <hr />
 <h3 id="151-explicacion-detallada-por-que-se-usa-cada-propiedad-y-para-que-sirve">15.1 Explicación detallada: ¿Por qué se usa cada propiedad y para qué sirve?</h3>
 <p>A continuación se explican los fundamentos científicos y de diseño detrás de cada propiedad utilizada:</p>

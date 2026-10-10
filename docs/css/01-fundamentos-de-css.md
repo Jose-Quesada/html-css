@@ -50,6 +50,19 @@ Para un estudiante que parte de cero, CSS parece a menudo «magia impredecible»
 5. **Pintado (*Paint* o *Repaint*):** El motor convierte los elementos geométricos en píxeles reales dibujados en capas (colores de fondo, textos, sombras, bordes).
 6. **Composición (*Composite*):** Si hay varias capas (generadas por aceleración gráfica con GPU, `transform` o `opacity`), la GPU las superpone en el orden correcto para proyectarlas en la pantalla.
 
+```mermaid
+flowchart TD
+    HTML["Bytes HTML"] --> DOM["Árbol DOM<br>(Nodos del documento)"]
+    CSS["Archivos CSS"] --> CSSOM["Árbol CSSOM<br>(Reglas y estilos calculados)"]
+
+    DOM --> RT["Render Tree (Árbol de renderizado)<br>Nodos visibles con sus estilos asociados"]
+    CSSOM --> RT
+
+    RT --> LAYOUT["Layout / Reflow (Geometría)<br>Cálculo de coordenadas (x, y) y tamaños (width, height)"]
+    LAYOUT --> PAINT["Paint / Repaint (Rasterizado)<br>Dibujo de píxeles: fondos, bordes, sombras, texto"]
+    PAINT --> COMPOSITE["Composite (GPU)<br>Superposición acelerada de capas en pantalla"]
+```
+
 !!! tip "Por qué importa a un desarrollador"
 
     Entender este pipeline es vital para el rendimiento: cambiar un `width` o `margin` obliga al navegador a recalcular **Layout + Paint + Composite** (costoso), mientras que animar un `transform` o `opacity` solo ejecuta **Composite** directamente en la GPU (fluido a 60/120 fps).
@@ -227,20 +240,18 @@ El nombre de CSS proviene precisamente de la palabra **Cascada**. En una web rea
 
 Ese algoritmo procesa el conflicto en **tres fases secuenciales** (especificación *CSS Cascading and Inheritance Level 5/6*):
 
-```text title="flujo-cascada.txt"
-Conflicto de propiedades
-   │
-   ▼
-¿Tienen distinto Origen o Importancia? ──(SÍ)──► Gana el origen más prioritario
-   │ (NO)
-   ▼
-¿Pertenecen a distintas @layer?        ──(SÍ)──► Gana la capa con prioridad
-   │ (NO)
-   ▼
-¿Tienen distinta Especificidad?        ──(SÍ)──► Gana el selector más específico
-   │ (NO)
-   ▼
-Orden en el código                     ────────► Gana la última declaración leída
+```mermaid
+flowchart TD
+    START["Conflicto de propiedades entre reglas"] --> F1{"1. ¿Distinto Origen o Importancia?"}
+    
+    F1 -->|SÍ| WIN1["🏆 Gana el origen más prioritario<br>(User !important > Author !important > Author normal > User normal > User-Agent)"]
+    F1 -->|NO| F2{"2. ¿Pertenecen a distintas @layer?"}
+
+    F2 -->|SÍ| WIN2["🏆 Gana la capa con prioridad<br>(Capas declaradas posteriormente vencen a capas previas)"]
+    F2 -->|NO| F3{"3. ¿Distinta Especificidad?"}
+
+    F3 -->|SÍ| WIN3["🏆 Gana el selector más específico<br>(Comparación tupla: I > A > B > C)"]
+    F3 -->|NO| WIN4["🏆 Gana el Orden en el código fuente<br>(Última declaración leída en el CSS)"]
 ```
 
 ### Fase 1 — Origen e importancia
@@ -426,172 +437,176 @@ El CE h pide ==herramientas de validación== de hojas de estilo: aquí están la
 
 El siguiente ejemplo integra todos los conceptos fundamentales de la unidad: separación de responsabilidades mediante archivo externo, reset con capas de cascada (`@layer`), diseño basado en tokens/variables semánticas, herencia natural y forzada en controles de interfaz, y resolución limpia de especificidad sin necesidad de recurrir al destructivo `!important`.
 
-```html title="tarjeta-curso.html"
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fundamentos de CSS · Tarjeta de Módulo</title>
-  <!-- Inclusión recomendada por estándar: enlace externo no bloqueante -->
-  <link rel="stylesheet" href="css/estilos.css">
-</head>
-<body>
-  <main class="contenedor">
-    <article class="tarjeta tarjeta--destacada">
-      <header class="tarjeta__cabecera">
-        <span class="badge">DAW · 1.º Curso</span>
-        <h2 class="tarjeta__titulo">Lenguajes de Marcas</h2>
-      </header>
-      
-      <p class="tarjeta__descripcion">
-        Aprende a estructurar documentos con HTML5 semántico y a estilizarlos con CSS moderno, cascada predecible y accesibilidad universal.
-      </p>
+=== "HTML"
 
-      <footer class="tarjeta__pie">
-        <span class="tarjeta__horas">96 horas lectivas</span>
-        <button type="button" class="btn btn--primario">Ver temario</button>
-      </footer>
-    </article>
-  </main>
-</body>
-</html>
-```
-
-```css title="css/estilos.css"
-/* 1. Capa de reset: prioridad mínima en la cascada */
-@layer reset {
-  *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  body {
-    min-height: 100vh;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* Excepción clásica de formularios: forzar herencia */
-  button, input, select, textarea {
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-  }
-}
-
-/* 2. Capa base y tokens de diseño */
-@layer tema {
-  :root {
-    --color-fondo: #f8fafc;
-    --color-superficie: #ffffff;
-    --color-texto: #0f172a;
-    --color-texto-secundario: #475569;
-    --color-primario: #0284c7;
-    --color-primario-hover: #0369a1;
-    --color-borde: #e2e8f0;
-    --color-destacado: #38bdf8;
+    ```html title="tarjeta-curso.html"
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Fundamentos de CSS · Tarjeta de Módulo</title>
+      <!-- Inclusión recomendada por estándar: enlace externo no bloqueante -->
+      <link rel="stylesheet" href="css/estilos.css">
+    </head>
+    <body>
+      <main class="contenedor">
+        <article class="tarjeta tarjeta--destacada">
+          <header class="tarjeta__cabecera">
+            <span class="badge">DAW · 1.º Curso</span>
+            <h2 class="tarjeta__titulo">Lenguajes de Marcas</h2>
+          </header>
+          
+          <p class="tarjeta__descripcion">
+            Aprende a estructurar documentos con HTML5 semántico y a estilizarlos con CSS moderno, cascada predecible y accesibilidad universal.
+          </p>
     
-    --fuente-principal: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    --radio-borde: 0.75rem;
-    --sombra-tarjeta: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  }
+          <footer class="tarjeta__pie">
+            <span class="tarjeta__horas">96 horas lectivas</span>
+            <button type="button" class="btn btn--primario">Ver temario</button>
+          </footer>
+        </article>
+      </main>
+    </body>
+    </html>
+    ```
 
-  body {
-    background-color: var(--color-fondo);
-    color: var(--color-texto);
-    font-family: var(--fuente-principal);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1.5rem;
-  }
-}
+=== "CSS"
 
-/* 3. Capa de componentes */
-@layer componentes {
-  .tarjeta {
-    background-color: var(--color-superficie);
-    border: 1px solid var(--color-borde);
-    border-radius: var(--radio-borde);
-    box-shadow: var(--sombra-tarjeta);
-    max-width: 24rem;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  /* Modificador de especificidad limpia (0, 2, 0) */
-  .tarjeta.tarjeta--destacada {
-    border-color: var(--color-destacado);
-    border-width: 2px;
-  }
-
-  .badge {
-    display: inline-block;
-    align-self: flex-start;
-    padding: 0.25rem 0.625rem;
-    background-color: #e0f2fe;
-    color: #0369a1;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    border-radius: 9999px;
-  }
-
-  .tarjeta__titulo {
-    font-size: 1.35rem;
-    color: var(--color-texto);
-    line-height: 1.25;
-  }
-
-  .tarjeta__descripcion {
-    color: var(--color-texto-secundario);
-    font-size: 0.95rem;
-  }
-
-  .tarjeta__pie {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 0.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--color-borde);
-  }
-
-  .tarjeta__horas {
-    font-size: 0.85rem;
-    color: var(--color-texto-secundario);
-    font-weight: 600;
-  }
-
-  .btn {
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    font-weight: 600;
-    transition: background-color 0.2s ease;
-  }
-
-  .btn--primario {
-    background-color: var(--color-primario);
-    color: #ffffff;
-  }
-
-  .btn--primario:hover {
-    background-color: var(--color-primario-hover);
-  }
-
-  .btn:focus-visible {
-    outline: 2px solid var(--color-primario);
-    outline-offset: 2px;
-  }
-}
-```
+    ```css title="css/estilos.css"
+    /* 1. Capa de reset: prioridad mínima en la cascada */
+    @layer reset {
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+    
+      body {
+        min-height: 100vh;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+    
+      /* Excepción clásica de formularios: forzar herencia */
+      button, input, select, textarea {
+        font-family: inherit;
+        font-size: inherit;
+        color: inherit;
+      }
+    }
+    
+    /* 2. Capa base y tokens de diseño */
+    @layer tema {
+      :root {
+        --color-fondo: #f8fafc;
+        --color-superficie: #ffffff;
+        --color-texto: #0f172a;
+        --color-texto-secundario: #475569;
+        --color-primario: #0284c7;
+        --color-primario-hover: #0369a1;
+        --color-borde: #e2e8f0;
+        --color-destacado: #38bdf8;
+        
+        --fuente-principal: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        --radio-borde: 0.75rem;
+        --sombra-tarjeta: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+      }
+    
+      body {
+        background-color: var(--color-fondo);
+        color: var(--color-texto);
+        font-family: var(--fuente-principal);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1.5rem;
+      }
+    }
+    
+    /* 3. Capa de componentes */
+    @layer componentes {
+      .tarjeta {
+        background-color: var(--color-superficie);
+        border: 1px solid var(--color-borde);
+        border-radius: var(--radio-borde);
+        box-shadow: var(--sombra-tarjeta);
+        max-width: 24rem;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+    
+      /* Modificador de especificidad limpia (0, 2, 0) */
+      .tarjeta.tarjeta--destacada {
+        border-color: var(--color-destacado);
+        border-width: 2px;
+      }
+    
+      .badge {
+        display: inline-block;
+        align-self: flex-start;
+        padding: 0.25rem 0.625rem;
+        background-color: #e0f2fe;
+        color: #0369a1;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        border-radius: 9999px;
+      }
+    
+      .tarjeta__titulo {
+        font-size: 1.35rem;
+        color: var(--color-texto);
+        line-height: 1.25;
+      }
+    
+      .tarjeta__descripcion {
+        color: var(--color-texto-secundario);
+        font-size: 0.95rem;
+      }
+    
+      .tarjeta__pie {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--color-borde);
+      }
+    
+      .tarjeta__horas {
+        font-size: 0.85rem;
+        color: var(--color-texto-secundario);
+        font-weight: 600;
+      }
+    
+      .btn {
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        font-weight: 600;
+        transition: background-color 0.2s ease;
+      }
+    
+      .btn--primario {
+        background-color: var(--color-primario);
+        color: #ffffff;
+      }
+    
+      .btn--primario:hover {
+        background-color: var(--color-primario-hover);
+      }
+    
+      .btn:focus-visible {
+        outline: 2px solid var(--color-primario);
+        outline-offset: 2px;
+      }
+    }
+    ```
 
 ---
 

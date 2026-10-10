@@ -128,6 +128,21 @@ Imaginemos este fragmento HTML:
 </article>
 ```
 
+```mermaid
+flowchart TD
+    ART["&lt;article class='post'&gt; (Elemento Padre)"]
+    
+    ART -->|Hijo directo: &gt;| H2["&lt;h2&gt; Título"]
+    ART -->|Hijo directo: &gt;| P1["&lt;p&gt; Primer párrafo"]
+    ART -->|Hijo directo: &gt;| DIV["&lt;div class='destacado'&gt;"]
+    ART -->|Hijo directo: &gt;| P3["&lt;p&gt; Párrafo final"]
+
+    DIV -->|Hijo directo de div| P2["&lt;p&gt; Párrafo interior"]
+
+    H2 -. "h2 + p (Hermano adyacente inmediato)" .-> P1
+    H2 -. "h2 ~ p (Hermano general posterior)" .-> P3
+```
+
 - **`article p` (Descendiente):** Selecciona **los tres párrafos**. A todos los afecta porque todos están contenidos dentro del `<article>`.
 - **`article > p` (Hijo directo):** Selecciona únicamente el primer párrafo y el párrafo final. **No selecciona** el párrafo del medio porque su padre directo es el `<div>`, no el `<article>`.
 - **`h2 + p` (Hermano adyacente):** Selecciona **únicamente el primer párrafo**, porque es el único que está justo pegado e inmediatamente después del `<h2>`.
@@ -408,246 +423,250 @@ El coste real está en **cuántos elementos visita** el motor, no en la «comple
 
 El siguiente ejemplo muestra la maquetación de una tabla de inventario interactiva donde el estilo visual responde dinámicamente al estado del DOM sin recurrir a scripts: filas alternas con `:nth-child`, combinadores de adyacencia (`+` y `~`) para estados reactivos, selectores funcionales (`:is`, `:not`, `:has`) y pseudo-elementos (`::before`, `::after`) para enriquecimiento visual accesible.
 
-```html title="inventario.html"
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestión de Inventario · Selectores CSS</title>
-  <link rel="stylesheet" href="css/inventario.css">
-</head>
-<body>
-  <main class="panel">
-    <header class="panel__cabecera">
-      <h1>Inventario de Almacén</h1>
-      <p class="panel__resumen">Monitoreo de existencias y pedidos en tiempo real.</p>
-    </header>
+=== "HTML"
 
-    <div class="tabla-contenedor">
-      <table class="tabla-datos">
-        <caption class="sr-only">Listado de existencias de material informático</caption>
-        <thead>
-          <tr>
-            <th scope="col">Estado</th>
-            <th scope="col">Artículo</th>
-            <th scope="col">Categoría</th>
-            <th scope="col">Stock</th>
-            <th scope="col">Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="fila fila--alerta">
-            <td><span class="indicador" data-estado="critico"></span></td>
-            <td><strong>SSD NVMe 1TB</strong></td>
-            <td>Almacenamiento</td>
-            <td class="col-stock">2 uds</td>
-            <td><button type="button" class="btn btn--urgente">Reponer</button></td>
-          </tr>
-          <tr class="fila">
-            <td><span class="indicador" data-estado="ok"></span></td>
-            <td>Memoria RAM 16GB DDR5</td>
-            <td>Componentes</td>
-            <td class="col-stock">45 uds</td>
-            <td><button type="button" class="btn">Pedir</button></td>
-          </tr>
-          <tr class="fila">
-            <td><span class="indicador" data-estado="ok"></span></td>
-            <td>Monitor 27" IPS 144Hz</td>
-            <td>Periféricos</td>
-            <td class="col-stock">18 uds</td>
-            <td><button type="button" class="btn">Pedir</button></td>
-          </tr>
-          <tr class="fila fila--agotado">
-            <td><span class="indicador" data-estado="agotado"></span></td>
-            <td>Placa Base B650 AM5</td>
-            <td>Componentes</td>
-            <td class="col-stock">0 uds</td>
-            <td><button type="button" class="btn" disabled>Agotado</button></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    ```html title="inventario.html"
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Gestión de Inventario · Selectores CSS</title>
+      <link rel="stylesheet" href="css/inventario.css">
+    </head>
+    <body>
+      <main class="panel">
+        <header class="panel__cabecera">
+          <h1>Inventario de Almacén</h1>
+          <p class="panel__resumen">Monitoreo de existencias y pedidos en tiempo real.</p>
+        </header>
+    
+        <div class="tabla-contenedor">
+          <table class="tabla-datos">
+            <caption class="sr-only">Listado de existencias de material informático</caption>
+            <thead>
+              <tr>
+                <th scope="col">Estado</th>
+                <th scope="col">Artículo</th>
+                <th scope="col">Categoría</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="fila fila--alerta">
+                <td><span class="indicador" data-estado="critico"></span></td>
+                <td><strong>SSD NVMe 1TB</strong></td>
+                <td>Almacenamiento</td>
+                <td class="col-stock">2 uds</td>
+                <td><button type="button" class="btn btn--urgente">Reponer</button></td>
+              </tr>
+              <tr class="fila">
+                <td><span class="indicador" data-estado="ok"></span></td>
+                <td>Memoria RAM 16GB DDR5</td>
+                <td>Componentes</td>
+                <td class="col-stock">45 uds</td>
+                <td><button type="button" class="btn">Pedir</button></td>
+              </tr>
+              <tr class="fila">
+                <td><span class="indicador" data-estado="ok"></span></td>
+                <td>Monitor 27" IPS 144Hz</td>
+                <td>Periféricos</td>
+                <td class="col-stock">18 uds</td>
+                <td><button type="button" class="btn">Pedir</button></td>
+              </tr>
+              <tr class="fila fila--agotado">
+                <td><span class="indicador" data-estado="agotado"></span></td>
+                <td>Placa Base B650 AM5</td>
+                <td>Componentes</td>
+                <td class="col-stock">0 uds</td>
+                <td><button type="button" class="btn" disabled>Agotado</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    
+        <form class="filtro-formulario">
+          <label class="control-check">
+            <input type="checkbox" id="ocultar-agotados" class="check-agotados">
+            <span>Ocultar artículos agotados</span>
+          </label>
+        </form>
+      </main>
+    </body>
+    </html>
+    ```
 
-    <form class="filtro-formulario">
-      <label class="control-check">
-        <input type="checkbox" id="ocultar-agotados" class="check-agotados">
-        <span>Ocultar artículos agotados</span>
-      </label>
-    </form>
-  </main>
-</body>
-</html>
-```
+=== "CSS"
 
-```css title="css/inventario.css"
-/* 1. Reset básico y variables */
-:root {
-  --color-ok: #16a34a;
-  --color-alerta: #dc2626;
-  --color-fondo-alerta: #fef2f2;
-  --color-texto: #1e293b;
-  --color-borde: #cbd5e1;
-  --color-fondo-cebra: #f8fafc;
-  --color-primario: #2563eb;
-}
-
-body {
-  font-family: system-ui, -apple-system, sans-serif;
-  color: var(--color-texto);
-  background-color: #f1f5f9;
-  padding: 2rem 1rem;
-  margin: 0;
-}
-
-.panel {
-  max-width: 56rem;
-  margin-inline: auto;
-  background: #ffffff;
-  padding: 2rem;
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-}
-
-/* 2. Combinador de hermano adyacente (+) */
-.panel__cabecera h1 + p {
-  margin-top: 0.25rem;
-  color: #64748b;
-  font-size: 0.95rem;
-}
-
-/* 3. Estructura de tabla y pseudo-clases estructurales */
-.tabla-datos {
-  width: 100%;
-  border-collapse: collapse;
-  margin-block: 1.5rem;
-}
-
-.tabla-datos th,
-.tabla-datos td {
-  padding: 0.75rem 1rem;
-  text-align: left;
-  border-bottom: 1px solid var(--color-borde);
-}
-
-/* Filas alternas (cebreado) con :nth-child(even) */
-.tabla-datos tbody tr:nth-child(even) {
-  background-color: var(--color-fondo-cebra);
-}
-
-/* Primera y última columna estilizadas con pseudo-clases de tipo */
-.tabla-datos th:first-child,
-.tabla-datos td:first-child {
-  width: 3rem;
-  text-align: center;
-}
-
-.tabla-datos td:last-child {
-  text-align: right;
-}
-
-/* 4. Selector relacional :has() para reactividad en fila */
-/* Si la fila contiene un botón deshabilitado, se atenúa toda la fila */
-.tabla-datos tr:has(button:disabled) {
-  opacity: 0.5;
-  background-color: #f8fafc;
-}
-
-/* Fila en alerta */
-.fila--alerta {
-  background-color: var(--color-fondo-alerta) !important;
-}
-
-/* 5. Selector por atributo y pseudo-elemento ::before */
-.indicador {
-  display: inline-block;
-  width: 0.75rem;
-  height: 0.75rem;
-  border-radius: 50%;
-}
-
-.indicador[data-estado="ok"] {
-  background-color: var(--color-ok);
-}
-
-.indicador[data-estado="critico"] {
-  background-color: var(--color-alerta);
-  box-shadow: 0 0 0 3px #fecaca;
-}
-
-.indicador[data-estado="agotado"] {
-  background-color: #94a3b8;
-}
-
-/* 6. Pseudo-clases de estado y pseudo-elementos en botones */
-.btn {
-  font-family: inherit;
-  font-size: 0.875rem;
-  font-weight: 600;
-  padding: 0.4rem 0.85rem;
-  border: 1px solid var(--color-borde);
-  border-radius: 0.375rem;
-  background: #ffffff;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-/* Agrupación limpia con :is() manteniendo especificidad mínima */
-:is(.btn:hover, .btn:focus-visible):not(:disabled) {
-  background-color: #f1f5f9;
-  border-color: #94a3b8;
-}
-
-.btn:focus-visible {
-  outline: 2px solid var(--color-primario);
-  outline-offset: 2px;
-}
-
-.btn:disabled {
-  cursor: not-allowed;
-}
-
-.btn--urgente {
-  background-color: var(--color-alerta);
-  border-color: var(--color-alerta);
-  color: #ffffff;
-}
-
-.btn--urgente:hover:not(:disabled) {
-  background-color: #b91c1c;
-}
-
-/* 7. Pseudo-clase :checked y combinador de hermano general (~) */
-.filtro-formulario {
-  margin-top: 1rem;
-}
-
-.control-check {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-
-/* Si el panel contiene el checkbox marcado, oculta las filas agotadas */
-.panel:has(.check-agotados:checked) .fila--agotado {
-  display: none;
-}
-
-/* Accesibilidad: texto solo para lectores de pantalla */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-```
+    ```css title="css/inventario.css"
+    /* 1. Reset básico y variables */
+    :root {
+      --color-ok: #16a34a;
+      --color-alerta: #dc2626;
+      --color-fondo-alerta: #fef2f2;
+      --color-texto: #1e293b;
+      --color-borde: #cbd5e1;
+      --color-fondo-cebra: #f8fafc;
+      --color-primario: #2563eb;
+    }
+    
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      color: var(--color-texto);
+      background-color: #f1f5f9;
+      padding: 2rem 1rem;
+      margin: 0;
+    }
+    
+    .panel {
+      max-width: 56rem;
+      margin-inline: auto;
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+    
+    /* 2. Combinador de hermano adyacente (+) */
+    .panel__cabecera h1 + p {
+      margin-top: 0.25rem;
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+    
+    /* 3. Estructura de tabla y pseudo-clases estructurales */
+    .tabla-datos {
+      width: 100%;
+      border-collapse: collapse;
+      margin-block: 1.5rem;
+    }
+    
+    .tabla-datos th,
+    .tabla-datos td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--color-borde);
+    }
+    
+    /* Filas alternas (cebreado) con :nth-child(even) */
+    .tabla-datos tbody tr:nth-child(even) {
+      background-color: var(--color-fondo-cebra);
+    }
+    
+    /* Primera y última columna estilizadas con pseudo-clases de tipo */
+    .tabla-datos th:first-child,
+    .tabla-datos td:first-child {
+      width: 3rem;
+      text-align: center;
+    }
+    
+    .tabla-datos td:last-child {
+      text-align: right;
+    }
+    
+    /* 4. Selector relacional :has() para reactividad en fila */
+    /* Si la fila contiene un botón deshabilitado, se atenúa toda la fila */
+    .tabla-datos tr:has(button:disabled) {
+      opacity: 0.5;
+      background-color: #f8fafc;
+    }
+    
+    /* Fila en alerta */
+    .fila--alerta {
+      background-color: var(--color-fondo-alerta) !important;
+    }
+    
+    /* 5. Selector por atributo y pseudo-elemento ::before */
+    .indicador {
+      display: inline-block;
+      width: 0.75rem;
+      height: 0.75rem;
+      border-radius: 50%;
+    }
+    
+    .indicador[data-estado="ok"] {
+      background-color: var(--color-ok);
+    }
+    
+    .indicador[data-estado="critico"] {
+      background-color: var(--color-alerta);
+      box-shadow: 0 0 0 3px #fecaca;
+    }
+    
+    .indicador[data-estado="agotado"] {
+      background-color: #94a3b8;
+    }
+    
+    /* 6. Pseudo-clases de estado y pseudo-elementos en botones */
+    .btn {
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 0.4rem 0.85rem;
+      border: 1px solid var(--color-borde);
+      border-radius: 0.375rem;
+      background: #ffffff;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    
+    /* Agrupación limpia con :is() manteniendo especificidad mínima */
+    :is(.btn:hover, .btn:focus-visible):not(:disabled) {
+      background-color: #f1f5f9;
+      border-color: #94a3b8;
+    }
+    
+    .btn:focus-visible {
+      outline: 2px solid var(--color-primario);
+      outline-offset: 2px;
+    }
+    
+    .btn:disabled {
+      cursor: not-allowed;
+    }
+    
+    .btn--urgente {
+      background-color: var(--color-alerta);
+      border-color: var(--color-alerta);
+      color: #ffffff;
+    }
+    
+    .btn--urgente:hover:not(:disabled) {
+      background-color: #b91c1c;
+    }
+    
+    /* 7. Pseudo-clase :checked y combinador de hermano general (~) */
+    .filtro-formulario {
+      margin-top: 1rem;
+    }
+    
+    .control-check {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    
+    /* Si el panel contiene el checkbox marcado, oculta las filas agotadas */
+    .panel:has(.check-agotados:checked) .fila--agotado {
+      display: none;
+    }
+    
+    /* Accesibilidad: texto solo para lectores de pantalla */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+    ```
 
 ---
 

@@ -684,6 +684,8 @@
       
         
       
+        
+      
     
     
     
@@ -1552,6 +1554,35 @@
   
   
     <li class="md-nav__item">
+      <a href="../15-ejercicios-soluciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  15. Ejercicios: soluciones
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../16-practicas/" class="md-nav__link">
         
   
@@ -1969,6 +2000,8 @@
   
     
     
+      
+        
       
         
       
@@ -2465,6 +2498,9 @@
 <hr />
 <h2 id="15-ejemplo-practico-arquitectura-modular-con-layer-css-nesting-property-y-bem">15. Ejemplo práctico: arquitectura modular con <code>@layer</code>, CSS Nesting, <code>@property</code> y <abbr title="Block Element Modifier">BEM</abbr></h2>
 <p>El siguiente ejemplo integra las características más avanzadas del estándar CSS contemporáneo: declaración anticipada de capas de cascada (<code>@layer</code>), registro tipado de variables con la API Houdini (<code>@property</code>), anidación de selectores nativa sin necesidad de preprocesadores Sass, y metodología <abbr title="Block Element Modifier">BEM</abbr> para el encapsulamiento de componentes.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">HTML</label><label for="__tabbed_2_2">CSS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="language-html highlight"><span class="filename">arquitectura.html</span><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
 </span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
@@ -2501,6 +2537,8 @@
 </span><span id="__span-17-34"><a id="__codelineno-17-34" name="__codelineno-17-34" href="#__codelineno-17-34"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </span><span id="__span-17-35"><a id="__codelineno-17-35" name="__codelineno-17-35" href="#__codelineno-17-35"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></code></pre></div>
+</div>
+<div class="tabbed-block">
 <div class="language-css highlight"><span class="filename">css/arquitectura.css</span><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c">/* 1. Declaración anticipada del orden canónico de capas de cascada */</span>
 </span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="p">@</span><span class="k">layer</span><span class="w"> </span><span class="nt">reset</span><span class="o">,</span><span class="w"> </span><span class="nt">base</span><span class="o">,</span><span class="w"> </span><span class="nt">componentes</span><span class="o">,</span><span class="w"> </span><span class="nt">utilidades</span><span class="p">;</span>
 </span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
@@ -2667,6 +2705,9 @@
 </span><span id="__span-18-164"><a id="__codelineno-18-164" name="__codelineno-18-164" href="#__codelineno-18-164"></a><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-18-165"><a id="__codelineno-18-165" name="__codelineno-18-165" href="#__codelineno-18-165"></a><span class="p">}</span>
 </span></code></pre></div>
+</div>
+</div>
+</div>
 <hr />
 <h3 id="151-explicacion-detallada-por-que-se-usa-cada-propiedad-y-para-que-sirve">15.1 Explicación detallada: ¿Por qué se usa cada propiedad y para qué sirve?</h3>
 <p>A continuación se analizan los principios arquitectónicos y las especificaciones modernas aplicadas:</p>
@@ -2674,7 +2715,25 @@
 <ul>
 <li><strong>¿Por qué declararlo en la primera línea?</strong> Establece el orden de precedencia inmutable de la cascada para todo el proyecto.</li>
 <li><strong>La jerarquía resultante:</strong>
-  $<span class="arithmatex">\(\text{reset} &lt; \text{base} &lt; \text{componentes} &lt; \text{utilidades}\)</span>$</li>
+  $<span class="arithmatex">\(\text{reset} &lt; \text{base} &lt; \text{componentes} &lt; \text{utilidades} &lt; \text{estilos sin capa}\)</span>$</li>
+</ul>
+<pre class="mermaid"><code>flowchart TD
+    subgraph NORMAL ["Reglas normales (Prioridad de menor a mayor ⬆)"]
+        direction TB
+        L1["1. @layer reset (Prioridad base mínima)"] --&gt; L2["2. @layer base"]
+        L2 --&gt; L3["3. @layer componentes"]
+        L3 --&gt; L4["4. @layer utilidades"]
+        L4 --&gt; L5["5. CSS sin capa / Unlayered (🏆 Máxima prioridad normal)"]
+    end
+
+    subgraph IMPORTANT ["Reglas con !important (Invierte la precedencia de capas ⬇)"]
+        direction TB
+        I5["1. CSS sin capa con !important"] --&gt; I4["2. @layer utilidades !important"]
+        I4 --&gt; I3["3. @layer componentes !important"]
+        I3 --&gt; I2["4. @layer base !important"]
+        I2 --&gt; I1["5. @layer reset !important (🏆 Máxima prioridad absoluta)"]
+    end</code></pre>
+<ul>
 <li><strong>Beneficio colosal:</strong> Una clase de utilidad como <code>.u-centrado</code> dentro de <code>@layer utilidades</code> siempre ganará a una regla de componente de <code>@layer componentes</code>, sin necesidad de aumentar artificialmente la especificidad ni recurrir al destructivo <code>!important</code>.</li>
 </ul>
 <h4 id="2-variables-tipadas-con-property-css-houdini">2. Variables tipadas con <code>@property</code> (CSS Houdini)</h4>

@@ -412,182 +412,186 @@ body::before {
 
 El siguiente ejemplo combina los recursos gráficos y decorativos más potentes de CSS moderno: composición de fondos multicapa mediante degradados angulares y radiales, tarjetas con efecto de vidrio esmerilado (*glassmorphism*) mediante `backdrop-filter` con alternativa accesible para transparencias reducidas, y etiquetas con recorte poligonal mediante `clip-path`.
 
-```html title="hero-banner.html"
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fondos y Decoración · Banner Inmersivo</title>
-  <link rel="stylesheet" href="css/decoracion.css">
-</head>
-<body>
-  <section class="banner-hero">
-    <!-- Capa de imagen de fondo optimizada -->
-    <div class="banner-hero__fondo">
-      <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1400&q=80" 
-           alt="" role="presentation" class="imagen-fondo">
-    </div>
+=== "HTML"
 
-    <!-- Panel flotante de vidrio (Glassmorphism) -->
-    <div class="tarjeta-vidrio">
-      <span class="insignia-angulo">Exposición 2026</span>
-      <h1 class="tarjeta-vidrio__titulo">Vanguardia Digital &amp; Arte Generativo</h1>
-      <p class="tarjeta-vidrio__texto">
-        Una experiencia interactiva donde los algoritmos y la creatividad humana convergen en instalaciones inmersivas.
-      </p>
-      
-      <div class="tarjeta-vidrio__acciones">
-        <a href="#entradas" class="btn btn--resplandor">Reservar Entrada</a>
-        <a href="#visita" class="btn btn--fantasma">Ver Programa</a>
-      </div>
-    </div>
-  </section>
-</body>
-</html>
-```
+    ```html title="hero-banner.html"
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Fondos y Decoración · Banner Inmersivo</title>
+      <link rel="stylesheet" href="css/decoracion.css">
+    </head>
+    <body>
+      <section class="banner-hero">
+        <!-- Capa de imagen de fondo optimizada -->
+        <div class="banner-hero__fondo">
+          <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1400&q=80" 
+               alt="" role="presentation" class="imagen-fondo">
+        </div>
+    
+        <!-- Panel flotante de vidrio (Glassmorphism) -->
+        <div class="tarjeta-vidrio">
+          <span class="insignia-angulo">Exposición 2026</span>
+          <h1 class="tarjeta-vidrio__titulo">Vanguardia Digital &amp; Arte Generativo</h1>
+          <p class="tarjeta-vidrio__texto">
+            Una experiencia interactiva donde los algoritmos y la creatividad humana convergen en instalaciones inmersivas.
+          </p>
+          
+          <div class="tarjeta-vidrio__acciones">
+            <a href="#entradas" class="btn btn--resplandor">Reservar Entrada</a>
+            <a href="#visita" class="btn btn--fantasma">Ver Programa</a>
+          </div>
+        </div>
+      </section>
+    </body>
+    </html>
+    ```
 
-```css title="css/decoracion.css"
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+=== "CSS"
 
-body {
-  font-family: system-ui, -apple-system, sans-serif;
-  color: #ffffff;
-  background-color: #09090b;
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 1.5rem;
-}
-
-/* 1. Contenedor con degradado multicapa superpuesto */
-.banner-hero {
-  position: relative;
-  width: 100%;
-  max-width: 64rem;
-  min-height: 34rem;
-  border-radius: 1.5rem;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  padding: 3rem;
-  box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
-
-  /* Multicapa: 1. Resplandor radial superior + 2. Velo oscuro inferior */
-  background:
-    radial-gradient(circle at 80% 20%, rgb(56 189 248 / 0.35) 0%, transparent 50%),
-    linear-gradient(135deg, rgb(15 23 42 / 0.9) 0%, rgb(15 23 42 / 0.5) 100%);
-}
-
-/* 2. Imagen de fondo tratada con modos de mezcla y filtros */
-.banner-hero__fondo {
-  position: absolute;
-  inset: 0;
-  z-index: -1; /* Envía la imagen detrás del degradado del contenedor */
-}
-
-.imagen-fondo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  filter: brightness(0.65) saturate(1.2); /* Ajuste de tono cinematográfico */
-  display: block;
-}
-
-/* 3. Tarjeta Glassmorphism (Vidrio esmerilado) */
-.tarjeta-vidrio {
-  max-width: 32rem;
-  background-color: rgb(255 255 255 / 0.1); /* Blanco semitransparente al 10% */
-  backdrop-filter: blur(16px) saturate(1.5); /* Desenfoque del fondo en tiempo real */
-  -webkit-backdrop-filter: blur(16px) saturate(1.5); /* Prefijo para Safari */
-  border: 1px solid rgb(255 255 255 / 0.2); /* Borde sutil reflectante */
-  border-radius: 1rem;
-  padding: 2.25rem;
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3);
-}
-
-/* Alternativa accesible para usuarios que solicitan reducción de transparencia */
-@media (prefers-reduced-transparency: reduce) {
-  .tarjeta-vidrio {
-    background-color: #0f172a;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-}
-
-/* 4. Insignia con recorte geométrico duro (clip-path) */
-.insignia-angulo {
-  display: inline-block;
-  background: linear-gradient(90deg, #38bdf8, #818cf8);
-  color: #0f172a;
-  font-size: 0.75rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 0.35rem 1.25rem 0.35rem 0.85rem;
-  margin-block-end: 1rem;
-  /* Recorte poligonal: bisel a 45 grados en la esquina derecha */
-  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 100%, 0 100%);
-}
-
-.tarjeta-vidrio__titulo {
-  font-size: 2rem;
-  line-height: 1.15;
-  margin-block-end: 1rem;
-  font-weight: 800;
-}
-
-.tarjeta-vidrio__texto {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: #cbd5e1;
-  margin-block-end: 1.75rem;
-}
-
-.tarjeta-vidrio__acciones {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.btn {
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 600;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  transition: all 0.2s ease;
-}
-
-/* Botón con sombra de resplandor difuso */
-.btn--resplandor {
-  background-color: #38bdf8;
-  color: #0f172a;
-  box-shadow: 0 0 20px rgb(56 189 248 / 0.4);
-}
-
-.btn--resplandor:hover {
-  background-color: #7dd3fc;
-  box-shadow: 0 0 30px rgb(56 189 248 / 0.65);
-  transform: translateY(-1px);
-}
-
-.btn--fantasma {
-  background-color: transparent;
-  color: #ffffff;
-  border: 1px solid rgb(255 255 255 / 0.3);
-}
-
-.btn--fantasma:hover {
-  background-color: rgb(255 255 255 / 0.1);
-  border-color: #ffffff;
-}
-```
+    ```css title="css/decoracion.css"
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      color: #ffffff;
+      background-color: #09090b;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+    }
+    
+    /* 1. Contenedor con degradado multicapa superpuesto */
+    .banner-hero {
+      position: relative;
+      width: 100%;
+      max-width: 64rem;
+      min-height: 34rem;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      padding: 3rem;
+      box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+    
+      /* Multicapa: 1. Resplandor radial superior + 2. Velo oscuro inferior */
+      background:
+        radial-gradient(circle at 80% 20%, rgb(56 189 248 / 0.35) 0%, transparent 50%),
+        linear-gradient(135deg, rgb(15 23 42 / 0.9) 0%, rgb(15 23 42 / 0.5) 100%);
+    }
+    
+    /* 2. Imagen de fondo tratada con modos de mezcla y filtros */
+    .banner-hero__fondo {
+      position: absolute;
+      inset: 0;
+      z-index: -1; /* Envía la imagen detrás del degradado del contenedor */
+    }
+    
+    .imagen-fondo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.65) saturate(1.2); /* Ajuste de tono cinematográfico */
+      display: block;
+    }
+    
+    /* 3. Tarjeta Glassmorphism (Vidrio esmerilado) */
+    .tarjeta-vidrio {
+      max-width: 32rem;
+      background-color: rgb(255 255 255 / 0.1); /* Blanco semitransparente al 10% */
+      backdrop-filter: blur(16px) saturate(1.5); /* Desenfoque del fondo en tiempo real */
+      -webkit-backdrop-filter: blur(16px) saturate(1.5); /* Prefijo para Safari */
+      border: 1px solid rgb(255 255 255 / 0.2); /* Borde sutil reflectante */
+      border-radius: 1rem;
+      padding: 2.25rem;
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.3);
+    }
+    
+    /* Alternativa accesible para usuarios que solicitan reducción de transparencia */
+    @media (prefers-reduced-transparency: reduce) {
+      .tarjeta-vidrio {
+        background-color: #0f172a;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      }
+    }
+    
+    /* 4. Insignia con recorte geométrico duro (clip-path) */
+    .insignia-angulo {
+      display: inline-block;
+      background: linear-gradient(90deg, #38bdf8, #818cf8);
+      color: #0f172a;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.35rem 1.25rem 0.35rem 0.85rem;
+      margin-block-end: 1rem;
+      /* Recorte poligonal: bisel a 45 grados en la esquina derecha */
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 100%, 0 100%);
+    }
+    
+    .tarjeta-vidrio__titulo {
+      font-size: 2rem;
+      line-height: 1.15;
+      margin-block-end: 1rem;
+      font-weight: 800;
+    }
+    
+    .tarjeta-vidrio__texto {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #cbd5e1;
+      margin-block-end: 1.75rem;
+    }
+    
+    .tarjeta-vidrio__acciones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .btn {
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      transition: all 0.2s ease;
+    }
+    
+    /* Botón con sombra de resplandor difuso */
+    .btn--resplandor {
+      background-color: #38bdf8;
+      color: #0f172a;
+      box-shadow: 0 0 20px rgb(56 189 248 / 0.4);
+    }
+    
+    .btn--resplandor:hover {
+      background-color: #7dd3fc;
+      box-shadow: 0 0 30px rgb(56 189 248 / 0.65);
+      transform: translateY(-1px);
+    }
+    
+    .btn--fantasma {
+      background-color: transparent;
+      color: #ffffff;
+      border: 1px solid rgb(255 255 255 / 0.3);
+    }
+    
+    .btn--fantasma:hover {
+      background-color: rgb(255 255 255 / 0.1);
+      border-color: #ffffff;
+    }
+    ```
 
 ---
 

@@ -25,39 +25,45 @@ HTML5 no se limita a estructurar texto plano: incorpora **elementos interactivos
 
 Cualquier atributo cuyo nombre comience por ==`data-*`== es válido en HTML5. El navegador no los procesa ni los valida, pero expone su valor a JavaScript mediante la propiedad `elemento.dataset`. Permiten asociar datos de negocio al marcado sin recurrir a clases CSS artificiales ni a atributos no estándar.
 
-```html title="ficha-modulo.html"
-<!-- Los datos de estado e identificación viajan en el propio marcado -->
-<article class="tarjeta-modulo"
-         data-codigo="0373"
-         data-curso="1"
-         data-horas-totales="128"
-         data-estado="activo">
-  <h3>Lenguajes de Marcas</h3>
-  <button type="button" class="btn-detalles">Ver detalles</button>
-</article>
+=== "HTML"
 
-<script>
-const tarjeta = document.querySelector('.tarjeta-modulo');
+    ```html title="ficha-modulo.html"
+    <!-- Los datos de estado e identificación viajan en el propio marcado -->
+    <article class="tarjeta-modulo"
+             data-codigo="0373"
+             data-curso="1"
+             data-horas-totales="128"
+             data-estado="activo">
+      <h3>Lenguajes de Marcas</h3>
+      <button type="button" class="btn-detalles">Ver detalles</button>
+    </article>
+    ```
 
-// Los guiones se transforman automáticamente a camelCase
-console.log(tarjeta.dataset.codigo);        // "0373" (SIEMPRE devuelve STRING)
-console.log(tarjeta.dataset.horasTotales); // "128"
-console.log(tarjeta.dataset.estado);       // "activo"
+=== "CSS"
 
-// Modificación dinámica desde JavaScript
-tarjeta.dataset.estado = 'archivado';      // Escribe data-estado="archivado" en el DOM
-</script>
-```
+    ```css title="estilos-data.css"
+    /* Selección por atributos data en CSS */
+    .tarjeta-modulo[data-estado="activo"] {
+      border-left: 4px solid #146c2e;
+    }
+    .tarjeta-modulo[data-estado="archivado"] {
+      opacity: 0.6;
+    }
+    ```
 
-```css title="estilos-data.css"
-/* Selección por atributos data en CSS */
-.tarjeta-modulo[data-estado="activo"] {
-  border-left: 4px solid #146c2e;
-}
-.tarjeta-modulo[data-estado="archivado"] {
-  opacity: 0.6;
-}
-```
+=== "JavaScript"
+
+    ```javascript title="script.js"
+    const tarjeta = document.querySelector('.tarjeta-modulo');
+
+    // Los guiones se transforman automáticamente a camelCase
+    console.log(tarjeta.dataset.codigo);        // "0373" (SIEMPRE devuelve STRING)
+    console.log(tarjeta.dataset.horasTotales); // "128"
+    console.log(tarjeta.dataset.estado);       // "activo"
+
+    // Modificación dinámica desde JavaScript
+    tarjeta.dataset.estado = 'archivado';      // Escribe data-estado="archivado" en el DOM
+    ```
 
 ---
 
@@ -205,6 +211,16 @@ datos.forEach(mod => {
 ## 3. Almacenamiento en el cliente: `localStorage` y `sessionStorage`
 
 ### 3.1 Comparativa de mecanismos
+
+```mermaid
+flowchart TD
+    DECISION["¿Qué tipo de almacenamiento cliente necesitas?"]
+    
+    DECISION -->|¿Debe viajar automáticamente al servidor en cada petición HTTP?| COOKIE["✅ Cookies (HttpOnly, Secure)<br>Capacidad: ~4 KB · Sesión / Expiración"]
+    DECISION -->|¿Solo en el navegador, durante la sesión actual de la pestaña?| SS["✅ sessionStorage<br>Capacidad: ~5 MB · Se destruye al cerrar la pestaña"]
+    DECISION -->|¿Solo en el navegador, persistente entre sesiones y pestañas?| LS["✅ localStorage<br>Capacidad: ~5 MB · Permanece hasta borrado explícito"]
+    DECISION -->|¿Bases de datos complejas o archivos grandes offline?| IDB["✅ IndexedDB<br>Base de datos no relacional de gran capacidad"]
+```
 
 | Mecanismo | Capacidad | Persistencia | Viaja al servidor | Ámbito |
 |---|---|---|---|---|
@@ -411,31 +427,41 @@ console.log(modulos);
 
 Aplicación cliente completa con persistencia local, sanitización y manejo defensivo de JSON.
 
-```html title="notas.html"
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestor de Notas Rápidas · DAW</title>
-</head>
-<body>
-  <main>
-    <h1>Mis Notas de Clase</h1>
+=== "HTML"
 
-    <form id="formNota">
-      <label for="textoNota">Nueva anotación:</label>
-      <input type="text" id="textoNota" name="textoNota" required maxlength="100" placeholder="Ej: Repasar selectores de CSS">
-      <button type="submit">Añadir nota</button>
-    </form>
+    ```html title="notas.html"
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Gestor de Notas Rápidas · DAW</title>
+    </head>
+    <body>
+      <main>
+        <h1>Mis Notas de Clase</h1>
 
-    <section aria-labelledby="tit-lista">
-      <h2 id="tit-lista">Listado de tareas</h2>
-      <ul id="listaNotas"></ul>
-    </section>
-  </main>
+        <form id="formNota">
+          <label for="textoNota">Nueva anotación:</label>
+          <input type="text" id="textoNota" name="textoNota" required maxlength="100" placeholder="Ej: Repasar selectores de CSS">
+          <button type="submit">Añadir nota</button>
+        </form>
 
-  <script>
+        <section aria-labelledby="tit-lista">
+          <h2 id="tit-lista">Listado de tareas</h2>
+          <ul id="listaNotas"></ul>
+        </section>
+      </main>
+
+      <!-- Lógica de almacenamiento desacoplada en archivo externo -->
+      <script src="js/app.js"></script>
+    </body>
+    </html>
+    ```
+
+=== "JavaScript"
+
+    ```javascript title="js/app.js"
     const CLAVE_STORAGE = 'apuntes_notas_daw';
     const form = document.getElementById('formNota');
     const inputTexto = document.getElementById('textoNota');
@@ -488,10 +514,7 @@ Aplicación cliente completa con persistencia local, sanitización y manejo defe
 
     // Render inicial al cargar la página
     renderizar();
-  </script>
-</body>
-</html>
-```
+    ```
 
 ---
 

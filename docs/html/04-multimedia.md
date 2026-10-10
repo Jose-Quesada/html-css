@@ -64,6 +64,21 @@ Para un alumno que aprende HTML5, la etiqueta `<video>` se controla mediante una
 
 ### 2.2 `src` frente a `<source>` múltiple y contenido de respaldo
 
+Cuando se declaran múltiples formatos mediante elementos `<source>`, el navegador ejecuta un algoritmo de selección secuencial de arriba hacia abajo (*fall-through*), seleccionando el primer códec que su motor multimedia sea capaz de reproducir:
+
+```mermaid
+flowchart TD
+    START["Navegador lee etiqueta &lt;video&gt;"] --> S1["Evalúa 1.º &lt;source type='video/mp4'&gt;"]
+    S1 -->|¿Códec MP4 soportado?| PLAY1["✅ Descarga y reproduce MP4<br>(Detiene la evaluación)"]
+    S1 -->|No soportado| S2["Evalúa 2.º &lt;source type='video/webm'&gt;"]
+    
+    S2 -->|¿Códec WebM soportado?| PLAY2["✅ Descarga y reproduce WebM<br>(Detiene la evaluación)"]
+    S2 -->|No soportado| S3["Evalúa 3.º &lt;source type='video/ogg'&gt;"]
+
+    S3 -->|¿Códec OGG soportado?| PLAY3["✅ Descarga y reproduce OGG"]
+    S3 -->|No soportado| FB["❌ Ningún formato compatible:<br>Renderiza el texto de respaldo interior &lt;p&gt;"]
+```
+
 ```html title="video-multipista.html"
 <video controls
        poster="https://dummyimage.com/800x600/ccc/000.png&text=noticia-portada.jpg"

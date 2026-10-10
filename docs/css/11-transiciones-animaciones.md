@@ -16,6 +16,23 @@ Dos mecanismos distintos que se complementan:
 | **Transición** | Cambio de valor de una propiedad (hover, clase, estado) | Micro-interacciones suaves entre dos estados. |
 | **Animación** (`@keyframes`) | Tiempo (y hoy, scroll) | Secuencias complejas, loops, entradas/salidas. |
 
+```mermaid
+flowchart TD
+    subgraph TRANSICIONES ["Transiciones CSS (Micro-interacciones A ➔ B)"]
+        T_EVT["Disparador: Evento del usuario (:hover, :focus, toggle de clase)"]
+        T_EST["Interpola de forma fluida entre DOS estados fijos (Inicial ➔ Final)"]
+        T_DUR["Se resuelve en una sola pasada de tiempo (duration + timing-function)"]
+        T_EVT --> T_EST --> T_DUR
+    end
+
+    subgraph ANIMACIONES ["Animaciones @keyframes (Secuencias multi-estado)"]
+        A_EVT["Disparador: Carga de página, scroll o clase activa"]
+        A_EST["Define fotogramas clave porcentuales: 0% ➔ 25% ➔ 50% ➔ 100%"]
+        A_DUR["Control avanzado: iterations (infinite), direction (alternate), play-state"]
+        A_EVT --> A_EST --> A_DUR
+    end
+```
+
 !!! note "Conocimientos previos"
 
     - Estados y pseudo-clases `:hover`, `:focus-visible` (unidad 02).
@@ -325,18 +342,22 @@ Sin él, al añadir `.abierto` el navegador parte del estilo ya aplicado (sin tr
 
 Permite transicionar **entre dos estados completos del documento** (navegación SPA o MPA con progressive enhancement):
 
-```css title="vista.css"
-::view-transition-old(root),
-::view-transition-new(root) { animation-duration: .3s; }
+=== "CSS"
 
-.tarjeta { view-transition-name: tarjeta-principal; }
-/* ese elemento hace morphing entre vistas (shared element) */
-```
+    ```css title="vista.css"
+    ::view-transition-old(root),
+    ::view-transition-new(root) { animation-duration: .3s; }
+    
+    .tarjeta { view-transition-name: tarjeta-principal; }
+    /* ese elemento hace morphing entre vistas (shared element) */
+    ```
 
-```js title="app.js"
-// JS mínimo para activar (MPA):
-document.startViewTransition(() => navegar());
-```
+=== "JavaScript"
+
+    ```js title="app.js"
+    // JS mínimo para activar (MPA):
+    document.startViewTransition(() => navegar());
+    ```
 
 - Pseudo-elementos: `::view-transition-old/new/group/root`, `::view-transition-image-pair`.
 - Soporte: Chrome 111+, Firefox 144+, Safari 18+.
@@ -377,201 +398,205 @@ El ajuste que lo cambia todo es ==prefers-reduced-motion==:
 
 El siguiente ejemplo implementa microinteracciones de alto rendimiento renderizadas íntegramente en la GPU (utilizando solo `transform` y `opacity`): una tarjeta con perspectiva y efecto de elevación 3D, un spinner de carga sincronizado con `@keyframes`, y la salvaguarda obligatoria de accesibilidad mediante `@media (prefers-reduced-motion: reduce)`.
 
-```html title="interacciones.html"
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Transiciones y Animaciones · Interfaz Interactiva</title>
-  <link rel="stylesheet" href="css/animaciones.css">
-</head>
-<body>
-  <main class="escenario">
-    <article class="tarjeta-3d">
-      <div class="tarjeta-3d__contenido">
-        <header class="tarjeta-3d__cabecera">
-          <span class="icono-flotante">🚀</span>
-          <h2>Aceleración por GPU</h2>
-        </header>
+=== "HTML"
 
-        <p>
-          Animaciones a 60 FPS fluidas mediante transformaciones geométricas compuestas en hardware, sin bloqueos del hilo principal.
-        </p>
+    ```html title="interacciones.html"
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Transiciones y Animaciones · Interfaz Interactiva</title>
+      <link rel="stylesheet" href="css/animaciones.css">
+    </head>
+    <body>
+      <main class="escenario">
+        <article class="tarjeta-3d">
+          <div class="tarjeta-3d__contenido">
+            <header class="tarjeta-3d__cabecera">
+              <span class="icono-flotante">🚀</span>
+              <h2>Aceleración por GPU</h2>
+            </header>
+    
+            <p>
+              Animaciones a 60 FPS fluidas mediante transformaciones geométricas compuestas en hardware, sin bloqueos del hilo principal.
+            </p>
+    
+            <div class="zona-carga">
+              <!-- Indicador de carga animado por keyframes -->
+              <div class="spinner" role="status" aria-label="Sincronizando estado"></div>
+              <span class="estado-texto">Sincronizando nodo...</span>
+            </div>
+    
+            <button type="button" class="btn-interactivo">Desplegar Servicio</button>
+          </div>
+        </article>
+      </main>
+    </body>
+    </html>
+    ```
 
-        <div class="zona-carga">
-          <!-- Indicador de carga animado por keyframes -->
-          <div class="spinner" role="status" aria-label="Sincronizando estado"></div>
-          <span class="estado-texto">Sincronizando nodo...</span>
-        </div>
+=== "CSS"
 
-        <button type="button" class="btn-interactivo">Desplegar Servicio</button>
-      </div>
-    </article>
-  </main>
-</body>
-</html>
-```
-
-```css title="css/animaciones.css"
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: system-ui, -apple-system, sans-serif;
-  background-color: #0f172a;
-  color: #f8fafc;
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 1.5rem;
-}
-
-/* 1. Contenedor de perspectiva tridimensional */
-.escenario {
-  perspective: 1000px; /* Profundidad óptica para transformaciones 3D */
-}
-
-/* 2. Tarjeta con microinteracción de elevación y rotación */
-.tarjeta-3d {
-  background: linear-gradient(145deg, #1e293b, #0f172a);
-  border: 1px solid #334155;
-  border-radius: 1.25rem;
-  max-width: 24rem;
-  padding: 2.25rem;
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.5);
-
-  /* Solo animamos propiedades baratas: transform y box-shadow */
-  /* Curva de rebote sutil: cubic-bezier */
-  transition:
-    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 0.35s ease,
-    border-color 0.35s ease;
-  transform-style: preserve-3d;
-}
-
-/* Hover accesible: elevación en el eje Z y rotación suave */
-.tarjeta-3d:hover {
-  transform: translateY(-8px) rotateX(4deg) scale(1.02);
-  border-color: #0284c7;
-  box-shadow: 0 25px 30px -5px rgb(2 132 199 / 0.25);
-}
-
-.tarjeta-3d__cabecera {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-block-end: 1rem;
-}
-
-.icono-flotante {
-  font-size: 1.75rem;
-  display: inline-block;
-  transition: transform 0.3s ease;
-}
-
-.tarjeta-3d:hover .icono-flotante {
-  transform: scale(1.2) rotate(10deg);
-}
-
-.tarjeta-3d h2 {
-  font-size: 1.3rem;
-  color: #ffffff;
-}
-
-.tarjeta-3d p {
-  color: #94a3b8;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  margin-block-end: 1.5rem;
-}
-
-/* 3. Indicador animado continuo (@keyframes) */
-.zona-carga {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-block-end: 1.75rem;
-}
-
-.spinner {
-  width: 1.5rem;
-  height: 1.5rem;
-  border: 3px solid #334155;
-  border-top-color: #38bdf8;
-  border-radius: 50%;
-  
-  /* Animación continua infinita */
-  animation: girar 1s linear infinite;
-}
-
-@keyframes girar {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.estado-texto {
-  font-size: 0.85rem;
-  color: #38bdf8;
-  font-weight: 500;
-}
-
-/* 4. Botón interactivo con microinteracciones de pulsación */
-.btn-interactivo {
-  width: 100%;
-  padding: 0.85rem 1.5rem;
-  background-color: #0284c7;
-  color: #ffffff;
-  border: none;
-  border-radius: 0.5rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition:
-    background-color 0.15s ease,
-    transform 0.1s ease;
-}
-
-.btn-interactivo:hover {
-  background-color: #0369a1;
-}
-
-.btn-interactivo:active {
-  /* Efecto háptico visual: retroceso elástico al hacer clic */
-  transform: scale(0.97);
-}
-
-.btn-interactivo:focus-visible {
-  outline: 2px solid #38bdf8;
-  outline-offset: 2px;
-}
-
-/* 5. Accesibilidad obligatoria: Desactivación de movimiento */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    /* Reduce la duración a un instante imperceptible para evitar mareos */
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-
-  .tarjeta-3d:hover {
-    transform: none; /* Elimina balanceos y zooms tridimensionales */
-  }
-
-  .spinner {
-    border-top-color: #38bdf8; /* Mantiene la visibilidad del icono estático */
-  }
-}
-```
+    ```css title="css/animaciones.css"
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 1.5rem;
+    }
+    
+    /* 1. Contenedor de perspectiva tridimensional */
+    .escenario {
+      perspective: 1000px; /* Profundidad óptica para transformaciones 3D */
+    }
+    
+    /* 2. Tarjeta con microinteracción de elevación y rotación */
+    .tarjeta-3d {
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      border: 1px solid #334155;
+      border-radius: 1.25rem;
+      max-width: 24rem;
+      padding: 2.25rem;
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.5);
+    
+      /* Solo animamos propiedades baratas: transform y box-shadow */
+      /* Curva de rebote sutil: cubic-bezier */
+      transition:
+        transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+      transform-style: preserve-3d;
+    }
+    
+    /* Hover accesible: elevación en el eje Z y rotación suave */
+    .tarjeta-3d:hover {
+      transform: translateY(-8px) rotateX(4deg) scale(1.02);
+      border-color: #0284c7;
+      box-shadow: 0 25px 30px -5px rgb(2 132 199 / 0.25);
+    }
+    
+    .tarjeta-3d__cabecera {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-block-end: 1rem;
+    }
+    
+    .icono-flotante {
+      font-size: 1.75rem;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    
+    .tarjeta-3d:hover .icono-flotante {
+      transform: scale(1.2) rotate(10deg);
+    }
+    
+    .tarjeta-3d h2 {
+      font-size: 1.3rem;
+      color: #ffffff;
+    }
+    
+    .tarjeta-3d p {
+      color: #94a3b8;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-block-end: 1.5rem;
+    }
+    
+    /* 3. Indicador animado continuo (@keyframes) */
+    .zona-carga {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-block-end: 1.75rem;
+    }
+    
+    .spinner {
+      width: 1.5rem;
+      height: 1.5rem;
+      border: 3px solid #334155;
+      border-top-color: #38bdf8;
+      border-radius: 50%;
+      
+      /* Animación continua infinita */
+      animation: girar 1s linear infinite;
+    }
+    
+    @keyframes girar {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    
+    .estado-texto {
+      font-size: 0.85rem;
+      color: #38bdf8;
+      font-weight: 500;
+    }
+    
+    /* 4. Botón interactivo con microinteracciones de pulsación */
+    .btn-interactivo {
+      width: 100%;
+      padding: 0.85rem 1.5rem;
+      background-color: #0284c7;
+      color: #ffffff;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition:
+        background-color 0.15s ease,
+        transform 0.1s ease;
+    }
+    
+    .btn-interactivo:hover {
+      background-color: #0369a1;
+    }
+    
+    .btn-interactivo:active {
+      /* Efecto háptico visual: retroceso elástico al hacer clic */
+      transform: scale(0.97);
+    }
+    
+    .btn-interactivo:focus-visible {
+      outline: 2px solid #38bdf8;
+      outline-offset: 2px;
+    }
+    
+    /* 5. Accesibilidad obligatoria: Desactivación de movimiento */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        /* Reduce la duración a un instante imperceptible para evitar mareos */
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    
+      .tarjeta-3d:hover {
+        transform: none; /* Elimina balanceos y zooms tridimensionales */
+      }
+    
+      .spinner {
+        border-top-color: #38bdf8; /* Mantiene la visibilidad del icono estático */
+      }
+    }
+    ```
 
 ---
 

@@ -39,6 +39,22 @@ Los encabezados no se eligen por el tamaño que quieras dar, sino por su **posic
 1.  Un único `<h1>` y niveles encadenados: ese es el esquema que leerá una máquina.
 2.  Aquí hay dos `<h1>` y se salta de `h2` a `h4`: el esquema queda roto.
 
+```mermaid
+flowchart TD
+    subgraph ARBOL_CORRECTO ["Estructura Accesible Válida (Árbol continuo)"]
+        C_H1["&lt;h1&gt; Horario de DAW (Tema principal)"] --> C_H2_A["&lt;h2&gt; Lunes"]
+        C_H1 --> C_H2_B["&lt;h2&gt; Martes"]
+        C_H2_A --> C_H3_A1["&lt;h3&gt; Sesión Mañana"]
+        C_H2_A --> C_H3_A2["&lt;h3&gt; Sesión Tarde"]
+    end
+
+    subgraph ARBOL_INCORRECTO ["Estructura Rota (Anti-patrón de accesibilidad)"]
+        I_H1["&lt;h1&gt; Horario"] 
+        I_H1_BIS["&lt;h1&gt; Lunes (&lt;h1&gt; duplicado)"]
+        I_H1_BIS -. "❌ Salto de nivel prohibido" .-> I_H4["&lt;h4&gt; Mañana (Faltan h2 y h3)"]
+    end
+```
+
 El texto del encabezado debe **resumir** lo que viene después ("Tipos de listas", no "Otra cosa más"). `h5` y `h6` casi nunca se usan en una web real, y el tamaño lo decide CSS, no el nivel.
 
 ### 1.2 Por qué importa: lectores de pantalla y SEO

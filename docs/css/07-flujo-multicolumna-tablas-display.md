@@ -275,223 +275,227 @@ Valores: `horizontal-tb` (def), `vertical-rl`, `vertical-lr`. Afecta a ejes lóg
 
 El siguiente ejemplo demuestra los casos de uso legítimos de los sistemas clásicos y especializados de CSS en la web moderna: flujo de texto periodístico con `columns` y `column-span: all`, una figura flotada con contención limpia mediante `display: flow-root`, y una tabla de datos estadísticos optimizada con `table-layout: fixed`.
 
-```html title="editorial.html"
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CSS Editorial · Maquetación Periodística</title>
-  <link rel="stylesheet" href="css/editorial.css">
-</head>
-<body>
-  <article class="publicacion">
-    <header class="publicacion__cabecera">
-      <span class="categoria">Reportaje Tecnológico</span>
-      <h1>La Revolución del Hardware Abierto en Europa</h1>
-      <p class="entradilla">
-        Universidades y centros de investigación impulsan procesadores con arquitectura RISC-V para garantizar la soberanía digital del continente.
-      </p>
-    </header>
+=== "HTML"
 
-    <!-- Contenedor con Multi-column Layout -->
-    <div class="cuerpo-editorial">
-      <p>
-        Durante décadas, la industria de los semiconductores ha dependido de licencias propietarias cerradas. Sin embargo, un consorcio de instituciones europeas ha comenzado la fabricación en serie de los primeros chips basados íntegramente en estándares abiertos.
-      </p>
+    ```html title="editorial.html"
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>CSS Editorial · Maquetación Periodística</title>
+      <link rel="stylesheet" href="css/editorial.css">
+    </head>
+    <body>
+      <article class="publicacion">
+        <header class="publicacion__cabecera">
+          <span class="categoria">Reportaje Tecnológico</span>
+          <h1>La Revolución del Hardware Abierto en Europa</h1>
+          <p class="entradilla">
+            Universidades y centros de investigación impulsan procesadores con arquitectura RISC-V para garantizar la soberanía digital del continente.
+          </p>
+        </header>
+    
+        <!-- Contenedor con Multi-column Layout -->
+        <div class="cuerpo-editorial">
+          <p>
+            Durante décadas, la industria de los semiconductores ha dependido de licencias propietarias cerradas. Sin embargo, un consorcio de instituciones europeas ha comenzado la fabricación en serie de los primeros chips basados íntegramente en estándares abiertos.
+          </p>
+    
+          <!-- Bloque con float y BFC -->
+          <figure class="figura-flotada">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80" 
+                 alt="Oblea de silicio con microchips grabados"
+                 width="280" height="200">
+            <figcaption>Oblea de silicio en sala limpia.</figcaption>
+          </figure>
+    
+          <p>
+            El diseño colaborativo permite auditar cada línea de código Verilog, verificando que no existan puertas traseras que comprometan la seguridad de infraestructuras críticas como redes eléctricas o centros de cálculo estatales.
+          </p>
+    
+          <!-- Titular que rompe y cruza todas las columnas -->
+          <h2 class="subtitulo-cruzado">Comparativa de Adopción por Países</h2>
+    
+          <p>
+            Los planes de transición tecnológica contemplan una inversión inicial de más de 3.000 millones de euros distribuidos en los presupuestos comunitarios de la próxima década.
+          </p>
+    
+          <!-- Tabla de datos con table-layout: fixed -->
+          <table class="tabla-estadistica">
+            <caption>Inversión pública en microelectrónica abierta (2025-2026)</caption>
+            <thead>
+              <tr>
+                <th scope="col">País</th>
+                <th scope="col">Proyectos</th>
+                <th scope="col">Presupuesto</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Alemania</th>
+                <td>14</td>
+                <td>850 M€</td>
+              </tr>
+              <tr>
+                <th scope="row">España</th>
+                <td>9</td>
+                <td>420 M€</td>
+              </tr>
+              <tr>
+                <th scope="row">Francia</th>
+                <td>12</td>
+                <td>710 M€</td>
+              </tr>
+            </tbody>
+          </table>
+    
+          <p>
+            Los expertos concluyen que, aunque el desafío de manufactura física sigue siendo gigantesco, el impulso de la propiedad intelectual abierta es ya imparable en todo el territorio.
+          </p>
+        </div>
+      </article>
+    </body>
+    </html>
+    ```
 
-      <!-- Bloque con float y BFC -->
-      <figure class="figura-flotada">
-        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=400&q=80" 
-             alt="Oblea de silicio con microchips grabados"
-             width="280" height="200">
-        <figcaption>Oblea de silicio en sala limpia.</figcaption>
-      </figure>
+=== "CSS"
 
-      <p>
-        El diseño colaborativo permite auditar cada línea de código Verilog, verificando que no existan puertas traseras que comprometan la seguridad de infraestructuras críticas como redes eléctricas o centros de cálculo estatales.
-      </p>
-
-      <!-- Titular que rompe y cruza todas las columnas -->
-      <h2 class="subtitulo-cruzado">Comparativa de Adopción por Países</h2>
-
-      <p>
-        Los planes de transición tecnológica contemplan una inversión inicial de más de 3.000 millones de euros distribuidos en los presupuestos comunitarios de la próxima década.
-      </p>
-
-      <!-- Tabla de datos con table-layout: fixed -->
-      <table class="tabla-estadistica">
-        <caption>Inversión pública en microelectrónica abierta (2025-2026)</caption>
-        <thead>
-          <tr>
-            <th scope="col">País</th>
-            <th scope="col">Proyectos</th>
-            <th scope="col">Presupuesto</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Alemania</th>
-            <td>14</td>
-            <td>850 M€</td>
-          </tr>
-          <tr>
-            <th scope="row">España</th>
-            <td>9</td>
-            <td>420 M€</td>
-          </tr>
-          <tr>
-            <th scope="row">Francia</th>
-            <td>12</td>
-            <td>710 M€</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p>
-        Los expertos concluyen que, aunque el desafío de manufactura física sigue siendo gigantesco, el impulso de la propiedad intelectual abierta es ya imparable en todo el territorio.
-      </p>
-    </div>
-  </article>
-</body>
-</html>
-```
-
-```css title="css/editorial.css"
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: Georgia, Cambria, "Times New Roman", serif;
-  background-color: #fafaf9;
-  color: #1c1917;
-  line-height: 1.7;
-  padding: 2.5rem 1rem;
-}
-
-.publicacion {
-  max-width: 58rem;
-  margin-inline: auto;
-  background-color: #ffffff;
-  padding: 3rem 2.5rem;
-  border: 1px solid #e7e5e4;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
-}
-
-.publicacion__cabecera {
-  margin-block-end: 2rem;
-  border-bottom: 2px solid #1c1917;
-  padding-bottom: 1.5rem;
-}
-
-.categoria {
-  font-family: system-ui, sans-serif;
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  color: #b91c1c;
-}
-
-.publicacion__cabecera h1 {
-  font-size: 2.5rem;
-  line-height: 1.15;
-  margin-block: 0.5rem 1rem;
-}
-
-.entradilla {
-  font-size: 1.25rem;
-  line-height: 1.45;
-  color: #44403c;
-  font-style: italic;
-}
-
-/* 1. Multicolumna fluida con regla separadora */
-.cuerpo-editorial {
-  /* columns: 2 18rem => genera 2 columnas si caben (mínimo 18rem cada una) */
-  columns: 2 18rem;
-  column-gap: 2.5rem;
-  column-rule: 1px solid #d6d3d1; /* Línea de separación clásica de periódico */
-  text-align: justify; /* Justificado editorial */
-}
-
-.cuerpo-editorial p {
-  margin-block-end: 1.25rem;
-}
-
-/* 2. Titular intermedio que cruza todas las columnas */
-.subtitulo-cruzado {
-  column-span: all; /* Atraviesa todas las columnas de la página */
-  font-family: system-ui, sans-serif;
-  font-size: 1.5rem;
-  margin-block: 2rem 1.5rem;
-  padding-block: 0.5rem;
-  border-top: 1px solid #e7e5e4;
-  border-bottom: 1px solid #e7e5e4;
-  text-align: left;
-}
-
-/* 3. Imagen flotada con contención BFC */
-.figura-flotada {
-  float: left; /* Flota la caja a la izquierda permitiendo que el texto la envuelva */
-  margin-inline-end: 1.5rem;
-  margin-block-end: 1rem;
-  max-width: 14rem;
-  break-inside: avoid; /* Impide que la figura se fracture entre dos columnas */
-}
-
-.figura-flotada img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 0.25rem;
-}
-
-.figura-flotada figcaption {
-  font-family: system-ui, sans-serif;
-  font-size: 0.75rem;
-  color: #78716c;
-  margin-top: 0.35rem;
-}
-
-/* 4. Tabla de datos optimizada */
-.tabla-estadistica {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed; /* Rendimiento: el navegador no espera a leer todos los datos */
-  margin-block: 1.5rem;
-  font-family: system-ui, sans-serif;
-  font-size: 0.85rem;
-  break-inside: avoid; /* No partir la tabla entre columnas */
-}
-
-.tabla-estadistica caption {
-  font-weight: 700;
-  text-align: left;
-  margin-bottom: 0.5rem;
-  color: #44403c;
-}
-
-.tabla-estadistica th,
-.tabla-estadistica td {
-  padding: 0.6rem 0.75rem;
-  border-bottom: 1px solid #e7e5e4;
-  text-align: left;
-}
-
-.tabla-estadistica th {
-  background-color: #f5f5f4;
-  color: #1c1917;
-}
-
-.tabla-estadistica td:last-child,
-.tabla-estadistica th:last-child {
-  text-align: right; /* Alineación numérica a la derecha */
-}
-```
+    ```css title="css/editorial.css"
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: Georgia, Cambria, "Times New Roman", serif;
+      background-color: #fafaf9;
+      color: #1c1917;
+      line-height: 1.7;
+      padding: 2.5rem 1rem;
+    }
+    
+    .publicacion {
+      max-width: 58rem;
+      margin-inline: auto;
+      background-color: #ffffff;
+      padding: 3rem 2.5rem;
+      border: 1px solid #e7e5e4;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+    }
+    
+    .publicacion__cabecera {
+      margin-block-end: 2rem;
+      border-bottom: 2px solid #1c1917;
+      padding-bottom: 1.5rem;
+    }
+    
+    .categoria {
+      font-family: system-ui, sans-serif;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: #b91c1c;
+    }
+    
+    .publicacion__cabecera h1 {
+      font-size: 2.5rem;
+      line-height: 1.15;
+      margin-block: 0.5rem 1rem;
+    }
+    
+    .entradilla {
+      font-size: 1.25rem;
+      line-height: 1.45;
+      color: #44403c;
+      font-style: italic;
+    }
+    
+    /* 1. Multicolumna fluida con regla separadora */
+    .cuerpo-editorial {
+      /* columns: 2 18rem => genera 2 columnas si caben (mínimo 18rem cada una) */
+      columns: 2 18rem;
+      column-gap: 2.5rem;
+      column-rule: 1px solid #d6d3d1; /* Línea de separación clásica de periódico */
+      text-align: justify; /* Justificado editorial */
+    }
+    
+    .cuerpo-editorial p {
+      margin-block-end: 1.25rem;
+    }
+    
+    /* 2. Titular intermedio que cruza todas las columnas */
+    .subtitulo-cruzado {
+      column-span: all; /* Atraviesa todas las columnas de la página */
+      font-family: system-ui, sans-serif;
+      font-size: 1.5rem;
+      margin-block: 2rem 1.5rem;
+      padding-block: 0.5rem;
+      border-top: 1px solid #e7e5e4;
+      border-bottom: 1px solid #e7e5e4;
+      text-align: left;
+    }
+    
+    /* 3. Imagen flotada con contención BFC */
+    .figura-flotada {
+      float: left; /* Flota la caja a la izquierda permitiendo que el texto la envuelva */
+      margin-inline-end: 1.5rem;
+      margin-block-end: 1rem;
+      max-width: 14rem;
+      break-inside: avoid; /* Impide que la figura se fracture entre dos columnas */
+    }
+    
+    .figura-flotada img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 0.25rem;
+    }
+    
+    .figura-flotada figcaption {
+      font-family: system-ui, sans-serif;
+      font-size: 0.75rem;
+      color: #78716c;
+      margin-top: 0.35rem;
+    }
+    
+    /* 4. Tabla de datos optimizada */
+    .tabla-estadistica {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed; /* Rendimiento: el navegador no espera a leer todos los datos */
+      margin-block: 1.5rem;
+      font-family: system-ui, sans-serif;
+      font-size: 0.85rem;
+      break-inside: avoid; /* No partir la tabla entre columnas */
+    }
+    
+    .tabla-estadistica caption {
+      font-weight: 700;
+      text-align: left;
+      margin-bottom: 0.5rem;
+      color: #44403c;
+    }
+    
+    .tabla-estadistica th,
+    .tabla-estadistica td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid #e7e5e4;
+      text-align: left;
+    }
+    
+    .tabla-estadistica th {
+      background-color: #f5f5f4;
+      color: #1c1917;
+    }
+    
+    .tabla-estadistica td:last-child,
+    .tabla-estadistica th:last-child {
+      text-align: right; /* Alineación numérica a la derecha */
+    }
+    ```
 
 ---
 

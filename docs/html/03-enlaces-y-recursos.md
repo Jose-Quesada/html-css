@@ -214,45 +214,49 @@ El lector de pantalla lista los enlaces **fuera de su contexto**: "haz clic aqu�
 
 Este código ilustra una de las técnicas de accesibilidad (**A11y**) más ingeniosas y fundamentales en el desarrollo web: el **Skip Link** (enlace de salto). Sirve para resolver un problema de usabilidad muy frustrante para las personas que navegan utilizando el teclado (con la tecla <kbd>Tab</kbd>) o un lector de pantalla.
 
-```html title="skip-link.html"
-<body>
-  <!-- Primer enlace del documento: atajo directo al contenido -->
-  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
-  <header>
-    <nav aria-label="Principal">
-      <!-- Menú con decenas de enlaces que el usuario de teclado puede saltarse -->
-    </nav>
-  </header>
-  <main id="contenido">
-    <h1>Zapatillas Run 300</h1>
-  </main>
-</body>
-```
+=== "HTML"
 
-```css title="foco.css"
-/* Regla de oro: el foco nunca se elimina (outline: none sin alternativa está prohibido) */
-a:focus-visible { outline: 3px solid #0b5fff; outline-offset: 2px; }
+    ```html title="skip-link.html"
+    <body>
+      <!-- Primer enlace del documento: atajo directo al contenido -->
+      <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+      <header>
+        <nav aria-label="Principal">
+          <!-- Menú con decenas de enlaces que el usuario de teclado puede saltarse -->
+        </nav>
+      </header>
+      <main id="contenido">
+        <h1>Zapatillas Run 300</h1>
+      </main>
+    </body>
+    ```
 
-/* El truco de magia: fuera de pantalla para que no moleste con ratón */
-.skip-link {
-  position: absolute;
-  left: -9999px;
-  z-index: 1000;
-}
+=== "CSS"
 
-/* La interacción: reaparece visiblemente al recibir el foco */
-.skip-link:focus {
-  left: 1rem;
-  top: 1rem;
-  background: #ffffff;
-  color: #0b1020;
-  padding: 0.6rem 1rem;
-  border-radius: 4px;
-  font-weight: bold;
-  text-decoration: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-```
+    ```css title="foco.css"
+    /* Regla de oro: el foco nunca se elimina (outline: none sin alternativa está prohibido) */
+    a:focus-visible { outline: 3px solid #0b5fff; outline-offset: 2px; }
+    
+    /* El truco de magia: fuera de pantalla para que no moleste con ratón */
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      z-index: 1000;
+    }
+    
+    /* La interacción: reaparece visiblemente al recibir el foco */
+    .skip-link:focus {
+      left: 1rem;
+      top: 1rem;
+      background: #ffffff;
+      color: #0b1020;
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    ```
 
 #### ¿Qué problema resuelve?
 En la mayoría de las páginas web modernas, la cabecera (`<header>`) contiene menús de navegación (`<nav>`) con decenas de enlaces, buscadores y desplegables. Si una persona usuaria que navega con teclado entra a tu web, tendría que **pulsar la tecla <kbd>Tab</kbd> 20 o 30 veces en cada página nueva** solo para atravesar el menú y llegar al texto que realmente quiere leer.
@@ -375,6 +379,17 @@ Si duplicas el texto en ambos atributos, las personas con lector de pantalla esc
 ## 6. Imagen responsive: `srcset`, `sizes` y `picture`
 
 En la web moderna, los usuarios acceden desde pantallas con tamaños muy dispares (desde un reloj inteligente o un móvil de 360 px hasta monitores 4K de 3840 px) y con densidades de píxeles muy diferentes (pantallas normales 1x vs. pantallas Retina/HiDPI de 2x y 3x). Servir la misma imagen pesada de 2000 px a todos los usuarios es una aberración de rendimiento.
+
+```mermaid
+flowchart TD
+    DECISION["¿Qué reto técnico necesitas resolver?"]
+    
+    DECISION -->|Misma imagen a diferentes anchos o densidades Retina| RESOLUCION["Resolución Adaptativa<br>(Mismo encuadre visual)"]
+    DECISION -->|Cambio de formato o recorte diferente según pantalla| DIRECCION["Formatos / Dirección de Arte<br>(Reglas estrictas impuestas)"]
+
+    RESOLUCION ==> USE_SRCSET["✅ Solución: &lt;img srcset='...' sizes='...'&gt;<br>El navegador calcula el DPR y descarga la imagen óptima"]
+    DIRECCION ==> USE_PICTURE["✅ Solución: &lt;picture&gt; + &lt;source&gt;<br>Negociación de formatos (AVIF/WebP) y recortes por media query"]
+```
 
 ### 6.1 `srcset` + `sizes`: Resolución adaptativa inteligente
 

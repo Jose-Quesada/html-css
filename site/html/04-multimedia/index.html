@@ -1134,6 +1134,8 @@
       
         
       
+        
+      
     
     
     
@@ -1629,6 +1631,35 @@
     
   
   15. Ejercicios, glosario y recursos
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/15-ejercicios-soluciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  15. Ejercicios: soluciones
 
     
   </span>
@@ -2305,6 +2336,17 @@
 <p>Un <code>&lt;video&gt;</code> sin <mark>controls</mark> es <strong>solo una caja muda</strong>: no hay botón de play, ni barra de desplazamiento, ni teclado (barra espaciadora para pausar, flechas para avanzar/retroceder), ni control de volumen. Es lo primero que se revisa en un examen técnico y el fallo más habitual de los principiantes.</p>
 </div>
 <h3 id="22-src-frente-a-source-multiple-y-contenido-de-respaldo">2.2 <code>src</code> frente a <code>&lt;source&gt;</code> múltiple y contenido de respaldo</h3>
+<p>Cuando se declaran múltiples formatos mediante elementos <code>&lt;source&gt;</code>, el navegador ejecuta un algoritmo de selección secuencial de arriba hacia abajo (<em>fall-through</em>), seleccionando el primer códec que su motor multimedia sea capaz de reproducir:</p>
+<pre class="mermaid"><code>flowchart TD
+    START["Navegador lee etiqueta &amp;lt;video&amp;gt;"] --&gt; S1["Evalúa 1.º &amp;lt;source type='video/mp4'&amp;gt;"]
+    S1 --&gt;|¿Códec MP4 soportado?| PLAY1["✅ Descarga y reproduce MP4&lt;br&gt;(Detiene la evaluación)"]
+    S1 --&gt;|No soportado| S2["Evalúa 2.º &amp;lt;source type='video/webm'&amp;gt;"]
+
+    S2 --&gt;|¿Códec WebM soportado?| PLAY2["✅ Descarga y reproduce WebM&lt;br&gt;(Detiene la evaluación)"]
+    S2 --&gt;|No soportado| S3["Evalúa 3.º &amp;lt;source type='video/ogg'&amp;gt;"]
+
+    S3 --&gt;|¿Códec OGG soportado?| PLAY3["✅ Descarga y reproduce OGG"]
+    S3 --&gt;|No soportado| FB["❌ Ningún formato compatible:&lt;br&gt;Renderiza el texto de respaldo interior &amp;lt;p&amp;gt;"]</code></pre>
 <div class="language-html highlight"><span class="filename">video-multipista.html</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">&lt;</span><span class="nt">video</span> <span class="na">controls</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>       <span class="na">poster</span><span class="o">=</span><span class="s">&quot;https://dummyimage.com/800x600/ccc/000.png&amp;text=noticia-portada.jpg&quot;</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>       <span class="na">width</span><span class="o">=</span><span class="s">&quot;640&quot;</span> <span class="na">height</span><span class="o">=</span><span class="s">&quot;360&quot;</span>

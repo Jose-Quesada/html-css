@@ -1199,6 +1199,8 @@
       
         
       
+        
+      
     
     
     
@@ -1694,6 +1696,35 @@
     
   
   15. Ejercicios, glosario y recursos
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/15-ejercicios-soluciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  15. Ejercicios: soluciones
 
     
   </span>
@@ -2770,6 +2801,18 @@
 <p>Si un alumno crea un botón para abrir un modal o calcular una operación con JavaScript y escribe <code>&lt;button id="calc"&gt;Calcular&lt;/button&gt;</code> (omitiendo el atributo <code>type</code>), al hacer clic sobre él <strong>el navegador enviará y recargará toda la página de golpe</strong>, perdiendo todos los datos introducidos. Escribe siempre de forma explícita <code>type="button"</code> en cualquier botón controlado por scripts.</p>
 </div>
 <h2 id="6-validacion-nativa-de-html5">6. Validación nativa de HTML5</h2>
+<p>El estándar HTML5 incluye un motor de validación declarativo integrado en el navegador (<em>Constraint Validation API</em>). El ciclo de validación se ejecuta automáticamente antes del envío:</p>
+<pre class="mermaid"><code>flowchart TD
+    INPUT["Usuario introduce datos o envía formulario"] --&gt; CHECK["Motor HTML5 evalúa restricciones:&lt;br&gt;required, type, pattern, min/max, step"]
+
+    CHECK --&gt;|¿checkValidity() == true?| OK["✅ Campo Válido"]
+    CHECK --&gt;|¿checkValidity() == false?| ERR["❌ Campo Inválido"]
+
+    OK --&gt; C_CSS["Aplica pseudoclase CSS :valid"]
+    OK --&gt; SUBMIT["Permite el envío HTTP (GET / POST)"]
+
+    ERR --&gt; E_CSS["Aplica pseudoclases CSS :invalid y :user-invalid"]
+    ERR --&gt; E_MSG["Dispara evento 'invalid'&lt;br&gt;Muestra bocadillo nativo (si no hay novalidate)&lt;br&gt;Bloquea el envío al servidor"]</code></pre>
 <h3 id="61-mensajes-del-navegador-y-pseudoclases">6.1 Mensajes del navegador y pseudoclases</h3>
 <p>El navegador comprueba <code>required</code>, <code>type</code>, <code>pattern</code>, <code>min</code>/<code>max</code>... y muestra su mensaje (<em>"Introduce un correo electrónico válido"</em>). Es correcto, pero <strong>no se estila con CSS</strong>; sí lo hacen las pseudoclases:</p>
 <div class="language-css highlight"><span class="filename">validacion.css</span><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="hll"><span class="nt">input</span><span class="p">:</span><span class="nd">invalid</span><span class="p">:</span><span class="nd">not</span><span class="o">(</span><span class="p">:</span><span class="nd">placeholder-shown</span><span class="o">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">border-color</span><span class="p">:</span><span class="w"> </span><span class="mh">#b00020</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w">  </span><span class="c">/* error real */</span>

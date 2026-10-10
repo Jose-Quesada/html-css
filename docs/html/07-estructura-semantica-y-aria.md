@@ -48,6 +48,27 @@ Para comprender los elementos semánticos de HTML5, los alumnos deben entender p
 > 
 > En la web ocurre exactamente lo mismo: una persona ciega no lee la página de arriba abajo como un documento de Word. Utiliza atajos de teclado de su lector de pantalla (como pulsar la tecla ++d++ o ++m++) para **saltar directamente de una sección mayor a otra**. Los *landmarks* son esos grandes carteles de orientación.
 
+```mermaid
+flowchart TD
+    subgraph BODY ["&lt;body&gt; (Estructura semántica del documento)"]
+        HDR["&lt;header&gt; · Landmark: banner<br>Logo, lema institucional, buscador superior"]
+        NAV["&lt;nav&gt; · Landmark: navigation<br>Menú de navegación principal"]
+        
+        subgraph CENTRAL ["Distribución de contenido central"]
+            direction TB
+            MAIN["&lt;main&gt; · Landmark: main (Estrictamente ÚNICO)<br>Contenido central y distintivo de esta página"]
+            ASIDE["&lt;aside&gt; · Landmark: complementary<br>Barra lateral, glosario, enlaces relacionados"]
+            
+            MAIN --> ART["&lt;article&gt; (Autocontenido: post, noticia, producto)"]
+            MAIN --> SEC["&lt;section&gt; · Landmark: region (Con h2 y tema propio)"]
+        end
+
+        FTR["&lt;footer&gt; · Landmark: contentinfo<br>Copyright, aviso legal, datos de contacto"]
+
+        HDR --> NAV --> CENTRAL --> FTR
+    end
+```
+
 | Elemento HTML | Significado semántico | *Landmark* ARIA implícito | Regla de uso estricta |
 |---|---|---|---|
 | `<header>` | Cabecera introductoria de la página o de una sección | `banner` (solo si es hijo directo de `<body>`) | Contiene logos, eslóganes y títulos principales. No confundir con `<head>`. |
@@ -190,21 +211,25 @@ A continuación se detalla la función de cada contenedor semántico y atributo 
 
 Es el ==primer elemento enfocable== de la página: permite saltarse la cabecera y el menú sin tabular por 30 enlaces.
 
-```html title="skip-link.html" hl_lines="3 6"
-<body>
-  <!-- Debe ser el PRIMER enlace del DOM -->
-  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
-  <header> ... menú con 12 enlaces ... </header>
-  <!-- destino: el id de <main>; tabindex="-1" lo enfoca sin entrar en el Tab -->
-  <main id="contenido" tabindex="-1"> <h1>...</h1> </main>
-</body>
-```
+=== "HTML"
 
-```css title="skip-link.css"
-.skip-link { position: absolute; left: -9999px; background: #fff; padding: .6rem 1rem; }
-.skip-link:focus { left: 0; top: 0; z-index: 1000; }
-:focus-visible { outline: 3px solid #0b5fff; outline-offset: 2px; } /* nunca borres el foco */
-```
+    ```html title="skip-link.html" hl_lines="3 6"
+    <body>
+      <!-- Debe ser el PRIMER enlace del DOM -->
+      <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+      <header> ... menú con 12 enlaces ... </header>
+      <!-- destino: el id de <main>; tabindex="-1" lo enfoca sin entrar en el Tab -->
+      <main id="contenido" tabindex="-1"> <h1>...</h1> </main>
+    </body>
+    ```
+
+=== "CSS"
+
+    ```css title="skip-link.css"
+    .skip-link { position: absolute; left: -9999px; background: #fff; padding: .6rem 1rem; }
+    .skip-link:focus { left: 0; top: 0; z-index: 1000; }
+    :focus-visible { outline: 3px solid #0b5fff; outline-offset: 2px; } /* nunca borres el foco */
+    ```
 
 ### 4.2 Cómo probarlo con teclado
 

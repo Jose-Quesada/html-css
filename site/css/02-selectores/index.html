@@ -684,6 +684,8 @@
       
         
       
+        
+      
     
     
     
@@ -1686,6 +1688,35 @@
   
   
     <li class="md-nav__item">
+      <a href="../15-ejercicios-soluciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  15. Ejercicios: soluciones
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../16-practicas/" class="md-nav__link">
         
   
@@ -2272,6 +2303,8 @@
       
         
       
+        
+      
     
     
     
@@ -2487,6 +2520,18 @@
 </span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>  <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Párrafo final de conclusiones.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 </span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="p">&lt;/</span><span class="nt">article</span><span class="p">&gt;</span>
 </span></code></pre></div>
+<pre class="mermaid"><code>flowchart TD
+    ART["&amp;lt;article class='post'&amp;gt; (Elemento Padre)"]
+
+    ART --&gt;|Hijo directo: &amp;gt;| H2["&amp;lt;h2&amp;gt; Título"]
+    ART --&gt;|Hijo directo: &amp;gt;| P1["&amp;lt;p&amp;gt; Primer párrafo"]
+    ART --&gt;|Hijo directo: &amp;gt;| DIV["&amp;lt;div class='destacado'&amp;gt;"]
+    ART --&gt;|Hijo directo: &amp;gt;| P3["&amp;lt;p&amp;gt; Párrafo final"]
+
+    DIV --&gt;|Hijo directo de div| P2["&amp;lt;p&amp;gt; Párrafo interior"]
+
+    H2 -. "h2 + p (Hermano adyacente inmediato)" .-&gt; P1
+    H2 -. "h2 ~ p (Hermano general posterior)" .-&gt; P3</code></pre>
 <ul>
 <li><strong><code>article p</code> (Descendiente):</strong> Selecciona <strong>los tres párrafos</strong>. A todos los afecta porque todos están contenidos dentro del <code>&lt;article&gt;</code>.</li>
 <li><strong><code>article &gt; p</code> (Hijo directo):</strong> Selecciona únicamente el primer párrafo y el párrafo final. <strong>No selecciona</strong> el párrafo del medio porque su padre directo es el <code>&lt;div&gt;</code>, no el <code>&lt;article&gt;</code>.</li>
@@ -2999,6 +3044,9 @@
 <hr />
 <h2 id="9-ejemplo-practico-catalogo-interactivo-con-combinadores-pseudo-clases-y-pseudo-elementos">9. Ejemplo práctico: catálogo interactivo con combinadores, pseudo-clases y pseudo-elementos</h2>
 <p>El siguiente ejemplo muestra la maquetación de una tabla de inventario interactiva donde el estilo visual responde dinámicamente al estado del DOM sin recurrir a scripts: filas alternas con <code>:nth-child</code>, combinadores de adyacencia (<code>+</code> y <code>~</code>) para estados reactivos, selectores funcionales (<code>:is</code>, <code>:not</code>, <code>:has</code>) y pseudo-elementos (<code>::before</code>, <code>::after</code>) para enriquecimiento visual accesible.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">HTML</label><label for="__tabbed_1_2">CSS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="language-html highlight"><span class="filename">inventario.html</span><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
@@ -3069,6 +3117,8 @@
 </span><span id="__span-12-68"><a id="__codelineno-12-68" name="__codelineno-12-68" href="#__codelineno-12-68"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </span><span id="__span-12-69"><a id="__codelineno-12-69" name="__codelineno-12-69" href="#__codelineno-12-69"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></code></pre></div>
+</div>
+<div class="tabbed-block">
 <div class="language-css highlight"><span class="filename">css/inventario.css</span><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c">/* 1. Reset básico y variables */</span>
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="nv">--color-ok</span><span class="p">:</span><span class="w"> </span><span class="mh">#16a34a</span><span class="p">;</span>
@@ -3236,6 +3286,9 @@
 </span><span id="__span-13-165"><a id="__codelineno-13-165" name="__codelineno-13-165" href="#__codelineno-13-165"></a><span class="w">  </span><span class="k">border-width</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 </span><span id="__span-13-166"><a id="__codelineno-13-166" name="__codelineno-13-166" href="#__codelineno-13-166"></a><span class="p">}</span>
 </span></code></pre></div>
+</div>
+</div>
+</div>
 <hr />
 <h3 id="91-explicacion-detallada-por-que-se-usa-cada-propiedad-y-para-que-sirve">9.1 Explicación detallada: ¿Por qué se usa cada propiedad y para qué sirve?</h3>
 <p>A continuación se analizan los motivos técnicos de cada regla de selección y las propiedades de interfaz aplicadas:</p>

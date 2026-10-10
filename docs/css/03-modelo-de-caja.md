@@ -35,6 +35,17 @@ Las **cuatro capas** concéntricas forman el ==modelo de caja==:
 └──────────────────────────────────────────────┘
 ```
 
+```mermaid
+flowchart TD
+    subgraph MARGIN ["Margen exterior (margin) · Espacio exterior transparente entre elementos"]
+        subgraph BORDER ["Borde (border) · Línea perimetral visible (solid, dashed, etc.)"]
+            subgraph PADDING ["Relleno interior (padding) · Espacio entre el borde y el texto"]
+                CONTENT["Área de Contenido (content)<br>Texto, imágenes y elementos hijos anidados"]
+            end
+        end
+    end
+```
+
 | Capa | Propiedades | Notas |
 |---|---|---|
 | Contenido | `width`, `height` | Tamaño del contenido (**no de la caja completa**). |
@@ -358,166 +369,170 @@ El ==centrado== es el patrón que más se repite:
 
 El siguiente ejemplo implementa una tarjeta de producto de comercio electrónico profesional donde cada capa del modelo de caja (`content`, `padding`, `border`, `margin`) y las propiedades de dimensionamiento moderno se articulan para evitar desplazamientos de diseño (CLS), colapsos inesperados de márgenes y roturas por textos extensos.
 
-```html title="tarjeta-producto.html"
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modelo de Caja · Tarjeta de Producto</title>
-  <link rel="stylesheet" href="css/caja.css">
-</head>
-<body>
-  <main class="escaparate">
-    <article class="caja-producto">
-      <div class="caja-producto__media">
-        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80" 
-             alt="Auriculares inalámbricos premium negros sobre fondo gris"
-             width="800" height="450">
-        <span class="caja-producto__etiqueta">Nuevo</span>
-      </div>
+=== "HTML"
 
-      <div class="caja-producto__cuerpo">
-        <h2 class="caja-producto__titulo">Auriculares Pro Wireless NC</h2>
-        <p class="caja-producto__descripcion">
-          Cancelación de ruido adaptativa con 40 horas de autonomía y transductores de titanio de alta fidelidad.
-        </p>
+    ```html title="tarjeta-producto.html"
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Modelo de Caja · Tarjeta de Producto</title>
+      <link rel="stylesheet" href="css/caja.css">
+    </head>
+    <body>
+      <main class="escaparate">
+        <article class="caja-producto">
+          <div class="caja-producto__media">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80" 
+                 alt="Auriculares inalámbricos premium negros sobre fondo gris"
+                 width="800" height="450">
+            <span class="caja-producto__etiqueta">Nuevo</span>
+          </div>
+    
+          <div class="caja-producto__cuerpo">
+            <h2 class="caja-producto__titulo">Auriculares Pro Wireless NC</h2>
+            <p class="caja-producto__descripcion">
+              Cancelación de ruido adaptativa con 40 horas de autonomía y transductores de titanio de alta fidelidad.
+            </p>
+    
+            <div class="caja-producto__precio-fila">
+              <span class="caja-producto__precio">189,99&nbsp;€</span>
+              <span class="caja-producto__iva">IVA incl.</span>
+            </div>
+    
+            <button type="button" class="caja-producto__boton">Añadir a la cesta</button>
+          </div>
+        </article>
+      </main>
+    </body>
+    </html>
+    ```
 
-        <div class="caja-producto__precio-fila">
-          <span class="caja-producto__precio">189,99&nbsp;€</span>
-          <span class="caja-producto__iva">IVA incl.</span>
-        </div>
+=== "CSS"
 
-        <button type="button" class="caja-producto__boton">Añadir a la cesta</button>
-      </div>
-    </article>
-  </main>
-</body>
-</html>
-```
-
-```css title="css/caja.css"
-/* 1. Reset universal del modelo de caja */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: system-ui, -apple-system, sans-serif;
-  background-color: #f8fafc;
-  color: #0f172a;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem 1rem;
-}
-
-/* 2. Contenedor con BFC y control de dimensiones */
-.caja-producto {
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 1rem;
-  overflow: hidden; /* Evita que la imagen sobresalga de las esquinas redondeadas */
-  display: flow-root; /* Crea un nuevo BFC: aísla márgenes internos de externos */
-  max-width: 22rem; /* Ancho máximo para evitar tarjetas desproporcionadas */
-  width: 100%; /* Adaptable a pantallas más estrechas */
-  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.08);
-}
-
-/* 3. Media con relación de aspecto estricta anti-CLS */
-.caja-producto__media {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9; /* Reserva el espacio exacto antes de descargar la imagen */
-  background-color: #e2e8f0; /* Fondo placeholder durante la carga */
-}
-
-.caja-producto__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ajusta la fotografía recortando excesos sin deformar */
-  display: block; /* Elimina el espacio fantasma inferior de los inline */
-}
-
-.caja-producto__etiqueta {
-  position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
-  background-color: rgb(15 23 42 / 0.85);
-  color: #ffffff;
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.25rem 0.6rem;
-  border-radius: 9999px;
-}
-
-/* 4. Padding interior y ritmo vertical lógico */
-.caja-producto__cuerpo {
-  padding: 1.25rem;
-}
-
-.caja-producto__titulo {
-  font-size: 1.25rem;
-  line-height: 1.3;
-  margin-block-end: 0.5rem; /* Margen lógico inferior */
-  color: #0f172a;
-}
-
-.caja-producto__descripcion {
-  font-size: 0.9rem;
-  color: #64748b;
-  line-height: 1.5;
-  margin-block-end: 1.25rem;
-  max-width: 50ch; /* Limita la longitud visual de la línea a un máximo de 50 caracteres */
-}
-
-/* 5. Fila de precio con márgenes alineados */
-.caja-producto__precio-fila {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  margin-block-end: 1.25rem;
-}
-
-.caja-producto__precio {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #0f172a;
-}
-
-.caja-producto__iva {
-  font-size: 0.8rem;
-  color: #94a3b8;
-}
-
-/* 6. Botón de acción con modelo de caja expandido */
-.caja-producto__boton {
-  display: block;
-  width: 100%;
-  padding-block: 0.75rem;
-  padding-inline: 1.25rem;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #ffffff;
-  background-color: #0284c7;
-  border: 1px solid transparent;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.caja-producto__boton:hover {
-  background-color: #0369a1;
-}
-
-.caja-producto__boton:focus-visible {
-  outline: 2px solid #0284c7;
-  outline-offset: 2px;
-}
-```
+    ```css title="css/caja.css"
+    /* 1. Reset universal del modelo de caja */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+    
+    /* 2. Contenedor con BFC y control de dimensiones */
+    .caja-producto {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 1rem;
+      overflow: hidden; /* Evita que la imagen sobresalga de las esquinas redondeadas */
+      display: flow-root; /* Crea un nuevo BFC: aísla márgenes internos de externos */
+      max-width: 22rem; /* Ancho máximo para evitar tarjetas desproporcionadas */
+      width: 100%; /* Adaptable a pantallas más estrechas */
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.08);
+    }
+    
+    /* 3. Media con relación de aspecto estricta anti-CLS */
+    .caja-producto__media {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9; /* Reserva el espacio exacto antes de descargar la imagen */
+      background-color: #e2e8f0; /* Fondo placeholder durante la carga */
+    }
+    
+    .caja-producto__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ajusta la fotografía recortando excesos sin deformar */
+      display: block; /* Elimina el espacio fantasma inferior de los inline */
+    }
+    
+    .caja-producto__etiqueta {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      background-color: rgb(15 23 42 / 0.85);
+      color: #ffffff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 9999px;
+    }
+    
+    /* 4. Padding interior y ritmo vertical lógico */
+    .caja-producto__cuerpo {
+      padding: 1.25rem;
+    }
+    
+    .caja-producto__titulo {
+      font-size: 1.25rem;
+      line-height: 1.3;
+      margin-block-end: 0.5rem; /* Margen lógico inferior */
+      color: #0f172a;
+    }
+    
+    .caja-producto__descripcion {
+      font-size: 0.9rem;
+      color: #64748b;
+      line-height: 1.5;
+      margin-block-end: 1.25rem;
+      max-width: 50ch; /* Limita la longitud visual de la línea a un máximo de 50 caracteres */
+    }
+    
+    /* 5. Fila de precio con márgenes alineados */
+    .caja-producto__precio-fila {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-block-end: 1.25rem;
+    }
+    
+    .caja-producto__precio {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    
+    .caja-producto__iva {
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+    
+    /* 6. Botón de acción con modelo de caja expandido */
+    .caja-producto__boton {
+      display: block;
+      width: 100%;
+      padding-block: 0.75rem;
+      padding-inline: 1.25rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #ffffff;
+      background-color: #0284c7;
+      border: 1px solid transparent;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    
+    .caja-producto__boton:hover {
+      background-color: #0369a1;
+    }
+    
+    .caja-producto__boton:focus-visible {
+      outline: 2px solid #0284c7;
+      outline-offset: 2px;
+    }
+    ```
 
 ---
 

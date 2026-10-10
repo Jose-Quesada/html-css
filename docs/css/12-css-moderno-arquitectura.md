@@ -410,211 +410,215 @@ Herramientas: Storybook (con addons CSS), Zeroheight, o simplemente Markdown + d
 
 El siguiente ejemplo integra las características más avanzadas del estándar CSS contemporáneo: declaración anticipada de capas de cascada (`@layer`), registro tipado de variables con la API Houdini (`@property`), anidación de selectores nativa sin necesidad de preprocesadores Sass, y metodología BEM para el encapsulamiento de componentes.
 
-```html title="arquitectura.html"
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CSS Moderno · Arquitectura de Componentes</title>
-  <link rel="stylesheet" href="css/arquitectura.css">
-</head>
-<body>
-  <main class="contenedor">
-    <!-- Componente siguiendo metodología BEM -->
-    <article class="tarjeta-usuario tarjeta-usuario--premium">
-      <header class="tarjeta-usuario__cabecera">
-        <div class="tarjeta-usuario__avatar-marco">
-          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" 
-               alt="Retrato de Elena Domínguez" class="tarjeta-usuario__avatar">
-        </div>
-        <div class="tarjeta-usuario__meta">
-          <h2 class="tarjeta-usuario__nombre">Elena Domínguez</h2>
-          <span class="tarjeta-usuario__rol">Senior Cloud Architect</span>
-        </div>
-      </header>
+=== "HTML"
 
-      <p class="tarjeta-usuario__bio">
-        Especialista en resiliencia de microservicios y despliegue continuo con Kubernetes y Terraform.
-      </p>
+    ```html title="arquitectura.html"
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>CSS Moderno · Arquitectura de Componentes</title>
+      <link rel="stylesheet" href="css/arquitectura.css">
+    </head>
+    <body>
+      <main class="contenedor">
+        <!-- Componente siguiendo metodología BEM -->
+        <article class="tarjeta-usuario tarjeta-usuario--premium">
+          <header class="tarjeta-usuario__cabecera">
+            <div class="tarjeta-usuario__avatar-marco">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" 
+                   alt="Retrato de Elena Domínguez" class="tarjeta-usuario__avatar">
+            </div>
+            <div class="tarjeta-usuario__meta">
+              <h2 class="tarjeta-usuario__nombre">Elena Domínguez</h2>
+              <span class="tarjeta-usuario__rol">Senior Cloud Architect</span>
+            </div>
+          </header>
+    
+          <p class="tarjeta-usuario__bio">
+            Especialista en resiliencia de microservicios y despliegue continuo con Kubernetes y Terraform.
+          </p>
+    
+          <footer class="tarjeta-usuario__acciones">
+            <button type="button" class="btn btn--primario">Conectar</button>
+            <button type="button" class="btn btn--secundario">Mensaje</button>
+          </footer>
+        </article>
+      </main>
+    </body>
+    </html>
+    ```
 
-      <footer class="tarjeta-usuario__acciones">
-        <button type="button" class="btn btn--primario">Conectar</button>
-        <button type="button" class="btn btn--secundario">Mensaje</button>
-      </footer>
-    </article>
-  </main>
-</body>
-</html>
-```
+=== "CSS"
 
-```css title="css/arquitectura.css"
-/* 1. Declaración anticipada del orden canónico de capas de cascada */
-@layer reset, base, componentes, utilidades;
-
-/* 2. Registro de Custom Property tipada con CSS Houdini (@property) */
-@property --angulo-borde {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-
-/* 3. Capa de Reset */
-@layer reset {
-  *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-
-  button {
-    font-family: inherit;
-    font-size: inherit;
-  }
-}
-
-/* 4. Capa Base y Tokens de diseño */
-@layer base {
-  :root {
-    --color-superficie: #ffffff;
-    --color-fondo: #0f172a;
-    --color-texto: #1e293b;
-    --color-muted: #64748b;
-    --color-primario: #0284c7;
-    --color-primario-hover: #0369a1;
-    --radio-tarjeta: 1.25rem;
-  }
-
-  body {
-    font-family: system-ui, -apple-system, sans-serif;
-    background-color: var(--color-fondo);
-    color: var(--color-texto);
-    min-height: 100vh;
-    display: grid;
-    place-items: center;
-    padding: 1.5rem;
-  }
-}
-
-/* 5. Capa de Componentes con CSS Nesting nativo y BEM */
-@layer componentes {
-  .tarjeta-usuario {
-    background-color: var(--color-superficie);
-    border-radius: var(--radio-tarjeta);
-    padding: 2rem;
-    max-width: 24rem;
-    width: 100%;
-    position: relative;
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);
-
-    /* Anidación nativa: elementos hijos */
-    &__cabecera {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-block-end: 1.25rem;
+    ```css title="css/arquitectura.css"
+    /* 1. Declaración anticipada del orden canónico de capas de cascada */
+    @layer reset, base, componentes, utilidades;
+    
+    /* 2. Registro de Custom Property tipada con CSS Houdini (@property) */
+    @property --angulo-borde {
+      syntax: "<angle>";
+      inherits: false;
+      initial-value: 0deg;
     }
-
-    &__avatar-marco {
-      position: relative;
-      width: 4rem;
-      height: 4rem;
-      border-radius: 50%;
-      padding: 3px;
-      background: conic-gradient(from var(--angulo-borde), #38bdf8, #818cf8, #38bdf8);
-      /* Animación suave de la variable tipada @property */
-      animation: rotar-gradiente 4s linear infinite;
-    }
-
-    &__avatar {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      display: block;
-    }
-
-    &__nombre {
-      font-size: 1.25rem;
-      color: #0f172a;
-      line-height: 1.2;
-    }
-
-    &__rol {
-      font-size: 0.85rem;
-      color: var(--color-muted);
-      font-weight: 500;
-    }
-
-    &__bio {
-      font-size: 0.95rem;
-      line-height: 1.55;
-      color: #475569;
-      margin-block-end: 1.5rem;
-    }
-
-    &__acciones {
-      display: flex;
-      gap: 0.75rem;
-    }
-
-    /* Modificador BEM anidado */
-    &--premium {
-      border: 1px solid rgb(56 189 248 / 0.4);
-      box-shadow: 0 20px 25px -5px rgb(56 189 248 / 0.15);
-    }
-  }
-
-  /* Componente botón modular */
-  .btn {
-    flex: 1;
-    padding: 0.65rem 1rem;
-    border-radius: 0.5rem;
-    border: 1px solid transparent;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s ease;
-
-    &--primario {
-      background-color: var(--color-primario);
-      color: #ffffff;
-
-      &:hover {
-        background-color: var(--color-primario-hover);
+    
+    /* 3. Capa de Reset */
+    @layer reset {
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+    
+      button {
+        font-family: inherit;
+        font-size: inherit;
       }
     }
-
-    &--secundario {
-      background-color: #f1f5f9;
-      color: #334155;
-      border-color: #cbd5e1;
-
-      &:hover {
-        background-color: #e2e8f0;
+    
+    /* 4. Capa Base y Tokens de diseño */
+    @layer base {
+      :root {
+        --color-superficie: #ffffff;
+        --color-fondo: #0f172a;
+        --color-texto: #1e293b;
+        --color-muted: #64748b;
+        --color-primario: #0284c7;
+        --color-primario-hover: #0369a1;
+        --radio-tarjeta: 1.25rem;
+      }
+    
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        background-color: var(--color-fondo);
+        color: var(--color-texto);
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 1.5rem;
       }
     }
-
-    &:focus-visible {
-      outline: 2px solid var(--color-primario);
-      outline-offset: 2px;
+    
+    /* 5. Capa de Componentes con CSS Nesting nativo y BEM */
+    @layer componentes {
+      .tarjeta-usuario {
+        background-color: var(--color-superficie);
+        border-radius: var(--radio-tarjeta);
+        padding: 2rem;
+        max-width: 24rem;
+        width: 100%;
+        position: relative;
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+    
+        /* Anidación nativa: elementos hijos */
+        &__cabecera {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          margin-block-end: 1.25rem;
+        }
+    
+        &__avatar-marco {
+          position: relative;
+          width: 4rem;
+          height: 4rem;
+          border-radius: 50%;
+          padding: 3px;
+          background: conic-gradient(from var(--angulo-borde), #38bdf8, #818cf8, #38bdf8);
+          /* Animación suave de la variable tipada @property */
+          animation: rotar-gradiente 4s linear infinite;
+        }
+    
+        &__avatar {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          object-fit: cover;
+          display: block;
+        }
+    
+        &__nombre {
+          font-size: 1.25rem;
+          color: #0f172a;
+          line-height: 1.2;
+        }
+    
+        &__rol {
+          font-size: 0.85rem;
+          color: var(--color-muted);
+          font-weight: 500;
+        }
+    
+        &__bio {
+          font-size: 0.95rem;
+          line-height: 1.55;
+          color: #475569;
+          margin-block-end: 1.5rem;
+        }
+    
+        &__acciones {
+          display: flex;
+          gap: 0.75rem;
+        }
+    
+        /* Modificador BEM anidado */
+        &--premium {
+          border: 1px solid rgb(56 189 248 / 0.4);
+          box-shadow: 0 20px 25px -5px rgb(56 189 248 / 0.15);
+        }
+      }
+    
+      /* Componente botón modular */
+      .btn {
+        flex: 1;
+        padding: 0.65rem 1rem;
+        border-radius: 0.5rem;
+        border: 1px solid transparent;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    
+        &--primario {
+          background-color: var(--color-primario);
+          color: #ffffff;
+    
+          &:hover {
+            background-color: var(--color-primario-hover);
+          }
+        }
+    
+        &--secundario {
+          background-color: #f1f5f9;
+          color: #334155;
+          border-color: #cbd5e1;
+    
+          &:hover {
+            background-color: #e2e8f0;
+          }
+        }
+    
+        &:focus-visible {
+          outline: 2px solid var(--color-primario);
+          outline-offset: 2px;
+        }
+      }
     }
-  }
-}
-
-/* 6. Animación de la Custom Property tipada */
-@keyframes rotar-gradiente {
-  to {
-    --angulo-borde: 360deg;
-  }
-}
-
-/* 7. Capa de utilidades (máxima prioridad) */
-@layer utilidades {
-  .u-centrado {
-    text-align: center;
-  }
-}
-```
+    
+    /* 6. Animación de la Custom Property tipada */
+    @keyframes rotar-gradiente {
+      to {
+        --angulo-borde: 360deg;
+      }
+    }
+    
+    /* 7. Capa de utilidades (máxima prioridad) */
+    @layer utilidades {
+      .u-centrado {
+        text-align: center;
+      }
+    }
+    ```
 
 ---
 
@@ -625,7 +629,27 @@ A continuación se analizan los principios arquitectónicos y las especificacion
 #### 1. `@layer reset, base, componentes, utilidades;`
 - **¿Por qué declararlo en la primera línea?** Establece el orden de precedencia inmutable de la cascada para todo el proyecto.
 - **La jerarquía resultante:**
-  $$\text{reset} < \text{base} < \text{componentes} < \text{utilidades}$$
+  $$\text{reset} < \text{base} < \text{componentes} < \text{utilidades} < \text{estilos sin capa}$$
+
+```mermaid
+flowchart TD
+    subgraph NORMAL ["Reglas normales (Prioridad de menor a mayor ⬆)"]
+        direction TB
+        L1["1. @layer reset (Prioridad base mínima)"] --> L2["2. @layer base"]
+        L2 --> L3["3. @layer componentes"]
+        L3 --> L4["4. @layer utilidades"]
+        L4 --> L5["5. CSS sin capa / Unlayered (🏆 Máxima prioridad normal)"]
+    end
+
+    subgraph IMPORTANT ["Reglas con !important (Invierte la precedencia de capas ⬇)"]
+        direction TB
+        I5["1. CSS sin capa con !important"] --> I4["2. @layer utilidades !important"]
+        I4 --> I3["3. @layer componentes !important"]
+        I3 --> I2["4. @layer base !important"]
+        I2 --> I1["5. @layer reset !important (🏆 Máxima prioridad absoluta)"]
+    end
+```
+
 - **Beneficio colosal:** Una clase de utilidad como `.u-centrado` dentro de `@layer utilidades` siempre ganará a una regla de componente de `@layer componentes`, sin necesidad de aumentar artificialmente la especificidad ni recurrir al destructivo `!important`.
 
 #### 2. Variables tipadas con `@property` (CSS Houdini)

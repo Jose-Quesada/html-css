@@ -87,6 +87,17 @@ En CSS ocurre exactamente igual:
 - Los valores de `z-index` de los hijos solo compiten **dentro de su propio edificio**.
 - Entre edificios distintos, lo único que decide quién tapa a quién es el `z-index` del **padre** que crea el contexto.
 
+```mermaid
+flowchart TD
+    ROOT["Contexto de Apilamiento Raíz (&lt;html&gt;)"]
+    
+    ROOT --> ED_A["Contexto A: .caja-a<br>z-index: 1 (Edificio bajo)"]
+    ROOT --> ED_B["Contexto B: .caja-b<br>z-index: 2 (Edificio alto)"]
+
+    ED_A --> HIJO_A["Hijo A1: .popup<br>z-index: 999999<br>❌ Queda DEBAJO de cualquier elemento del Contexto B"]
+    ED_B --> HIJO_B["Hijo B1: .elemento<br>z-index: 1<br>🏆 Tapa a Hijo A1 porque el Contexto B (2) gana al Contexto A (1)"]
+```
+
 ### 4.2. ¿Qué crea un nuevo Contexto de Apilamiento?
 
 Un elemento crea su propio "edificio" (contexto de apilamiento) cuando cumple cualquiera de estas condiciones comunes:
@@ -274,220 +285,224 @@ header { position: sticky; top: 0; transition: box-shadow .3s; }
 
 El siguiente ejemplo articula los esquemas fundamentales de posicionamiento (`relative`, `absolute`, `fixed`, `sticky`) junto a una escala modular de variables para `z-index`, aplicando la propiedad `isolation: isolate` para blindar los contextos de apilamiento y evitar colisiones entre capas.
 
-```html title="posicionamiento.html"
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Posicionamiento y Capas · Panel de Control</title>
-  <link rel="stylesheet" href="css/posicionamiento.css">
-</head>
-<body>
-  <!-- 1. Cabecera adhesiva (Sticky) -->
-  <header class="barra-navegacion">
-    <div class="barra-navegacion__contenido">
-      <span class="logo">AppDAW</span>
-      <nav class="acciones">
-        <button type="button" class="btn-notificaciones" aria-label="Notificaciones del sistema">
-          🔔
-          <span class="insignia-contador" aria-hidden="true">3</span>
-        </button>
-      </nav>
-    </div>
-  </header>
+=== "HTML"
 
-  <main class="contenedor-principal">
-    <section class="tarjeta-perfil">
-      <div class="tarjeta-perfil__cabecera">
-        <!-- Badge posicionado absolutamente respecto a su padre -->
-        <span class="etiqueta-estado">En línea</span>
-      </div>
-      <h2>Servidor de Despliegue</h2>
-      <p>Instancia de producción ejecutándose en Ubuntu 24.04 LTS.</p>
-    </section>
+    ```html title="posicionamiento.html"
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Posicionamiento y Capas · Panel de Control</title>
+      <link rel="stylesheet" href="css/posicionamiento.css">
+    </head>
+    <body>
+      <!-- 1. Cabecera adhesiva (Sticky) -->
+      <header class="barra-navegacion">
+        <div class="barra-navegacion__contenido">
+          <span class="logo">AppDAW</span>
+          <nav class="acciones">
+            <button type="button" class="btn-notificaciones" aria-label="Notificaciones del sistema">
+              🔔
+              <span class="insignia-contador" aria-hidden="true">3</span>
+            </button>
+          </nav>
+        </div>
+      </header>
+    
+      <main class="contenedor-principal">
+        <section class="tarjeta-perfil">
+          <div class="tarjeta-perfil__cabecera">
+            <!-- Badge posicionado absolutamente respecto a su padre -->
+            <span class="etiqueta-estado">En línea</span>
+          </div>
+          <h2>Servidor de Despliegue</h2>
+          <p>Instancia de producción ejecutándose en Ubuntu 24.04 LTS.</p>
+        </section>
+    
+        <!-- Simulación de scroll vertical para evidenciar el comportamiento sticky -->
+        <div class="espaciador-scroll">
+          <p>Haz scroll para comprobar cómo la cabecera se mantiene adherida en la parte superior del viewport.</p>
+        </div>
+      </main>
+    
+      <!-- 2. Ventana modal flotante con telón fijo (Fixed + Inset) -->
+      <aside class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="tit-modal">
+        <div class="modal-caja">
+          <h3 id="tit-modal">Confirmar reinicio</h3>
+          <p>¿Estás seguro de que deseas reiniciar la instancia de producción?</p>
+          <div class="modal-botones">
+            <button type="button" class="btn btn--cancelar">Cancelar</button>
+            <button type="button" class="btn btn--peligro">Reiniciar</button>
+          </div>
+        </div>
+      </aside>
+    </body>
+    </html>
+    ```
 
-    <!-- Simulación de scroll vertical para evidenciar el comportamiento sticky -->
-    <div class="espaciador-scroll">
-      <p>Haz scroll para comprobar cómo la cabecera se mantiene adherida en la parte superior del viewport.</p>
-    </div>
-  </main>
+=== "CSS"
 
-  <!-- 2. Ventana modal flotante con telón fijo (Fixed + Inset) -->
-  <aside class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="tit-modal">
-    <div class="modal-caja">
-      <h3 id="tit-modal">Confirmar reinicio</h3>
-      <p>¿Estás seguro de que deseas reiniciar la instancia de producción?</p>
-      <div class="modal-botones">
-        <button type="button" class="btn btn--cancelar">Cancelar</button>
-        <button type="button" class="btn btn--peligro">Reiniciar</button>
-      </div>
-    </div>
-  </aside>
-</body>
-</html>
-```
-
-```css title="css/posicionamiento.css"
-/* 1. Reset y escala semántica de contextos de apilamiento */
-:root {
-  --z-base: 1;
-  --z-dropdown: 100;
-  --z-sticky: 200;
-  --z-overlay: 300;
-  --z-modal: 400;
-  --z-tooltip: 500;
-
-  --color-fondo: #f1f5f9;
-  --color-primario: #0284c7;
-  --color-peligro: #ef4444;
-}
-
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: system-ui, -apple-system, sans-serif;
-  background-color: var(--color-fondo);
-  color: #0f172a;
-  min-height: 200vh; /* Permite scroll vertical */
-}
-
-/* 2. Cabecera adhesiva (Sticky) */
-.barra-navegacion {
-  position: sticky;
-  top: 0; /* Punto de anclaje obligatorio para activar sticky */
-  z-index: var(--z-sticky);
-  background-color: rgb(255 255 255 / 0.9);
-  backdrop-filter: blur(8px); /* Efecto translúcido */
-  border-bottom: 1px solid #cbd5e1;
-  padding: 0.75rem 1.5rem;
-}
-
-.barra-navegacion__contenido {
-  max-width: 60rem;
-  margin-inline: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* 3. Botón contenedor y Badge absoluto */
-.btn-notificaciones {
-  position: relative; /* Bloque contenedor para la insignia absoluta */
-  background: none;
-  border: none;
-  font-size: 1.25rem;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-}
-
-.insignia-contador {
-  position: absolute;
-  top: 0.15rem;
-  right: 0.15rem;
-  background-color: var(--color-peligro);
-  color: #ffffff;
-  font-size: 0.7rem;
-  font-weight: 700;
-  min-width: 1.1rem;
-  height: 1.1rem;
-  line-height: 1.1rem;
-  text-align: center;
-  border-radius: 9999px;
-  box-shadow: 0 0 0 2px #ffffff; /* Separador nítido contra el fondo */
-}
-
-/* 4. Tarjeta con contexto de apilamiento aislado */
-.contenedor-principal {
-  max-width: 60rem;
-  margin-inline: auto;
-  padding: 2rem 1.5rem;
-}
-
-.tarjeta-perfil {
-  position: relative;
-  isolation: isolate; /* Crea un nuevo stacking context local e infranqueable */
-  background: #ffffff;
-  padding: 2rem;
-  border-radius: 1rem;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
-}
-
-.etiqueta-estado {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background-color: #dcfce7;
-  color: #15803d;
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.25rem 0.6rem;
-  border-radius: 9999px;
-}
-
-.espaciador-scroll {
-  margin-top: 4rem;
-  padding: 2rem;
-  background-color: #e2e8f0;
-  border-radius: 0.5rem;
-  text-align: center;
-  color: #64748b;
-}
-
-/* 5. Modal centrado en viewport con telón Fixed */
-.modal-overlay {
-  position: fixed;
-  inset: 0; /* Equivale a top: 0; right: 0; bottom: 0; left: 0; */
-  background-color: rgb(15 23 42 / 0.6);
-  z-index: var(--z-overlay);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-}
-
-.modal-caja {
-  position: relative;
-  background: #ffffff;
-  border-radius: 1rem;
-  padding: 2rem;
-  max-width: 28rem;
-  width: 100%;
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.2);
-  z-index: var(--z-modal);
-}
-
-.modal-botones {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
-}
-
-.btn {
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: 1px solid transparent;
-}
-
-.btn--cancelar {
-  background: #f1f5f9;
-  color: #475569;
-}
-
-.btn--peligro {
-  background: var(--color-peligro);
-  color: #ffffff;
-}
-```
+    ```css title="css/posicionamiento.css"
+    /* 1. Reset y escala semántica de contextos de apilamiento */
+    :root {
+      --z-base: 1;
+      --z-dropdown: 100;
+      --z-sticky: 200;
+      --z-overlay: 300;
+      --z-modal: 400;
+      --z-tooltip: 500;
+    
+      --color-fondo: #f1f5f9;
+      --color-primario: #0284c7;
+      --color-peligro: #ef4444;
+    }
+    
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: var(--color-fondo);
+      color: #0f172a;
+      min-height: 200vh; /* Permite scroll vertical */
+    }
+    
+    /* 2. Cabecera adhesiva (Sticky) */
+    .barra-navegacion {
+      position: sticky;
+      top: 0; /* Punto de anclaje obligatorio para activar sticky */
+      z-index: var(--z-sticky);
+      background-color: rgb(255 255 255 / 0.9);
+      backdrop-filter: blur(8px); /* Efecto translúcido */
+      border-bottom: 1px solid #cbd5e1;
+      padding: 0.75rem 1.5rem;
+    }
+    
+    .barra-navegacion__contenido {
+      max-width: 60rem;
+      margin-inline: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    /* 3. Botón contenedor y Badge absoluto */
+    .btn-notificaciones {
+      position: relative; /* Bloque contenedor para la insignia absoluta */
+      background: none;
+      border: none;
+      font-size: 1.25rem;
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+    }
+    
+    .insignia-contador {
+      position: absolute;
+      top: 0.15rem;
+      right: 0.15rem;
+      background-color: var(--color-peligro);
+      color: #ffffff;
+      font-size: 0.7rem;
+      font-weight: 700;
+      min-width: 1.1rem;
+      height: 1.1rem;
+      line-height: 1.1rem;
+      text-align: center;
+      border-radius: 9999px;
+      box-shadow: 0 0 0 2px #ffffff; /* Separador nítido contra el fondo */
+    }
+    
+    /* 4. Tarjeta con contexto de apilamiento aislado */
+    .contenedor-principal {
+      max-width: 60rem;
+      margin-inline: auto;
+      padding: 2rem 1.5rem;
+    }
+    
+    .tarjeta-perfil {
+      position: relative;
+      isolation: isolate; /* Crea un nuevo stacking context local e infranqueable */
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+    }
+    
+    .etiqueta-estado {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background-color: #dcfce7;
+      color: #15803d;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 9999px;
+    }
+    
+    .espaciador-scroll {
+      margin-top: 4rem;
+      padding: 2rem;
+      background-color: #e2e8f0;
+      border-radius: 0.5rem;
+      text-align: center;
+      color: #64748b;
+    }
+    
+    /* 5. Modal centrado en viewport con telón Fixed */
+    .modal-overlay {
+      position: fixed;
+      inset: 0; /* Equivale a top: 0; right: 0; bottom: 0; left: 0; */
+      background-color: rgb(15 23 42 / 0.6);
+      z-index: var(--z-overlay);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+    
+    .modal-caja {
+      position: relative;
+      background: #ffffff;
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 28rem;
+      width: 100%;
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.2);
+      z-index: var(--z-modal);
+    }
+    
+    .modal-botones {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    
+    .btn {
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    
+    .btn--cancelar {
+      background: #f1f5f9;
+      color: #475569;
+    }
+    
+    .btn--peligro {
+      background: var(--color-peligro);
+      color: #ffffff;
+    }
+    ```
 
 ---
 

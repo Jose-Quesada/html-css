@@ -1083,6 +1083,8 @@
       
         
       
+        
+      
     
     
     
@@ -1578,6 +1580,35 @@
     
   
   15. Ejercicios, glosario y recursos
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/15-ejercicios-soluciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  15. Ejercicios: soluciones
 
     
   </span>
@@ -2170,6 +2201,24 @@
 </tbody>
 </table>
 <h2 id="2-estructura-semantica-completa">2. Estructura semántica completa</h2>
+<p>Para garantizar la accesibilidad y correcta lectura por tecnologías asistivas, una tabla de datos debe seguir un orden estructural estricto de elementos jerárquicos:</p>
+<pre class="mermaid"><code>flowchart TD
+    TBL["&amp;lt;table&amp;gt;&lt;br&gt;(Contenedor matriz de datos)"]
+
+    TBL --&gt; CAP["&amp;lt;caption&amp;gt;&lt;br&gt;Título accesible de la tabla&lt;br&gt;(Primer hijo obligatorio)"]
+    TBL --&gt; THD["&amp;lt;thead&amp;gt;&lt;br&gt;Cabecera superior"]
+    TBL --&gt; TBD["&amp;lt;tbody&amp;gt;&lt;br&gt;Cuerpo de datos principal"]
+    TBL --&gt; TFT["&amp;lt;tfoot&amp;gt;&lt;br&gt;Pie de totales / resumen"]
+
+    THD --&gt; TR_H["&amp;lt;tr&amp;gt; (Fila de cabecera)"]
+    TR_H --&gt; TH_COL["&amp;lt;th scope='col'&amp;gt;&lt;br&gt;Encabezados de columna"]
+
+    TBD --&gt; TR_B["&amp;lt;tr&amp;gt; (Filas de registros)"]
+    TR_B --&gt; TH_ROW["&amp;lt;th scope='row'&amp;gt;&lt;br&gt;Identificador de fila"]
+    TR_B --&gt; TD_VAL["&amp;lt;td&amp;gt; Dato atómico"]
+
+    TFT --&gt; TR_F["&amp;lt;tr&amp;gt; (Fila de resumen)"]
+    TR_F --&gt; TD_TOT["&amp;lt;td&amp;gt; Totales / Medias"]</code></pre>
 <h3 id="21-elementos-que-forman-una-tabla">2.1 Elementos que forman una tabla</h3>
 <table>
 <thead>

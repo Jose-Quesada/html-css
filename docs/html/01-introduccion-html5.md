@@ -123,6 +123,27 @@ El comportamiento del navegador no depende únicamente del código escrito, sino
 
 ## 2. Anatomía de un documento HTML5 moderno
 
+El documento HTML5 se estructura de forma jerárquica en un árbol de nodos (DOM) encabezado por la instrucción de tipo de documento y la etiqueta raíz `<html>`, dividida en dos grandes ramas con propósitos claramente diferenciados:
+
+```mermaid
+flowchart TD
+    DOC["&lt;!DOCTYPE html&gt;<br>(Activa el Modo Estándar)"] --> ROOT["&lt;html lang='es'&gt;<br>(Elemento raíz del documento)"]
+    
+    ROOT --> HEAD["&lt;head&gt;<br>Metadatos e instrucciones de máquina<br>(Invisible en pantalla)"]
+    ROOT --> BODY["&lt;body&gt;<br>Contenido perceptible y estructura visual<br>(Visible para el usuario)"]
+
+    HEAD --> H_META["&lt;meta charset='UTF-8'&gt;<br>&lt;meta name='viewport'...&gt;"]
+    HEAD --> H_TITLE["&lt;title&gt;Título de la pestaña&lt;/title&gt;"]
+    HEAD --> H_LINK["&lt;link rel='stylesheet' href='...'&gt;"]
+
+    BODY --> B_HDR["&lt;header&gt;<br>Cabecera / Logo"]
+    BODY --> B_NAV["&lt;nav&gt;<br>Menú principal"]
+    BODY --> B_MAIN["&lt;main&gt;<br>Contenido principal único"]
+    BODY --> B_FTR["&lt;footer&gt;<br>Pie de página / Copyright"]
+
+    B_MAIN --> B_ART["&lt;article&gt; / &lt;section&gt;"]
+```
+
 ### 2.1 Plantilla completa (*boilerplate*) profesional
 
 ```html title="index.html" hl_lines="1 2 4 5 6 7 8 13 14 17 21"

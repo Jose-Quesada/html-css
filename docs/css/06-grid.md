@@ -40,6 +40,22 @@ fecha: "2026-09-06"
         └────────┴────────┴────────┘
 ```
 
+```mermaid
+flowchart TD
+    subgraph CONTAINER ["Grid Container (display: grid)"]
+        direction TB
+        subgraph TRACKS ["Pistas (Grid Tracks)"]
+            COLS["Pistas de Columna (Verticales)<br>grid-template-columns: 200px 1fr 1fr"]
+            ROWS["Pistas de Fila (Horizontales)<br>grid-template-rows: auto 100px"]
+        end
+        subgraph ANATOMIA ["Componentes estructurales"]
+            LINES["Líneas divisorias (Grid Lines)<br>Numeradas desde 1 (o negativas desde el final -1)"]
+            CELLS["Celdas unitarias (Grid Cells)<br>Intersección de 1 fila × 1 columna"]
+            AREAS["Áreas con nombre (Grid Areas)<br>Zonas rectangulares (header, main, sidebar)"]
+        end
+    end
+```
+
 
 ## 2. Definir la cuadrícula explícita
 
@@ -373,267 +389,271 @@ No son rivales: lo normal es **grid fuera, flex dentro**. El mismo bloque de dos
 
 El siguiente ejemplo implementa la arquitectura completa de un panel de control profesional bidimensional (2D): maquetación de página con áreas semánticas (`grid-template-areas`), cuadrícula de widgets adaptable sin media queries (`repeat(auto-fit, minmax(...))`), widgets multidimensionales con `span`, y alineación interna de tarjetas mediante `subgrid`.
 
-```html title="dashboard.html"
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CSS Grid · Panel de Control Empresarial</title>
-  <link rel="stylesheet" href="css/dashboard.css">
-</head>
-<body>
-  <div class="pantalla-grid">
-    <!-- 1. Cabecera superior -->
-    <header class="area-cabecera">
-      <div class="logo">CloudMetrics</div>
-      <div class="usuario">Admin · Centro de Datos</div>
-    </header>
+=== "HTML"
 
-    <!-- 2. Barra lateral de navegación -->
-    <aside class="area-sidebar">
-      <nav aria-label="Navegación del panel">
-        <ul>
-          <li><a href="#" class="activo">Métricas</a></li>
-          <li><a href="#">Servidores</a></li>
-          <li><a href="#">Seguridad</a></li>
-          <li><a href="#">Ajustes</a></li>
-        </ul>
-      </nav>
-    </aside>
+    ```html title="dashboard.html"
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>CSS Grid · Panel de Control Empresarial</title>
+      <link rel="stylesheet" href="css/dashboard.css">
+    </head>
+    <body>
+      <div class="pantalla-grid">
+        <!-- 1. Cabecera superior -->
+        <header class="area-cabecera">
+          <div class="logo">CloudMetrics</div>
+          <div class="usuario">Admin · Centro de Datos</div>
+        </header>
+    
+        <!-- 2. Barra lateral de navegación -->
+        <aside class="area-sidebar">
+          <nav aria-label="Navegación del panel">
+            <ul>
+              <li><a href="#" class="activo">Métricas</a></li>
+              <li><a href="#">Servidores</a></li>
+              <li><a href="#">Seguridad</a></li>
+              <li><a href="#">Ajustes</a></li>
+            </ul>
+          </nav>
+        </aside>
+    
+        <!-- 3. Contenido principal con sub-rejillas -->
+        <main class="area-principal">
+          <h1>Estado de la Infraestructura</h1>
+    
+          <section class="rejilla-widgets">
+            <!-- Tarjeta KPI 1 -->
+            <article class="widget widget-kpi">
+              <span class="widget-kpi__icono">⚡</span>
+              <div class="widget-kpi__datos">
+                <span class="widget-kpi__valor">99.98%</span>
+                <span class="widget-kpi__etiqueta">Disponibilidad SLA</span>
+              </div>
+            </article>
+    
+            <!-- Tarjeta KPI 2 -->
+            <article class="widget widget-kpi">
+              <span class="widget-kpi__icono">🛡️</span>
+              <div class="widget-kpi__datos">
+                <span class="widget-kpi__valor">0</span>
+                <span class="widget-kpi__etiqueta">Incidentes Críticos</span>
+              </div>
+            </article>
+    
+            <!-- Widget de Gráfica expandido (2 columnas) -->
+            <article class="widget widget-grafica">
+              <h2>Rendimiento de Servidores (Últimas 24h)</h2>
+              <div class="grafica-placeholder">
+                [Visualización de tráfico y consumo de CPU]
+              </div>
+            </article>
+    
+            <!-- Tarjeta con Subgrid para alinear títulos y pies -->
+            <article class="widget widget-alerta">
+              <h3>Copia de Seguridad Semanal</h3>
+              <p>Completada con éxito en almacenamiento frío S3. Total: 1.4 TB transferidos.</p>
+              <button type="button" class="btn">Ver reporte</button>
+            </article>
+          </section>
+        </main>
+    
+        <!-- 4. Pie de página del dashboard -->
+        <footer class="area-pie">
+          <p>&copy; 2026 CloudMetrics Platform · Entorno Seguro</p>
+        </footer>
+      </div>
+    </body>
+    </html>
+    ```
 
-    <!-- 3. Contenido principal con sub-rejillas -->
-    <main class="area-principal">
-      <h1>Estado de la Infraestructura</h1>
+=== "CSS"
 
-      <section class="rejilla-widgets">
-        <!-- Tarjeta KPI 1 -->
-        <article class="widget widget-kpi">
-          <span class="widget-kpi__icono">⚡</span>
-          <div class="widget-kpi__datos">
-            <span class="widget-kpi__valor">99.98%</span>
-            <span class="widget-kpi__etiqueta">Disponibilidad SLA</span>
-          </div>
-        </article>
-
-        <!-- Tarjeta KPI 2 -->
-        <article class="widget widget-kpi">
-          <span class="widget-kpi__icono">🛡️</span>
-          <div class="widget-kpi__datos">
-            <span class="widget-kpi__valor">0</span>
-            <span class="widget-kpi__etiqueta">Incidentes Críticos</span>
-          </div>
-        </article>
-
-        <!-- Widget de Gráfica expandido (2 columnas) -->
-        <article class="widget widget-grafica">
-          <h2>Rendimiento de Servidores (Últimas 24h)</h2>
-          <div class="grafica-placeholder">
-            [Visualización de tráfico y consumo de CPU]
-          </div>
-        </article>
-
-        <!-- Tarjeta con Subgrid para alinear títulos y pies -->
-        <article class="widget widget-alerta">
-          <h3>Copia de Seguridad Semanal</h3>
-          <p>Completada con éxito en almacenamiento frío S3. Total: 1.4 TB transferidos.</p>
-          <button type="button" class="btn">Ver reporte</button>
-        </article>
-      </section>
-    </main>
-
-    <!-- 4. Pie de página del dashboard -->
-    <footer class="area-pie">
-      <p>&copy; 2026 CloudMetrics Platform · Entorno Seguro</p>
-    </footer>
-  </div>
-</body>
-</html>
-```
-
-```css title="css/dashboard.css"
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: system-ui, -apple-system, sans-serif;
-  background-color: #f1f5f9;
-  color: #0f172a;
-  line-height: 1.5;
-}
-
-/* 1. Grid 2D de pantalla completa mediante áreas nominadas */
-.pantalla-grid {
-  display: grid;
-  min-height: 100dvh;
-  /* 2 columnas: barra lateral fija y contenido absorbente */
-  grid-template-columns: 16rem 1fr;
-  /* 3 filas: cabecera automática, cuerpo flexible, pie automático */
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas:
-    "cabecera cabecera"
-    "sidebar  principal"
-    "pie      pie";
-}
-
-/* Asignación directa de cada región semántica */
-.area-cabecera {
-  grid-area: cabecera;
-  background-color: #0f172a;
-  color: #ffffff;
-  padding: 1rem 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.area-sidebar {
-  grid-area: sidebar;
-  background-color: #ffffff;
-  border-right: 1px solid #e2e8f0;
-  padding: 1.5rem 1rem;
-}
-
-.area-sidebar ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.area-sidebar a {
-  display: block;
-  text-decoration: none;
-  color: #475569;
-  padding: 0.6rem 1rem;
-  border-radius: 0.375rem;
-  font-weight: 500;
-}
-
-.area-sidebar a.activo,
-.area-sidebar a:hover {
-  background-color: #e0f2fe;
-  color: #0284c7;
-}
-
-.area-principal {
-  grid-area: principal;
-  padding: 2rem;
-}
-
-.area-principal h1 {
-  font-size: 1.75rem;
-  margin-block-end: 1.5rem;
-}
-
-.area-pie {
-  grid-area: pie;
-  background-color: #ffffff;
-  border-top: 1px solid #e2e8f0;
-  padding: 1rem 1.5rem;
-  text-align: center;
-  font-size: 0.85rem;
-  color: #64748b;
-}
-
-/* 2. Rejilla de widgets fluida sin media queries */
-.rejilla-widgets {
-  display: grid;
-  /* Fórmula auto-fit: crea columnas de mínimo 240px que se expanden a 1fr */
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
-  gap: 1.5rem;
-  grid-auto-rows: minmax(8rem, auto);
-}
-
-.widget {
-  background-color: #ffffff;
-  border-radius: 0.75rem;
-  border: 1px solid #e2e8f0;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
-}
-
-/* 3. Colocación específica con span */
-.widget-kpi {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.widget-kpi__icono {
-  font-size: 2rem;
-  background: #f8fafc;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-}
-
-.widget-kpi__valor {
-  display: block;
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #0f172a;
-}
-
-.widget-kpi__etiqueta {
-  font-size: 0.85rem;
-  color: #64748b;
-}
-
-/* Widget ancho que ocupa 2 columnas completas */
-.widget-grafica {
-  grid-column: span 2;
-  display: flex;
-  flex-direction: column;
-}
-
-.widget-grafica h2 {
-  font-size: 1.15rem;
-  margin-block-end: 1rem;
-}
-
-.grafica-placeholder {
-  flex: 1;
-  min-height: 8rem;
-  background-color: #f8fafc;
-  border: 1px dashed #cbd5e1;
-  border-radius: 0.5rem;
-  display: grid;
-  place-items: center; /* Centrado bidimensional perfecto */
-  color: #94a3b8;
-  font-size: 0.9rem;
-}
-
-.widget-alerta {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.widget-alerta h3 {
-  font-size: 1.1rem;
-  margin-block-end: 0.5rem;
-}
-
-.widget-alerta p {
-  font-size: 0.9rem;
-  color: #64748b;
-  margin-block-end: 1rem;
-}
-
-.btn {
-  align-self: flex-start;
-  padding: 0.5rem 1rem;
-  background-color: #0284c7;
-  color: #ffffff;
-  border: none;
-  border-radius: 0.375rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-```
+    ```css title="css/dashboard.css"
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: #f1f5f9;
+      color: #0f172a;
+      line-height: 1.5;
+    }
+    
+    /* 1. Grid 2D de pantalla completa mediante áreas nominadas */
+    .pantalla-grid {
+      display: grid;
+      min-height: 100dvh;
+      /* 2 columnas: barra lateral fija y contenido absorbente */
+      grid-template-columns: 16rem 1fr;
+      /* 3 filas: cabecera automática, cuerpo flexible, pie automático */
+      grid-template-rows: auto 1fr auto;
+      grid-template-areas:
+        "cabecera cabecera"
+        "sidebar  principal"
+        "pie      pie";
+    }
+    
+    /* Asignación directa de cada región semántica */
+    .area-cabecera {
+      grid-area: cabecera;
+      background-color: #0f172a;
+      color: #ffffff;
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .area-sidebar {
+      grid-area: sidebar;
+      background-color: #ffffff;
+      border-right: 1px solid #e2e8f0;
+      padding: 1.5rem 1rem;
+    }
+    
+    .area-sidebar ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .area-sidebar a {
+      display: block;
+      text-decoration: none;
+      color: #475569;
+      padding: 0.6rem 1rem;
+      border-radius: 0.375rem;
+      font-weight: 500;
+    }
+    
+    .area-sidebar a.activo,
+    .area-sidebar a:hover {
+      background-color: #e0f2fe;
+      color: #0284c7;
+    }
+    
+    .area-principal {
+      grid-area: principal;
+      padding: 2rem;
+    }
+    
+    .area-principal h1 {
+      font-size: 1.75rem;
+      margin-block-end: 1.5rem;
+    }
+    
+    .area-pie {
+      grid-area: pie;
+      background-color: #ffffff;
+      border-top: 1px solid #e2e8f0;
+      padding: 1rem 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+    
+    /* 2. Rejilla de widgets fluida sin media queries */
+    .rejilla-widgets {
+      display: grid;
+      /* Fórmula auto-fit: crea columnas de mínimo 240px que se expanden a 1fr */
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+      gap: 1.5rem;
+      grid-auto-rows: minmax(8rem, auto);
+    }
+    
+    .widget {
+      background-color: #ffffff;
+      border-radius: 0.75rem;
+      border: 1px solid #e2e8f0;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+    }
+    
+    /* 3. Colocación específica con span */
+    .widget-kpi {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .widget-kpi__icono {
+      font-size: 2rem;
+      background: #f8fafc;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+    }
+    
+    .widget-kpi__valor {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #0f172a;
+    }
+    
+    .widget-kpi__etiqueta {
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+    
+    /* Widget ancho que ocupa 2 columnas completas */
+    .widget-grafica {
+      grid-column: span 2;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .widget-grafica h2 {
+      font-size: 1.15rem;
+      margin-block-end: 1rem;
+    }
+    
+    .grafica-placeholder {
+      flex: 1;
+      min-height: 8rem;
+      background-color: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 0.5rem;
+      display: grid;
+      place-items: center; /* Centrado bidimensional perfecto */
+      color: #94a3b8;
+      font-size: 0.9rem;
+    }
+    
+    .widget-alerta {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .widget-alerta h3 {
+      font-size: 1.1rem;
+      margin-block-end: 0.5rem;
+    }
+    
+    .widget-alerta p {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-block-end: 1rem;
+    }
+    
+    .btn {
+      align-self: flex-start;
+      padding: 0.5rem 1rem;
+      background-color: #0284c7;
+      color: #ffffff;
+      border: none;
+      border-radius: 0.375rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    ```
 
 ---
 

@@ -684,6 +684,8 @@
       
         
       
+        
+      
     
     
     
@@ -1574,6 +1576,35 @@
   
   
     <li class="md-nav__item">
+      <a href="../15-ejercicios-soluciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  15. Ejercicios: soluciones
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../16-practicas/" class="md-nav__link">
         
   
@@ -2048,6 +2079,8 @@
       
         
       
+        
+      
     
     
     
@@ -2107,6 +2140,18 @@
 <li>La base ya es usable en móvil: lo demás solo <strong>añade</strong> columnas.</li>
 </ol>
 <p>Ventajas: CSS más ligero por defecto, progresivo (los navegadores viejos ven la versión simple), y fuerza a priorizar contenido.</p>
+<pre class="mermaid"><code>flowchart TD
+    subgraph MOBILE_FIRST ["Estrategia Mobile-First (min-width) · Enfoque Moderno Progresivo"]
+        direction TB
+        M_BASE["1. Base (Móvil por defecto)&lt;br&gt;Layout simple a 1 columna · Rendimiento máximo"] --&gt; M_TAB["2. @media (min-width: 48em)&lt;br&gt;Enriquece a 2 columnas para Tablet"]
+        M_TAB --&gt; M_DSK["3. @media (min-width: 64em)&lt;br&gt;Enriquece a 3 columnas para Escritorio"]
+    end
+
+    subgraph DESKTOP_FIRST ["Estrategia Desktop-First (max-width) · Enfoque Regresivo Frágil"]
+        direction TB
+        D_BASE["1. Base (Escritorio por defecto)&lt;br&gt;Maquetación compleja a 3 columnas"] --&gt; D_TAB["2. @media (max-width: 64em)&lt;br&gt;Sobrescribe y deshace a 2 columnas"]
+        D_TAB --&gt; D_MOB["3. @media (max-width: 48em)&lt;br&gt;Sobrescribe y fuerza 1 columna para Móvil"]
+    end</code></pre>
 <div class="admonition info">
 <p class="admonition-title">Por qué <mark>mobile-first</mark> gana</p>
 <ul>
@@ -2498,6 +2543,9 @@
 <hr />
 <h2 id="10-ejemplo-practico-portal-de-noticias-con-container-queries-y-media-queries-de-rango">10. Ejemplo práctico: portal de noticias con Container Queries y Media Queries de rango</h2>
 <p>El siguiente ejemplo implementa una arquitectura responsiva moderna combinando la metodología <strong>Mobile-First</strong>, la sintaxis moderna de rango para Media Queries (<code>width &gt;= 48em</code>), y el estándar de <strong>Container Queries</strong> (<code>@container</code>), permitiendo que las tarjetas de noticias se reconfiguren visualmente de formato vertical a apaisado según el ancho del contenedor en el que se ubiquen (sea en la columna principal o en una barra lateral estrecha).</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">HTML</label><label for="__tabbed_2_2">CSS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="language-html highlight"><span class="filename">noticias-responsivo.html</span><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
 </span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
 </span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
@@ -2564,6 +2612,8 @@
 </span><span id="__span-15-64"><a id="__codelineno-15-64" name="__codelineno-15-64" href="#__codelineno-15-64"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </span><span id="__span-15-65"><a id="__codelineno-15-65" name="__codelineno-15-65" href="#__codelineno-15-65"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></code></pre></div>
+</div>
+<div class="tabbed-block">
 <div class="language-css highlight"><span class="filename">css/responsivo.css</span><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="o">*,</span><span class="w"> </span><span class="o">*</span><span class="p">::</span><span class="nd">before</span><span class="o">,</span><span class="w"> </span><span class="o">*</span><span class="p">::</span><span class="nd">after</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span><span class="k">box-sizing</span><span class="p">:</span><span class="w"> </span><span class="kc">border-box</span><span class="p">;</span>
 </span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
@@ -2729,6 +2779,9 @@
 </span><span id="__span-16-163"><a id="__codelineno-16-163" name="__codelineno-16-163" href="#__codelineno-16-163"></a><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-16-164"><a id="__codelineno-16-164" name="__codelineno-16-164" href="#__codelineno-16-164"></a><span class="p">}</span>
 </span></code></pre></div>
+</div>
+</div>
+</div>
 <hr />
 <h3 id="101-explicacion-detallada-por-que-se-usa-cada-propiedad-y-para-que-sirve">10.1 Explicación detallada: ¿Por qué se usa cada propiedad y para qué sirve?</h3>
 <p>A continuación se detalla la justificación técnica de la arquitectura responsiva empleada:</p>

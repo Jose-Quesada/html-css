@@ -40,6 +40,19 @@ row (default):          column:
 ↓ cross axis            → cross axis
 ```
 
+```mermaid
+flowchart TD
+    subgraph MODO_ROW ["flex-direction: row (Comportamiento habitual en fila)"]
+        R_MAIN["Eje Principal (Main Axis) ➔ Horizontal<br>Propiedad de reparto: justify-content"]
+        R_CROSS["Eje Transversal (Cross Axis) ⬇ Vertical<br>Propiedad de alineación: align-items"]
+    end
+
+    subgraph MODO_COL ["flex-direction: column (Distribución en columna)"]
+        C_MAIN["Eje Principal (Main Axis) ⬇ Vertical<br>Propiedad de reparto: justify-content"]
+        C_CROSS["Eje Transversal (Cross Axis) ➔ Horizontal<br>Propiedad de alineación: align-items"]
+    end
+```
+
 El ==main axis== **reparte** el espacio; el transversal **alinea**.
 
 `display: inline-flex` crea un contenedor flex que fluye como inline (útil para widgets embebidos en texto).
@@ -258,241 +271,245 @@ Se pueden **combinar**: grid para la página, flex dentro de cada celda.
 
 El siguiente ejemplo combina los patrones más exigentes de Flexbox en producción: una barra de navegación con empuje automático (`margin-inline-start: auto`), un catálogo de tarjetas que envuelve con `flex-wrap` y bases adaptables (`flex: 1 1 280px`), la solución a la trampa de `min-width: auto` mediante `min-width: 0`, y tarjetas internas con pie empujado al fondo (`margin-top: auto`).
 
-```html title="catalogo-flex.html"
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flexbox · Navegación y Tarjetas Autoalineadas</title>
-  <link rel="stylesheet" href="css/flexbox.css">
-</head>
-<body>
-  <!-- 1. Barra de navegación 1D en fila -->
-  <header class="navbar">
-    <div class="navbar__logo">DevPlatform</div>
-    <nav class="navbar__enlaces" aria-label="Navegación principal">
-      <a href="#proyectos" class="navbar__link">Proyectos</a>
-      <a href="#despliegues" class="navbar__link">Despliegues</a>
-      <a href="#equipos" class="navbar__link">Equipos</a>
-    </nav>
-    <div class="navbar__usuario">
-      <button type="button" class="btn btn--perfil">Mi Cuenta</button>
-    </div>
-  </header>
+=== "HTML"
 
-  <main class="contenedor">
-    <header class="seccion-cabecera">
-      <h1>Servicios Activos</h1>
-      <p>Infraestructura desplegada y balanceo de carga.</p>
-    </header>
+    ```html title="catalogo-flex.html"
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Flexbox · Navegación y Tarjetas Autoalineadas</title>
+      <link rel="stylesheet" href="css/flexbox.css">
+    </head>
+    <body>
+      <!-- 1. Barra de navegación 1D en fila -->
+      <header class="navbar">
+        <div class="navbar__logo">DevPlatform</div>
+        <nav class="navbar__enlaces" aria-label="Navegación principal">
+          <a href="#proyectos" class="navbar__link">Proyectos</a>
+          <a href="#despliegues" class="navbar__link">Despliegues</a>
+          <a href="#equipos" class="navbar__link">Equipos</a>
+        </nav>
+        <div class="navbar__usuario">
+          <button type="button" class="btn btn--perfil">Mi Cuenta</button>
+        </div>
+      </header>
+    
+      <main class="contenedor">
+        <header class="seccion-cabecera">
+          <h1>Servicios Activos</h1>
+          <p>Infraestructura desplegada y balanceo de carga.</p>
+        </header>
+    
+        <!-- 2. Rejilla envolvente con Flexbox -->
+        <div class="cards-grid">
+          <article class="card">
+            <div class="card__estado card__estado--ok">Operativo</div>
+            <h2 class="card__titulo">API Gateway Principal</h2>
+            <p class="card__texto">
+              Punto de entrada microservicios con enrutamiento SSL y límite de peticiones activo.
+            </p>
+            <footer class="card__pie">
+              <span class="card__metricas">99.98% uptime</span>
+              <a href="#" class="card__accion">Detalles →</a>
+            </footer>
+          </article>
+    
+          <article class="card">
+            <div class="card__estado card__estado--ok">Operativo</div>
+            <h2 class="card__titulo">Cluster Postgres Primario</h2>
+            <p class="card__texto">
+              Base de datos transaccional con replicación asíncrona en 3 zonas de disponibilidad.
+            </p>
+            <footer class="card__pie">
+              <span class="card__metricas">12.4 ms latencia</span>
+              <a href="#" class="card__accion">Detalles →</a>
+            </footer>
+          </article>
+    
+          <article class="card">
+            <div class="card__estado card__estado--alerta">Carga Alta</div>
+            <h2 class="card__titulo">Cola de Tareas Redis</h2>
+            <p class="card__texto">
+              Procesamiento asíncrono de mensajes y colas de correos con consumo elevado de memoria.
+            </p>
+            <footer class="card__pie">
+              <span class="card__metricas">84% memoria</span>
+              <a href="#" class="card__accion">Detalles →</a>
+            </footer>
+          </article>
+        </div>
+      </main>
+    </body>
+    </html>
+    ```
 
-    <!-- 2. Rejilla envolvente con Flexbox -->
-    <div class="cards-grid">
-      <article class="card">
-        <div class="card__estado card__estado--ok">Operativo</div>
-        <h2 class="card__titulo">API Gateway Principal</h2>
-        <p class="card__texto">
-          Punto de entrada microservicios con enrutamiento SSL y límite de peticiones activo.
-        </p>
-        <footer class="card__pie">
-          <span class="card__metricas">99.98% uptime</span>
-          <a href="#" class="card__accion">Detalles →</a>
-        </footer>
-      </article>
+=== "CSS"
 
-      <article class="card">
-        <div class="card__estado card__estado--ok">Operativo</div>
-        <h2 class="card__titulo">Cluster Postgres Primario</h2>
-        <p class="card__texto">
-          Base de datos transaccional con replicación asíncrona en 3 zonas de disponibilidad.
-        </p>
-        <footer class="card__pie">
-          <span class="card__metricas">12.4 ms latencia</span>
-          <a href="#" class="card__accion">Detalles →</a>
-        </footer>
-      </article>
-
-      <article class="card">
-        <div class="card__estado card__estado--alerta">Carga Alta</div>
-        <h2 class="card__titulo">Cola de Tareas Redis</h2>
-        <p class="card__texto">
-          Procesamiento asíncrono de mensajes y colas de correos con consumo elevado de memoria.
-        </p>
-        <footer class="card__pie">
-          <span class="card__metricas">84% memoria</span>
-          <a href="#" class="card__accion">Detalles →</a>
-        </footer>
-      </article>
-    </div>
-  </main>
-</body>
-</html>
-```
-
-```css title="css/flexbox.css"
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: system-ui, -apple-system, sans-serif;
-  background-color: #f8fafc;
-  color: #0f172a;
-  line-height: 1.5;
-}
-
-/* 1. Navbar con Flexbox y empuje automático */
-.navbar {
-  display: flex;
-  align-items: center; /* Alineación vertical perfecta en el eje transversal */
-  gap: 1.5rem;
-  padding: 1rem 2rem;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.navbar__logo {
-  font-weight: 800;
-  font-size: 1.25rem;
-  color: #0284c7;
-}
-
-.navbar__enlaces {
-  display: flex;
-  gap: 1rem;
-}
-
-.navbar__link {
-  text-decoration: none;
-  color: #475569;
-  font-weight: 500;
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  transition: color 0.15s ease;
-}
-
-.navbar__link:hover {
-  color: #0284c7;
-}
-
-/* margin-inline-start: auto absorbe todo el espacio sobrante en el eje principal */
-.navbar__usuario {
-  margin-inline-start: auto;
-}
-
-.btn--perfil {
-  background-color: #0f172a;
-  color: #ffffff;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-/* 2. Contenedor principal */
-.contenedor {
-  max-width: 72rem;
-  margin-inline: auto;
-  padding: 2.5rem 1.5rem;
-}
-
-.seccion-cabecera {
-  margin-block-end: 2rem;
-}
-
-.seccion-cabecera h1 {
-  font-size: 1.75rem;
-  margin-block-end: 0.25rem;
-}
-
-.seccion-cabecera p {
-  color: #64748b;
-}
-
-/* 3. Rejilla flex envolvente */
-.cards-grid {
-  display: flex;
-  flex-wrap: wrap; /* Permite que las tarjetas salten a la siguiente línea */
-  gap: 1.5rem; /* Espaciado uniforme en filas y columnas sin hacks de márgenes */
-}
-
-/* 4. Tarjetas individuales como items y sub-contenedores flex */
-.card {
-  /* flex: 1 1 280px => crece si hay hueco, encoge si falta, base ideal de 280px */
-  flex: 1 1 18rem;
-  min-width: 0; /* Solución crucial a la trampa de desbordamiento de min-width: auto */
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
-
-  /* Tarjeta interna en columna para empujar el footer */
-  display: flex;
-  flex-direction: column;
-}
-
-.card__estado {
-  align-self: flex-start; /* Sobreescribe align-items stretch en el item */
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.2rem 0.5rem;
-  border-radius: 9999px;
-  margin-block-end: 0.75rem;
-}
-
-.card__estado--ok {
-  background-color: #dcfce7;
-  color: #166534;
-}
-
-.card__estado--alerta {
-  background-color: #fef3c7;
-  color: #92400e;
-}
-
-.card__titulo {
-  font-size: 1.15rem;
-  margin-block-end: 0.5rem;
-}
-
-.card__texto {
-  color: #64748b;
-  font-size: 0.9rem;
-  margin-block-end: 1.5rem;
-}
-
-/* 5. Pie de tarjeta empujado al fondo con margin-top: auto */
-.card__pie {
-  margin-top: auto; /* Empuja el pie al fondo sin importar la cantidad de texto superior */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 1rem;
-  border-top: 1px solid #f1f5f9;
-}
-
-.card__metricas {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #64748b;
-}
-
-.card__accion {
-  color: #0284c7;
-  font-weight: 600;
-  text-decoration: none;
-  font-size: 0.85rem;
-}
-
-.card__accion:hover {
-  text-decoration: underline;
-}
-```
+    ```css title="css/flexbox.css"
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      line-height: 1.5;
+    }
+    
+    /* 1. Navbar con Flexbox y empuje automático */
+    .navbar {
+      display: flex;
+      align-items: center; /* Alineación vertical perfecta en el eje transversal */
+      gap: 1.5rem;
+      padding: 1rem 2rem;
+      background-color: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .navbar__logo {
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: #0284c7;
+    }
+    
+    .navbar__enlaces {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .navbar__link {
+      text-decoration: none;
+      color: #475569;
+      font-weight: 500;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      transition: color 0.15s ease;
+    }
+    
+    .navbar__link:hover {
+      color: #0284c7;
+    }
+    
+    /* margin-inline-start: auto absorbe todo el espacio sobrante en el eje principal */
+    .navbar__usuario {
+      margin-inline-start: auto;
+    }
+    
+    .btn--perfil {
+      background-color: #0f172a;
+      color: #ffffff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    
+    /* 2. Contenedor principal */
+    .contenedor {
+      max-width: 72rem;
+      margin-inline: auto;
+      padding: 2.5rem 1.5rem;
+    }
+    
+    .seccion-cabecera {
+      margin-block-end: 2rem;
+    }
+    
+    .seccion-cabecera h1 {
+      font-size: 1.75rem;
+      margin-block-end: 0.25rem;
+    }
+    
+    .seccion-cabecera p {
+      color: #64748b;
+    }
+    
+    /* 3. Rejilla flex envolvente */
+    .cards-grid {
+      display: flex;
+      flex-wrap: wrap; /* Permite que las tarjetas salten a la siguiente línea */
+      gap: 1.5rem; /* Espaciado uniforme en filas y columnas sin hacks de márgenes */
+    }
+    
+    /* 4. Tarjetas individuales como items y sub-contenedores flex */
+    .card {
+      /* flex: 1 1 280px => crece si hay hueco, encoge si falta, base ideal de 280px */
+      flex: 1 1 18rem;
+      min-width: 0; /* Solución crucial a la trampa de desbordamiento de min-width: auto */
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+    
+      /* Tarjeta interna en columna para empujar el footer */
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .card__estado {
+      align-self: flex-start; /* Sobreescribe align-items stretch en el item */
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: 9999px;
+      margin-block-end: 0.75rem;
+    }
+    
+    .card__estado--ok {
+      background-color: #dcfce7;
+      color: #166534;
+    }
+    
+    .card__estado--alerta {
+      background-color: #fef3c7;
+      color: #92400e;
+    }
+    
+    .card__titulo {
+      font-size: 1.15rem;
+      margin-block-end: 0.5rem;
+    }
+    
+    .card__texto {
+      color: #64748b;
+      font-size: 0.9rem;
+      margin-block-end: 1.5rem;
+    }
+    
+    /* 5. Pie de tarjeta empujado al fondo con margin-top: auto */
+    .card__pie {
+      margin-top: auto; /* Empuja el pie al fondo sin importar la cantidad de texto superior */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid #f1f5f9;
+    }
+    
+    .card__metricas {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #64748b;
+    }
+    
+    .card__accion {
+      color: #0284c7;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.85rem;
+    }
+    
+    .card__accion:hover {
+      text-decoration: underline;
+    }
+    ```
 
 ---
 

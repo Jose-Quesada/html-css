@@ -684,6 +684,8 @@
       
         
       
+        
+      
     
     
     
@@ -1568,6 +1570,35 @@
   
   
     <li class="md-nav__item">
+      <a href="../15-ejercicios-soluciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  15. Ejercicios: soluciones
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../16-practicas/" class="md-nav__link">
         
   
@@ -2036,6 +2067,8 @@
       
         
       
+        
+      
     
     
     
@@ -2160,6 +2193,14 @@
 <li>Los valores de <code>z-index</code> de los hijos solo compiten <strong>dentro de su propio edificio</strong>.</li>
 <li>Entre edificios distintos, lo único que decide quién tapa a quién es el <code>z-index</code> del <strong>padre</strong> que crea el contexto.</li>
 </ul>
+<pre class="mermaid"><code>flowchart TD
+    ROOT["Contexto de Apilamiento Raíz (&amp;lt;html&amp;gt;)"]
+
+    ROOT --&gt; ED_A["Contexto A: .caja-a&lt;br&gt;z-index: 1 (Edificio bajo)"]
+    ROOT --&gt; ED_B["Contexto B: .caja-b&lt;br&gt;z-index: 2 (Edificio alto)"]
+
+    ED_A --&gt; HIJO_A["Hijo A1: .popup&lt;br&gt;z-index: 999999&lt;br&gt;❌ Queda DEBAJO de cualquier elemento del Contexto B"]
+    ED_B --&gt; HIJO_B["Hijo B1: .elemento&lt;br&gt;z-index: 1&lt;br&gt;🏆 Tapa a Hijo A1 porque el Contexto B (2) gana al Contexto A (1)"]</code></pre>
 <h3 id="42-que-crea-un-nuevo-contexto-de-apilamiento">4.2. ¿Qué crea un nuevo Contexto de Apilamiento?</h3>
 <p>Un elemento crea su propio "edificio" (contexto de apilamiento) cuando cumple cualquiera de estas condiciones comunes:</p>
 <ol>
@@ -2338,6 +2379,9 @@
 <hr />
 <h2 id="9-ejemplo-practico-interfaz-con-cabecera-sticky-badge-flotante-modal-y-escala-de-z-index">9. Ejemplo práctico: interfaz con cabecera sticky, badge flotante, modal y escala de <code>z-index</code></h2>
 <p>El siguiente ejemplo articula los esquemas fundamentales de posicionamiento (<code>relative</code>, <code>absolute</code>, <code>fixed</code>, <code>sticky</code>) junto a una escala modular de variables para <code>z-index</code>, aplicando la propiedad <code>isolation: isolate</code> para blindar los contextos de apilamiento y evitar colisiones entre capas.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">HTML</label><label for="__tabbed_1_2">CSS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="language-html highlight"><span class="filename">posicionamiento.html</span><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
@@ -2390,6 +2434,8 @@
 </span><span id="__span-11-50"><a id="__codelineno-11-50" name="__codelineno-11-50" href="#__codelineno-11-50"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </span><span id="__span-11-51"><a id="__codelineno-11-51" name="__codelineno-11-51" href="#__codelineno-11-51"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></code></pre></div>
+</div>
+<div class="tabbed-block">
 <div class="language-css highlight"><span class="filename">css/posicionamiento.css</span><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c">/* 1. Reset y escala semántica de contextos de apilamiento */</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nv">--z-base</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
@@ -2549,6 +2595,9 @@
 </span><span id="__span-12-157"><a id="__codelineno-12-157" name="__codelineno-12-157" href="#__codelineno-12-157"></a><span class="w">  </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="mh">#ffffff</span><span class="p">;</span>
 </span><span id="__span-12-158"><a id="__codelineno-12-158" name="__codelineno-12-158" href="#__codelineno-12-158"></a><span class="p">}</span>
 </span></code></pre></div>
+</div>
+</div>
+</div>
 <hr />
 <h3 id="91-explicacion-detallada-por-que-se-usa-cada-propiedad-y-para-que-sirve">9.1 Explicación detallada: ¿Por qué se usa cada propiedad y para qué sirve?</h3>
 <p>A continuación se analizan en detalle las reglas de posicionamiento y gestión del apilamiento empleadas en el código:</p>

@@ -313,6 +313,22 @@ En HTML moderno se prefiere siempre el elemento `<button>` frente al clásico `<
 
 ## 6. Validación nativa de HTML5
 
+El estándar HTML5 incluye un motor de validación declarativo integrado en el navegador (*Constraint Validation API*). El ciclo de validación se ejecuta automáticamente antes del envío:
+
+```mermaid
+flowchart TD
+    INPUT["Usuario introduce datos o envía formulario"] --> CHECK["Motor HTML5 evalúa restricciones:<br>required, type, pattern, min/max, step"]
+
+    CHECK -->|¿checkValidity() == true?| OK["✅ Campo Válido"]
+    CHECK -->|¿checkValidity() == false?| ERR["❌ Campo Inválido"]
+
+    OK --> C_CSS["Aplica pseudoclase CSS :valid"]
+    OK --> SUBMIT["Permite el envío HTTP (GET / POST)"]
+
+    ERR --> E_CSS["Aplica pseudoclases CSS :invalid y :user-invalid"]
+    ERR --> E_MSG["Dispara evento 'invalid'<br>Muestra bocadillo nativo (si no hay novalidate)<br>Bloquea el envío al servidor"]
+```
+
 ### 6.1 Mensajes del navegador y pseudoclases
 
 El navegador comprueba `required`, `type`, `pattern`, `min`/`max`... y muestra su mensaje (*"Introduce un correo electrónico válido"*). Es correcto, pero **no se estila con CSS**; sí lo hacen las pseudoclases:

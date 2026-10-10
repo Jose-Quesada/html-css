@@ -684,6 +684,8 @@
       
         
       
+        
+      
     
     
     
@@ -1574,6 +1576,35 @@
   
   
     <li class="md-nav__item">
+      <a href="../15-ejercicios-soluciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  15. Ejercicios: soluciones
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../16-practicas/" class="md-nav__link">
         
   
@@ -2048,6 +2079,8 @@
       
         
       
+        
+      
     
     
     
@@ -2104,6 +2137,16 @@
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>→ main axis             ↓ main axis
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>↓ cross axis            → cross axis
 </span></code></pre></div>
+<pre class="mermaid"><code>flowchart TD
+    subgraph MODO_ROW ["flex-direction: row (Comportamiento habitual en fila)"]
+        R_MAIN["Eje Principal (Main Axis) ➔ Horizontal&lt;br&gt;Propiedad de reparto: justify-content"]
+        R_CROSS["Eje Transversal (Cross Axis) ⬇ Vertical&lt;br&gt;Propiedad de alineación: align-items"]
+    end
+
+    subgraph MODO_COL ["flex-direction: column (Distribución en columna)"]
+        C_MAIN["Eje Principal (Main Axis) ⬇ Vertical&lt;br&gt;Propiedad de reparto: justify-content"]
+        C_CROSS["Eje Transversal (Cross Axis) ➔ Horizontal&lt;br&gt;Propiedad de alineación: align-items"]
+    end</code></pre>
 <p>El <mark>main axis</mark> <strong>reparte</strong> el espacio; el transversal <strong>alinea</strong>.</p>
 <p><code>display: inline-flex</code> crea un contenedor flex que fluye como inline (útil para widgets embebidos en texto).</p>
 <h2 id="2-propiedades-del-contenedor">2. Propiedades del contenedor</h2>
@@ -2429,6 +2472,9 @@
 <hr />
 <h2 id="8-ejemplo-practico-barra-de-navegacion-y-tarjetas-autoajustables-con-flexbox">8. Ejemplo práctico: barra de navegación y tarjetas autoajustables con Flexbox</h2>
 <p>El siguiente ejemplo combina los patrones más exigentes de Flexbox en producción: una barra de navegación con empuje automático (<code>margin-inline-start: auto</code>), un catálogo de tarjetas que envuelve con <code>flex-wrap</code> y bases adaptables (<code>flex: 1 1 280px</code>), la solución a la trampa de <code>min-width: auto</code> mediante <code>min-width: 0</code>, y tarjetas internas con pie empujado al fondo (<code>margin-top: auto</code>).</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">HTML</label><label for="__tabbed_1_2">CSS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="language-html highlight"><span class="filename">catalogo-flex.html</span><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
@@ -2499,6 +2545,8 @@
 </span><span id="__span-11-68"><a id="__codelineno-11-68" name="__codelineno-11-68" href="#__codelineno-11-68"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </span><span id="__span-11-69"><a id="__codelineno-11-69" name="__codelineno-11-69" href="#__codelineno-11-69"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></code></pre></div>
+</div>
+<div class="tabbed-block">
 <div class="language-css highlight"><span class="filename">css/flexbox.css</span><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="o">*,</span><span class="w"> </span><span class="o">*</span><span class="p">::</span><span class="nd">before</span><span class="o">,</span><span class="w"> </span><span class="o">*</span><span class="p">::</span><span class="nd">after</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="k">box-sizing</span><span class="p">:</span><span class="w"> </span><span class="kc">border-box</span><span class="p">;</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="k">margin</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
@@ -2661,6 +2709,9 @@
 </span><span id="__span-12-160"><a id="__codelineno-12-160" name="__codelineno-12-160" href="#__codelineno-12-160"></a><span class="w">  </span><span class="k">text-decoration</span><span class="p">:</span><span class="w"> </span><span class="kc">underline</span><span class="p">;</span>
 </span><span id="__span-12-161"><a id="__codelineno-12-161" name="__codelineno-12-161" href="#__codelineno-12-161"></a><span class="p">}</span>
 </span></code></pre></div>
+</div>
+</div>
+</div>
 <hr />
 <h3 id="81-explicacion-detallada-por-que-se-usa-cada-propiedad-y-para-que-sirve">8.1 Explicación detallada: ¿Por qué se usa cada propiedad y para qué sirve?</h3>
 <p>A continuación se detalla la justificación técnica de las propiedades Flexbox utilizadas:</p>

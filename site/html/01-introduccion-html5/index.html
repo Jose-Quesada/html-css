@@ -1321,6 +1321,8 @@
       
         
       
+        
+      
     
     
     
@@ -1816,6 +1818,35 @@
     
   
   15. Ejercicios, glosario y recursos
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../css/15-ejercicios-soluciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  15. Ejercicios: soluciones
 
     
   </span>
@@ -2729,6 +2760,23 @@
 </ul>
 <hr />
 <h2 id="2-anatomia-de-un-documento-html5-moderno">2. Anatomía de un documento HTML5 moderno</h2>
+<p>El documento HTML5 se estructura de forma jerárquica en un árbol de nodos (<abbr title="Document Object Model">DOM</abbr>) encabezado por la instrucción de tipo de documento y la etiqueta raíz <code>&lt;html&gt;</code>, dividida en dos grandes ramas con propósitos claramente diferenciados:</p>
+<pre class="mermaid"><code>flowchart TD
+    DOC["&amp;lt;!DOCTYPE html&amp;gt;&lt;br&gt;(Activa el Modo Estándar)"] --&gt; ROOT["&amp;lt;html lang='es'&amp;gt;&lt;br&gt;(Elemento raíz del documento)"]
+
+    ROOT --&gt; HEAD["&amp;lt;head&amp;gt;&lt;br&gt;Metadatos e instrucciones de máquina&lt;br&gt;(Invisible en pantalla)"]
+    ROOT --&gt; BODY["&amp;lt;body&amp;gt;&lt;br&gt;Contenido perceptible y estructura visual&lt;br&gt;(Visible para el usuario)"]
+
+    HEAD --&gt; H_META["&amp;lt;meta charset='UTF-8'&amp;gt;&lt;br&gt;&amp;lt;meta name='viewport'...&amp;gt;"]
+    HEAD --&gt; H_TITLE["&amp;lt;title&amp;gt;Título de la pestaña&amp;lt;/title&amp;gt;"]
+    HEAD --&gt; H_LINK["&amp;lt;link rel='stylesheet' href='../...'&amp;gt;"]
+
+    BODY --&gt; B_HDR["&amp;lt;header&amp;gt;&lt;br&gt;Cabecera / Logo"]
+    BODY --&gt; B_NAV["&amp;lt;nav&amp;gt;&lt;br&gt;Menú principal"]
+    BODY --&gt; B_MAIN["&amp;lt;main&amp;gt;&lt;br&gt;Contenido principal único"]
+    BODY --&gt; B_FTR["&amp;lt;footer&amp;gt;&lt;br&gt;Pie de página / Copyright"]
+
+    B_MAIN --&gt; B_ART["&amp;lt;article&amp;gt; / &amp;lt;section&amp;gt;"]</code></pre>
 <h3 id="21-plantilla-completa-boilerplate-profesional">2.1 Plantilla completa (<em>boilerplate</em>) profesional</h3>
 <div class="language-html highlight"><span class="filename">index.html</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="hll"><span class="cp">&lt;!DOCTYPE html&gt;</span>
 </span></span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="hll"><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>

@@ -684,6 +684,8 @@
       
         
       
+        
+      
     
     
     
@@ -1646,6 +1648,35 @@
   
   
     <li class="md-nav__item">
+      <a href="../15-ejercicios-soluciones/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-check-check" viewBox="0 0 24 24"><path d="M18 6 7 17l-5-5M22 10l-7.5 7.5L13 16"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  15. Ejercicios: soluciones
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../16-practicas/" class="md-nav__link">
         
   
@@ -2192,6 +2223,8 @@
       
         
       
+        
+      
     
     
     
@@ -2242,6 +2275,13 @@
 <li><strong>Nivel de conformidad</strong>: A (mínimo) → AA (objetivo habitual profesional y contractual) → AAA (máximo, no siempre viable).</li>
 <li>Cada <strong>criterio de éxito</strong> tiene número (p. ej., 1.4.3) y nivel.</li>
 </ul>
+<pre class="mermaid"><code>flowchart TD
+    POUR["Principios WCAG 2.2 y Aplicación en CSS"]
+
+    POUR --&gt; P["1. Perceptible&lt;br&gt;Contraste mínimo 4.5:1 (1.4.3)&lt;br&gt;Contraste UI 3:1 (1.4.11)&lt;br&gt;Uso no exclusivo del color"]
+    POUR --&gt; O["2. Operable&lt;br&gt;Foco visible :focus-visible (2.4.7)&lt;br&gt;Tamaño de objetivo táctil (2.5.8)&lt;br&gt;prefers-reduced-motion (2.3.3)"]
+    POUR --&gt; U["3. Comprensible&lt;br&gt;Diseño coherente y predecible&lt;br&gt;Mensajes de error visuales claros&lt;br&gt;Jerarquía visual sin ambigüedades"]
+    POUR --&gt; R["4. Robusto&lt;br&gt;Reflow y zoom 200% (1.4.4 / 1.4.10)&lt;br&gt;Modos de alto contraste (forced-colors)&lt;br&gt;Compatibilidad con tecnologías asistivas"]</code></pre>
 <p>Los criterios que <strong>CSS implementa directamente</strong> son los que trabajamos aquí; el más preguntado es <mark>1.4.3 (contraste)</mark>.</p>
 <div class="admonition info">
 <p class="admonition-title">Qué significa certificar AA</p>
@@ -2579,6 +2619,9 @@ Objetivo: que lo principal sea <em>recordado</em> (misma posición siempre) y lo
 <hr />
 <h2 id="7-ejemplo-practico-formulario-accesible-con-foco-reforzado-visually-hidden-y-forced-colors">7. Ejemplo práctico: formulario accesible con foco reforzado, <code>.visually-hidden</code> y <code>forced-colors</code></h2>
 <p>El siguiente ejemplo implementa un formulario de soporte ciudadano con plena conformidad <strong><abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.1 Nivel AA</strong>: navegación fluida por teclado con enlace de salto (<em>skip link</em>), la técnica canónica <code>.visually-hidden</code> para instrucciones destinadas exclusivamente a lectores de pantalla, indicadores de foco de alto contraste que no tapan el contenido, validación de errores independiente del color y compatibilidad con el modo de contraste forzado del sistema operativo (<code>forced-colors</code>).</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">HTML</label><label for="__tabbed_1_2">CSS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="language-html highlight"><span class="filename">soporte-accesible.html</span><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;es&quot;</span><span class="p">&gt;</span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
@@ -2637,6 +2680,8 @@ Objetivo: que lo principal sea <em>recordado</em> (misma posición siempre) y lo
 </span><span id="__span-8-56"><a id="__codelineno-8-56" name="__codelineno-8-56" href="#__codelineno-8-56"></a><span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
 </span><span id="__span-8-57"><a id="__codelineno-8-57" name="__codelineno-8-57" href="#__codelineno-8-57"></a><span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
 </span></code></pre></div>
+</div>
+<div class="tabbed-block">
 <div class="language-css highlight"><span class="filename">css/accesibilidad.css</span><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c">/* 1. Reset accesible y variables de alto contraste */</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="p">:</span><span class="nd">root</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nv">--color-fondo</span><span class="p">:</span><span class="w"> </span><span class="mh">#f8fafc</span><span class="p">;</span>
@@ -2829,6 +2874,9 @@ Objetivo: que lo principal sea <em>recordado</em> (misma posición siempre) y lo
 </span><span id="__span-9-190"><a id="__codelineno-9-190" name="__codelineno-9-190" href="#__codelineno-9-190"></a><span class="w">  </span><span class="p">}</span>
 </span><span id="__span-9-191"><a id="__codelineno-9-191" name="__codelineno-9-191" href="#__codelineno-9-191"></a><span class="p">}</span>
 </span></code></pre></div>
+</div>
+</div>
+</div>
 <hr />
 <h3 id="71-explicacion-detallada-por-que-se-usa-cada-propiedad-y-para-que-sirve">7.1 Explicación detallada: ¿Por qué se usa cada propiedad y para qué sirve?</h3>
 <p>A continuación se detalla la justificación técnica de accesibilidad (<abbr title="Web Content Accessibility Guidelines">WCAG</abbr> 2.1 / 2.2) implementada:</p>
