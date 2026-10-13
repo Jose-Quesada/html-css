@@ -347,7 +347,7 @@ Esta práctica pone a prueba la capacidad de trazar el eje X e Y de una tabla co
 3. **El superpoder de `scope`:** Es el núcleo de esta práctica. En el `<thead>`, los `<th>` tienen `scope="col"` (esta celda da título a la columna que tiene debajo). En el `<tbody>` y `<tfoot>`, la primera celda de la izquierda es un `<th>` con `scope="row"` (da título a todos los datos que tiene a su derecha). Así, si un usuario invidente está en la celda "$40k", su lector dirá: *"Software, Ingresos, Europa: $40k"*.
 4. **`colspan`:** Se usa en la primera fila del `thead` para que la celda "Ingresos" se expanda horizontalmente ocupando el espacio de dos columnas secundarias (Norteamérica y Europa).
 
-## Solución: Práctica Global 5 (Sistema de Reservas)
+<!-- ## Solución: Práctica Global 5 (Sistema de Reservas)
 
 Esta solución implementa un formulario sólido, accesible y con validación nativa sin requerir JavaScript.
 
@@ -651,4 +651,4 @@ Este ejercicio demuestra cómo las APIs y los nuevos elementos interactivos de H
 2. **Ventanas Modales (`<dialog>`):** HTML5 incluye su propio sistema de popups accesibles. Permite gestionar el "foco atrapado" (focus trap) y el fondo opaco (backdrop) desde el navegador. El atributo `method="dialog"` en su `<form>` interno permite que al pulsar el botón `submit`, los datos del formulario se validen, no se recargue la página, y se cierre la ventana modal mágicamente.
 3. **Plantillas (`<template>`):** El código dentro de un `<template>` **no se renderiza en pantalla** ni ejecuta scripts/imágenes asociados en la primera carga de la página. Está diseñado para que JavaScript pueda acceder a él, clonarlo, inyectarle los datos de la nueva tarea y volcarlo al DOM de forma supereficiente.
 4. **Atributos Personalizados (`data-*`):** Atributos como `data-estado` o `data-tarea-id` nos permiten incrustar metadatos directamente en las etiquetas HTML. En JavaScript se capturarán fácilmente, sirviendo de puente perfecto entre el diseño visual y la lógica de programación.
-5. **Preparación para APIs:** La etiqueta `<canvas>` se reserva un bloque en memoria para que la *Canvas API* dibuje píxeles con JavaScript, incluyendo un texto alternativo dentro por accesibilidad. Botones como "Vincular GPS" dejan la estructura lista para asociar un evento de tipo `navigator.geolocation.getCurrentPosition()`.
+5. **Preparación para APIs:** La etiqueta `<canvas>` se reserva un bloque en memoria para que la *Canvas API* dibuje píxeles con JavaScript, incluyendo un texto alternativo dentro por accesibilidad. Botones como "Vincular GPS" dejan la estructura lista para asociar un evento de tipo `navigator.geolocation.getCurrentPosition()`. -->
