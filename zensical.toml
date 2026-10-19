@@ -82,6 +82,14 @@ nav = [
     { "15. Ejercicios: soluciones" = "css/15-ejercicios-soluciones.md" },
     { "16. Prácticas" = "css/16-practicas.md" },
   ] },
+  { "Código de ejemplo (CSS)" = [
+    { "03. Modelo de caja" = "css/Código ejemplo/03-modelo-de-caja.md" },
+    { "04. Posicionamiento y z-index" = "css/Código ejemplo/04-posicionamiento-y-z-index.md" },
+    { "05. Flexbox" = "css/Código ejemplo/05-flexbox.md" },
+    { "06. Grid" = "css/Código ejemplo/06-grid.md" },
+    { "09. Fondos, imágenes y decoración" = "css/Código ejemplo/09-fondos-imagenes-decoracion.md" },
+    { "10. Diseño responsivo" = "css/Código ejemplo/10-diseno-responsivo.md" },
+  ] },
 ]
 
 # With the "extra_css" option you can add your own CSS styling to customize

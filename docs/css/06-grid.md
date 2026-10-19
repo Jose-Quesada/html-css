@@ -229,7 +229,7 @@ Uno de los mayores hitos de CSS Grid es permitir crear rejillas responsivas (que
 3. **`auto-fit` vs `auto-fill` (El cálculo dinámico de columnas):**
     - El navegador mide el ancho disponible del contenedor.
     - Divide ese ancho entre `250px` (teniendo en cuenta los gaps).
-    - En una pantalla móvil de `360px` cabe **1 columna** $\rightarrow$ se muestra a ancho completo.
+    - En una pantalla móvil de `360px` cabe **1 columna** → se muestra a ancho completo.
     - En una tablet de `800px` caben **3 columnas** de ~260px.
     - En un monitor de `1920px` caben **7 columnas**.
     - ¡Todo ocurre de forma 100% automática y fluida sin `@media (max-width: ...)`!
@@ -271,6 +271,7 @@ Permite a un item **heredar la definición de pistas** de la cuadrícula padre, 
 .tarjetas {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, auto); /* El padre debe definir explícitamente las filas a heredar */
   gap: 1rem;
 }
 .tarjeta {
@@ -385,9 +386,9 @@ No son rivales: lo normal es **grid fuera, flex dentro**. El mismo bloque de dos
 
 ---
 
-## 11. Ejemplo práctico: dashboard administrativo con Grid Areas, pistas fluidas y Subgrid
+## 11. Ejemplo práctico: dashboard administrativo con Grid Areas y pistas fluidas
 
-El siguiente ejemplo implementa la arquitectura completa de un panel de control profesional bidimensional (2D): maquetación de página con áreas semánticas (`grid-template-areas`), cuadrícula de widgets adaptable sin media queries (`repeat(auto-fit, minmax(...))`), widgets multidimensionales con `span`, y alineación interna de tarjetas mediante `subgrid`.
+El siguiente ejemplo implementa la arquitectura completa de un panel de control profesional bidimensional (2D): maquetación de página con áreas semánticas (`grid-template-areas`), cuadrícula de widgets adaptable sin media queries (`repeat(auto-fit, minmax(...))`), widgets multidimensionales con `span`, y centrado bidimensional con `place-items`.
 
 === "HTML"
 
@@ -451,7 +452,7 @@ El siguiente ejemplo implementa la arquitectura completa de un panel de control 
               </div>
             </article>
     
-            <!-- Tarjeta con Subgrid para alinear títulos y pies -->
+            <!-- Tarjeta de alerta informativa con distribución vertical -->
             <article class="widget widget-alerta">
               <h3>Copia de Seguridad Semanal</h3>
               <p>Completada con éxito en almacenamiento frío S3. Total: 1.4 TB transferidos.</p>
@@ -707,7 +708,7 @@ A continuación se analizan en profundidad las decisiones técnicas de CSS Grid 
     - [ ] El contenido largo no infla las pistas: uso **`minmax(0, 1fr)`** donde hace falta.
     - [ ] El spacing sale de **`gap`**, no de márgenes entre items.
 
-## 12. Autoevaluación rápida
+## 13. Autoevaluación rápida
 
 1. ¿Cuántas columnas crea `repeat(auto-fit, minmax(200px, 1fr))` en un contenedor de 1000px con `gap: 20px`? (Pista: 200n + 20(n−1) ≤ 1000.)
 2. Diferencia entre `grid-column: 2 / 4` y `grid-column: 2 / span 2`.

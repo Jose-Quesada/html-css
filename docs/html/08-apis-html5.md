@@ -591,7 +591,7 @@ A continuación se examina minuciosamente la arquitectura de la mini-aplicación
 
 !!! success "Practica esta unidad"
 
-    - Enunciados: [Ejercicios de la Unidad 8 — Elementos interactivos y APIs nativas](09-ejercicios.md#ejercicio-7-formulario-de-matricula) (retos `U8.1` a `U8.4`).
+    - Enunciados: [Ejercicios de la Unidad 8 — Elementos interactivos y APIs nativas](09-ejercicios.md#ej-u8) (retos `U8.1` a `U8.4`).
     - Soluciones: [Soluciones de la Unidad 8](10-ejercicios-soluciones.md#sol-u8).
 
 *[API]: Application Programming Interface

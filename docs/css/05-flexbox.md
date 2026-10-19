@@ -40,18 +40,53 @@ row (default):          column:
 ↓ cross axis            → cross axis
 ```
 
-```mermaid
-flowchart TD
-    subgraph MODO_ROW ["flex-direction: row (Comportamiento habitual en fila)"]
-        R_MAIN["Eje Principal (Main Axis) ➔ Horizontal<br>Propiedad de reparto: justify-content"]
-        R_CROSS["Eje Transversal (Cross Axis) ⬇ Vertical<br>Propiedad de alineación: align-items"]
-    end
+<div class="esquema-grid-2">
+  <div class="esquema-panel esquema-panel--blue">
+    <div class="esquema-panel__header">
+      <h4 class="esquema-panel__title">➡️ flex-direction: row</h4>
+      <p class="esquema-panel__sub">Comportamiento habitual en fila (horizontal).</p>
+    </div>
+    <div class="esquema-items">
+      <div class="esquema-card">
+        <div class="esquema-card__header">
+          <strong>Eje Principal (Main Axis) ➔ Horizontal</strong>
+          <span class="tag tag--defecto">Left to Right</span>
+        </div>
+        <p>Propiedad de reparto del espacio libre: <code>justify-content</code>.</p>
+      </div>
+      <div class="esquema-card">
+        <div class="esquema-card__header">
+          <strong>Eje Transversal (Cross Axis) ⬇ Vertical</strong>
+          <span class="tag tag--defecto">Top to Bottom</span>
+        </div>
+        <p>Propiedad de alineación geométrica: <code>align-items</code>.</p>
+      </div>
+    </div>
+  </div>
 
-    subgraph MODO_COL ["flex-direction: column (Distribución en columna)"]
-        C_MAIN["Eje Principal (Main Axis) ⬇ Vertical<br>Propiedad de reparto: justify-content"]
-        C_CROSS["Eje Transversal (Cross Axis) ➔ Horizontal<br>Propiedad de alineación: align-items"]
-    end
-```
+  <div class="esquema-panel esquema-panel--purple">
+    <div class="esquema-panel__header">
+      <h4 class="esquema-panel__title">⬇️ flex-direction: column</h4>
+      <p class="esquema-panel__sub">Distribución en columna (vertical).</p>
+    </div>
+    <div class="esquema-items">
+      <div class="esquema-card">
+        <div class="esquema-card__header">
+          <strong>Eje Principal (Main Axis) ⬇ Vertical</strong>
+          <span class="tag tag--hibrido">Top to Bottom</span>
+        </div>
+        <p>Propiedad de reparto del espacio libre: <code>justify-content</code>.</p>
+      </div>
+      <div class="esquema-card">
+        <div class="esquema-card__header">
+          <strong>Eje Transversal (Cross Axis) ➔ Horizontal</strong>
+          <span class="tag tag--hibrido">Left to Right</span>
+        </div>
+        <p>Propiedad de alineación geométrica: <code>align-items</code>.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 El ==main axis== **reparte** el espacio; el transversal **alinea**.
 
@@ -124,8 +159,8 @@ Para entender el atajo `flex: grow shrink basis`, hay que desgranar qué hace ca
 
     - Si un contenedor mide `1000px` y tiene dos hijos con `flex-basis: 300px`, la suma de bases es `600px`. Sobran `400px` de espacio libre en blanco.
     - Si el Hijo 1 tiene `flex-grow: 1` y el Hijo 2 tiene `flex-grow: 3`, los `400px` sobrantes se dividen en 4 partes (1+3 = 4 partes de 100px cada una).
-    - El Hijo 1 se queda con 1 parte (+100px) $\rightarrow$ Ancho final: `400px`.
-    - El Hijo 2 se queda con 3 partes (+300px) $\rightarrow$ Ancho final: `600px`.
+    - El Hijo 1 se queda con 1 parte (+100px) → Ancho final: `400px`.
+    - El Hijo 2 se queda con 3 partes (+300px) → Ancho final: `600px`.
     - Si `flex-grow: 0` (el valor por defecto), los elementos **no crecen** y el espacio libre queda vacío a la derecha.
 3. **`flex-shrink` (El sacrificio ante la estrechez):**
    Define cómo se comprimen los elementos cuando el contenedor es **demasiado pequeño** y no caben todos.

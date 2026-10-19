@@ -51,18 +51,34 @@
 .mermaid {
   text-align: center;
   margin: 2rem auto;
-  padding: 1.5rem;
+  padding: 1.5rem 1rem;
   background-color: var(--md-code-bg-color, #f8fafc);
   border: 1px solid var(--md-default-fg-color--lightest, #e2e8f0);
   border-radius: 0.75rem;
   box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.05);
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mermaid svg {
-  max-width: 100% !important;
+  max-width: 100%;
   height: auto !important;
   font-family: var(--md-text-font, inherit) !important;
+  display: inline-block;
+}
+
+.mermaid svg text,
+.mermaid svg .nodeLabel,
+.mermaid svg .edgeLabel {
+  font-size: 14.5px !important;
+  font-family: var(--md-text-font, inherit) !important;
+}
+
+.mermaid svg .node rect,
+.mermaid svg .node circle,
+.mermaid svg .node polygon {
+  rx: 6px;
+  ry: 6px;
 }
 
 /* 4. Listas de Definiciones (Definition Lists dl / dt / dd) */
@@ -248,6 +264,37 @@
   color: #7dd3fc;
 }
 
+.badge-blue {
+  background-color: rgba(29, 78, 216, 0.12);
+  color: #1d4ed8;
+  border: 1px solid rgba(29, 78, 216, 0.25);
+}
+
+.badge-green {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: #047857;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.badge-amber {
+  background-color: rgba(245, 158, 11, 0.12);
+  color: #b45309;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.badge-purple {
+  background-color: rgba(168, 85, 247, 0.12);
+  color: #7e22ce;
+  border: 1px solid rgba(168, 85, 247, 0.25);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0 1.5rem 0;
+}
+
 [data-md-color-scheme="slate"] .badge-ra {
   background-color: rgba(52, 211, 153, 0.2);
   color: #6ee7b7;
@@ -256,6 +303,26 @@
 [data-md-color-scheme="slate"] .badge-exam {
   background-color: rgba(248, 113, 113, 0.2);
   color: #fca5a5;
+}
+
+[data-md-color-scheme="slate"] .badge-blue {
+  background-color: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+}
+
+[data-md-color-scheme="slate"] .badge-green {
+  background-color: rgba(52, 211, 153, 0.2);
+  color: #6ee7b7;
+}
+
+[data-md-color-scheme="slate"] .badge-amber {
+  background-color: rgba(251, 191, 36, 0.2);
+  color: #fde68a;
+}
+
+[data-md-color-scheme="slate"] .badge-purple {
+  background-color: rgba(192, 132, 252, 0.2);
+  color: #e9d5ff;
 }
 
 /* 10. Contenedor de visualización / Mockup de navegador para ejemplos */
@@ -291,3 +358,164 @@
   padding: 1.25rem;
   background-color: var(--md-default-bg-color, #ffffff);
 }
+
+/* ==========================================================================
+   11. Esquemas Conceptuales Didácticos (Tarjetas y Arquitectura Visual)
+   ========================================================================== */
+.esquema-conceptual {
+  margin: 1.75rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.esquema-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.esquema-panel {
+  background: var(--md-code-bg-color, #f8fafc);
+  border: 1px solid var(--md-default-fg-color--lightest, #cbd5e1);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.esquema-panel--blue {
+  border-top: 4px solid #2563eb;
+  background-color: rgba(37, 99, 235, 0.03);
+}
+
+.esquema-panel--green {
+  border-top: 4px solid #16a34a;
+  background-color: rgba(22, 163, 74, 0.03);
+}
+
+.esquema-panel--amber {
+  border-top: 4px solid #d97706;
+  background-color: rgba(217, 119, 6, 0.03);
+}
+
+.esquema-panel--purple {
+  border-top: 4px solid #9333ea;
+  background-color: rgba(147, 51, 234, 0.03);
+}
+
+.esquema-panel--rose {
+  border-top: 4px solid #e11d48;
+  background-color: rgba(225, 29, 72, 0.03);
+}
+
+.esquema-panel__header {
+  border-bottom: 1px solid var(--md-default-fg-color--lightest, #e2e8f0);
+  padding-bottom: 0.6rem;
+  margin-bottom: 0.25rem;
+}
+
+.esquema-panel__title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--md-default-fg-color, #0f172a);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.25rem 0;
+}
+
+.esquema-panel__sub {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.esquema-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.esquema-card {
+  background: var(--md-default-bg-color, #ffffff);
+  border: 1px solid var(--md-default-fg-color--lightest, #e2e8f0);
+  border-radius: 0.5rem;
+  padding: 0.85rem 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.esquema-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.35rem;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.esquema-card code {
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.2rem 0.45rem;
+  background: var(--md-code-bg-color, #f1f5f9);
+  color: var(--md-primary-fg-color, #1d4ed8);
+  border-radius: 0.3rem;
+}
+
+.esquema-card p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--md-default-fg-color, #475569);
+  line-height: 1.5;
+}
+
+.tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.tag--defecto {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+
+.tag--hibrido {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.tag--alerta {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+[data-md-color-scheme="slate"] .esquema-panel {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+[data-md-color-scheme="slate"] .esquema-panel__title {
+  color: #f1f5f9;
+}
+
+[data-md-color-scheme="slate"] .esquema-panel__sub {
+  color: #94a3b8;
+}
+
+[data-md-color-scheme="slate"] .esquema-card {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+[data-md-color-scheme="slate"] .esquema-card p {
+  color: #cbd5e1;
+}
+

@@ -398,7 +398,7 @@ A continuación se profundiza en las razones técnicas, de diseño y de accesibi
 
 !!! success "Practica esta unidad"
 
-    - Enunciados: [Ejercicios de la Unidad 4 — Multimedia en HTML5](09-ejercicios.md#u61-alta-en-el-boletin) — cuatro retos (`U4.1` a `U4.4`) — del más básico al más avanzado.
+    - Enunciados: [Ejercicios de la Unidad 4 — Multimedia en HTML5](09-ejercicios.md#ej-u4) — cuatro retos (`U4.1` a `U4.4`) — del más básico al más avanzado.
     - Comprueba tu trabajo con [las soluciones de esta unidad](10-ejercicios-soluciones.md#sol-u4).
 
 *[WCAG]: Web Content Accessibility Guidelines

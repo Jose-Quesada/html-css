@@ -17,6 +17,10 @@ Todo elemento renderizado es una **caja rectangular** en el flujo del documento.
     - Sumar un ancho sumando `padding` y `border` (unidad 01).
     - Usar `width`, `height` y `margin`.
 
+!!! tip "Ejemplos de código completos HTML + CSS"
+
+    Hemos preparado un banco completo de código interactivo con ejemplos y disecciones técnicas para cada elemento del tema en: **[Código de ejemplo — 03. Modelo de caja](Código ejemplo/03-modelo-de-caja.md)**.
+
 ## 1. Anatomía de la caja
 
 Las **cuatro capas** concéntricas forman el ==modelo de caja==:

@@ -541,15 +541,15 @@ blockquote.cita::before {
 
 Desglose de la puntuación en la tupla `(Inline, ID, Clase/Attr/Pseudo-clase, Elemento/Pseudo-elem)`:
 
-* **Selector A:** `header nav.principal ul li a:hover` $\rightarrow$ `(0, 0, 2, 4)`
+* **Selector A:** `header nav.principal ul li a:hover` → `(0, 0, 2, 4)`
   *(0 IDs, 2 clases/pseudo `[.principal, :hover]`, 4 elementos `[header, nav, ul, li, a]`)*
-* **Selector B:** `#usuario-perfil .datos > span` $\rightarrow$ `(0, 1, 1, 1)`
+* **Selector B:** `#usuario-perfil .datos > span` → `(0, 1, 1, 1)`
   *(1 ID `[#usuario-perfil]`, 1 clase `[.datos]`, 1 elemento `[span]`)*
-* **Selector C:** `body main article p` $\rightarrow$ `(0, 0, 0, 4)`
+* **Selector C:** `body main article p` → `(0, 0, 0, 4)`
   *(0 IDs, 0 clases, 4 elementos `[body, main, article, p]`)*
-* **Selector D:** `button[type="submit"]:not(:disabled)` $\rightarrow$ `(0, 0, 2, 1)`
+* **Selector D:** `button[type="submit"]:not(:disabled)` → `(0, 0, 2, 1)`
   *(0 IDs, 2 attr/pseudo `[[type=submit], :disabled - :not no suma pero sí su argumento]`, 1 elemento `[button]`)*
-* **Selector E:** `#alerta` $\rightarrow$ `(0, 1, 0, 0)`
+* **Selector E:** `#alerta` → `(0, 1, 0, 0)`
   *(1 ID `[#alerta]`, 0 clases, 0 elementos)*
 
 **Ordenación de menor a mayor prioridad en la cascada:**
@@ -1538,6 +1538,7 @@ footer {
 .grid-tarjetas {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, auto); /* Necesario para que el subgrid herede las pistas del padre */
   gap: 1.5rem;
 }
 

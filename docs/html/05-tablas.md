@@ -476,7 +476,7 @@ A continuación se realiza una disección técnica de cada etiqueta y atributo d
 
 !!! success "Practica esta unidad"
 
-    - Enunciados: [Ejercicios de la Unidad 5 — Tablas de datos](09-ejercicios.md#u71-encabezados-sin-saltos) — cuatro retos (`U5.1` a `U5.4`) — del más básico al más avanzado.
+    - Enunciados: [Ejercicios de la Unidad 5 — Tablas de datos](09-ejercicios.md#ej-u5) — cuatro retos (`U5.1` a `U5.4`) — del más básico al más avanzado.
     - Comprueba tu trabajo con [las soluciones de esta unidad](10-ejercicios-soluciones.md#sol-u5).
 
 *[HTML]: HyperText Markup Language

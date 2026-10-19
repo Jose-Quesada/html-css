@@ -27,6 +27,9 @@ fecha: "2026-09-06"
 | `fixed` | Como `absolute`, pero respecto al **viewport** (no se mueve al hacer scroll). | Sí |
 | ==`sticky`== | Híbrido: se comporta como `relative` hasta alcanzar un umbral, luego «se pega» como `fixed` dentro de su contenedor. | No |
 
+!!! info "Enlace con explicaciones y ejemplos"
+    https://lenguajecss.com/css/posicionamiento/position/
+
 ## 2. Bloque contenedor (containing block)
 
 El elemento de referencia para `absolute`/`fixed` y para porcentajes de offsets:
