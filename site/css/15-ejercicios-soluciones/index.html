@@ -4788,7 +4788,7 @@
   <em>(1 ID <code>[#alerta]</code>, 0 clases, 0 elementos)</em></li>
 </ul>
 <p><strong>Ordenación de menor a mayor prioridad en la cascada:</strong>
-$<span class="arithmatex">\(\text{C (0,0,0,4)} &lt; \text{D (0,0,2,1)} &lt; \text{A (0,0,2,4)} &lt; \text{E (0,1,0,0)} &lt; \text{B (0,1,1,1)}\)</span>$</p>
+<code>C (0,0,0,4) &lt; D (0,0,2,1) &lt; A (0,0,2,4) &lt; E (0,1,0,0) &lt; B (0,1,1,1)</code></p>
 <ul>
 <li><strong>Puntos clave:</strong> Un solo ID en la columna B (ej. Selector E) supera a cualquier número de clases en la columna C (como el Selector A con 2 clases y 4 elementos).</li>
 <li><strong>Error frecuente:</strong> Sumar los números en un único valor decimal (ej. pensar que 2 clases y 4 elementos = "24 puntos" y 1 ID = "10 puntos"). No hay base decimal en la especificidad.</li>
@@ -4833,10 +4833,10 @@ $<span class="arithmatex">\(\text{C (0,0,0,4)} &lt; \text{D (0,0,2,1)} &lt; \tex
 <ul>
 <li><strong>Datos de la caja:</strong> <code>width: 320px</code>, <code>padding: 24px</code>, <code>border: 6px</code>, <code>margin: 30px</code>.</li>
 <li><strong>Fórmula de ancho total renderizado (visual):</strong>
-  $<span class="arithmatex">\(\text{Ancho Visual} = \text{width} + \text{padding-left} + \text{padding-right} + \text{border-left} + \text{border-right}\)</span>$
-  $<span class="arithmatex">\(\text{Ancho Visual} = 320 + 24 + 24 + 6 + 6 = \mathbf{380\text{ px}}\)</span>$</li>
+  <code>Ancho Visual = width + padding-left + padding-right + border-left + border-right</code><br />
+<code>Ancho Visual = 320 + 24 + 24 + 6 + 6 = 380px</code></li>
 <li><strong>Fórmula de ocupación total en el flujo (con márgenes):</strong>
-  $<span class="arithmatex">\(\text{Espacio Total} = \text{Ancho Visual} + \text{margin-left} + \text{margin-right} = 380 + 30 + 30 = \mathbf{440\text{ px}}\)</span>$</li>
+  <code>Espacio Total = Ancho Visual + margin-left + margin-right = 380 + 30 + 30 = 440px</code></li>
 <li><strong>Puntos clave:</strong> En <code>content-box</code> (valor inicial de CSS), la propiedad <code>width</code> solo delimita el área interior del contenido; todo padding y borde se suma por fuera.</li>
 <li><strong>Error frecuente:</strong> Creer que un elemento con <code>width: 320px</code> y <code>padding: 24px</code> medirá 320px en la pantalla.</li>
 </ul>
@@ -4894,10 +4894,10 @@ $<span class="arithmatex">\(\text{C (0,0,0,4)} &lt; \text{D (0,0,2,1)} &lt; \tex
 <ul>
 <li><strong>Caso 1:</strong> <code>h2</code> (<code>margin-bottom: 30px</code>) y <code>p</code> (<code>margin-top: 20px</code>).</li>
 <li>En el colapso vertical, prevalece el margen positivo mayor:
-  $<span class="arithmatex">\(\text{Espacio resultante} = \max(30\text{px}, 20\text{px}) = \mathbf{30\text{ px}}\)</span>$</li>
-<li><strong>Caso 2:</strong> Si ambos tuvieran 30px, el espacio sigue siendo <span class="arithmatex">\(\max(30, 30) = \mathbf{30\text{ px}}\)</span>.</li>
+  <code>Espacio resultante = max(30px, 20px) = 30px</code></li>
+<li><strong>Caso 2:</strong> Si ambos tuvieran 30px, el espacio sigue siendo <code>max(30px, 30px) = 30px</code>.</li>
 <li><strong>Caso 3:</strong> Si el párrafo tuviera <code>margin-top: -10px</code>:
-  $<span class="arithmatex">\(\text{Espacio resultante} = 30\text{px} + (-10\text{px}) = \mathbf{20\text{ px}}\)</span>$</li>
+  <code>Espacio resultante = 30px + (-10px) = 20px</code></li>
 <li><strong>Puntos clave:</strong> El colapso solo ocurre en el eje vertical (bloque) entre hermanos en el flujo normal; los márgenes horizontales jamás colapsan (siempre se suman).</li>
 <li><strong>Error frecuente:</strong> Sumar 30 + 20 y esperar 50px de separación entre títulos y párrafos.</li>
 </ul>

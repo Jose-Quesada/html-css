@@ -57,14 +57,20 @@ flowchart TD
 
 La unidad ==`fr`== (*fractional unit*) representa una **fracción del espacio libre positivo remanente** tras deducir las pistas de tamaño fijo (`px`, `rem`, etc.) y los canalones de separación (`gap`):
 
-$$\text{Espacio a repartir} = \text{Ancho total} - \sum \text{Pistas fijas} - \sum \text{Gaps}$$
+```text
+Espacio a repartir = Ancho total - Suma(Pistas fijas) - Suma(Gaps)
+```
 
 Si declaramos `grid-template-columns: 200px 1fr 2fr;` en un contenedor de `1100px` con `gap: 0`:
-1. Pistas fijas: `200px`.
-2. Espacio libre restante: $1100\text{px} - 200\text{px} = 900\text{px}$.
-3. Suma de fracciones: $1\text{fr} + 2\text{fr} = 3\text{fr}$.
-4. Valor de $1\text{fr} = 900\text{px} / 3 = 300\text{px}$.
-5. Columna 1: `200px` | Columna 2: `300px` | Columna 3: `600px`.
+
+1. **Pistas fijas:** `200px`.
+2. **Espacio libre restante:** `1100px - 200px = 900px`.
+3. **Suma de fracciones:** `1fr + 2fr = 3fr`.
+4. **Valor de 1fr:** `900px / 3 = 300px`.
+5. **Resultado final:**
+    - Columna 1: `200px`
+    - Columna 2: `300px` (`1fr`)
+    - Columna 3: `600px` (`2fr`)
 
 ### Código de Ejemplo
 
@@ -202,6 +208,11 @@ Si declaramos `grid-template-columns: 200px 1fr 2fr;` en un contenedor de `1100p
     2. **Cálculo de `grid-template-columns: 200px 1fr 2fr`:** Observa cómo la primera columna no varía nunca de tamaño (mide siempre `200px`). El resto del ancho disponible se divide en 3 fracciones: la central recibe 1 parte y la derecha recibe 2 partes exactas.
     3. **Pistas de fila con `repeat(2, minmax(90px, auto))`:** Define 2 filas que como mínimo miden 90px de alto, pero que pueden crecer libremente (`auto`) si el texto interior lo requiere, evitando desbordamientos de contenido.
 
+!!! warning "Analiza"
+
+    1. ¿Por qué usamos flexbox dentro del grid? ¿Qué función tiene?
+    2. Se han creado solo 2 filas con la plantilla de grid proporcionada. ¿Qué ocurre si añadimos una tercera? ¿Que diferencia hay con `grid-auto-rows: minmax(90px, auto);`?
+
 ---
 
 ## 2. Posicionamiento por Líneas: `grid-column`, `grid-row`, `span` y Líneas Negativas
@@ -213,7 +224,7 @@ Las pistas de una cuadrícula están delimitadas por **líneas divisorias (*Grid
 ```text
  (1)             (2)             (3)             (4)  <- Líneas Positivas
 ┌───────────────┬───────────────┬───────────────┐
-│   Columna 1   │   Columna 2   │   Columna 3   │
+│   Columna 1  │   Columna 2  │   Columna 3  │
 └───────────────┴───────────────┴───────────────┘
 (-4)            (-3)            (-2)            (-1)  <- Líneas Negativas
 ```
@@ -384,6 +395,10 @@ Las pistas de una cuadrícula están delimitadas por **líneas divisorias (*Grid
     2. **Autocolocación de los hermanos:** Las cuatro tarjetas secundarias se van ubicando de forma automática en los huecos restantes (2 celdas en la primera fila, 2 en la segunda).
     3. **El poder de `grid-column: 1 / -1`:** No necesitas saber si la cuadrícula tiene 4, 8 o 12 columnas. La línea `-1` referencia siempre el límite final derecho, expandiendo la tarjeta por todo el ancho sin riesgo de descuadre.
 
+
+!!! warning "Modifica"
+
+    1. Si añadimos 2 tarjetas nuevas de 1x1, ¿dónde se sitúan?
 ---
 
 ## 3. Cuadrícula Implícita y Flujo Denso: `grid-auto-flow: dense`
@@ -415,6 +430,9 @@ graph TD
 !!! danger "Advertencia de Accesibilidad en `dense`"
 
     El modo `dense` reordena los elementos **visualmente**, pero **no altera el orden del DOM**. Una persona que navegue con lector de pantalla o tabulador recorrerá los elementos en el orden del código HTML, saltando de adelante hacia atrás en pantalla. Documenta y utiliza `dense` solo para galerías puramente visuales (imágenes, portfolios).
+
+
+
 
 ### Código de Ejemplo
 
@@ -546,6 +564,11 @@ graph TD
     1. **Sin `dense` (modo normal):** Si cambias a `grid-auto-flow: row`, tras colocar el Item 1 y el Item 2 en la primera fila, el Item 3 (que ocupa 2 columnas) no cabe en la única columna restante y salta a la fila 2, dejando un espacio vacío inservible en la fila 1. Lo mismo ocurre en la fila 2 con el Item 5.
     2. **Con `grid-auto-flow: row dense`:** El motor de layout detecta los huecos vacíos en las filas anteriores y busca hacia adelante en el código HTML. Al ver que el Item 4 y el Item 6 solo miden 1 columna, los «teletransporta» visualmente hacia atrás para rellenar esos huecos, logrando un mosaico compacto sin fisuras.
 
+
+!!! warning "Modifica"
+
+    1. Desactiva la opción "dense", ¿qué ocurre con los elementos mostrados?
+
 ---
 
 ## 4. Maquetación con Áreas Nombradas: `grid-template-areas` y Responsive Trivial
@@ -601,7 +624,7 @@ Reglas obligatorias de la sintaxis:
         <!-- ÁREA CABECERA -->
         <header class="bloque-cabecera">
           <h2>Panel de Administración</h2>
-          <span class="usuario">Admin · DominIA</span>
+          <span class="usuario">Admin · DominF3</span>
         </header>
 
         <!-- ÁREA SIDEBAR -->
@@ -632,7 +655,7 @@ Reglas obligatorias de la sintaxis:
 
         <!-- ÁREA PIE -->
         <footer class="bloque-pie">
-          <p>&copy; 2026 DominIA Academy · Todos los derechos reservados</p>
+          <p>&copy; 2026 DominFe Academy · Todos los derechos reservados</p>
         </footer>
       </div>
     </body>

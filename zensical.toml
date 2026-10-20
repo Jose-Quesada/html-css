@@ -388,9 +388,6 @@ custom_checkbox = true
 generic = true
 
 
-# Activar el motor de renderizado matemático (MathJax)
-[[project.javascript]]
-url = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"
 
 
 # Para activar los iconos y emojis

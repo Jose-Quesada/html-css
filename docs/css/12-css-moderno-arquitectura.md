@@ -629,7 +629,7 @@ A continuación se analizan los principios arquitectónicos y las especificacion
 #### 1. `@layer reset, base, componentes, utilidades;`
 - **¿Por qué declararlo en la primera línea?** Establece el orden de precedencia inmutable de la cascada para todo el proyecto.
 - **La jerarquía resultante:**
-  $$\text{reset} < \text{base} < \text{componentes} < \text{utilidades} < \text{estilos sin capa}$$
+  `reset < base < componentes < utilidades < estilos sin capa`
 
 ```mermaid
 flowchart TD

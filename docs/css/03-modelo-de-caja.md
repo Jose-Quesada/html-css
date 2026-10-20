@@ -554,10 +554,10 @@ A continuación se realiza una disección técnica de cada regla y valor del mod
 #### 1. `box-sizing: border-box` en el reset
 - **¿Para qué sirve?** Modifica la ecuación fundamental del modelo de caja del navegador.
 - **Fórmula matemática estándar (`content-box`):**
-  $$\text{Ancho total} = \text{width} + \text{padding} + \text{border}$$
+  `Ancho total = width + padding + border`
 - **Fórmula con `border-box`:**
-  $$\text{Ancho total} = \text{width}$$
-- **Por qué es indispensable aquí:** Cuando a `.caja-producto__boton` le asignamos `width: 100%` y un `padding-inline: 1.25rem`, con `content-box` el botón se saldría lateralmente de la tarjeta por $2 \times 1.25\text{ rem} = 2.5\text{ rem}$. Con `border-box`, el navegador encoge el área de contenido para que la suma total coincida exactamente con el 100% del contenedor.
+  `Ancho total = width`
+- **Por qué es indispensable aquí:** Cuando a `.caja-producto__boton` le asignamos `width: 100%` y un `padding-inline: 1.25rem`, con `content-box` el botón se saldría lateralmente de la tarjeta por `2 × 1.25rem = 2.5rem`. Con `border-box`, el navegador encoge el área de contenido para que la suma total coincida exactamente con el 100% del contenedor.
 
 #### 2. `display: flow-root` y contención BFC
 - **¿Para qué sirve?** Establece un nuevo **Contexto de Formateo de Bloque** (*Block Formatting Context - BFC*).

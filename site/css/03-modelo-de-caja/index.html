@@ -3122,10 +3122,10 @@
 <ul>
 <li><strong>¿Para qué sirve?</strong> Modifica la ecuación fundamental del modelo de caja del navegador.</li>
 <li><strong>Fórmula matemática estándar (<code>content-box</code>):</strong>
-  $<span class="arithmatex">\(\text{Ancho total} = \text{width} + \text{padding} + \text{border}\)</span>$</li>
+  <code>Ancho total = width + padding + border</code></li>
 <li><strong>Fórmula con <code>border-box</code>:</strong>
-  $<span class="arithmatex">\(\text{Ancho total} = \text{width}\)</span>$</li>
-<li><strong>Por qué es indispensable aquí:</strong> Cuando a <code>.caja-producto__boton</code> le asignamos <code>width: 100%</code> y un <code>padding-inline: 1.25rem</code>, con <code>content-box</code> el botón se saldría lateralmente de la tarjeta por <span class="arithmatex">\(2 \times 1.25\text{ rem} = 2.5\text{ rem}\)</span>. Con <code>border-box</code>, el navegador encoge el área de contenido para que la suma total coincida exactamente con el 100% del contenedor.</li>
+  <code>Ancho total = width</code></li>
+<li><strong>Por qué es indispensable aquí:</strong> Cuando a <code>.caja-producto__boton</code> le asignamos <code>width: 100%</code> y un <code>padding-inline: 1.25rem</code>, con <code>content-box</code> el botón se saldría lateralmente de la tarjeta por <code>2 × 1.25rem = 2.5rem</code>. Con <code>border-box</code>, el navegador encoge el área de contenido para que la suma total coincida exactamente con el 100% del contenedor.</li>
 </ul>
 <h4 id="2-display-flow-root-y-contencion-bfc">2. <code>display: flow-root</code> y contención <abbr title="Block Formatting Context">BFC</abbr></h4>
 <ul>

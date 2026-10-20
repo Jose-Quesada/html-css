@@ -422,12 +422,14 @@ Aquí es donde entra la combinación de ambos atributos:
 #### El cálculo mental que realiza el navegador
 Con esta información, el navegador realiza una multiplicación matemática instantánea:
 
-$$\text{Píxeles necesarios} = \text{Ancho previsto en CSS (de sizes)} \times \text{Densidad de pantalla (DPR)}$$
+```text
+Píxeles necesarios = Ancho previsto en CSS (de sizes) × Densidad de pantalla (DPR)
+```
 
 Por ejemplo, en un móvil de 400 px con pantalla Retina (DPR 2x):
 
 - De `sizes` obtiene que la imagen ocupa `100vw` = 400 px de ancho.
-- Multiplica por su densidad física: $400 \times 2 = 800\text{ px}$.
+- Multiplica por su densidad física: `400 × 2 = 800 px`.
 - Consulta `srcset` y descarga exactamente la versión `zapatillas-800w.jpg`. 
 
 Ni descarga la versión pequeña de 400w (que se vería borrosa), ni desperdicia datos con la de 1200w. **El atributo `src` clásico sigue siendo obligatorio** como respaldo para navegadores antiguos que no reconozcan `srcset`.

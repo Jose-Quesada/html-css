@@ -553,7 +553,7 @@ Desglose de la puntuación en la tupla `(Inline, ID, Clase/Attr/Pseudo-clase, El
   *(1 ID `[#alerta]`, 0 clases, 0 elementos)*
 
 **Ordenación de menor a mayor prioridad en la cascada:**
-$$\text{C (0,0,0,4)} < \text{D (0,0,2,1)} < \text{A (0,0,2,4)} < \text{E (0,1,0,0)} < \text{B (0,1,1,1)}$$
+`C (0,0,0,4) < D (0,0,2,1) < A (0,0,2,4) < E (0,1,0,0) < B (0,1,1,1)`
 
 * **Puntos clave:** Un solo ID en la columna B (ej. Selector E) supera a cualquier número de clases en la columna C (como el Selector A con 2 clases y 4 elementos).
 * **Error frecuente:** Sumar los números en un único valor decimal (ej. pensar que 2 clases y 4 elementos = "24 puntos" y 1 ID = "10 puntos"). No hay base decimal en la especificidad.
@@ -606,10 +606,10 @@ form:has(input[type="checkbox"]:required:checked) {
 
 * **Datos de la caja:** `width: 320px`, `padding: 24px`, `border: 6px`, `margin: 30px`.
 * **Fórmula de ancho total renderizado (visual):**
-  $$\text{Ancho Visual} = \text{width} + \text{padding-left} + \text{padding-right} + \text{border-left} + \text{border-right}$$
-  $$\text{Ancho Visual} = 320 + 24 + 24 + 6 + 6 = \mathbf{380\text{ px}}$$
+  `Ancho Visual = width + padding-left + padding-right + border-left + border-right`  
+  `Ancho Visual = 320 + 24 + 24 + 6 + 6 = 380px`
 * **Fórmula de ocupación total en el flujo (con márgenes):**
-  $$\text{Espacio Total} = \text{Ancho Visual} + \text{margin-left} + \text{margin-right} = 380 + 30 + 30 = \mathbf{440\text{ px}}$$
+  `Espacio Total = Ancho Visual + margin-left + margin-right = 380 + 30 + 30 = 440px`
 * **Puntos clave:** En `content-box` (valor inicial de CSS), la propiedad `width` solo delimita el área interior del contenido; todo padding y borde se suma por fuera.
 * **Error frecuente:** Creer que un elemento con `width: 320px` y `padding: 24px` medirá 320px en la pantalla.
 
@@ -668,10 +668,10 @@ form:has(input[type="checkbox"]:required:checked) {
 
 * **Caso 1:** `h2` (`margin-bottom: 30px`) y `p` (`margin-top: 20px`).
   * En el colapso vertical, prevalece el margen positivo mayor:
-  $$\text{Espacio resultante} = \max(30\text{px}, 20\text{px}) = \mathbf{30\text{ px}}$$
-* **Caso 2:** Si ambos tuvieran 30px, el espacio sigue siendo $\max(30, 30) = \mathbf{30\text{ px}}$.
+  `Espacio resultante = max(30px, 20px) = 30px`
+* **Caso 2:** Si ambos tuvieran 30px, el espacio sigue siendo `max(30px, 30px) = 30px`.
 * **Caso 3:** Si el párrafo tuviera `margin-top: -10px`:
-  $$\text{Espacio resultante} = 30\text{px} + (-10\text{px}) = \mathbf{20\text{ px}}$$
+  `Espacio resultante = 30px + (-10px) = 20px`
 * **Puntos clave:** El colapso solo ocurre en el eje vertical (bloque) entre hermanos en el flujo normal; los márgenes horizontales jamás colapsan (siempre se suman).
 * **Error frecuente:** Sumar 30 + 20 y esperar 50px de separación entre títulos y párrafos.
 
