@@ -519,3 +519,17 @@
   color: #cbd5e1;
 }
 
+/* 12. Estabilidad de cabecera y pestañas de contenido */
+.md-header {
+  z-index: 100;
+}
+
+.md-header__title {
+  overflow: hidden;
+}
+
+.tabbed-set {
+  margin: 1.25rem 0;
+}
+
+
