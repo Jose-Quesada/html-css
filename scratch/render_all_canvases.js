@@ -139,10 +139,17 @@
     const headY = by + 32;
     drawRoundRect(ctx, bx, headY, bw, 46, 0, '#0f172a');
     drawText(ctx, '⚡ DominIA Academy', bx + 20, headY + 28, 'bold 14px system-ui', '#38bdf8');
-    drawText(ctx, 'Inicio    Artículos    Lecciones    Recursos', bx + 180, headY + 28, '11px system-ui', '#e2e8f0');
+    drawText(ctx, 'Inicio    Artículos    Lecciones    Recursos', bx + 185, headY + 28, '11px system-ui', '#cbd5e1');
 
-    ctx.font = '16px system-ui'; ctx.fillText('🔔', bx + bw - 40, headY + 28);
-    ctx.beginPath(); ctx.arc(bx + bw - 32, headY + 16, 5, 0, Math.PI*2); ctx.fillStyle = '#ef4444'; ctx.fill();
+    // Campana de notificaciones con insignia numérica (position: absolute)
+    const bellX = bx + bw - 35, bellY = headY + 28;
+    ctx.font = '16px system-ui';
+    ctx.fillText('🔔', bellX, bellY);
+    ctx.beginPath();
+    ctx.arc(bellX + 7, bellY - 11, 6, 0, Math.PI * 2);
+    ctx.fillStyle = '#ef4444';
+    ctx.fill();
+    drawText(ctx, '3', bellX + 7, bellY - 8, 'bold 7px system-ui', '#ffffff', 'center');
 
     const contY = headY + 60;
     drawText(ctx, 'Guía Maestra: Sticky vs Fixed en CSS', bx + 30, contY + 20, 'bold 18px system-ui', '#0f172a');
@@ -174,7 +181,7 @@
     drawRoundRect(ctx, bx + bw - 110, cookY + 15, 90, 26, 6, '#10b981');
     drawText(ctx, 'Aceptar todas', bx + bw - 65, cookY + 31, 'bold 11px system-ui', '#ffffff', 'center');
 
-    drawAnnotation(ctx, 'position: sticky; top: 0;', bx + bw - 130, headY + 23, bx + bw - 15, headY + 23, '#38bdf8');
+    drawAnnotation(ctx, 'position: sticky; top: 0;', bx + bw - 120, headY + 12, bx + bw - 60, headY + 12, '#38bdf8');
     drawAnnotation(ctx, 'position: fixed (bottom: 5rem)', fabX - 25, fabY, fabX, fabY, '#60a5fa');
     drawAnnotation(ctx, 'position: fixed (bottom: 0)', bx + 160, cookY + 10, bx + 120, cookY + 25, '#34d399');
   }

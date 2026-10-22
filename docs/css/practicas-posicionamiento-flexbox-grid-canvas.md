@@ -74,8 +74,8 @@ flowchart LR
 Vas a maquetar la tarjeta de producto de una tienda de tecnología para unos auriculares inalámbricos de estudio:
 
 1. **Bloque Contenedor:**
-    * El elemento `.card-product` debe tener ancho acotado (`max-width: 320px`), fondo blanco, borde y esquinas redondeadas.
-    * El contenedor de la imagen `.product-media` debe declarar **`position: relative;`** para actuar como sistema de coordenadas de sus elementos hijos absolutos.
+    * El elemento `.card-product` debe tener ancho acotado (`max-width: 320px`), fondo blanco, borde y esquinas redondeadas. **No debes usar `overflow: hidden;` en `.card-product`**, ya que recortaría físicamente cualquier elemento hijo que sobresalga (como el *tooltip* superior), sin importar su nivel de `z-index`.
+    * El contenedor de la imagen `.product-media` debe declarar **`position: relative;`** para actuar como sistema de coordenadas de sus elementos hijos absolutos, y aplicar `border-top-left-radius` y `border-top-right-radius` para adaptarse al borde redondeado superior de la tarjeta.
 2. **Insignia de Descuento (Badge):**
     * La etiqueta `.badge-discount` («-25% HOY») debe posicionarse de forma absoluta en la esquina superior izquierda de la imagen (`top: 0.75rem; left: 0.75rem;`).
 3. **Botón de Favoritos con Tooltip:**
@@ -171,7 +171,26 @@ Vas a maquetar la tarjeta de producto de una tienda de tecnología para unos aur
 
 ---
 
+### 3. Puntos Críticos y Rúbrica de la Práctica 1
 
+!!! warning "La Trampa de `overflow: hidden` frente a `z-index`: ¿Por qué se cortaba el Tooltip?"
+    Un error clásico al maquetar tarjetas con elementos flotantes es añadir `overflow: hidden;` a `.card-product` para recortar automáticamente la imagen superior.
+    
+    * **¿Por qué falla el tooltip aunque tenga `z-index: 10`?**
+      `overflow: hidden` crea una frontera física de recorte (*clipping path*). Aunque apliques `z-index: 10`, `z-index: 999` o `z-index: 999999`, **`z-index` únicamente define el orden de apilamiento en el eje perpendicular (profundidad Z), pero jamás puede anular ni atravesar el recorte geométrico de un contenedor ancestro con `overflow: hidden`**.
+    * **La solución arquitectónica correcta:**
+      1. Quitar `overflow: hidden;` de la tarjeta padre `.card-product`.
+      2. Aplicar `border-top-left-radius` y `border-top-right-radius` directamente a `.product-media` para mantener el acabado visual limpio sin amputar los elementos flotantes.
+
+!!! tip "¿Qué ocurre si eliminas `position: relative` de `.product-media`?"
+    Si comentas la regla `position: relative;` del contenedor multimedia, el navegador buscará hacia arriba en el árbol DOM hasta el elemento raíz `<html>`. Como consecuencia, la insignia `-25%` y el botón de favoritos volarán a la esquina superior de la ventana del navegador, saliéndose por completo de la tarjeta.
+
+!!! success "Rúbrica de verificación (Práctica 1)"
+    - [ ] **Referencia espacial:** `.product-media` tiene `position: relative;` y sirve de origen de coordenadas `(0,0)`.
+    - [ ] **Sin recorte de desbordamiento:** `.card-product` no tiene `overflow: hidden;`, permitiendo que el `.tooltip` sobresalga y se lea al completo sin amputarse.
+    - [ ] **Insignia fija en esquina:** `.badge-discount` usa `position: absolute; top: 0.75rem; left: 0.75rem;`.
+    - [ ] **Botón en esquina:** `.btn-favorite` usa `position: absolute; top: 0.75rem; right: 0.75rem;`.
+    - [ ] **Tooltip flotante:** El mensaje explicativo descansa encima del botón con `bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);` y solo se muestra en `:hover` o `:focus-visible`.
 
 ---
 
@@ -185,22 +204,23 @@ Vas a maquetar la tarjeta de producto de una tienda de tecnología para unos aur
 
 ### 1. Escenario y Requerimientos
 
-Maquetarás la vista de lectura de un artículo técnico para una academia online:
+Maquetarás la vista de lectura y documentación de una academia online:
 
-1. **Cabecera Adhesiva (`sticky`):**
-    * La barra superior `.sticky-header` debe desplazarse normalmente al inicio, pero al hacer scroll debe congelarse pegada al borde superior de la pantalla (`position: sticky; top: 0;`).
-    * Debe contar con un `z-index: 100` para que el texto del artículo pase por debajo sin taparla.
-2. **Cuerpo del Artículo:**
-    * Un texto con suficiente longitud (márgenes y párrafos) para generar scroll vertical holgado en el navegador.
+1. **Cabecera Adhesiva (`sticky-header`):**
+    * La barra superior `.sticky-header` debe permanecer visible pegada al borde superior de la pantalla durante todo el desplazamiento (`position: sticky; top: 0;`) con `z-index: 100` y fondo oscuro (`#0f172a`).
+    * Contiene el logotipo corporativo (`⚡ DominIA Academy`), un menú de navegación principal con los enlaces `Inicio`, `Artículos`, `Lecciones` y `Recursos`, y un botón de notificaciones con icono de campana `🔔` e insignia numérica roja (`.notification-badge`) superpuesta en la esquina superior derecha (`position: absolute; top: 0; right: 0;`).
+2. **Cuerpo del Artículo y Cuadrícula Comparativa:**
+    * Encabezado con título principal `Guía Maestra: Sticky vs Fixed en CSS` y subtítulo explicativo.
+    * Una cuadrícula `.cards-grid` con dos tarjetas comparativas:
+        * `.concept-card--sticky`: Título azul `1. Comportamiento Sticky`, explicación y badge `position: sticky; top: 0;`.
+        * `.concept-card--fixed`: Título naranja `2. Comportamiento Fixed`, explicación y badge `position: fixed; bottom: 0;`.
+    * Párrafos de lectura complementarios para garantizar suficiente recorrido de desplazamiento vertical en el navegador.
 3. **Botón Volver Arriba (`fixed`):**
-    * Un botón circular flotante `.btn-scroll-top` en la esquina inferior derecha con `position: fixed; bottom: 5rem; right: 1.5rem; z-index: 90;`.
-4. **Banner de Consentimiento (`fixed` inferior):**
+    * Un botón circular flotante `.btn-scroll-top` en la esquina inferior derecha con `position: fixed; bottom: 5rem; right: 1.5rem; z-index: 90;` y flecha `↑`.
+4. **Banner de Consentimiento Fijo Inferior (`fixed`):**
     * Una barra fija inferior `.cookie-banner` que ocupa el 100% del ancho con `position: fixed; bottom: 0; left: 0; right: 0; z-index: 95;`.
-    * El elemento `body` debe reservar un margen inferior para que el banner fijo no tape el final del artículo.
-
----
-
-### 2. Código Fuente de la Práctica 2
+    * Contiene el texto `🍪 Utilizamos cookies técnicas para garantizar el funcionamiento del aula.` y el botón `Aceptar todas`.
+    * El elemento `body` debe reservar un margen inferior (`padding-bottom: 6rem;`) para que el banner fijo no tape el final del artículo.
 
 ### 2. Lienzo Gráfico y Código HTML Base
 
@@ -237,57 +257,95 @@ Maquetarás la vista de lectura de un artículo técnico para una academia onlin
     </head>
     <body>
 
-      <!-- 1. BARRA SUPERIOR ADHESIVA (POSITION: STICKY) -->
+      <!-- 1. CABECERA ADHESIVA (POSITION: STICKY) -->
       <header class="sticky-header">
         <div class="header-content">
-          <span class="logo">📚 DominIA Academy</span>
-          <span class="lesson-tag">Unidad 04: Posicionamiento</span>
+          <!-- Logotipo de la academia -->
+          <a href="#" class="logo">
+            <span class="logo-icon">⚡</span>
+            <span class="logo-text">DominIA Academy</span>
+          </a>
+
+          <!-- Menú de navegación principal -->
+          <nav class="main-nav" aria-label="Navegación principal">
+            <a href="#" class="nav-link active">Inicio</a>
+            <a href="#" class="nav-link">Artículos</a>
+            <a href="#" class="nav-link">Lecciones</a>
+            <a href="#" class="nav-link">Recursos</a>
+          </nav>
+
+          <!-- Zona de acciones con campana e insignia absoluta -->
+          <div class="header-actions">
+            <button type="button" class="btn-notifications" aria-label="Notificaciones">
+              <span class="bell-icon">🔔</span>
+              <span class="notification-badge" aria-label="3 notificaciones nuevas">3</span>
+            </button>
+          </div>
         </div>
       </header>
 
-      <!-- 2. CONTENIDO PRINCIPAL CON SCROLL EXTENSO -->
+      <!-- 2. CONTENIDO PRINCIPAL CON TARJETAS COMPARATIVAS Y SCROLL EXTENSO -->
       <main class="article-container">
-        <h1>Entendiendo el Flujo del Documento y las Capas en CSS</h1>
-        <p class="lead">
-          El posicionamiento en CSS es uno de los conceptos que más confusión genera cuando no se 
-          comprende la diferencia entre reservar espacio en el flujo o colapsar a cero píxeles.
-        </p>
-
-        <section class="text-block">
-          <h2>1. La Naturaleza de position: sticky</h2>
-          <p>
-            A diferencia de fixed, un elemento sticky respeta el espacio inicial que ocupa en el DOM. 
-            No requiere que le añadamos padding-top artificial al body. Solo cuando el usuario hace scroll 
-            y la ventana alcanza la cota declarada (por ejemplo top: 0), el elemento conmuta su comportamiento 
-            a fijo temporal.
+        <header class="article-intro">
+          <h1 class="article-title">Guía Maestra: Sticky vs Fixed en CSS</h1>
+          <p class="article-lead">
+            Aprende la diferencia operativa entre elementos anclados al flujo y fijados a la ventana.
           </p>
+        </header>
+
+        <!-- Tarjetas comparativas principales -->
+        <section class="cards-grid">
+          <!-- Tarjeta 1: Comportamiento Sticky -->
+          <article class="concept-card concept-card--sticky">
+            <h2 class="card-title">1. Comportamiento Sticky</h2>
+            <p class="card-desc">
+              El elemento fluye con el scroll hasta alcanzar top: 0, donde queda congelado. 
+              Requiere que su contenedor padre mantenga altura en pantalla.
+            </p>
+            <div class="card-footer">
+              <span class="badge badge--sticky">position: sticky; top: 0;</span>
+            </div>
+          </article>
+
+          <!-- Tarjeta 2: Comportamiento Fixed -->
+          <article class="concept-card concept-card--fixed">
+            <h2 class="card-title">2. Comportamiento Fixed</h2>
+            <p class="card-desc">
+              Se extrae por completo del flujo y se ancla al viewport físico de la pantalla. 
+              No se mueve jamás al hacer scroll, independientemente de los padres.
+            </p>
+            <div class="card-footer">
+              <span class="badge badge--fixed">position: fixed; bottom: 0;</span>
+            </div>
+          </article>
+        </section>
+
+        <!-- Secciones de texto extendido para garantizar recorrido de scroll holgado -->
+        <section class="text-block">
+          <h2>3. Profundizando en el Mecanismo de Sticky</h2>
           <p>
-            Cuidado: un elemento sticky vive dentro de su contenedor padre. En cuanto el borde inferior del padre 
-            sale de la pantalla, arrastra al elemento sticky consigo hacia afuera.
+            A diferencia de <code>fixed</code>, un elemento <code>sticky</code> respeta su hueco inicial en el documento. 
+            No requiere compensaciones artificiales de <code>padding-top</code> en el <code>body</code>. 
+            Al hacer scroll y alcanzar el umbral declarado (por ejemplo <code>top: 0</code>), conmuta su renderizado 
+            a fijo relativo a la pantalla hasta que su contenedor ancestro finaliza.
           </p>
         </section>
 
         <section class="text-block">
-          <h2>2. El Anclaje Inmutable de position: fixed</h2>
+          <h2>4. El Funcionamiento Inmutable de Fixed</h2>
           <p>
-            Fixed no negocia con el scroll. Se mide directamente contra el Viewport (el rectángulo visible de tu navegador). 
-            Por esa razón, los botones flotantes de ayuda, los banners de cookies y los diálogos modales se construyen con fixed.
-          </p>
-          <p>
-            Desplaza la página hacia abajo para comprobar cómo la cabecera sticky te acompaña en la parte superior, 
-            mientras el botón de flecha y la barra de cookies permanecen anclados con fixed en la parte inferior.
+            Los elementos <code>fixed</code> se posicionan siempre respecto al <em>Viewport</em> (la ventana del navegador). 
+            Por este motivo son la solución obligada para barras de consentimiento, botones flotantes de ayuda o retorno 
+            al inicio (FAB) y ventanas modales de diálogo.
           </p>
         </section>
 
         <section class="text-block">
-          <h2>3. El Papel Vital del z-index</h2>
+          <h2>5. La Jerarquía de Capas con z-index</h2>
           <p>
-            Sin z-index, los elementos que aparecen después en el código HTML taparían a la cabecera sticky 
-            cuando esta pasa por encima de ellos. Al asignarle un nivel de apilamiento controlado (z-index: 100), 
-            garantizamos que la barra quede siempre en la capa superior visible.
-          </p>
-          <p>
-            Texto complementario de relleno para garantizar suficiente recorrido de desplazamiento en la ventana...
+            Tanto la cabecera adhesiva (<code>z-index: 100</code>) como los elementos fijos inferiores 
+            (<code>z-index: 90</code> y <code>95</code>) deben declarar niveles de apilamiento superiores al contenido 
+            estándar para evitar que imágenes o bloques de código los oculten durante el desplazamiento.
           </p>
         </section>
       </main>
@@ -299,9 +357,13 @@ Maquetarás la vista de lectura de un artículo técnico para una academia onlin
 
       <!-- 4. BANNER DE CONSENTIMIENTO FIJO INFERIOR (POSITION: FIXED) -->
       <aside class="cookie-banner" role="region" aria-label="Aviso de privacidad">
-        <p>Utilizamos cookies esenciales para el rendimiento del aula virtual.</p>
-        <div class="banner-actions">
-          <button type="button" class="btn-banner btn-banner--primary">Aceptar</button>
+        <div class="cookie-content">
+          <p class="cookie-text">
+            🍪 Utilizamos cookies técnicas para garantizar el funcionamiento del aula.
+          </p>
+          <div class="cookie-actions">
+            <button type="button" class="btn-cookie">Aceptar todas</button>
+          </div>
         </div>
       </aside>
 
@@ -311,7 +373,20 @@ Maquetarás la vista de lectura de un artículo técnico para una academia onlin
 
 ---
 
+### 3. Puntos Críticos y Rúbrica de la Práctica 2
 
+!!! tip "Diferencia de comportamiento en el flujo: Sticky vs Fixed"
+    * **`position: sticky`** mantiene su espacio en el flujo normal del documento al cargar la página; solo conmuta a comportamiento flotante cuando el scroll alcanza su coordenada umbral (`top: 0`).
+    * **`position: fixed`** extrae al elemento por completo del flujo desde el primer instante; no reserva espacio en el layout y se ancla de forma inmutable respecto a la ventana física (*Viewport*).
+
+!!! success "Rúbrica de verificación (Práctica 2)"
+    - [ ] **Cabecera adhesiva (`sticky`):** `.sticky-header` tiene `position: sticky; top: 0; z-index: 100;` y se mantiene visible durante todo el scroll.
+    - [ ] **Estructura de cabecera:** La cabecera incluye el logotipo `⚡ DominIA Academy`, el menú con enlaces (`Inicio`, `Artículos`, `Lecciones`, `Recursos`) y el botón con campana `🔔`.
+    - [ ] **Insignia numérica absoluta:** `.notification-badge` se posiciona de forma absoluta respecto al botón de notificaciones (`position: absolute; top: 0; right: 0;`).
+    - [ ] **Cuadrícula comparativa:** Las tarjetas `.concept-card--sticky` y `.concept-card--fixed` explican claramente ambos comportamientos.
+    - [ ] **Botón flotante fijo:** `.btn-scroll-top` usa `position: fixed; bottom: 5rem; right: 1.5rem; z-index: 90;`.
+    - [ ] **Banner fijo de cookies:** `.cookie-banner` usa `position: fixed; bottom: 0; left: 0; width: 100%; z-index: 95;`.
+    - [ ] **Reserva de espacio inferior:** `body` incluye `padding-bottom: 6rem;` para evitar que el banner fijo tape el último bloque de texto.
 
 ---
 
@@ -1513,10 +1588,17 @@ Para consolidar la elección de la tecnología correcta al desarrollar cualquier
     const headY = by + 32;
     drawRoundRect(ctx, bx, headY, bw, 46, 0, '#0f172a');
     drawText(ctx, '⚡ DominIA Academy', bx + 20, headY + 28, 'bold 14px system-ui', '#38bdf8');
-    drawText(ctx, 'Inicio    Artículos    Lecciones    Recursos', bx + 180, headY + 28, '11px system-ui', '#e2e8f0');
+    drawText(ctx, 'Inicio    Artículos    Lecciones    Recursos', bx + 185, headY + 28, '11px system-ui', '#cbd5e1');
 
-    ctx.font = '16px system-ui'; ctx.fillText('🔔', bx + bw - 40, headY + 28);
-    ctx.beginPath(); ctx.arc(bx + bw - 32, headY + 16, 5, 0, Math.PI*2); ctx.fillStyle = '#ef4444'; ctx.fill();
+    // Campana de notificaciones con insignia numérica (position: absolute)
+    const bellX = bx + bw - 35, bellY = headY + 28;
+    ctx.font = '16px system-ui';
+    ctx.fillText('🔔', bellX, bellY);
+    ctx.beginPath();
+    ctx.arc(bellX + 7, bellY - 11, 6, 0, Math.PI * 2);
+    ctx.fillStyle = '#ef4444';
+    ctx.fill();
+    drawText(ctx, '3', bellX + 7, bellY - 8, 'bold 7px system-ui', '#ffffff', 'center');
 
     const contY = headY + 60;
     drawText(ctx, 'Guía Maestra: Sticky vs Fixed en CSS', bx + 30, contY + 20, 'bold 18px system-ui', '#0f172a');
@@ -1548,7 +1630,7 @@ Para consolidar la elección de la tecnología correcta al desarrollar cualquier
     drawRoundRect(ctx, bx + bw - 110, cookY + 15, 90, 26, 6, '#10b981');
     drawText(ctx, 'Aceptar todas', bx + bw - 65, cookY + 31, 'bold 11px system-ui', '#ffffff', 'center');
 
-    drawAnnotation(ctx, 'position: sticky; top: 0;', bx + bw - 130, headY + 23, bx + bw - 15, headY + 23, '#38bdf8');
+    drawAnnotation(ctx, 'position: sticky; top: 0;', bx + bw - 120, headY + 12, bx + bw - 60, headY + 12, '#38bdf8');
     drawAnnotation(ctx, 'position: fixed (bottom: 5rem)', fabX - 25, fabY, fabX, fabY, '#60a5fa');
     drawAnnotation(ctx, 'position: fixed (bottom: 0)', bx + 160, cookY + 10, bx + 120, cookY + 25, '#34d399');
   }
