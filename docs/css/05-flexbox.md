@@ -94,6 +94,30 @@ El ==main axis== **reparte** el espacio; el transversal **alinea**.
 
 ## 2. Propiedades del contenedor
 
+!!! tip "Guía de referencia rápida MDN Web Docs — CSS 05 — Flexbox"
+
+    Documentación técnica oficial en MDN de cada propiedad explicada en esta unidad (se abren en una nueva ventana):
+
+    | Propiedad CSS | Descripción y especificación en MDN |
+    |---|---|
+    | [`display`](https://developer.mozilla.org/en-US/docs/Web/CSS/display){target="_blank"} | Activa el contexto flexbox (flex o inline-flex) |
+    | [`flex-direction`](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-direction){target="_blank"} | Establece la orientación del eje principal (row/column) |
+    | [`flex-wrap`](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-wrap){target="_blank"} | Controla si los ítems saltan a nuevas líneas |
+    | [`flex-flow`](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-flow){target="_blank"} | Atajo combinado de flex-direction y flex-wrap |
+    | [`justify-content`](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content){target="_blank"} | Distribución de ítems y espacio en el eje principal |
+    | [`align-items`](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items){target="_blank"} | Alineación transversal de todos los flex items |
+    | [`align-content`](https://developer.mozilla.org/en-US/docs/Web/CSS/align-content){target="_blank"} | Distribución y alineación de las líneas múltiples |
+    | [`gap`](https://developer.mozilla.org/en-US/docs/Web/CSS/gap){target="_blank"} | Espaciado uniforme entre ítems adyacentes |
+    | [`row-gap`](https://developer.mozilla.org/en-US/docs/Web/CSS/row-gap){target="_blank"} | Espaciado vertical entre filas flexibles |
+    | [`column-gap`](https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap){target="_blank"} | Espaciado horizontal entre columnas flexibles |
+    | [`order`](https://developer.mozilla.org/en-US/docs/Web/CSS/order){target="_blank"} | Altera el orden visual de un ítem sin cambiar el DOM |
+    | [`flex-grow`](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-grow){target="_blank"} | Factor de crecimiento ante espacio libre sobrante |
+    | [`flex-shrink`](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-shrink){target="_blank"} | Factor de contracción ante espacio negativo insuficiente |
+    | [`flex-basis`](https://developer.mozilla.org/en-US/docs/Web/CSS/flex-basis){target="_blank"} | Tamaño inicial base antes del reparto de espacio |
+    | [`flex`](https://developer.mozilla.org/en-US/docs/Web/CSS/flex){target="_blank"} | Atajo combinado: flex-grow flex-shrink flex-basis |
+    | [`align-self`](https://developer.mozilla.org/en-US/docs/Web/CSS/align-self){target="_blank"} | Alineación transversal individual para un ítem concreto |
+
+
 
 | Propiedad | Valores habituales | Efecto |
 |---|---|---|

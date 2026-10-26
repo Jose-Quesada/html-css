@@ -721,6 +721,8 @@
       
         
       
+        
+      
     
     
     
@@ -1731,6 +1733,35 @@
   
   
     <li class="md-nav__item">
+      <a href="../practicas-posicionamiento-flexbox-grid/" class="md-nav__link">
+        
+  
+  
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-layout" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+  
+  <span class="md-ellipsis">
+    
+  
+  17. Ejercicios clase
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+                
+              
+                
+                  
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../practicas-posicionamiento-flexbox-grid-canvas/" class="md-nav__link">
         
   
@@ -2518,6 +2549,8 @@
       
         
       
+        
+      
     
     
     
@@ -2611,6 +2644,80 @@
         end
     end</code></pre>
 <h2 id="2-definir-la-cuadricula-explicita">2. Definir la cuadrícula explícita</h2>
+<div class="admonition tip">
+<p class="admonition-title">Guía de referencia rápida MDN Web Docs — CSS 06 — CSS Grid Layout</p>
+<p>Documentación técnica oficial en MDN de cada propiedad explicada en esta unidad (se abren en una nueva ventana):</p>
+<table>
+<thead>
+<tr>
+<th>Propiedad CSS</th>
+<th>Descripción y especificación en MDN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/display" target="_blank"><code>display</code></a></td>
+<td>Activa el contenedor cuadrícula (grid o inline-grid)</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns" target="_blank"><code>grid-template-columns</code></a></td>
+<td>Define las pistas de columnas de la cuadrícula explícita</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows" target="_blank"><code>grid-template-rows</code></a></td>
+<td>Define las pistas de filas de la cuadrícula explícita</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas" target="_blank"><code>grid-template-areas</code></a></td>
+<td>Define áreas nombradas para maquetación por nombres</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-columns" target="_blank"><code>grid-auto-columns</code></a></td>
+<td>Tamaño de las columnas implícitas generadas</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-rows" target="_blank"><code>grid-auto-rows</code></a></td>
+<td>Tamaño de las filas implícitas generadas</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-flow" target="_blank"><code>grid-auto-flow</code></a></td>
+<td>Algoritmo de colocación automática (row/column/dense)</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column" target="_blank"><code>grid-column</code></a></td>
+<td>Atajo para inicio y fin de columna de un ítem</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row" target="_blank"><code>grid-row</code></a></td>
+<td>Atajo para inicio y fin de fila de un ítem</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/grid-area" target="_blank"><code>grid-area</code></a></td>
+<td>Asigna un ítem a un área o define sus 4 coordenadas</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/gap" target="_blank"><code>gap</code></a></td>
+<td>Espacio entre filas y columnas de la cuadrícula</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items" target="_blank"><code>justify-items</code></a></td>
+<td>Alineación horizontal de los ítems en su celda</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/align-items" target="_blank"><code>align-items</code></a></td>
+<td>Alineación vertical de los ítems en su celda</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/place-items" target="_blank"><code>place-items</code></a></td>
+<td>Atajo para align-items y justify-items</td>
+</tr>
+<tr>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/place-content" target="_blank"><code>place-content</code></a></td>
+<td>Atajo para align-content y justify-content</td>
+</tr>
+</tbody>
+</table>
+</div>
 <h3 id="21-grid-template-columns-grid-template-rows">2.1. <code>grid-template-columns</code> / <code>grid-template-rows</code></h3>
 <div class="language-css highlight"><span class="filename">plantilla-explicita.css</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">.</span><span class="nc">g</span><span class="w"> </span><span class="p">{</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="k">grid-template-columns</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="kt">px</span><span class="w"> </span><span class="mi">1</span><span class="n">fr</span><span class="w"> </span><span class="mi">1</span><span class="n">fr</span><span class="p">;</span><span class="w">   </span><span class="c">/* 3 columnas */</span>

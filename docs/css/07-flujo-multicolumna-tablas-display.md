@@ -18,6 +18,21 @@ Esta unidad cubre el **flujo normal del documento** y los sistemas de ordenació
 
 ## 1. Evolución histórica de la maquetación (contexto curricular)
 
+!!! tip "Guía de referencia rápida MDN Web Docs — CSS 07 — Multicolumna, Tablas y Flujo"
+
+    Documentación técnica oficial en MDN de cada propiedad explicada en esta unidad (se abren en una nueva ventana):
+
+    | Propiedad CSS | Descripción y especificación en MDN |
+    |---|---|
+    | [`columns`](https://developer.mozilla.org/en-US/docs/Web/CSS/columns){target="_blank"} | Atajo para column-width y column-count |
+    | [`column-count`](https://developer.mozilla.org/en-US/docs/Web/CSS/column-count){target="_blank"} | Número ideal de columnas de texto |
+    | [`column-width`](https://developer.mozilla.org/en-US/docs/Web/CSS/column-width){target="_blank"} | Anchura óptima mínima de cada columna |
+    | [`column-gap`](https://developer.mozilla.org/en-US/docs/Web/CSS/column-gap){target="_blank"} | Separación entre columnas de texto |
+    | [`column-rule`](https://developer.mozilla.org/en-US/docs/Web/CSS/column-rule){target="_blank"} | Línea divisoria decorativa entre columnas |
+    | [`break-inside`](https://developer.mozilla.org/en-US/docs/Web/CSS/break-inside){target="_blank"} | Evita rupturas de elementos entre columnas (avoid) |
+    | [`table-layout`](https://developer.mozilla.org/en-US/docs/Web/CSS/table-layout){target="_blank"} | Algoritmo de cálculo de anchos de tabla (fixed o auto) |
+
+
 | Era | Técnica | Problema |
 |---|---|---|
 | ~1996–2000 | **Marcos** (`<frameset>`, `<frame>`) | Cada frame = documento independiente; sin SEO, sin impresión, sin accesibilidad. **Obsoleto en HTML5**. |

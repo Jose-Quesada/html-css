@@ -19,6 +19,17 @@ El CSS afecta al rendimiento en tres frentes: **bloqueo del render** (aparece ta
 
 ## 1. Critical Rendering Path (CRP)
 
+!!! tip "Guía de referencia rápida MDN Web Docs — CSS 14 — Rendimiento y Optimización de Renderizado"
+
+    Documentación técnica oficial en MDN de cada propiedad explicada en esta unidad (se abren en una nueva ventana):
+
+    | Propiedad CSS | Descripción y especificación en MDN |
+    |---|---|
+    | [`contain`](https://developer.mozilla.org/en-US/docs/Web/CSS/contain){target="_blank"} | Aísla subárboles DOM para optimizar repintado y layout |
+    | [`content-visibility`](https://developer.mozilla.org/en-US/docs/Web/CSS/content-visibility){target="_blank"} | Pospone el renderizado de contenido fuera de la pantalla |
+    | [`will-change`](https://developer.mozilla.org/en-US/docs/Web/CSS/will-change){target="_blank"} | Avisa al navegador de cambios inminentes para optimizar capas GPU |
+
+
 Cómo el navegador pinta la primera pantalla (==CRP==):
 
 ```mermaid

@@ -57,14 +57,14 @@ flowchart TD
     end
 ```
 
-| Capa | Propiedades | Notas |
+| Capa | Propiedades (Guía MDN) | Notas |
 |---|---|---|
-| Contenido | `width`, `height` | Tamaño del contenido (**no de la caja completa**). |
-| Padding | `padding`, `padding-top/right/bottom/left`, `padding-inline/block` | Espacio interior; admite `%` (sobre el ancho del contenedor padre). |
-| Borde | `border-width/style/color`, `border-*-radius` | El `style` es **obligatorio** para que el borde se pinte. |
-| Margen | `margin`, `margin-*`, `margin-inline/block` | Espacio exterior; puede ser **negativo**. |
+| Contenido | [`width`](https://developer.mozilla.org/en-US/docs/Web/CSS/width){target="_blank"}, [`height`](https://developer.mozilla.org/en-US/docs/Web/CSS/height){target="_blank"} | Tamaño del contenido (**no de la caja completa**). |
+| Padding | [`padding`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding){target="_blank"}, [`padding-top`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top){target="_blank"} / [`right`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right){target="_blank"} / [`bottom`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom){target="_blank"} / [`left`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-left){target="_blank"}, [`padding-inline`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline){target="_blank"} / [`padding-block`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-block){target="_blank"} | Espacio interior; admite `%` (sobre el ancho del contenedor padre). |
+| Borde | [`border`](https://developer.mozilla.org/en-US/docs/Web/CSS/border){target="_blank"} (`border-`[`width`](https://developer.mozilla.org/en-US/docs/Web/CSS/border-width){target="_blank"} / [`style`](https://developer.mozilla.org/en-US/docs/Web/CSS/border-style){target="_blank"} / [`color`](https://developer.mozilla.org/en-US/docs/Web/CSS/border-color){target="_blank"}), [`border-radius`](https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius){target="_blank"} | El `style` es **obligatorio** para que el borde se pinte. |
+| Margen | [`margin`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin){target="_blank"}, [`margin-top`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top){target="_blank"} / [`right`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right){target="_blank"} / [`bottom`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom){target="_blank"} / [`left`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left){target="_blank"}, [`margin-inline`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline){target="_blank"} / [`margin-block`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-block){target="_blank"} | Espacio exterior; puede ser **negativo**. |
 
-Propiedades de atajo: `box-shadow` (fuera de la caja pero dentro del «área de pintura»), `outline` (**no ocupa espacio**, se dibuja fuera del borde).
+Propiedades de atajo y utilidades perimetrales: [`box-shadow`](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow){target="_blank"} (fuera de la caja pero dentro del «área de pintura»), [`outline`](https://developer.mozilla.org/en-US/docs/Web/CSS/outline){target="_blank"} (**no ocupa espacio**, se dibuja fuera del borde) y [`outline-offset`](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-offset){target="_blank"}.
 
 !!! info "Las cuatro áreas que nombra DevTools"
 
@@ -73,13 +73,29 @@ Propiedades de atajo: `box-shadow` (fuera de la caja pero dentro del «área de 
     - **border-box**: incluye el borde; es el ancho real con `border-box`.
     - **margin-box**: caja + margen; el espacio hasta los vecinos.
 
+!!! tip "Guía de referencia rápida MDN Web Docs - CSS 03 - Modelo de caja"
+
+    Acceso directo a la documentación oficial y especificación de cada propiedad del modelo de caja:
+
+    | Bloque | Propiedades con enlace a MDN |
+    |---|---|
+    | **Dimensiones y Caja** | [`box-sizing`](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing){target="_blank"} · [`width`](https://developer.mozilla.org/en-US/docs/Web/CSS/width){target="_blank"} · [`height`](https://developer.mozilla.org/en-US/docs/Web/CSS/height){target="_blank"} · [`min-width`](https://developer.mozilla.org/en-US/docs/Web/CSS/min-width){target="_blank"} · [`max-width`](https://developer.mozilla.org/en-US/docs/Web/CSS/max-width){target="_blank"} · [`min-height`](https://developer.mozilla.org/en-US/docs/Web/CSS/min-height){target="_blank"} · [`max-height`](https://developer.mozilla.org/en-US/docs/Web/CSS/max-height){target="_blank"} · [`aspect-ratio`](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio){target="_blank"} |
+    | **Relleno (Padding)** | [`padding`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding){target="_blank"} · [`padding-top`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-top){target="_blank"} · [`padding-right`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right){target="_blank"} · [`padding-bottom`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-bottom){target="_blank"} · [`padding-left`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-left){target="_blank"} · [`padding-inline`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline){target="_blank"} · [`padding-block`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-block){target="_blank"} |
+    | **Bordes y Contornos** | [`border`](https://developer.mozilla.org/en-US/docs/Web/CSS/border){target="_blank"} · [`border-width`](https://developer.mozilla.org/en-US/docs/Web/CSS/border-width){target="_blank"} · [`border-style`](https://developer.mozilla.org/en-US/docs/Web/CSS/border-style){target="_blank"} · [`border-color`](https://developer.mozilla.org/en-US/docs/Web/CSS/border-color){target="_blank"} · [`border-radius`](https://developer.mozilla.org/en-US/docs/Web/CSS/border-radius){target="_blank"} · [`box-shadow`](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow){target="_blank"} · [`outline`](https://developer.mozilla.org/en-US/docs/Web/CSS/outline){target="_blank"} · [`outline-offset`](https://developer.mozilla.org/en-US/docs/Web/CSS/outline-offset){target="_blank"} |
+    | **Márgenes exteriores** | [`margin`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin){target="_blank"} · [`margin-top`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top){target="_blank"} · [`margin-right`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right){target="_blank"} · [`margin-bottom`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom){target="_blank"} · [`margin-left`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left){target="_blank"} · [`margin-inline`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline){target="_blank"} · [`margin-inline-start`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start){target="_blank"} · [`margin-block`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-block){target="_blank"} · [`margin-block-end`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-block-end){target="_blank"} |
+    | **Desbordamiento y Ajuste** | [`overflow`](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow){target="_blank"} · [`overflow-x`](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-x){target="_blank"} · [`overflow-y`](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-y){target="_blank"} · [`overscroll-behavior`](https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior){target="_blank"} · [`text-overflow`](https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow){target="_blank"} · [`object-fit`](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit){target="_blank"} |
+    | **Contención e Interacción** | [`contain`](https://developer.mozilla.org/en-US/docs/Web/CSS/contain){target="_blank"} · [`contain-intrinsic-size`](https://developer.mozilla.org/en-US/docs/Web/CSS/contain-intrinsic-size){target="_blank"} · [`resize`](https://developer.mozilla.org/en-US/docs/Web/CSS/resize){target="_blank"} · [`cursor`](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor){target="_blank"} · [`display`](https://developer.mozilla.org/en-US/docs/Web/CSS/display){target="_blank"} (`flow-root`) |
+
+
 ## 2. `box-sizing`: el cambio que lo cambia todo
+
+La propiedad [`box-sizing`](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing){target="_blank"} determina cómo se computan las dimensiones totales de una caja sumando o integrando el relleno y el borde.
 
 ### 2.1. `content-box` (el comportamiento histórico por defecto)
 
-En el modelo tradicional de CSS, cuando escribes `width: 300px`, le estás diciendo al navegador: *«Haz que el área del **contenido de texto** mida 300px»*.
+En el modelo tradicional de CSS, cuando escribes [`width`](https://developer.mozilla.org/en-US/docs/Web/CSS/width){target="_blank"}`: 300px`, le estás diciendo al navegador: *«Haz que el área del **contenido de texto** mida 300px»*.
 
-Si luego añades relleno interior (`padding: 20px`) y un borde (`border: 10px solid black`), el navegador suma esas capas hacia el exterior como capas de una cebolla:
+Si luego añades relleno interior ([`padding`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding){target="_blank"}`: 20px`) y un borde ([`border`](https://developer.mozilla.org/en-US/docs/Web/CSS/border){target="_blank"}`: 10px solid black`), el navegador suma esas capas hacia el exterior como capas de una cebolla:
 
 ```text title="content-box-calculo.txt"
 Ancho visual real = width + padding-izq + padding-der + border-izq + border-der
@@ -90,7 +106,7 @@ Ancho visual real = 300px + 20px        + 20px        + 10px       + 10px = 360p
 
 ### 2.2. `border-box` (el estándar moderno intuitivo)
 
-Con `box-sizing: border-box`, el valor de `width: 300px` pasa a ser el **tamaño exterior total de la caja** (hasta el borde exterior).
+Con [`box-sizing: border-box`](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing){target="_blank"}, el valor de `width: 300px` pasa a ser el **tamaño exterior total de la caja** (hasta el borde exterior).
 
 Si declaras `width: 300px`, `padding: 20px` y `border: 10px`, la caja medirá **exactamente 300px**. El navegador encoge el contenido interior automáticamente para que todo quepa dentro de los 300px:
 
@@ -114,7 +130,7 @@ Ancho visual real = width = 300px
 > **Claves para el examen**: 
 > - Con `content-box`, `width` mide solo el contenido (el padding y el borde **se suman por fuera**).
 > - Con `border-box`, `width` mide hasta el borde (el padding y el borde **se restan por dentro**).
-> - El margen (`margin`) **nunca** forma parte de `width` en ninguno de los dos modelos; el margen siempre es espacio exterior entre cajas vecinas.
+> - El margen ([`margin`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin){target="_blank"}) **nunca** forma parte de `width` en ninguno de los dos modelos; el margen siempre es espacio exterior entre cajas vecinas.
 
 ### 2.3. ¿Por qué se utiliza siempre `border-box` en la industria?
 
@@ -122,6 +138,8 @@ Ancho visual real = width = 300px
 - **Compatibilidad con sistemas de diseño:** Todos los frameworks modernos (Bootstrap, Tailwind, etc.) y sistemas de cuadrícula asumen `border-box` como premisa indispensable.
 
 ## 3. Dimensiones: `width` y `height`
+
+Las dimensiones de una caja se controlan mediante [`width`](https://developer.mozilla.org/en-US/docs/Web/CSS/width){target="_blank"} (anchura) y [`height`](https://developer.mozilla.org/en-US/docs/Web/CSS/height){target="_blank"} (altura).
 
 ### 3.1. Valores
 
@@ -141,6 +159,8 @@ Ancho visual real = width = 300px
 
 ### 3.2. Límites: `min-*` y `max-*`
 
+Para acotar el crecimiento o contracción de una caja se utilizan [`min-width`](https://developer.mozilla.org/en-US/docs/Web/CSS/min-width){target="_blank"}, [`max-width`](https://developer.mozilla.org/en-US/docs/Web/CSS/max-width){target="_blank"}, [`min-height`](https://developer.mozilla.org/en-US/docs/Web/CSS/min-height){target="_blank"} y [`max-height`](https://developer.mozilla.org/en-US/docs/Web/CSS/max-height){target="_blank"}:
+
 ```css title="estilos.css"
 input {
   width: 100%;
@@ -151,13 +171,13 @@ input {
 
 Reglas importantes:
 
-- `min-width`/`min-height` **ganan** ante `width`/`height` cuando entran en conflicto.
-- `max-width: 100%` en imágenes/media evita desbordes clásicos.
-- En flex/grid, `min-width: auto` impide que un item se encoga menos que su contenido (ver unidad 05, problema clásico).
+- [`min-width`](https://developer.mozilla.org/en-US/docs/Web/CSS/min-width){target="_blank"} / [`min-height`](https://developer.mozilla.org/en-US/docs/Web/CSS/min-height){target="_blank"} **ganan** ante `width`/`height` cuando entran en conflicto.
+- [`max-width: 100%`](https://developer.mozilla.org/en-US/docs/Web/CSS/max-width){target="_blank"} en imágenes/media evita desbordes clásicos.
+- En flex/grid, `min-width: auto` impide que un item se encoja menos que su contenido (ver unidad 05, problema clásico).
 
 ### 3.3. `aspect-ratio`
 
-Mantiene proporción entre anchura y altura:
+La propiedad [`aspect-ratio`](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio){target="_blank"} mantiene la proporción matemática entre anchura y altura:
 
 ```css title="estilos.css"
 .thumb {
@@ -168,17 +188,28 @@ Mantiene proporción entre anchura y altura:
 ```
 
 - Funciona con `width` o `height` definidos (o `auto` en reemplazos como `<img>`).
-- Se combina con `object-fit` para controlar el relleno de media (unidad 09).
+- Se combina con [`object-fit`](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit){target="_blank"} para controlar el relleno de media (unidad 09).
 - Permite **reservas de espacio** anti CLS: el contenedor reserva la proporción antes de cargar la imagen (unidad 14).
 
 ## 4. Márgenes
 
+La propiedad [`margin`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin){target="_blank"} establece el espacio de separación exterior alrededor de la caja.
+
 ### 4.1. Valores y atajos
+
+La propiedad abreviada (*shorthand*) `margin` (al igual que `padding`) permite definir el espaciado exterior mediante 1, 2, 3 o 4 valores:
+
+- **1 valor**: afecta a los **cuatro lados/ejes** por igual (arriba, derecha, abajo e izquierda).
+- **2 valores**: el 1.º para el eje **vertical** (arriba y abajo) y el 2.º para el eje **horizontal** (derecha e izquierda).
+- **3 valores**: el 1.º para **arriba**, el 2.º para el eje **horizontal** (derecha e izquierda) y el 3.º para **abajo**.
+- **4 valores**: sentido horario (**arriba, derecha, abajo, izquierda** — regla mnemotécnica **TRBL**: *Top, Right, Bottom, Left*).
 
 ```css title="estilos.css"
 .margen {
-  margin: 1rem 2rem;          /* vertical horizontal */
-  margin: 1rem 2rem 3rem 4rem;/* arriba derecha abajo izquierda */
+  margin: 1rem;               /* 1 valor: los 4 lados/ejes (arriba, derecha, abajo, izquierda) */
+  margin: 1rem 2rem;          /* 2 valores: vertical (arriba/abajo) horizontal (der/izq) */
+  margin: 1rem 2rem 3rem;     /* 3 valores: arriba horizontal (der/izq) abajo */
+  margin: 1rem 2rem 3rem 4rem;/* 4 valores: arriba derecha abajo izquierda (sentido horario TRBL) */
   margin-block: 2rem;         /* logical: arriba+abajo */
   margin-inline-start: 1rem;  /* logical: lado de inicio (i18n) */
 }
@@ -186,7 +217,7 @@ Mantiene proporción entre anchura y altura:
 
 !!! info "Márgenes lógicos (i18n)"
 
-    - `margin-inline-*` y `margin-block-*` siguen la **dirección del texto**, no la pantalla.
+    - [`margin-inline`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline){target="_blank"} (con [`margin-inline-start`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-start){target="_blank"} / [`margin-inline-end`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline-end){target="_blank"}) y [`margin-block`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-block){target="_blank"} (con [`margin-block-start`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-block-start){target="_blank"} / [`margin-block-end`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-block-end){target="_blank"}) siguen la **dirección del texto**, no la pantalla.
     - Con `dir="rtl"`, `margin-inline-start` cambia solo de lado: **cero reglas duplicadas**.
     - `margin: a b c d` sigue siendo válido; los lógicos son su versión **internacionalizable**.
 
@@ -198,7 +229,7 @@ El ==colapso de márgenes== es uno de los comportamientos que más confunde a lo
 Tiene un origen puramente **editorial y tipográfico**. En un libro o artículo de periódico, si un título tiene un margen inferior de `20px` y el párrafo siguiente tiene un margen superior de `16px`, el tipógrafo no quiere un hueco descomunal de `36px` entre ellos; quiere una separación armónica de `20px` (el mayor de los dos). El navegador implementa esta regla por defecto para el texto en flujo normal.
 
 #### La regla básica
-Cuando dos márgenes verticales pertenecientes a elementos en bloque en el mismo contexto de formato se tocan directamente, **no se suman**: se funden en un único margen común cuyo tamaño es el **máximo** de los márgenes implicados.
+Cuando dos márgenes verticales ([`margin-top`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top){target="_blank"} y [`margin-bottom`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom){target="_blank"}) pertenecientes a elementos en bloque en el mismo contexto de formato se tocan directamente, **no se suman**: se funden en un único margen común cuyo tamaño es el **máximo** de los márgenes implicados.
 
 ```text title="colapso-hermanos.txt"
 <p style="margin-bottom: 30px;">Párrafo 1</p>
@@ -223,12 +254,12 @@ Espacio real resultante entre ambos = Max(30px, 20px) = 30px (¡NO 50px!)
 
 !!! warning "Error crítico de examen y de maquetación"
 
-    Pensar que los márgenes horizontales (`margin-left` y `margin-right`) colapsan. **FALSO:** Los márgenes horizontales **NUNCA colapsan**; si pones dos botones inline-block con `margin-right: 10px` y `margin-left: 10px`, la separación siempre es `20px`. El colapso solo ocurre en el eje **vertical** de elementos en bloque.
+    Pensar que los márgenes horizontales ([`margin-left`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-left){target="_blank"} y [`margin-right`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-right){target="_blank"}) colapsan. **FALSO:** Los márgenes horizontales **NUNCA colapsan**; si pones dos botones inline-block con `margin-right: 10px` y `margin-left: 10px`, la separación siempre es `20px`. El colapso solo ocurre en el eje **vertical** de elementos en bloque.
 
 **No colapsan** cuando:
 
-- Hay algo que separe: padding, borde, `inline-content`, clearance.
-- El elemento crea un **nuevo BFC** (`overflow: hidden/auto/scroll`, `display: flow-root/flex/grid/table-caption…`).
+- Hay algo que separe: [`padding`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding){target="_blank"}, [`border`](https://developer.mozilla.org/en-US/docs/Web/CSS/border){target="_blank"}, `inline-content`, clearance.
+- El elemento crea un **nuevo BFC** ([`overflow`](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow){target="_blank"}: `hidden/auto/scroll`, [`display: flow-root`](https://developer.mozilla.org/en-US/docs/Web/CSS/display){target="_blank"} o flex/grid/table-caption…).
 - Posicionamiento distinto de `static` (absoluto/fijo no colapsan con nada).
 - En flex/grid containers, los márgenes de items **nunca** colapsan.
 - Márgenes horizontales **nunca** colapsan (solo verticales de bloques).
@@ -265,6 +296,8 @@ section { padding-top: 1px; } /* truco feo, evitar */
 
 ### 4.3. Márgenes negativos
 
+Al aplicar valores negativos en [`margin`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin){target="_blank"} o en sus propiedades lógicas ([`margin-inline`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-inline){target="_blank"}, [`margin-top`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top){target="_blank"}), la caja se desplaza absorbiendo espacio o superponiéndose a cajas contiguas:
+
 ```css title="estilos.css"
 .full-bleed {
   margin-inline: calc(50% - 50vw);  /* rompe el contenedor a ancho total */
@@ -276,7 +309,7 @@ section { padding-top: 1px; } /* truco feo, evitar */
 
 ## 5. `overflow`
 
-Controla qué pasa cuando el contenido supera la caja: ==`overflow`== **pinta**, **recorta** o **desplaza**.
+Controla qué pasa cuando el contenido supera las dimensiones de la caja: la propiedad ==[`overflow`](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow){target="_blank"}== **pinta**, **recorta** o **desplaza**.
 
 | Valor | Comportamiento |
 |---|---|
@@ -289,14 +322,14 @@ Controla qué pasa cuando el contenido supera la caja: ==`overflow`== **pinta**,
 Detalles:
 
 - Si uno de los ejes es `visible` y el otro no, el `visible` se convierte en `auto` (comportamiento contraintuitivo a recordar).
-- `overflow-x` / `overflow-y` independientes.
-- `overscroll-behavior` controla el «rubber-band»/propagación de scroll en móviles.
+- Control por ejes independientes con [`overflow-x`](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-x){target="_blank"} y [`overflow-y`](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow-y){target="_blank"}.
+- [`overscroll-behavior`](https://developer.mozilla.org/en-US/docs/Web/CSS/overscroll-behavior){target="_blank"} controla el «rubber-band» y la propagación del scroll encadenado en móviles.
 - **Crear `overflow` ≠ visible genera nuevo BFC** → corta colapso de márgenes (ver 4.2).
-- `text-overflow: ellipsis` requiere `overflow: hidden` + `white-space: nowrap`.
+- [`text-overflow: ellipsis`](https://developer.mozilla.org/en-US/docs/Web/CSS/text-overflow){target="_blank"} requiere `overflow: hidden` + [`white-space: nowrap`](https://developer.mozilla.org/en-US/docs/Web/CSS/white-space){target="_blank"}.
 
 ## 6. Contención (`contain`)
 
-Indica al navegador que ciertas partes del render son **independientes**, permitiendo optimizaciones:
+Indica al navegador que ciertas partes del render son **independientes**, permitiendo optimizaciones mediante la propiedad [`contain`](https://developer.mozilla.org/en-US/docs/Web/CSS/contain){target="_blank"}:
 
 | Valor | Aísla |
 |---|---|
@@ -310,9 +343,11 @@ Indica al navegador que ciertas partes del render son **independientes**, permit
 .lista-virtual .item { contain: content; }
 ```
 
-Advertencia: `contain: size` **ignora el tamaño del contenido** (peligroso sin `contain-intrinsic-size`); la ==contención== se estudia en rendimiento (unidad 14).
+Advertencia: `contain: size` **ignora el tamaño del contenido** (peligroso sin [`contain-intrinsic-size`](https://developer.mozilla.org/en-US/docs/Web/CSS/contain-intrinsic-size){target="_blank"}); la ==contención== se estudia en rendimiento (unidad 14).
 
 ## 7. `resize` y `cursor`
+
+Las propiedades [`resize`](https://developer.mozilla.org/en-US/docs/Web/CSS/resize){target="_blank"} y [`cursor`](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor){target="_blank"} permiten interactividad manual en el tamaño y la apariencia del puntero:
 
 ```css title="estilos.css"
 .editable {
@@ -552,31 +587,31 @@ El siguiente ejemplo implementa una tarjeta de producto de comercio electrónico
 A continuación se realiza una disección técnica de cada regla y valor del modelo de caja aplicados en la tarjeta:
 
 #### 1. `box-sizing: border-box` en el reset
-- **¿Para qué sirve?** Modifica la ecuación fundamental del modelo de caja del navegador.
+- **¿Para qué sirve?** Modifica la ecuación fundamental del modelo de caja del navegador mediante [`box-sizing`](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing){target="_blank"}.
 - **Fórmula matemática estándar (`content-box`):**
   `Ancho total = width + padding + border`
 - **Fórmula con `border-box`:**
   `Ancho total = width`
-- **Por qué es indispensable aquí:** Cuando a `.caja-producto__boton` le asignamos `width: 100%` y un `padding-inline: 1.25rem`, con `content-box` el botón se saldría lateralmente de la tarjeta por `2 × 1.25rem = 2.5rem`. Con `border-box`, el navegador encoge el área de contenido para que la suma total coincida exactamente con el 100% del contenedor.
+- **Por qué es indispensable aquí:** Cuando a `.caja-producto__boton` le asignamos [`width: 100%`](https://developer.mozilla.org/en-US/docs/Web/CSS/width){target="_blank"} y un [`padding-inline: 1.25rem`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline){target="_blank"}, con `content-box` el botón se saldría lateralmente de la tarjeta por `2 × 1.25rem = 2.5rem`. Con `border-box`, el navegador encoge el área de contenido para que la suma total coincida exactamente con el 100% del contenedor.
 
 #### 2. `display: flow-root` y contención BFC
-- **¿Para qué sirve?** Establece un nuevo **Contexto de Formateo de Bloque** (*Block Formatting Context - BFC*).
-- **El problema que previene:** Evita el fenómeno del **colapso de márgenes verticales**. En CSS ordinario, el margen superior del primer hijo (`margin-top`) se escapa fuera del contenedor padre, empujando toda la tarjeta hacia abajo. Al declarar `flow-root`, los márgenes interiores quedan estrictamente confinados dentro de los límites de la tarjeta.
+- **¿Para qué sirve?** Establece un nuevo **Contexto de Formateo de Bloque** (*Block Formatting Context - BFC*) mediante [`display: flow-root`](https://developer.mozilla.org/en-US/docs/Web/CSS/display){target="_blank"}.
+- **El problema que previene:** Evita el fenómeno del **colapso de márgenes verticales**. En CSS ordinario, el margen superior del primer hijo ([`margin-top`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-top){target="_blank"}) se escapa fuera del contenedor padre, empujando toda la tarjeta hacia abajo. Al declarar `flow-root`, los márgenes interiores quedan estrictamente confinados dentro de los límites de la tarjeta.
 
 #### 3. `aspect-ratio: 16 / 9` frente al Cumulative Layout Shift (CLS)
-- **¿Para qué sirve?** Fuerza una relación dimensional constante entre anchura y altura sin necesidad de esperar a que la imagen se descargue de internet.
+- **¿Para qué sirve?** La propiedad [`aspect-ratio`](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio){target="_blank"} fuerza una relación dimensional constante entre anchura y altura sin necesidad de esperar a que la imagen se descargue de internet.
 - **Importancia en rendimiento (*Core Web Vitals*):** En conexiones lentas, el navegador calcula inmediatamente la altura del contenedor (`altura = ancho * 9 / 16`). Cuando la fotografía finalmente termina de cargarse, no se produce ningún salto brusco en la interfaz, eliminando el CLS.
 
 #### 4. `object-fit: cover` y `display: block` en imágenes
-- **`object-fit: cover`:** Escala la imagen para llenar todo el marco de 16:9, recortando sutilmente los sobrantes sin distorsionar ni estirar la proporción original de la fotografía.
-- **`display: block`:** Por defecto, los elementos `<img>` son de tipo `inline-block`, por lo que el navegador les reserva un espacio inferior de 3 o 4 píxeles para acomodar la línea base tipográfica (*descender space*). Convertirla en bloque elimina ese espacio fantasma.
+- **[`object-fit: cover`](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit){target="_blank"}:** Escala la imagen para llenar todo el marco de 16:9, recortando sutilmente los sobrantes sin distorsionar ni estirar la proporción original de la fotografía.
+- **[`display: block`](https://developer.mozilla.org/en-US/docs/Web/CSS/display){target="_blank"}:** Por defecto, los elementos `<img>` son de tipo `inline-block`, por lo que el navegador les reserva un espacio inferior de 3 o 4 píxeles para acomodar la línea base tipográfica (*descender space*). Convertirla en bloque elimina ese espacio fantasma.
 
 #### 5. Propiedades lógicas de dirección (`margin-block-end`, `padding-inline`)
 - **¿Por qué usarlas frente a `margin-bottom` o `padding-left/right`?**
-- Respetan la internacionalización moderna (*i18n*). Si la web se visualiza en un idioma con escritura de derecha a izquierda (árabe, hebreo) o vertical (japonés tradicional), el navegador adapta los márgenes y rellenos automáticamente sin necesidad de reescribir hojas de estilo separadas.
+  Las propiedades lógicas como [`margin-block-end`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-block-end){target="_blank"} y [`padding-inline`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-inline){target="_blank"} frente a las físicas tradicionales ([`margin-bottom`](https://developer.mozilla.org/en-US/docs/Web/CSS/margin-bottom){target="_blank"}, [`padding-left`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-left){target="_blank"}, [`padding-right`](https://developer.mozilla.org/en-US/docs/Web/CSS/padding-right){target="_blank"}) respetan la internacionalización moderna (*i18n*). Si la web se visualiza en un idioma con escritura de derecha a izquierda (árabe, hebreo) o vertical (japonés tradicional), el navegador adapta los márgenes y rellenos automáticamente sin necesidad de reescribir hojas de estilo separadas.
 
 #### 6. Legibilidad óptima con unidades de caracteres (`max-width: 50ch`)
-- **¿Para qué sirve?** Fija el ancho máximo del párrafo a la anchura de 50 caracteres del glifo "0" de la tipografía activa.
+- **¿Para qué sirve?** Fija el ancho máximo del párrafo con [`max-width`](https://developer.mozilla.org/en-US/docs/Web/CSS/max-width){target="_blank"} a la anchura de 50 caracteres del glifo "0" de la tipografía activa.
 - **Justificación ergonómica:** La investigación tipográfica demuestra que las líneas de lectura con más de 65-75 caracteres provocan fatiga visual y pérdida de foco al saltar de renglón. Acotar a `50ch` garantiza una lectura cómoda y descansada.
 
 ---

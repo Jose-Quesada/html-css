@@ -21,6 +21,18 @@ Sin `<a>` no hay hipertexto: destinos, rutas, atributos, accesibilidad, imágene
 
 ### 1.1 Anatomía de un enlace
 
+!!! tip "Guía de referencia rápida MDN Web Docs — HTML 03 — Enlaces, Navegación y Recursos"
+
+    Documentación técnica oficial en MDN de cada etiqueta explicada en esta unidad (se abren en una nueva ventana):
+
+    | Etiqueta HTML | Descripción y especificación en MDN |
+    |---|---|
+    | [`<a>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a){target="_blank"} | Hiperenlace a destinos internos, externos o anclas |
+    | [`<iframe>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe){target="_blank"} | Marco anidado para incrustar páginas o mapas |
+    | [`<embed>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/embed){target="_blank"} | Contenedor de recursos multimedia externos |
+    | [`<object>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/object){target="_blank"} | Contenedor de recursos externos multiuso (PDFs, SVGs) |
+
+
 ```html title="enlace.html" hl_lines="2"
 <!-- El destino va siempre en href; sin él <a> no navega -->
 <a href="productos.html">Ver el catálogo de productos</a>

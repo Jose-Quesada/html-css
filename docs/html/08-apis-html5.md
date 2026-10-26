@@ -21,6 +21,16 @@ HTML5 no se limita a estructurar texto plano: incorpora **elementos interactivos
 
 ## 1. Atributos `data-*`: el puente con JavaScript
 
+!!! tip "Guía de referencia rápida MDN Web Docs — HTML 08 — APIs HTML5 y Elementos Interactivos"
+
+    Documentación técnica oficial en MDN de cada etiqueta explicada en esta unidad (se abren en una nueva ventana):
+
+    | Etiqueta HTML | Descripción y especificación en MDN |
+    |---|---|
+    | [`<canvas>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas){target="_blank"} | Lienzo de renderizado gráfico 2D y WebGL mediante scripts |
+    | [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog){target="_blank"} | Cuadro de diálogo y ventana modal nativa interactiva |
+
+
 ### 1.1 Qué son y cómo funcionan
 
 Cualquier atributo cuyo nombre comience por ==`data-*`== es válido en HTML5. El navegador no los procesa ni los valida, pero expone su valor a JavaScript mediante la propiedad `elemento.dataset`. Permiten asociar datos de negocio al marcado sin recurrir a clases CSS artificiales ni a atributos no estándar.

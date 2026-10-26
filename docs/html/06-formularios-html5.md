@@ -19,6 +19,28 @@ Un formulario es la **puerta de entrada de datos** hacia el servidor: sin `label
 
 ## 1. El elemento `form`
 
+!!! tip "Guía de referencia rápida MDN Web Docs — HTML 06 — Formularios y Controles Interactivos"
+
+    Documentación técnica oficial en MDN de cada etiqueta explicada en esta unidad (se abren en una nueva ventana):
+
+    | Etiqueta HTML | Descripción y especificación en MDN |
+    |---|---|
+    | [`<form>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form){target="_blank"} | Contenedor interactivo de captura y envío de datos |
+    | [`<label>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label){target="_blank"} | Etiqueta textual accesible vinculada a un control |
+    | [`<input>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input){target="_blank"} | Control de entrada de datos (text, email, password, etc.) |
+    | [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button){target="_blank"} | Botón interactivo de envío, reinicio o acción JS |
+    | [`<select>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/select){target="_blank"} | Menú desplegable de opciones seleccionables |
+    | [`<optgroup>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/optgroup){target="_blank"} | Agrupación temática de opciones en un desplegable |
+    | [`<option>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/option){target="_blank"} | Opción individual dentro de un menú select |
+    | [`<textarea>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea){target="_blank"} | Área de texto multilínea |
+    | [`<fieldset>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/fieldset){target="_blank"} | Agrupación lógica de campos relacionados |
+    | [`<legend>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/legend){target="_blank"} | Título descriptivo de un fieldset |
+    | [`<datalist>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist){target="_blank"} | Lista de sugerencias predefinidas para un input |
+    | [`<output>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/output){target="_blank"} | Elemento que muestra el resultado de un cálculo |
+    | [`<progress>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress){target="_blank"} | Barra de progreso de una tarea cuantificable |
+    | [`<meter>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meter){target="_blank"} | Indicador de medida dentro de un rango conocido (manómetro) |
+
+
 ### 1.1 `action` y `method`: GET vs POST
 
 `<form>` envía los campos a la URL de **`action`** con el verbo de **`method`**.

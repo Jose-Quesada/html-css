@@ -19,6 +19,16 @@ El diseño responsivo (Ethan Marcotte, 2010) parte de tres pilares: **layout flu
 
 ## 1. Fundamentos no negociables
 
+!!! tip "Guía de referencia rápida MDN Web Docs — CSS 10 — Diseño Responsivo y Container Queries"
+
+    Documentación técnica oficial en MDN de cada propiedad explicada en esta unidad (se abren en una nueva ventana):
+
+    | Propiedad CSS | Descripción y especificación en MDN |
+    |---|---|
+    | [`container-type`](https://developer.mozilla.org/en-US/docs/Web/CSS/container-type){target="_blank"} | Convierte el elemento en contenedor para container queries |
+    | [`container-name`](https://developer.mozilla.org/en-US/docs/Web/CSS/container-name){target="_blank"} | Nombre identificador para consultas de contenedor dirigidas |
+
+
 ### 1.1. El `<meta name="viewport">`
 
 ```html title="index.html"

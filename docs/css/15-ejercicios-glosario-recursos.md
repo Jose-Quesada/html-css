@@ -1353,7 +1353,7 @@ Empezando por aquí: ==MDN== para dudas diarias y ==caniuse== antes de estrenar 
 
 ### Documentación de referencia
 
-- **MDN Web Docs (ES)**: <https://developer.mozilla.org/es/docs/Web/CSS> — la biblia diaria.
+- **MDN Web Docs (ES)**: [MDN Web Docs](https://developer.mozilla.org/es/docs/Web/CSS){target="_blank"} — la biblia diaria.
 - **web.dev** (Google): rendimiento, Core Web Vitals, a11y: <https://web.dev>
 - **Chrome Developers**: artículos profundos del equipo Chromium: <https://developer.chrome.com/docs>
 - **caniuse.com**: compatibilidad por característica (verificar antes de usar features nuevas).

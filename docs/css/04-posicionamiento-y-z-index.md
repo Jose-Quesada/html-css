@@ -18,6 +18,21 @@ fecha: "2026-09-06"
 
 ## 1. Los cinco valores de `position`
 
+!!! tip "Guía de referencia rápida MDN Web Docs — CSS 04 — Posicionamiento y z-index"
+
+    Documentación técnica oficial en MDN de cada propiedad explicada en esta unidad (se abren en una nueva ventana):
+
+    | Propiedad CSS | Descripción y especificación en MDN |
+    |---|---|
+    | [`position`](https://developer.mozilla.org/en-US/docs/Web/CSS/position){target="_blank"} | Define el esquema de posicionamiento de la caja |
+    | [`top`](https://developer.mozilla.org/en-US/docs/Web/CSS/top){target="_blank"} | Distancia desde el borde superior de referencia |
+    | [`right`](https://developer.mozilla.org/en-US/docs/Web/CSS/right){target="_blank"} | Distancia desde el borde derecho de referencia |
+    | [`bottom`](https://developer.mozilla.org/en-US/docs/Web/CSS/bottom){target="_blank"} | Distancia desde el borde inferior de referencia |
+    | [`left`](https://developer.mozilla.org/en-US/docs/Web/CSS/left){target="_blank"} | Distancia desde el borde izquierdo de referencia |
+    | [`inset`](https://developer.mozilla.org/en-US/docs/Web/CSS/inset){target="_blank"} | Atajo abreviado para top, right, bottom y left |
+    | [`z-index`](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index){target="_blank"} | Orden de apilamiento en el eje tridimensional Z |
+
+
 
 | Valor | Comportamiento | Sale del flujo? |
 |---|---|---|

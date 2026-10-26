@@ -19,6 +19,27 @@ Una página tiene cabecera, menú, contenido principal, barra lateral y pie; si 
 
 ## 1. Por qué la semántica
 
+!!! tip "Guía de referencia rápida MDN Web Docs — HTML 07 — Estructura Semántica y Accesibilidad (ARIA)"
+
+    Documentación técnica oficial en MDN de cada etiqueta explicada en esta unidad (se abren en una nueva ventana):
+
+    | Etiqueta HTML | Descripción y especificación en MDN |
+    |---|---|
+    | [`<header>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/header){target="_blank"} | Cabecera introductoria del sitio o de una sección |
+    | [`<nav>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav){target="_blank"} | Sección con enlaces principales de navegación |
+    | [`<main>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/main){target="_blank"} | Contenido principal y dominante del documento |
+    | [`<article>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/article){target="_blank"} | Contenido autocontenido, independiente y distribuible |
+    | [`<section>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/section){target="_blank"} | Sección temática genérica con encabezado |
+    | [`<aside>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/aside){target="_blank"} | Contenido tangencial o secundario (barra lateral, glosario) |
+    | [`<footer>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer){target="_blank"} | Pie de página o cierre contextual |
+    | [`<address>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/address){target="_blank"} | Información de contacto del autor o empresa |
+    | [`<dialog>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog){target="_blank"} | Ventana modal o cuadro de diálogo interactivo nativo |
+    | [`<details>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details){target="_blank"} | Contenedor colapsable de información desplegable |
+    | [`<summary>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/summary){target="_blank"} | Cabecera visible del desplegable details |
+    | [`<template>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template){target="_blank"} | Fragmento de HTML inerte para clonación con JavaScript |
+    | [`<search>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/search){target="_blank"} | Sección destinada a formularios de búsqueda o filtrado |
+
+
 ### 1.1 Tres lectores del mismo HTML
 
 - **Máquina** (buscadores): busca la estructura; con una sopa de `<div>` no distingue el artículo de un anuncio.

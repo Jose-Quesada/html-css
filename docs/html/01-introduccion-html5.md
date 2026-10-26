@@ -146,6 +146,32 @@ flowchart TD
 
 ### 2.1 Plantilla completa (*boilerplate*) profesional
 
+!!! tip "Guía de referencia rápida MDN Web Docs — HTML 01 — Anatomía y Elementos Raíz"
+
+    Documentación técnica oficial en MDN de cada etiqueta explicada en esta unidad (se abren en una nueva ventana):
+
+    | Etiqueta HTML | Descripción y especificación en MDN |
+    |---|---|
+    | [`<html>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/html){target="_blank"} | Elemento raíz de todo documento HTML |
+    | [`<head>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head){target="_blank"} | Contenedor de metadatos, títulos y enlaces a recursos |
+    | [`<title>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title){target="_blank"} | Título del documento mostrado en pestaña y marcadores |
+    | [`<meta>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta){target="_blank"} | Metadatos (charset, viewport, SEO, Open Graph) |
+    | [`<link>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link){target="_blank"} | Vínculo con recursos externos (hojas de estilo, favicons, canonical) |
+    | [`<body>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/body){target="_blank"} | Contenedor de todo el contenido visible y perceptible |
+    | [`<header>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/header){target="_blank"} | Cabecera introductoria o de contexto |
+    | [`<nav>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav){target="_blank"} | Sección con enlaces de navegación principal |
+    | [`<main>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/main){target="_blank"} | Contenido central, único y principal del documento |
+    | [`<h1>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h1){target="_blank"} | Encabezado de primer nivel jerárquico |
+    | [`<h2>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h2){target="_blank"} | Encabezado de segundo nivel jerárquico |
+    | [`<p>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p){target="_blank"} | Párrafo de texto |
+    | [`<strong>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strong){target="_blank"} | Texto con fuerte importancia o urgencia semántica |
+    | [`<form>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form){target="_blank"} | Sección interactiva para captura y envío de datos |
+    | [`<label>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/label){target="_blank"} | Etiqueta accesible asociada a un control de formulario |
+    | [`<input>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input){target="_blank"} | Control de entrada de datos multifuncional |
+    | [`<button>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button){target="_blank"} | Botón interactivo de activación o envío |
+    | [`<footer>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer){target="_blank"} | Pie de página o cierre de contexto |
+
+
 ```html title="index.html" hl_lines="1 2 4 5 6 7 8 13 14 17 21"
 <!DOCTYPE html>
 <html lang="es">

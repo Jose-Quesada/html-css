@@ -41,6 +41,28 @@ flowchart TD
 
 ## 1. Transiciones
 
+!!! tip "Guía de referencia rápida MDN Web Docs — CSS 11 — Transiciones y Animaciones"
+
+    Documentación técnica oficial en MDN de cada propiedad explicada en esta unidad (se abren en una nueva ventana):
+
+    | Propiedad CSS | Descripción y especificación en MDN |
+    |---|---|
+    | [`transition`](https://developer.mozilla.org/en-US/docs/Web/CSS/transition){target="_blank"} | Atajo completo para transiciones CSS |
+    | [`transition-property`](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-property){target="_blank"} | Propiedades CSS sujetas a transición |
+    | [`transition-duration`](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-duration){target="_blank"} | Duración temporal del cambio de estado |
+    | [`transition-timing-function`](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function){target="_blank"} | Curva de aceleración (ease, linear, cubic-bezier) |
+    | [`transition-delay`](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-delay){target="_blank"} | Tiempo de retardo antes de iniciar la transición |
+    | [`transform`](https://developer.mozilla.org/en-US/docs/Web/CSS/transform){target="_blank"} | Aplica transformaciones 2D/3D a la caja |
+    | [`translate`](https://developer.mozilla.org/en-US/docs/Web/CSS/translate){target="_blank"} | Propiedad individual de traslación dimensional |
+    | [`rotate`](https://developer.mozilla.org/en-US/docs/Web/CSS/rotate){target="_blank"} | Propiedad individual de rotación angular |
+    | [`scale`](https://developer.mozilla.org/en-US/docs/Web/CSS/scale){target="_blank"} | Propiedad individual de escalado dimensional |
+    | [`animation`](https://developer.mozilla.org/en-US/docs/Web/CSS/animation){target="_blank"} | Atajo completo para animaciones con fotogramas clave |
+    | [`animation-name`](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-name){target="_blank"} | Nombre de la regla @keyframes vinculada |
+    | [`animation-duration`](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-duration){target="_blank"} | Duración de un ciclo de animación |
+    | [`animation-iteration-count`](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-iteration-count){target="_blank"} | Número de repeticiones o infinite |
+    | [`animation-fill-mode`](https://developer.mozilla.org/en-US/docs/Web/CSS/animation-fill-mode){target="_blank"} | Estado de estilos antes y después de animar |
+
+
 La ==transition== interpola entre **dos estados** ya definidos.
 
 ### 1.1. Propiedades

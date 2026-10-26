@@ -19,6 +19,16 @@ El módulo 0615 (DIW) y el módulo 0488 (DI) dedican resultados de aprendizaje e
 
 ## 1. Marco: WCAG
 
+!!! tip "Guía de referencia rápida MDN Web Docs — CSS 13 — Accesibilidad y Preferencias de Usuario"
+
+    Documentación técnica oficial en MDN de cada propiedad explicada en esta unidad (se abren en una nueva ventana):
+
+    | Propiedad CSS | Descripción y especificación en MDN |
+    |---|---|
+    | [`color-scheme`](https://developer.mozilla.org/en-US/docs/Web/CSS/color-scheme){target="_blank"} | Indica soporte nativo para esquemas de color claro y oscuro |
+    | [`accent-color`](https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color){target="_blank"} | Personaliza el color de acento en controles de formulario nativos |
+
+
 Los cuatro principios se recuerdan por sus siglas: ==POUR==.
 
 **WCAG (Web Content Accessibility Guidelines)**, W3C, versiones 2.0/2.1/2.2. Se organiza en:

@@ -19,6 +19,24 @@ El RA 1 del módulo 0615 exige «analizar y seleccionar los **colores y tipograf
 
 ## PARTE A · UNIDADES
 
+!!! tip "Guía de referencia rápida MDN Web Docs — CSS 08 — Tipografía, Colores y Unidades"
+
+    Documentación técnica oficial en MDN de cada propiedad explicada en esta unidad (se abren en una nueva ventana):
+
+    | Propiedad CSS | Descripción y especificación en MDN |
+    |---|---|
+    | [`font-family`](https://developer.mozilla.org/en-US/docs/Web/CSS/font-family){target="_blank"} | Familia tipográfica y pila de fuentes de respaldo |
+    | [`font-size`](https://developer.mozilla.org/en-US/docs/Web/CSS/font-size){target="_blank"} | Tamaño de la fuente tipográfica |
+    | [`font-weight`](https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight){target="_blank"} | Grosor o peso del trazo tipográfico |
+    | [`font-style`](https://developer.mozilla.org/en-US/docs/Web/CSS/font-style){target="_blank"} | Estilo de fuente (normal, italic, oblique) |
+    | [`line-height`](https://developer.mozilla.org/en-US/docs/Web/CSS/line-height){target="_blank"} | Altura de línea e interlineado tipográfico |
+    | [`letter-spacing`](https://developer.mozilla.org/en-US/docs/Web/CSS/letter-spacing){target="_blank"} | Espaciado horizontal entre caracteres (tracking) |
+    | [`text-align`](https://developer.mozilla.org/en-US/docs/Web/CSS/text-align){target="_blank"} | Alineación del texto en el bloque (left, center, justify) |
+    | [`text-decoration`](https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration){target="_blank"} | Decoración de texto (subrayado, tachado, etc.) |
+    | [`text-transform`](https://developer.mozilla.org/en-US/docs/Web/CSS/text-transform){target="_blank"} | Transformación a mayúsculas, minúsculas o capitalización |
+    | [`color`](https://developer.mozilla.org/en-US/docs/Web/CSS/color){target="_blank"} | Color del texto y trazo de primer plano |
+
+
 Toda medida CSS es una **magnitud más una unidad**.
 
 ### 1. Clasificación general

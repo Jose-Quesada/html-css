@@ -19,6 +19,24 @@ Cubre el RA 3/4 del módulo 0615 (preparar e integrar contenido multimedia) desd
 
 ## 1. `background`: la propiedad maestra
 
+!!! tip "Guía de referencia rápida MDN Web Docs — CSS 09 — Fondos, Sombras y Filtros"
+
+    Documentación técnica oficial en MDN de cada propiedad explicada en esta unidad (se abren en una nueva ventana):
+
+    | Propiedad CSS | Descripción y especificación en MDN |
+    |---|---|
+    | [`background`](https://developer.mozilla.org/en-US/docs/Web/CSS/background){target="_blank"} | Atajo para color, imagen, posición, tamaño y repetición |
+    | [`background-color`](https://developer.mozilla.org/en-US/docs/Web/CSS/background-color){target="_blank"} | Color de fondo sólido o semitransparente |
+    | [`background-image`](https://developer.mozilla.org/en-US/docs/Web/CSS/background-image){target="_blank"} | Imagen, degradado (gradient) o patrón de fondo |
+    | [`background-position`](https://developer.mozilla.org/en-US/docs/Web/CSS/background-position){target="_blank"} | Posicionamiento de la imagen de fondo |
+    | [`background-size`](https://developer.mozilla.org/en-US/docs/Web/CSS/background-size){target="_blank"} | Dimensionamiento de la imagen (cover, contain, etc.) |
+    | [`background-repeat`](https://developer.mozilla.org/en-US/docs/Web/CSS/background-repeat){target="_blank"} | Modo de repetición de la imagen de fondo |
+    | [`box-shadow`](https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow){target="_blank"} | Sombra arrojada exterior o interior (inset) de la caja |
+    | [`filter`](https://developer.mozilla.org/en-US/docs/Web/CSS/filter){target="_blank"} | Efectos gráficos (desenfoque, brillo, contraste, escala de grises) |
+    | [`backdrop-filter`](https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter){target="_blank"} | Filtro gráfico aplicado al área situada detrás del elemento |
+    | [`clip-path`](https://developer.mozilla.org/en-US/docs/Web/CSS/clip-path){target="_blank"} | Recorta el área visible del elemento mediante formas geométricas |
+
+
 Domina ==background-size==: `cover` **llena recortando**, `contain` **cabe entero**.
 
 ### 1.1. Subpropiedades

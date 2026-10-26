@@ -39,6 +39,23 @@ Flash, Silverlight o QuickTime exigían instalar un componente aparte, actualiza
 
 ### 2.1 Atributos principales explicados en detalle
 
+!!! tip "Guía de referencia rápida MDN Web Docs — HTML 04 — Multimedia (Audio, Vídeo y Gráficos)"
+
+    Documentación técnica oficial en MDN de cada etiqueta explicada en esta unidad (se abren en una nueva ventana):
+
+    | Etiqueta HTML | Descripción y especificación en MDN |
+    |---|---|
+    | [`<img>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img){target="_blank"} | Imagen incrustada en el documento |
+    | [`<picture>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture){target="_blank"} | Contenedor responsivo multi-formato para imágenes |
+    | [`<source>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/source){target="_blank"} | Fuente alternativa de medio para picture, video o audio |
+    | [`<video>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video){target="_blank"} | Reproductor nativo de vídeo |
+    | [`<audio>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio){target="_blank"} | Reproductor nativo de sonido y música |
+    | [`<track>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/track){target="_blank"} | Pistas de subtítulos o transcripción sincronizada (WebVTT) |
+    | [`<canvas>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas){target="_blank"} | Lienzo de dibujo en mapa de bits mediante script |
+    | [`<map>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/map){target="_blank"} | Mapa de imagen con áreas interactivas |
+    | [`<area>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/area){target="_blank"} | Área clicable individual dentro de un mapa de imagen |
+
+
 Para un alumno que aprende HTML5, la etiqueta `<video>` se controla mediante una combinación de atributos booleanos y de configuración que determinan la interfaz y el comportamiento de red:
 
 | Atributo | Tipo | Función y Comportamiento |

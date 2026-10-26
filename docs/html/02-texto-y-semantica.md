@@ -172,6 +172,46 @@ Los menús son listas de enlaces: `<nav>` + `<ul>` + `<li>` + `<a>`, tal como se
 
 ### 4.2 Explicación detallada de los elementos en línea semánticos
 
+!!! tip "Guía de referencia rápida MDN Web Docs — HTML 02 — Texto, Encabezados y Semántica"
+
+    Documentación técnica oficial en MDN de cada etiqueta explicada en esta unidad (se abren en una nueva ventana):
+
+    | Etiqueta HTML | Descripción y especificación en MDN |
+    |---|---|
+    | [`<h1>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/h1){target="_blank"} | Encabezados jerárquicos de nivel 1 a 6 |
+    | [`<p>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/p){target="_blank"} | Párrafo de texto |
+    | [`<br>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/br){target="_blank"} | Salto de línea literal forzado |
+    | [`<hr>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hr){target="_blank"} | Separador temático entre párrafos o secciones |
+    | [`<ul>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul){target="_blank"} | Lista desordenada (elementos sin jerarquía estricta) |
+    | [`<ol>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol){target="_blank"} | Lista ordenada (pasos, ranking con numeración) |
+    | [`<li>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li){target="_blank"} | Elemento individual dentro de una lista |
+    | [`<dl>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dl){target="_blank"} | Lista de descripciones / glosario |
+    | [`<dt>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dt){target="_blank"} | Término a describir en una lista de descripción |
+    | [`<dd>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dd){target="_blank"} | Definición o descripción del término asociado |
+    | [`<strong>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/strong){target="_blank"} | Texto con gran importancia o advertencia crítica |
+    | [`<em>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/em){target="_blank"} | Énfasis semántico en el tono de voz |
+    | [`<time>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time){target="_blank"} | Fecha u hora en formato ISO 8601 legible por máquinas |
+    | [`<abbr>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr){target="_blank"} | Abreviatura o sigla con descripción expandida |
+    | [`<del>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/del){target="_blank"} | Texto eliminado o tachado tras una revisión |
+    | [`<ins>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ins){target="_blank"} | Texto insertado o añadido tras una revisión |
+    | [`<mark>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/mark){target="_blank"} | Texto resaltado contextualmente por relevancia |
+    | [`<sub>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sub){target="_blank"} | Texto en subíndice (fórmulas químicas) |
+    | [`<sup>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/sup){target="_blank"} | Texto en superíndice (potencias, notas al pie) |
+    | [`<dfn>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dfn){target="_blank"} | Término que se define por primera vez |
+    | [`<q>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/q){target="_blank"} | Cita textual corta integrada en línea |
+    | [`<blockquote>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/blockquote){target="_blank"} | Cita textual extensa en bloque |
+    | [`<cite>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/cite){target="_blank"} | Título de una obra citada o autoría |
+    | [`<small>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/small){target="_blank"} | Texto accesorio, descargos o letra pequeña legal |
+    | [`<code>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/code){target="_blank"} | Fragmento de código o sintaxis en línea |
+    | [`<pre>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre){target="_blank"} | Texto preformateado con espacios preservados |
+    | [`<kbd>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd){target="_blank"} | Entrada de teclado o comando del usuario |
+    | [`<samp>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/samp){target="_blank"} | Salida generada por un programa o terminal |
+    | [`<var>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/var){target="_blank"} | Variable matemática o parámetro de programación |
+    | [`<address>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/address){target="_blank"} | Información de contacto del autor o entidad |
+    | [`<figure>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figure){target="_blank"} | Contenido autocontenido (imagen, código, diagrama) |
+    | [`<figcaption>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/figcaption){target="_blank"} | Pie descriptivo de una figura |
+
+
 Para un alumno principiante, la regla de oro es: **nunca elijas una etiqueta HTML por cómo se ve en pantalla**, sino por **qué significa su contenido**. La apariencia visual siempre es responsabilidad de CSS.
 
 A continuación se detalla la función real de cada etiqueta semántica en línea:
@@ -247,11 +287,11 @@ Cuando escribimos documentación de software, tutoriales o apuntes informáticos
 
 | Etiqueta | Función conceptual | Ejemplo de uso |
 |---|---|---|
-| `<code>` | Fragmento de código o sintaxis de programación **en línea** | Para declarar variables en JS usa <code>const</code> o <code>let</code>. |
-| `<pre>` | Bloque con **espacios en blanco y saltos de línea preservados** | Bloques de código fuente completos (siempre debe envolver a un `<code>` en su interior). |
-| `<kbd>` | Tecla física o atajo de teclado que debe pulsar el usuario | Pulsa <kbd>Ctrl</kbd> + <kbd>C</kbd> para copiar. |
-| `<samp>` | Salida o respuesta que devuelve un programa o terminal | El servidor respondió: <samp>200 OK</samp>. |
-| `<var>` | Variable matemática o parámetro formal en programación | Si la variable <var>x</var> es mayor que 10... |
+| [`<code>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/code){target="_blank"} | Fragmento de código o sintaxis de programación **en línea** | Para declarar variables en JS usa <code>const</code> o <code>let</code>. |
+| [`<pre>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/pre){target="_blank"} | Bloque con **espacios en blanco y saltos de línea preservados** | Bloques de código fuente completos (siempre debe envolver a un `<code>` en su interior). |
+| [`<kbd>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/kbd){target="_blank"} | Tecla física o atajo de teclado que debe pulsar el usuario | Pulsa <kbd>Ctrl</kbd> + <kbd>C</kbd> para copiar. |
+| [`<samp>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/samp){target="_blank"} | Salida o respuesta que devuelve un programa o terminal | El servidor respondió: <samp>200 OK</samp>. |
+| [`<var>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/var){target="_blank"} | Variable matemática o parámetro formal en programación | Si la variable <var>x</var> es mayor que 10... |
 
 ```html title="codigo-tecnico.html"
 <p>Para formatear el disco duro, escribe el comando <code>format C:</code> en la consola y presiona la tecla <kbd>Enter</kbd>.</p>

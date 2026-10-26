@@ -59,6 +59,29 @@ flowchart TD
 
 ## 2. Definir la cuadrícula explícita
 
+!!! tip "Guía de referencia rápida MDN Web Docs — CSS 06 — CSS Grid Layout"
+
+    Documentación técnica oficial en MDN de cada propiedad explicada en esta unidad (se abren en una nueva ventana):
+
+    | Propiedad CSS | Descripción y especificación en MDN |
+    |---|---|
+    | [`display`](https://developer.mozilla.org/en-US/docs/Web/CSS/display){target="_blank"} | Activa el contenedor cuadrícula (grid o inline-grid) |
+    | [`grid-template-columns`](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-columns){target="_blank"} | Define las pistas de columnas de la cuadrícula explícita |
+    | [`grid-template-rows`](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows){target="_blank"} | Define las pistas de filas de la cuadrícula explícita |
+    | [`grid-template-areas`](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas){target="_blank"} | Define áreas nombradas para maquetación por nombres |
+    | [`grid-auto-columns`](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-columns){target="_blank"} | Tamaño de las columnas implícitas generadas |
+    | [`grid-auto-rows`](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-rows){target="_blank"} | Tamaño de las filas implícitas generadas |
+    | [`grid-auto-flow`](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-auto-flow){target="_blank"} | Algoritmo de colocación automática (row/column/dense) |
+    | [`grid-column`](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-column){target="_blank"} | Atajo para inicio y fin de columna de un ítem |
+    | [`grid-row`](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-row){target="_blank"} | Atajo para inicio y fin de fila de un ítem |
+    | [`grid-area`](https://developer.mozilla.org/en-US/docs/Web/CSS/grid-area){target="_blank"} | Asigna un ítem a un área o define sus 4 coordenadas |
+    | [`gap`](https://developer.mozilla.org/en-US/docs/Web/CSS/gap){target="_blank"} | Espacio entre filas y columnas de la cuadrícula |
+    | [`justify-items`](https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items){target="_blank"} | Alineación horizontal de los ítems en su celda |
+    | [`align-items`](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items){target="_blank"} | Alineación vertical de los ítems en su celda |
+    | [`place-items`](https://developer.mozilla.org/en-US/docs/Web/CSS/place-items){target="_blank"} | Atajo para align-items y justify-items |
+    | [`place-content`](https://developer.mozilla.org/en-US/docs/Web/CSS/place-content){target="_blank"} | Atajo para align-content y justify-content |
+
+
 ### 2.1. `grid-template-columns` / `grid-template-rows`
 
 ```css title="plantilla-explicita.css"

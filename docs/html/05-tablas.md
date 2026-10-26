@@ -20,6 +20,24 @@ Una tabla es el **único** elemento de HTML pensado para relacionar datos que se
 
 ## 1. Cuándo SÍ y cuándo NO usar una tabla
 
+!!! tip "Guía de referencia rápida MDN Web Docs — HTML 05 — Tablas de Datos Bidimensionales"
+
+    Documentación técnica oficial en MDN de cada etiqueta explicada en esta unidad (se abren en una nueva ventana):
+
+    | Etiqueta HTML | Descripción y especificación en MDN |
+    |---|---|
+    | [`<table>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table){target="_blank"} | Contenedor de tabla de datos bidimensional |
+    | [`<caption>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/caption){target="_blank"} | Título descriptivo y accesible de la tabla |
+    | [`<thead>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/thead){target="_blank"} | Bloque de cabecera que agrupa las filas de títulos |
+    | [`<tbody>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tbody){target="_blank"} | Bloque principal que contiene las filas de datos |
+    | [`<tfoot>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tfoot){target="_blank"} | Bloque de pie de tabla con totales o sumarios |
+    | [`<tr>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tr){target="_blank"} | Fila individual de celdas en la tabla |
+    | [`<th>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th){target="_blank"} | Celda de cabecera con rol de título de columna o fila |
+    | [`<td>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td){target="_blank"} | Celda estándar de datos |
+    | [`<colgroup>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/colgroup){target="_blank"} | Grupo estructural de columnas para estilado uniforme |
+    | [`<col>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/col){target="_blank"} | Columna individual dentro de un grupo colgroup |
+
+
 ### 1.1 Sí: cuando hay dos ejes de datos independientes
 
 Condiciones que deben cumplirse **todas**:
@@ -34,7 +52,7 @@ Casos típicos: horario, acta de notas, precios de productos o comparativa de m�
 
 ### 1.2 No: nunca para maquetar la página
 
-> **Regla de oro:** una tabla **no** es una herramienta de diseño. Maquetar con `<table>` obliga a anidar tablas e inventar `rowspan` absurdos, rompe el responsive y vuelve ilegible el HTML.
+> **Regla de oro:** una tabla **no** es una herramienta de diseño. Maquetar con [`<table>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table){target="_blank"} obliga a anidar tablas e inventar `rowspan` absurdos, rompe el responsive y vuelve ilegible el HTML.
 
 !!! failure "Anti-patrón: maquetar con tablas"
 
