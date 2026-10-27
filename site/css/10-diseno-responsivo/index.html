@@ -721,8 +721,6 @@
       
         
       
-        
-      
     
     
     
@@ -1157,6 +1155,34 @@
       </span>
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="1.2. Mobile-first">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-porque-del-orden-en-la-cascada-de-css" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        El porqué del orden en la cascada de CSS
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuadro-resumen-mobile-first-vs-desktop-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Cuadro Resumen: Mobile-First vs. Desktop-First
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1672,35 +1698,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../practicas-posicionamiento-flexbox-grid/" class="md-nav__link">
-        
-  
-  
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="lucide lucide-layout" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-  
-  <span class="md-ellipsis">
-    
-  
-  17. Ejercicios clase
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-                
-              
-                
-                  
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../practicas-posicionamiento-flexbox-grid-canvas/" class="md-nav__link">
         
   
@@ -2049,6 +2046,34 @@
       </span>
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="1.2. Mobile-first">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#el-porque-del-orden-en-la-cascada-de-css" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        El porqué del orden en la cascada de CSS
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuadro-resumen-mobile-first-vs-desktop-first" class="md-nav__link">
+    <span class="md-ellipsis">
+      <span class="md-typeset">
+        Cuadro Resumen: Mobile-First vs. Desktop-First
+      </span>
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -2427,8 +2452,6 @@
       
         
       
-        
-      
     
     
     
@@ -2530,8 +2553,42 @@
 <li><strong>Prioridad de contenido</strong>: lo esencial cabe en la columna estrecha.</li>
 </ul>
 </div>
+<h4 id="el-porque-del-orden-en-la-cascada-de-css">El porqué del orden en la cascada de CSS</h4>
+<p>La razón por la que en <strong>Mobile-First</strong> el orden debe ser estrictamente <strong>ascendente</strong> y en <strong>Desktop-First</strong> estrictamente <strong>descendente</strong> radica en la regla de la <strong>Cascada de CSS</strong> (<em>The Cascade</em>): ante dos reglas con la misma especificidad que se cumplen simultáneamente, <strong>la que está escrita más abajo en el archivo siempre gana y sobreescribe a las anteriores</strong>.</p>
+<ul>
+<li><strong>En Mobile-First (<code>min-width</code> / ≥):</strong> En un monitor de 1440px se cumplen a la vez la regla base, <code>min-width: 768px</code> y <code>min-width: 1024px</code>. Como la regla de 1024px está escrita más abajo, sobreescribe con éxito a la de tablet. Si se declarasen en orden inverso, la de tablet se aplicaría al final y anularía el diseño de escritorio.</li>
+<li><strong>En Desktop-First (<code>max-width</code> / ≤):</strong> En un smartphone de 390px se cumplen a la vez la regla base, <code>max-width: 1024px</code> y <code>max-width: 768px</code>. Como la regla de 768px está escrita más abajo, sobreescribe con éxito a la de tablet. Si se declarasen en orden inverso, la de tablet ganaría y el móvil mostraría la versión intermedia.</li>
+</ul>
+<h4 id="cuadro-resumen-mobile-first-vs-desktop-first">Cuadro Resumen: Mobile-First vs. Desktop-First</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Enfoque</th>
+<th style="text-align: left;">Propiedad</th>
+<th style="text-align: left;">Lógica</th>
+<th style="text-align: left;">Orden en el archivo CSS</th>
+<th style="text-align: left;">Regla mnemotécnica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Mobile-First</strong></td>
+<td style="text-align: left;"><code>min-width</code></td>
+<td style="text-align: left;">De menor a mayor resolución (≥)</td>
+<td style="text-align: left;"><strong>Ascendente:</strong> Base → 768px → 1024px → 1280px</td>
+<td style="text-align: left;"><em>«Crezco conforme se ensancha la pantalla; la regla más grande va al final»</em>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Desktop-First</strong></td>
+<td style="text-align: left;"><code>max-width</code></td>
+<td style="text-align: left;">De mayor a menor resolución (≤)</td>
+<td style="text-align: left;"><strong>Descendente:</strong> Base → 1024px → 768px → 480px</td>
+<td style="text-align: left;"><em>«Encojo conforme se achica la pantalla; la regla más pequeña va al final»</em>.</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
-<p><strong>Claves para el examen</strong>: explicar por qué <code>min-width</code> (mobile-first) frente a <code>max-width</code> (desktop-first): mejora progresiva + menos overrides.</p>
+<p><strong>Claves para el examen</strong>: explicar por qué <code>min-width</code> (mobile-first) frente a <code>max-width</code> (desktop-first): mejora progresiva + menos overrides + orden ascendente en la cascada.</p>
 </blockquote>
 <h3 id="13-layouts-intrinsecamente-fluidos-antes-que-breakpoints">1.3. Layouts intrínsecamente fluidos antes que breakpoints</h3>
 <p>Mucho «responsivo» no necesita media queries:</p>
@@ -3172,7 +3229,7 @@
 </ul>
 <h4 id="3-tamano-tactil-accesible-de-4444-px-criterio-wcag-255">3. Tamaño táctil accesible de 44×44 px (Criterio WCAG 2.5.5)</h4>
 <ul>
-<li><strong><code>min-width: 44px; min-height: 44px;</code>:</strong> Las directrices internacionales de accesibilidad establecen que los botones o enlaces interactivos en dispositivos móviles deben ofrecer un área táctil mínima de <span class="arithmatex">\(44 \times 44\text{ px}\)</span>. Esto evita que personas con temblores o dedos grandes pulsen involuntariamente elementos contiguos.</li>
+<li><strong><code>min-width: 44px; min-height: 44px;</code>:</strong> Las directrices internacionales de accesibilidad establecen que los botones o enlaces interactivos en dispositivos móviles deben ofrecer un área táctil mínima de <strong>44 × 44 px</strong>. Esto evita que personas con temblores o dedos grandes pulsen involuntariamente elementos contiguos.</li>
 </ul>
 <hr />
 <h2 id="11-errores-comunes">11. Errores comunes</h2>

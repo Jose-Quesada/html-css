@@ -80,7 +80,21 @@ flowchart TD
     - **Menos overrides**: nada de deshacer estilos de escritorio en móvil.
     - **Prioridad de contenido**: lo esencial cabe en la columna estrecha.
 
-> **Claves para el examen**: explicar por qué `min-width` (mobile-first) frente a `max-width` (desktop-first): mejora progresiva + menos overrides.
+#### El porqué del orden en la cascada de CSS
+
+La razón por la que en **Mobile-First** el orden debe ser estrictamente **ascendente** y en **Desktop-First** estrictamente **descendente** radica en la regla de la **Cascada de CSS** (*The Cascade*): ante dos reglas con la misma especificidad que se cumplen simultáneamente, **la que está escrita más abajo en el archivo siempre gana y sobreescribe a las anteriores**.
+
+- **En Mobile-First (`min-width` / ≥):** En un monitor de 1440px se cumplen a la vez la regla base, `min-width: 768px` y `min-width: 1024px`. Como la regla de 1024px está escrita más abajo, sobreescribe con éxito a la de tablet. Si se declarasen en orden inverso, la de tablet se aplicaría al final y anularía el diseño de escritorio.
+- **En Desktop-First (`max-width` / ≤):** En un smartphone de 390px se cumplen a la vez la regla base, `max-width: 1024px` y `max-width: 768px`. Como la regla de 768px está escrita más abajo, sobreescribe con éxito a la de tablet. Si se declarasen en orden inverso, la de tablet ganaría y el móvil mostraría la versión intermedia.
+
+#### Cuadro Resumen: Mobile-First vs. Desktop-First
+
+| Enfoque | Propiedad | Lógica | Orden en el archivo CSS | Regla mnemotécnica |
+| :--- | :--- | :--- | :--- | :--- |
+| **Mobile-First** | `min-width` | De menor a mayor resolución (≥) | **Ascendente:** Base → 768px → 1024px → 1280px | *«Crezco conforme se ensancha la pantalla; la regla más grande va al final»*. |
+| **Desktop-First** | `max-width` | De mayor a menor resolución (≤) | **Descendente:** Base → 1024px → 768px → 480px | *«Encojo conforme se achica la pantalla; la regla más pequeña va al final»*. |
+
+> **Claves para el examen**: explicar por qué `min-width` (mobile-first) frente a `max-width` (desktop-first): mejora progresiva + menos overrides + orden ascendente en la cascada.
 
 ### 1.3. Layouts intrínsecamente fluidos antes que breakpoints
 
@@ -632,7 +646,7 @@ A continuación se detalla la justificación técnica de la arquitectura respons
     - **Resultado profesional:** En la columna principal, la tarjeta detecta que tiene más de 450 px de ancho y se dibuja apaisada (foto a la izquierda, texto a la derecha). En la barra lateral, la misma tarjeta exacta detecta que su contenedor solo mide 280 px y se renderiza en formato vertical compacto, **sin necesidad de duplicar clases ni crear componentes separados**.
 
 #### 3. Tamaño táctil accesible de 44×44 px (Criterio WCAG 2.5.5)
-- **`min-width: 44px; min-height: 44px;`:** Las directrices internacionales de accesibilidad establecen que los botones o enlaces interactivos en dispositivos móviles deben ofrecer un área táctil mínima de $44 \times 44\text{ px}$. Esto evita que personas con temblores o dedos grandes pulsen involuntariamente elementos contiguos.
+- **`min-width: 44px; min-height: 44px;`:** Las directrices internacionales de accesibilidad establecen que los botones o enlaces interactivos en dispositivos móviles deben ofrecer un área táctil mínima de **44 × 44 px**. Esto evita que personas con temblores o dedos grandes pulsen involuntariamente elementos contiguos.
 
 ---
 

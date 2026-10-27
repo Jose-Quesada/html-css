@@ -599,7 +599,7 @@ A continuación se detalla la justificación técnica de accesibilidad (WCAG 2.1
 #### 1. La técnica canónica `.visually-hidden`
 - **¿Por qué no usar `display: none` o `visibility: hidden`?**
     - `display: none` y `visibility: hidden` eliminan el elemento del **árbol de accesibilidad** (*A11y Tree*), impidiendo que los lectores de pantalla puedan leerlo.
-    - La clase `.visually-hidden` colapsa el elemento a un área geométrica de $1 \times 1\text{ px}$ recortada con `clip: rect(0, 0, 0, 0)` y oculta el desbordamiento. Sigue plenamente disponible para tecnologías de asistencia mientras resulta invisible para videntes.
+    - La clase `.visually-hidden` colapsa el elemento a un área geométrica de **1 × 1 px** recortada con `clip: rect(0, 0, 0, 0)` y oculta el desbordamiento. Sigue plenamente disponible para tecnologías de asistencia mientras resulta invisible para videntes.
 
 #### 2. Enlace de salto (*Skip Link*) accesible
 - **Criterio WCAG 2.4.1 (Evitar bloques repetitivos):**

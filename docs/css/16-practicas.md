@@ -1257,7 +1257,7 @@ En **TechMarket** el 70% del tráfico proviene de dispositivos móviles. La dire
 !!! success "Lista de comprobación (Rúbrica de autoevaluación)"
     - [ ] **Filosofía Mobile-First:** El código base no depende de media queries; las reglas para pantallas mayores se introducen progresivamente con `min-width`.
     - [ ] **Sintaxis de rango moderna:** Se escriben expresiones como `@media (width >= 768px)`.
-    - [ ] **Diana táctil adaptativa:** Se utiliza `@media (pointer: coarse)` para expandir el área clicable de controles a $\ge 48\text{px}$.
+    - [ ] **Diana táctil adaptativa:** Se utiliza `@media (pointer: coarse)` para expandir el área clicable de controles a ≥ 48px.
     - [ ] **Patrón Column Drop:** En pantallas grandes (`>= 1024px`), el layout pasa de una columna vertical a un sistema de dos columnas (filtros a la izquierda + catálogo a la derecha).
     - [ ] **Prevención de CLS:** Las imágenes de producto tienen `aspect-ratio` declarado en CSS para reservar el espacio antes de cargar.
 

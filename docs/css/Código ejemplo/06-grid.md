@@ -399,6 +399,7 @@ Las pistas de una cuadrícula están delimitadas por **líneas divisorias (*Grid
 !!! warning "Modifica"
 
     1. Si añadimos 2 tarjetas nuevas de 1x1, ¿dónde se sitúan?
+    2. Para centrar el texto del cuadro verde, ¿cómo lo harías? 
 ---
 
 ## 3. Cuadrícula Implícita y Flujo Denso: `grid-auto-flow: dense`
@@ -571,37 +572,53 @@ graph TD
 
 ---
 
-## 4. Maquetación con Áreas Nombradas: `grid-template-areas` y Responsive Trivial
+## 4. Maquetación con Áreas Nombradas: `grid-template-areas` (Enfoque Desktop-First)
 
 ### Fundamento Conceptual
 
-==`grid-template-areas`== permite diseñar la estructura visual de una aplicación utilizando un **mapa semántico ASCII** directamente en el CSS:
+==`grid-template-areas`== permite diseñar la estructura visual de una aplicación utilizando un **mapa semántico ASCII** directamente en el CSS.
+
+En este primer ejemplo se muestra la técnica clásica **Desktop-First** (*degradación grácil*): se define como regla base la retícula completa de escritorio (3 columnas × 3 filas) y posteriormente se emplean dos reglas `@media (max-width: ...)` descendentes para adaptar el diseño progresivamente: primero a 2 columnas para tablet (`max-width: 1024px`) y finalmente a 1 columna vertical para smartphone (`max-width: 768px`):
 
 ```mermaid
-graph TD
-    subgraph MAPA_ESCRITORIO ["grid-template-areas (Escritorio)"]
+flowchart LR
+    subgraph ESCRITORIO ["1. Base Escritorio (Sin Media Query)"]
         direction TB
-        A1["'cabecera cabecera cabecera'"]
-        A2["'sidebar  principal aside   '"]
-        A3["'pie      pie       pie     '"]
-        A1 --- A2 --- A3
+        E1["'cabecera cabecera cabecera'"]
+        E2["'sidebar  principal auxiliar'"]
+        E3["'pie      pie       pie'"]
+        E1 --- E2 --- E3
     end
 
-    subgraph MAPA_MOVIL ["grid-template-areas (Móvil con 1 Media Query)"]
+    subgraph TABLET ["2. Tablet (@media max-width: 1024px)"]
+        direction TB
+        T1["'cabecera  cabecera'"]
+        T2["'sidebar   principal'"]
+        T3["'auxiliar  auxiliar'"]
+        T4["'pie       pie'"]
+        T1 --- T2 --- T3 --- T4
+    end
+
+    subgraph MOVIL ["3. Móvil (@media max-width: 768px)"]
         direction TB
         M1["'cabecera'"]
         M2["'principal'"]
         M3["'sidebar'"]
-        M4["'aside'"]
+        M4["'auxiliar'"]
         M5["'pie'"]
         M1 --- M2 --- M3 --- M4 --- M5
     end
 
-    style MAPA_ESCRITORIO fill:#eff6ff,stroke:#3b82f6,stroke-width:2px,color:#1e3a8a
-    style MAPA_MOVIL fill:#fdf4ff,stroke:#c026d3,stroke-width:2px,color:#701a75
+    ESCRITORIO ==>|"@media (max-width: 1024px)"| TABLET
+    TABLET ==>|"@media (max-width: 768px)"| MOVIL
+
+    style ESCRITORIO fill:#eff6ff,stroke:#3b82f6,stroke-width:2px,color:#1e3a8a
+    style TABLET fill:#fefce8,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    style MOVIL fill:#fdf4ff,stroke:#c026d3,stroke-width:2px,color:#701a75
 ```
 
 Reglas obligatorias de la sintaxis:
+
 1. Cada fila de áreas debe estar entre comillas dobles y tener el mismo número de nombres que columnas haya declaradas.
 2. Cada área debe conformar un **rectángulo perfecto**. No se permiten formas en "L" o en "T".
 3. El símbolo del punto (`.`) indica una celda vacía no asignada a ningún área.
@@ -616,14 +633,14 @@ Reglas obligatorias de la sintaxis:
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Maquetación con Grid Template Areas</title>
+      <title>Maquetación con Grid Template Areas (Desktop-First)</title>
       <link rel="stylesheet" href="04-grid-template-areas.css">
     </head>
     <body>
       <div class="pantalla-completa">
         <!-- ÁREA CABECERA -->
         <header class="bloque-cabecera">
-          <h2>Panel de Administración</h2>
+          <h2>Panel de Administración (Desktop-First)</h2>
           <span class="usuario">Admin · DominF3</span>
         </header>
 
@@ -686,7 +703,10 @@ Reglas obligatorias de la sintaxis:
       line-height: 1.5;
     }
 
-    /* 1. LAYOUT DE ESCRITORIO (3 COLUMNAS × 3 FILAS) */
+    /* ==========================================================================
+       1. LAYOUT BASE DE ESCRITORIO (3 COLUMNAS × 3 FILAS)
+       Enfoque Desktop-First: La regla base asume pantalla grande por defecto.
+       ========================================================================== */
     .pantalla-completa {
       display: grid;
       min-height: 100dvh; /* Ocupa el 100% de la ventana */
@@ -694,7 +714,7 @@ Reglas obligatorias de la sintaxis:
       grid-template-columns: 220px 1fr 240px;
       grid-template-rows: auto 1fr auto;
       
-      /* MAPA SEMÁNTICO VISUAL */
+      /* MAPA SEMÁNTICO VISUAL DE ESCRITORIO */
       grid-template-areas:
         "cabecera cabecera  cabecera"
         "sidebar  principal auxiliar"
@@ -785,13 +805,36 @@ Reglas obligatorias de la sintaxis:
       font-size: 0.8rem;
     }
 
-    /* 2. ADAPTACIÓN RESPONSIVE TRIVIAL PARA MÓVIL */
+    /* ==========================================================================
+       2. ADAPTACIÓN INTERMEDIA PARA TABLET (DESKTOP-FIRST: MÁXIMO 1024px -> 2 COLS)
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .pantalla-completa {
+        grid-template-columns: 240px 1fr;
+        grid-template-rows: auto 1fr auto auto;
+        
+        /* Reordenamos a 2 columnas: sidebar y principal lado a lado; auxiliar debajo */
+        grid-template-areas:
+          "cabecera  cabecera"
+          "sidebar   principal"
+          "auxiliar  auxiliar"
+          "pie       pie";
+      }
+
+      .bloque-principal {
+        padding: 1.5rem;
+      }
+    }
+
+    /* ==========================================================================
+       3. ADAPTACIÓN FINAL PARA MÓVIL (DESKTOP-FIRST: MÁXIMO 768px -> 1 COLUMNA)
+       ========================================================================== */
     @media (max-width: 768px) {
       .pantalla-completa {
         grid-template-columns: 1fr; /* Columna única */
         grid-template-rows: auto;
         
-        /* Reordenamos la página cambiando solo el texto */
+        /* Reordenamos la página para smartphone: principal antes de sidebar */
         grid-template-areas:
           "cabecera"
           "principal"
@@ -804,8 +847,301 @@ Reglas obligatorias de la sintaxis:
 
 !!! tip "Disección técnica paso a paso"
 
-    1. **Legibilidad arquitectónica:** No necesitas rastrear números de líneas `1 / 4` o `span 3`. El bloque `grid-template-areas` muestra un mapa visual de cómo se organizará la pantalla.
-    2. **Reordenación responsiva en 8 líneas de CSS:** En el `@media (max-width: 768px)`, cambiamos la cuadrícula a 1 columna y situamos el área `principal` **antes** que el `sidebar`, permitiendo que el usuario móvil lea el contenido prioritario sin tener que hacer scroll por todo el menú.
+    1. **Legibilidad arquitectónica:** No necesitas rastrear números de líneas `1 / 4` o `span 3`. El bloque `grid-template-areas` muestra un mapa visual de cómo se organizará la pantalla en cada resolución.
+    2. **Degradación grácil en orden descendente:** En la metodología Desktop-First, las reglas `@media (max-width: ...)` deben escribirse en orden **descendente** de resolución (`1024px` y luego `768px`). La cascada de CSS asegura que un smartphone aplique la regla final de 1 columna sin que la regla intermedia de tablet la anule.
+    3. **Paso intermedio para tablet (2 columnas):** Al pasar a `max-width: 1024px`, la cuadrícula reorganiza las áreas centrales para aprovechar el ancho mediano: `sidebar` y `principal` comparten fila, mientras que `auxiliar` se extiende al 100% de la fila inferior.
+    4. **Reordenación móvil prioritaria:** En `max-width: 768px`, el mapa ASCII sitúa `principal` antes que `sidebar` y `auxiliar`. Así, el usuario móvil accede inmediatamente al contenido fundamental sin verse obligado a desplazarse por menús de navegación largos.
+
+---
+
+## 4bis. Maquetación con Áreas Nombradas: `grid-template-areas` (Enfoque Mobile-First)
+
+### Fundamento Conceptual y Comparativa Arquitectónica
+
+El enfoque **Mobile-First** (*mejora progresiva* o *progressive enhancement*) es el estándar recomendado por la industria moderna de desarrollo web y por los principales frameworks (como Tailwind CSS):
+
+1. **Diseño base sin media queries:** La estructura por defecto fuera de cualquier `@media` se diseña exclusivamente para el dispositivo más restringido (el smartphone). Se define una cuadrícula natural de 1 sola columna (`grid-template-columns: 1fr`).
+2. **Menor coste computacional en móviles:** El dispositivo móvil lee y ejecuta de forma inmediata el CSS base sin tener que evaluar ni sobreescribir complejas reglas de cuadrículas de escritorio.
+3. **Mejora progresiva con `min-width`:** A medida que la pantalla crece (tablets y monitores de escritorio), se agregan columnas progresivamente mediante `@media (min-width: 768px)` y `@media (min-width: 1024px)`.
+
+```mermaid
+flowchart LR
+    subgraph MOVIL ["1. Base Móvil (Sin Media Query)"]
+        direction TB
+        M1["'cabecera'"]
+        M2["'principal'"]
+        M3["'sidebar'"]
+        M4["'auxiliar'"]
+        M5["'pie'"]
+        M1 --- M2 --- M3 --- M4 --- M5
+    end
+
+    subgraph TABLET ["2. Tablet (@media min-width: 768px)"]
+        direction TB
+        T1["'cabecera  cabecera'"]
+        T2["'sidebar   principal'"]
+        T3["'auxiliar  auxiliar'"]
+        T4["'pie       pie'"]
+        T1 --- T2 --- T3 --- T4
+    end
+
+    subgraph ESCRITORIO ["3. Escritorio (@media min-width: 1024px)"]
+        direction TB
+        E1["'cabecera cabecera  cabecera'"]
+        E2["'sidebar  principal auxiliar'"]
+        E3["'pie      pie       pie'"]
+        E1 --- E2 --- E3
+    end
+
+    MOVIL ==>|"@media (min-width: 768px)"| TABLET
+    TABLET ==>|"@media (min-width: 1024px)"| ESCRITORIO
+
+    style MOVIL fill:#fdf4ff,stroke:#c026d3,stroke-width:2px,color:#701a75
+    style TABLET fill:#fefce8,stroke:#ca8a04,stroke-width:2px,color:#713f12
+    style ESCRITORIO fill:#eff6ff,stroke:#3b82f6,stroke-width:2px,color:#1e3a8a
+```
+
+### Comparativa: Desktop-First frente a Mobile-First
+
+| Criterio | Enfoque Desktop-First (Ejemplo 4) | Enfoque Mobile-First (Ejemplo 4bis) |
+| :--- | :--- | :--- |
+| **Media Query utilizada** | `@media (max-width: ...)` (Degradación grácil) | `@media (min-width: ...)` (Mejora progresiva) |
+| **Estilos base (fuera de media query)** | Complejos: 3 columnas para pantalla de escritorio | Ligeros: 1 columna vertical para smartphone |
+| **Carga en móviles** | El móvil debe procesar y anular reglas de escritorio | El móvil ejecuta directamente el código base sin sobreescrituras |
+| **Flujo natural del DOM** | Lucha contra el flujo vertical natural de HTML | Aprovecha el flujo en bloque natural de la web |
+| **Adopción en la industria** | En desuso en arquitecturas contemporáneas | **Estándar en frameworks modernos** (Tailwind CSS, Bootstrap 5) |
+
+### Código de Ejemplo
+
+=== "HTML"
+
+    ```html title="04bis-grid-template-areas-mobile-first.html"
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Maquetación con Grid Template Areas (Mobile-First)</title>
+      <link rel="stylesheet" href="04bis-grid-template-areas-mobile-first.css">
+    </head>
+    <body>
+      <div class="pantalla-completa">
+        <!-- ÁREA CABECERA -->
+        <header class="bloque-cabecera">
+          <h2>Panel de Administración (Mobile-First)</h2>
+          <span class="usuario">Admin · DominF3</span>
+        </header>
+
+        <!-- ÁREA SIDEBAR -->
+        <aside class="bloque-sidebar">
+          <nav aria-label="Menú principal">
+            <ul>
+              <li><a href="#" class="activo">📊 Métricas</a></li>
+              <li><a href="#">👥 Usuarios</a></li>
+              <li><a href="#">⚙️ Configuración</a></li>
+            </ul>
+          </nav>
+        </aside>
+
+        <!-- ÁREA MAIN -->
+        <main class="bloque-principal">
+          <h1>Resumen Operativo</h1>
+          <p>Estructura concebida desde la pantalla pequeña con mejora progresiva mediante <code>min-width</code>.</p>
+          <div class="kpi-tarjeta">
+            <strong>Tráfico diario:</strong> 18.450 peticiones HTTP/3
+          </div>
+        </main>
+
+        <!-- ÁREA WIDGETS AUXILIARES -->
+        <aside class="bloque-auxiliar">
+          <h3>Alertas de Servidor</h3>
+          <p>CPU estable al 18% · Memoria al 42%.</p>
+        </aside>
+
+        <!-- ÁREA PIE -->
+        <footer class="bloque-pie">
+          <p>&copy; 2026 DominFe Academy · Arquitectura Mobile-First</p>
+        </footer>
+      </div>
+    </body>
+    </html>
+    ```
+
+=== "CSS"
+
+    ```css title="04bis-grid-template-areas-mobile-first.css"
+    :root {
+      --color-fondo: #f8fafc;
+      --color-superficie: #ffffff;
+      --color-texto: #0f172a;
+      --color-borde: #e2e8f0;
+      --radio: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background-color: var(--color-fondo);
+      color: var(--color-texto);
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       1. ESTILOS BASE: MÓVIL POR DEFECTO (MOBILE-FIRST, SIN MEDIA QUERY)
+       La cuadrícula base se define como 1 sola columna vertical.
+       El mapa sitúa el área 'principal' antes que el 'sidebar' para optimizar UX móvil.
+       ========================================================================== */
+    .pantalla-completa {
+      display: grid;
+      min-height: 100dvh;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      gap: 1rem;
+      padding: 1rem;
+
+      /* MAPA SEMÁNTICO MÓVIL (1 COLUMNA) */
+      grid-template-areas:
+        "cabecera"
+        "principal"
+        "sidebar"
+        "auxiliar"
+        "pie";
+    }
+
+    /* ASIGNACIÓN DE CADA ELEMENTO A SU ÁREA SEMÁNTICA (Común a todas las resoluciones) */
+    .bloque-cabecera  { grid-area: cabecera; }
+    .bloque-sidebar   { grid-area: sidebar; }
+    .bloque-principal { grid-area: principal; }
+    .bloque-auxiliar  { grid-area: auxiliar; }
+    .bloque-pie       { grid-area: pie; }
+
+    /* Estilos decorativos base */
+    .bloque-cabecera {
+      background-color: #0f172a;
+      color: #ffffff;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radio);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .bloque-sidebar {
+      background-color: var(--color-superficie);
+      border: 1px solid var(--color-borde);
+      border-radius: var(--radio);
+      padding: 1.25rem 1rem;
+    }
+
+    .bloque-sidebar ul {
+      list-style: none;
+    }
+
+    .bloque-sidebar a {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      color: #475569;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .bloque-sidebar a.activo,
+    .bloque-sidebar a:hover {
+      background-color: #f0fdf4;
+      color: #16a34a;
+    }
+
+    .bloque-principal {
+      background-color: var(--color-superficie);
+      border: 1px solid var(--color-borde);
+      border-radius: var(--radio);
+      padding: 1.5rem;
+    }
+
+    .bloque-principal h1 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .kpi-tarjeta {
+      margin-top: 1.25rem;
+      background-color: #f1f5f9;
+      padding: 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    .bloque-auxiliar {
+      background-color: var(--color-superficie);
+      border: 1px solid var(--color-borde);
+      border-radius: var(--radio);
+      padding: 1.25rem;
+    }
+
+    .bloque-pie {
+      background-color: #e2e8f0;
+      color: #475569;
+      text-align: center;
+      padding: 0.75rem;
+      border-radius: var(--radio);
+      font-size: 0.8rem;
+    }
+
+    /* ==========================================================================
+       2. MEJORA PROGRESIVA PARA TABLET (MÍNIMO 768px -> 2 COLUMNAS)
+       ========================================================================== */
+    @media (min-width: 768px) {
+      .pantalla-completa {
+        grid-template-columns: 240px 1fr;
+        grid-template-rows: auto 1fr auto auto;
+        
+        /* El menú se coloca a la izquierda del contenido principal */
+        grid-template-areas:
+          "cabecera  cabecera"
+          "sidebar   principal"
+          "auxiliar  auxiliar"
+          "pie       pie";
+      }
+    }
+
+    /* ==========================================================================
+       3. MEJORA PROGRESIVA PARA ESCRITORIO (MÍNIMO 1024px -> 3 COLUMNAS)
+       ========================================================================== */
+    @media (min-width: 1024px) {
+      .pantalla-completa {
+        grid-template-columns: 220px 1fr 240px;
+        grid-template-rows: auto 1fr auto;
+        
+        /* Disposición final con 3 columnas en pantalla completa */
+        grid-template-areas:
+          "cabecera cabecera  cabecera"
+          "sidebar  principal auxiliar"
+          "pie      pie       pie";
+      }
+
+      .bloque-principal {
+        padding: 2rem;
+      }
+    }
+    ```
+
+!!! tip "Disección técnica paso a paso"
+
+    1. **Base limpia sin sobrecoste:** Al declarar `grid-template-columns: 1fr` como regla base, los smartphones y dispositivos de recursos reducidos renderizan inmediatamente el diseño vertical sin esperar a evaluar media queries.
+    2. **Jerarquía móvil respetada en el mapa ASCII:** En la base móvil, `principal` se sitúa directamente bajo `cabecera` y antes de `sidebar` y `auxiliar`. Así, el usuario móvil accede de inmediato al contenido principal sin tener que scrollear a través de toda la botonera de navegación.
+    3. **Mejora progresiva en dos saltos:** En `min-width: 768px` (tablets), la cuadrícula aprovecha el espacio horizontal para colocar el menú al lado del contenido en 2 columnas. En `min-width: 1024px` (escritorio), se abre la tercera columna para el panel de alertas auxiliares.
+    4. **Inmutabilidad de los estilos cosméticos:** Los estilos decorativos (fondos, bordes, tipografías, hover de enlaces) se definen una única vez en el bloque base y se heredan limpiamente en las media queries superiores sin necesidad de reescribirlos ni anularlos.
+
+!!! question "¿Por qué la industria prefiere Mobile-First?"
+
+    Compara el CSS de la sección 4 (`max-width`) con el de la sección 4bis (`min-width`). Observa cómo en Mobile-First no se "deshace" ninguna propiedad: cada media query añade capacidad visual en lugar de anular configuraciones previas.
 
 ---
 
@@ -987,54 +1323,109 @@ flowchart TD
 
 ---
 
-## 6. Galerías Responsivas SIN Media Queries: La Fórmula Mágica `auto-fit` vs `auto-fill`
+## 6. Galerías Responsivas con `minmax()`: `auto-fit` vs `auto-fill` (Riesgo de Desbordamiento)
 
 ### Fundamento Conceptual
 
-Uno de los hitos técnicos más relevantes de CSS moderno es la capacidad de crear cuadrículas adaptables que calculan el número de columnas óptimo en tiempo real **sin escribir una sola *media query***:
+Uno de los mayores atractivos de CSS Grid es crear cuadrículas adaptables que calculan el número de columnas de forma automática **sin escribir una sola *media query***. Para ello, se combina la función `repeat()` con las palabras clave `auto-fit` o `auto-fill` y la función `minmax()`:
 
-$$\text{grid-template-columns: } \mathbf{repeat(auto-fit,\ minmax(min(100\%,\ 240px),\ 1fr));}$$
-
-```mermaid
-graph TD
-    AUTO["repeat(auto-fit, minmax(240px, 1fr))"]
-    
-    AUTO --> M360["Móvil (360px):<br>Cabe 1 columna de 360px (1fr llena la pantalla)"]
-    AUTO --> T768["Tablet (768px):<br>Caben 3 columnas de ~245px"]
-    AUTO --> D1200["Escritorio (1200px):<br>Caben 4 o 5 columnas de ~240px a 300px"]
-
-    style AUTO fill:#1e40af,stroke:#1d4ed8,stroke-width:2px,color:#ffffff
-    style M360 fill:#dcfce7,stroke:#16a34a,stroke-width:1px,color:#166534
-    style T768 fill:#e0f2fe,stroke:#0284c7,stroke-width:1px,color:#0c4a6e
-    style D1200 fill:#fef3c7,stroke:#d97706,stroke-width:1px,color:#78350f
+```css title="Fórmula clásica con mínimo absoluto"
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 ```
 
-#### ¿Cuál es la diferencia entre `auto-fit` y `auto-fill`?
+Para entender a fondo este mecanismo, es fundamental aclarar dos aspectos que suelen generar dudas al probarlo en el navegador:
 
-La diferencia se manifiesta cuando hay **pocos elementos** en una pantalla muy ancha:
+---
 
-| Valor | ¿Qué ocurre con las pistas sobrantes? | Impacto Visual en Pantalla |
-| :--- | :--- | :--- |
-| **`auto-fit`** | **Colapsa a cero píxeles** las columnas vacías. El espacio sobrante se reparte entre las columnas con tarjetas. | Las tarjetas se estiran ocupando el 100% del ancho disponible. **(Recomendado en el 95% de interfaces)**. |
-| **`auto-fill`** | **Preserva las columnas vacías** en la estructura de la retícula. | Las tarjetas mantienen su tamaño base a la izquierda y queda un hueco invisible a la derecha. |
+#### 1. ¿Dónde se aprecia realmente la diferencia entre `auto-fit` y `auto-fill`?
 
-### Código de Ejemplo
+> **Regla clave:** La diferencia **NO se aprecia al comprimir** la pantalla, sino **al ENSANCHARLA** cuando el contenedor es lo bastante amplio para alojar más columnas que tarjetas disponibles en el HTML.
+
+* **Al comprimir la pantalla (ancho reducido ~300px - 700px):**  
+  Como solo caben 1 o 2 columnas y tenemos 2 tarjetas en el HTML, **ambas propiedades se ven exactamente iguales** (1 o 2 columnas ocupadas al 100%). No hay pistas vacías sobrantes.
+
+* **Al ensanchar la pantalla (ancho amplio ~1100px):**  
+  Para que aparezca una 3ª columna vacía de 280px con un `gap: 1rem (16px)`, se requiere un ancho neto de cuadrícula de $280\text{px} \times 3 + 16\text{px} \times 2 = 872\text{px}$ (alrededor de 960px sumando márgenes y rellenos del contenedor). Al superar ese umbral en un contenedor de 1100px, el navegador calcula que caben 3 columnas y aquí es donde divergen:
+
+```mermaid
+flowchart TD
+    subgraph FIT ["1. Con auto-fit (1100px) · La 3ª columna vacía colapsa y las 2 tarjetas se expanden al 100%"]
+        direction LR
+        FA["<b>Tarjeta A</b><br>~500px (50% de la fila)"] --- FB["<b>Tarjeta B</b><br>~500px (50% de la fila)"]
+    end
+
+    subgraph FILL ["2. Con auto-fill (1100px) · Mantiene la 3ª columna fantasma vacía a la derecha"]
+        direction LR
+        LA["<b>Tarjeta A</b><br>~330px"] --- LB["<b>Tarjeta B</b><br>~330px"] --- LC["<i>3ª Pista vacía</i><br>~330px (libre)"]
+    end
+
+    style FIT fill:#eff6ff,stroke:#2563eb,stroke-width:2px,color:#1e3a8a
+    style FILL fill:#f8fafc,stroke:#94a3b8,stroke-width:2px,stroke-dasharray: 4 4,color:#0f172a
+    style FA fill:#3b82f6,color:#ffffff,stroke:#1d4ed8,stroke-width:1.5px
+    style FB fill:#3b82f6,color:#ffffff,stroke:#1d4ed8,stroke-width:1.5px
+    style LA fill:#6366f1,color:#ffffff,stroke:#4338ca,stroke-width:1.5px
+    style LB fill:#6366f1,color:#ffffff,stroke:#4338ca,stroke-width:1.5px
+    style LC fill:#f1f5f9,color:#94a3b8,stroke:#cbd5e1,stroke-width:1.5px,stroke-dasharray: 4 4
+```
+
+=== "auto-fit"
+
+    !!! example "auto-fit · Ajuste dinámico (Recomendado en el 95% de interfaces)"
+        El navegador detecta que sobran columnas porque solo hay 2 tarjetas en el HTML. **Colapsa a 0px las pistas vacías** y estira las tarjetas existentes para que llenen el **100% del contenedor**.
+
+        - **Resultado visual:** Sin huecos a la derecha. Ambas tarjetas llenan todo el ancho simétricamente.
+        - **Casos de uso:** Tiendas online, catálogos de productos, listados de noticias, blogs.
+
+=== "auto-fill"
+
+    !!! info "auto-fill · Relleno estricto (Para slots y plantillas fijas)"
+        El navegador calcula cuántas columnas de 280px caben en el ancho actual y **reserva todas las pistas en la cuadrícula**, incluso si no hay tarjetas suficientes para llenarlas.
+
+        - **Resultado visual:** Las tarjetas se alinean a la izquierda con su tamaño base y queda un espacio libre punteado a la derecha.
+        - **Casos de uso:** Cuadrículas de inventario (videojuegos), barras de herramientas, dashboards modulares con slots disponibles para añadir nuevos elementos.
+
+| Valor | ¿Qué ocurre con las pistas sobrantes? | Impacto Visual en Pantalla Ancha | Caso de Uso en la Industria |
+| :--- | :--- | :--- | :--- |
+| **`auto-fit`** | **Colapsa a 0px** las columnas vacías. El espacio sobrante se reparte entre las tarjetas presentes. | Las tarjetas se expanden ocupando el **100% del ancho**. | **Recomendado en el 95% de interfaces:** catálogos de productos, noticias, tarjetas de blog. |
+| **`auto-fill`** | **Preserva las columnas vacías** en la estructura de la retícula. | Las tarjetas mantienen su tamaño base a la izquierda y queda un **hueco vacío a la derecha**. | Inventarios de videojuegos, paletas de herramientas, slots de dashboards modulares. |
+
+---
+
+#### 2. El problema del mínimo rígido: ¿Por qué aparece la barra de desplazamiento horizontal?
+
+En este ejemplo 6 utilizamos un mínimo absoluto rígido: `minmax(280px, 1fr)`.
+
+* Le estamos ordenando al navegador: *«Cada tarjeta debe medir obligatoriamente **como mínimo 280 píxeles**»*.
+* Si abres la página en un teléfono móvil estrecho (como un Galaxy Fold cerrado de 280px o menos), en un reloj inteligente o si abres las DevTools y comprimes la vista por debajo de los 280px:
+
+!!! danger "Condición de desbordamiento en pantallas pequeñas"
+    **Ancho mínimo de la tarjeta (280px) > Ancho disponible del contenedor (< 280px)**
+    
+    El contenido ya no cabe en el viewport, se sale por el lateral derecho y **provoca la aparición de la barra de desplazamiento horizontal** (*overflow horizontal*), rompiendo la experiencia móvil.
+
+---
+
+### Código de Ejemplo (Con riesgo de desbordamiento en < 280px)
 
 === "HTML"
 
-    ```html title="06-autofit-vs-autofill.html"
+    ```html title="06-autofit-vs-autofill-desbordamiento.html"
     <!DOCTYPE html>
     <html lang="es">
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Comparativa Visual auto-fit vs auto-fill</title>
-      <link rel="stylesheet" href="06-autofit-vs-autofill.css">
+      <title>Comparativa Visual auto-fit vs auto-fill (Con Desbordamiento)</title>
+      <link rel="stylesheet" href="06-autofit-vs-autofill-desbordamiento.css">
     </head>
     <body>
       <main class="laboratorio">
         <h1>Comparativa: <code>auto-fit</code> frente a <code>auto-fill</code></h1>
-        <p class="intro">Ambos contenedores tienen solo 2 tarjetas en una pantalla ancha con base de 200px.</p>
+        <p class="intro">
+          Ambos contenedores tienen solo 2 tarjetas con base fija de <code>280px</code> en un contenedor de hasta <code>1100px</code>.
+          <br><strong>Prueba 1 (Ensanchar > 960px):</strong> En pantallas amplias donde caben 3 columnas, observa cómo <code>auto-fit</code> estira las 2 tarjetas al 50% cada una, mientras que <code>auto-fill</code> deja la 3ª columna libre como un hueco punteado a la derecha.
+          <br><strong>Prueba 2 (Comprimir en DevTools):</strong> Comprime la ventana por debajo de 280px para ver aparecer la barra de desplazamiento horizontal provocada por el mínimo rígido.
+        </p>
 
         <!-- CASO A: AUTO-FIT -->
         <section class="caso">
@@ -1060,7 +1451,7 @@ La diferencia se manifiesta cuando hay **pocos elementos** en una pantalla muy a
 
 === "CSS"
 
-    ```css title="06-autofit-vs-autofill.css"
+    ```css title="06-autofit-vs-autofill-desbordamiento.css"
     :root {
       --color-fondo: #f8fafc;
       --color-superficie: #ffffff;
@@ -1082,7 +1473,7 @@ La diferencia se manifiesta cuando hay **pocos elementos** en una pantalla muy a
     }
 
     .laboratorio {
-      max-width: 800px;
+      max-width: 1100px;
       margin: 0 auto;
     }
 
@@ -1095,6 +1486,168 @@ La diferencia se manifiesta cuando hay **pocos elementos** en una pantalla muy a
       color: #64748b;
       margin-bottom: 2rem;
       font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .caso {
+      background-color: var(--color-superficie);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--color-borde);
+      margin-bottom: 2rem;
+      /* Permite visualizar la barra de scroll si la cuadrícula desborda */
+      overflow-x: auto;
+    }
+
+    .caso h3 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .rejilla {
+      display: grid;
+      gap: 1rem;
+      background-color: #f1f5f9;
+      padding: 1rem;
+      border-radius: 8px;
+      border: 2px dashed #94a3b8;
+    }
+
+    /* CASO A: AUTO-FIT CON MÍNIMO RÍGIDO (280px) */
+    .rejilla--autofit {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    /* CASO B: AUTO-FILL CON MÍNIMO RÍGIDO (280px) */
+    .rejilla--autofill {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+
+    .tarjeta {
+      background-color: #4f46e5;
+      color: #ffffff;
+      padding: 1.5rem;
+      border-radius: 6px;
+      font-weight: 700;
+      text-align: center;
+    }
+    ```
+
+!!! tip "Disección técnica paso a paso"
+
+    1. **Visualización de `auto-fit` al ensanchar:** En pantallas anchas (contenedor de 1100px), caben 3 columnas de 280px ($280\text{px} \times 3 + 32\text{px} = 872\text{px}$). Con `auto-fit`, la 3ª columna sobrante colapsa a 0px y las 2 tarjetas existentes se expanden llenando el 100% del ancho (~500px cada una).
+    2. **Visualización de `auto-fill` al ensanchar:** En el mismo contenedor amplio, `auto-fill` mantiene reservada la 3ª columna libre. Las tarjetas A y B ocupan su espacio a la izquierda (~330px cada una) y a su derecha se observa con claridad el hueco vacío punteado de la 3ª columna.
+    3. **Aparición de la barra de desplazamiento horizontal al comprimir:** Al forzar un mínimo absoluto de `280px`, si la pantalla o el contenedor se reduce por debajo de esa cifra, el navegador no tiene permiso para encoger la tarjeta. En consecuencia, se desborda y genera una barra de scroll horizontal.
+
+---
+
+## 6bis. Galerías Responsivas Blindadas con `min()`: Solución Definitiva Anti-Desbordamiento
+
+### Fundamento Conceptual: Eliminando el Scroll Horizontal de Raíz
+
+Para resolver el problema del desbordamiento en dispositivos pequeños sin renunciar a la adaptabilidad automática de `auto-fit`, la especificación moderna de CSS permite anidar la función matemática `min()` dentro de `minmax()`:
+
+```css title="La fórmula fluida definitiva sin desbordamientos"
+grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+```
+
+#### ¿Cómo actúa matemáticamente `min(100%, 280px)` en cada resolución?
+
+La función `min(A, B)` devuelve en tiempo real el valor **más pequeño** entre los dos argumentos:
+
+| Ancho del Contenedor | Cálculo de `min(100%, 280px)` | Tamaño Mínimo de la Tarjeta | ¿Aparece Barra de Scroll? |
+| :--- | :--- | :--- | :---: |
+| **Escritorio amplio (1200px)** | `min(1200px, 280px) = 280px` | 280px (se crean hasta 4 columnas de 280px+) | ❌ No |
+| **Tablet estándar (768px)** | `min(768px, 280px) = 280px` | 280px (se crean 2 columnas de ~360px) | ❌ No |
+| **Smartphone común (375px)** | `min(375px, 280px) = 280px` | 280px (se crea 1 columna que llena los 375px) | ❌ No |
+| **Móvil ultra-estrecho (240px)** | `min(240px, 280px) = 240px` | **240px (la tarjeta se comprime elásticamente)** | **❌ NUNCA** |
+
+> **La gran ventaja:** En pantallas de más de 280px, la tarjeta pide sus 280px normales. Pero si la pantalla mide menos de 280px (por ejemplo 240px), la tarjeta adopta el `100%` (240px) y se adapta elásticamente al espacio disponible. **¡La barra de desplazamiento horizontal queda erradicada para siempre!**
+
+---
+
+### Código de Ejemplo (100% fluido y blindado contra desbordamiento)
+
+=== "HTML"
+
+    ```html title="06bis-autofit-vs-autofill-blindado.html"
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Cuadrícula Blindada con min() (Sin Scroll Horizontal)</title>
+      <link rel="stylesheet" href="06bis-autofit-vs-autofill-blindado.css">
+    </head>
+    <body>
+      <main class="laboratorio">
+        <h1>Cuadrícula Blindada con <code>min(100%, 280px)</code></h1>
+        <p class="intro">
+          Esta versión implementa la fórmula matemática moderna en un contenedor amplio de hasta <code>1100px</code>.
+          <br><strong>Prueba 1 (Diferencia fit vs fill al ensanchar):</strong> En pantallas de más de 960px caben 3 columnas de 280px. Observa que en la parte superior (<code>auto-fit</code>) las 2 tarjetas se estiran al 50% cada una (~500px), mientras que en la parte inferior (<code>auto-fill</code>) ocupan un tercio cada una (~330px) y dejan la 3ª columna vacía punteada a la derecha.
+          <br><strong>Prueba 2 (Anti-desbordamiento al comprimir):</strong> Abre DevTools y comprime la vista por debajo de 280px (por ejemplo a 240px). Observa que la tarjeta se adapta elásticamente al 100% y <strong>no aparece ninguna barra de scroll horizontal</strong>.
+        </p>
+
+        <!-- CASO A: AUTO-FIT BLINDADO -->
+        <section class="caso">
+          <h3>1. Con <code>auto-fit</code> + <code>min(100%, 280px)</code> (Recomendado en producción)</h3>
+          <div class="rejilla rejilla--autofit-blindada">
+            <article class="tarjeta">Tarjeta A</article>
+            <article class="tarjeta">Tarjeta B</article>
+          </div>
+        </section>
+
+        <!-- CASO B: AUTO-FILL BLINDADO -->
+        <section class="caso">
+          <h3>2. Con <code>auto-fill</code> + <code>min(100%, 280px)</code> (Para slots fijos)</h3>
+          <div class="rejilla rejilla--autofill-blindada">
+            <article class="tarjeta">Tarjeta A</article>
+            <article class="tarjeta">Tarjeta B</article>
+          </div>
+        </section>
+      </main>
+    </body>
+    </html>
+    ```
+
+=== "CSS"
+
+    ```css title="06bis-autofit-vs-autofill-blindado.css"
+    :root {
+      --color-fondo: #f8fafc;
+      --color-superficie: #ffffff;
+      --color-texto: #0f172a;
+      --color-borde: #cbd5e1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background-color: var(--color-fondo);
+      color: var(--color-texto);
+      padding: 2.5rem 1.5rem;
+    }
+
+    .laboratorio {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .intro {
+      color: #64748b;
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
     }
 
     .caso {
@@ -1119,19 +1672,19 @@ La diferencia se manifiesta cuando hay **pocos elementos** en una pantalla muy a
       border: 2px dashed #94a3b8;
     }
 
-    /* CASO A: AUTO-FIT (RECOMENDADO) */
-    .rejilla--autofit {
-      /* min(100%, 200px) garantiza que en móviles de 180px no aparezca scroll horizontal */
-      grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    /* CASO A: AUTO-FIT BLINDADO (FÓRMULA MODERNA) */
+    .rejilla--autofit-blindada {
+      /* min(100%, 280px) evita que la tarjeta supere el ancho del contenedor en móviles estrechos */
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
     }
 
-    /* CASO B: AUTO-FILL */
-    .rejilla--autofill {
-      grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
+    /* CASO B: AUTO-FILL BLINDADO */
+    .rejilla--autofill-blindada {
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
     }
 
     .tarjeta {
-      background-color: #4f46e5;
+      background-color: #0284c7;
       color: #ffffff;
       padding: 1.5rem;
       border-radius: 6px;
@@ -1142,9 +1695,9 @@ La diferencia se manifiesta cuando hay **pocos elementos** en una pantalla muy a
 
 !!! tip "Disección técnica paso a paso"
 
-    1. **Resultado visual de `auto-fit`:** Aunque cabrían 4 tarjetas de 200px en el contenedor de 800px, al haber solo 2, las dos columnas sobrantes colapsan a 0px y las tarjetas A y B se reparten el espacio sobrante midiendo 400px cada una.
-    2. **Resultado visual de `auto-fill`:** El navegador reserva físicamente las 4 columnas de 200px. Las tarjetas A y B miden exactamente 200px a la izquierda y el 50% derecho del contenedor queda vacío.
-    3. **El blindaje con `min(100%, 200px)`:** Si abres la página en un smartwatch o un móvil estrecho de 180px, la función `min()` reduce la base al 100% evitando la aparición de barras de scroll horizontales indeseadas.
+    1. **Diferencia visible entre `auto-fit` y `auto-fill` al ensanchar:** Al fijar `.laboratorio { max-width: 1100px; }`, el contenedor permite que quepan 3 pistas de 280px en pantallas de escritorio (> 960px). En `auto-fit`, la 3ª columna vacía colapsa y las 2 tarjetas llenan el 100% de la fila (~500px cada una). En `auto-fill`, la 3ª columna se reserva y permanece vacía como un hueco punteado a la derecha (~330px cada una).
+    2. **Eliminación del desbordamiento en móviles:** Al utilizar `min(100%, 280px)`, el suelo dimensional de la tarjeta nunca puede ser mayor que el ancho de la propia pantalla del usuario. Si el viewport se reduce a 220px, la tarjeta adopta el 100% (220px) y no se desborda ni un solo píxel hacia la derecha.
+    3. **Comportamiento elástico en pantallas pequeñas:** En pantallas menores a 280px, la función `min()` devuelve el ancho disponible al 100%, eliminando la barra de scroll horizontal sin necesidad de media queries.
 
 ---
 

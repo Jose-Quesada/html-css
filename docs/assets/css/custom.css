@@ -211,8 +211,9 @@
 
 .md-typeset .tabbed-labels > label {
   font-weight: 600;
-  font-size: 0.85rem;
-  padding: 0.6rem 1rem;
+  font-size: 0.75rem;
+  padding: 0.45rem 0.85rem;
+  letter-spacing: 0.01em;
 }
 
 /* 9. Badges e insignias de estado / categoría */
