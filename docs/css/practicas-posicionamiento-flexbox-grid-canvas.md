@@ -86,27 +86,22 @@ Vas a maquetar la tarjeta de producto de una tienda de tecnología para unos aur
 
 ---
 
-### 2. Código Fuente de la Práctica 1
-
-### 2. Lienzo Gráfico y Código HTML Base
+### 2. Objetivo Visual y Código HTML Base
 
 === "Lienzo Visual"
 
     !!! tip "Objetivo visual a replicar"
-        Observa con detenimiento las coordenadas, alineaciones y proporciones en el siguiente lienzo gráfico. Debes conseguir este resultado visual exacto escribiendo tu propia hoja de estilos CSS. **El código CSS no está expuesto en el código fuente de la página.**
+        Observa con detenimiento las coordenadas, alineaciones y proporciones en la siguiente imagen de referencia. Debes conseguir este resultado visual exacto escribiendo tu propia hoja de estilos CSS. **El código CSS no está expuesto en el código fuente de la página.**
 
     <div class="browser-preview">
       <div class="browser-preview-bar">
         <span class="browser-preview-dot red"></span>
         <span class="browser-preview-dot yellow"></span>
         <span class="browser-preview-dot green"></span>
-        <span style="font-family: monospace; font-size: 0.75rem; color: #64748b; margin-left: 0.5rem;">canvas://practica-01-objetivo-visual</span>
+        <span style="font-family: monospace; font-size: 0.75rem; color: #64748b; margin-left: 0.5rem;">img://practica-01-objetivo-visual.png</span>
       </div>
-      <div class="browser-preview-body" style="background: #0f172a; text-align: center; padding: 1.5rem 0.5rem; overflow-x: auto;">
-        <canva id="canva-practica-1" style="display:none;"></canva>
-        <canvas id="canvas-practica-1" width="760" height="460" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.4);" aria-label="Lienzo gráfico con la visualización esperada de la Práctica 1">
-          Tu navegador no soporta el elemento canvas de HTML5.
-        </canvas>
+      <div class="browser-preview-body" style="background: #fafafa; text-align: center; padding: 1.5rem 0.5rem; overflow-x: auto;">
+        <img src="../img/css/18/Práctica01.png" alt="Objetivo visual a replicar - Práctica 1" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin: 0 auto; display: inline-block;">
       </div>
     </div>
 
@@ -222,25 +217,22 @@ Maquetarás la vista de lectura y documentación de una academia online:
     * Contiene el texto `🍪 Utilizamos cookies técnicas para garantizar el funcionamiento del aula.` y el botón `Aceptar todas`.
     * El elemento `body` debe reservar un margen inferior (`padding-bottom: 6rem;`) para que el banner fijo no tape el final del artículo.
 
-### 2. Lienzo Gráfico y Código HTML Base
+### 2. Objetivo Visual y Código HTML Base
 
 === "Lienzo Visual"
 
     !!! tip "Objetivo visual a replicar"
-        Observa con detenimiento las coordenadas, alineaciones y proporciones en el siguiente lienzo gráfico. Debes conseguir este resultado visual exacto escribiendo tu propia hoja de estilos CSS. **El código CSS no está expuesto en el código fuente de la página.**
+        Observa con detenimiento las coordenadas, alineaciones y proporciones en la siguiente imagen de referencia. Debes conseguir este resultado visual exacto escribiendo tu propia hoja de estilos CSS. **El código CSS no está expuesto en el código fuente de la página.**
 
     <div class="browser-preview">
       <div class="browser-preview-bar">
         <span class="browser-preview-dot red"></span>
         <span class="browser-preview-dot yellow"></span>
         <span class="browser-preview-dot green"></span>
-        <span style="font-family: monospace; font-size: 0.75rem; color: #64748b; margin-left: 0.5rem;">canvas://practica-02-objetivo-visual</span>
+        <span style="font-family: monospace; font-size: 0.75rem; color: #64748b; margin-left: 0.5rem;">img://practica-02-objetivo-visual.png</span>
       </div>
-      <div class="browser-preview-body" style="background: #0f172a; text-align: center; padding: 1.5rem 0.5rem; overflow-x: auto;">
-        <canva id="canva-practica-2" style="display:none;"></canva>
-        <canvas id="canvas-practica-2" width="760" height="500" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.4);" aria-label="Lienzo gráfico con la visualización esperada de la Práctica 2">
-          Tu navegador no soporta el elemento canvas de HTML5.
-        </canvas>
+      <div class="browser-preview-body" style="background: #ffffff; text-align: center; padding: 1.5rem 0.5rem; overflow-x: auto;">
+        <img src="../img/css/18/Practica02.png" alt="Objetivo visual a replicar - Práctica 2" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin: 0 auto; display: inline-block;">
       </div>
     </div>
 
@@ -352,7 +344,10 @@ Maquetarás la vista de lectura y documentación de una academia online:
 
       <!-- 3. BOTÓN FLOTANTE FIJO (POSITION: FIXED) -->
       <a href="#" class="btn-scroll-top" title="Volver al principio" aria-label="Volver al principio">
-        ↑
+        <svg class="icon-arrow-up" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="12" y1="19" x2="12" y2="5"></line>
+          <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
       </a>
 
       <!-- 4. BANNER DE CONSENTIMIENTO FIJO INFERIOR (POSITION: FIXED) -->
@@ -417,27 +412,22 @@ Maquetarás un componente de ficha de usuario para el panel interno de una empre
 
 ---
 
-### 2. Código Fuente de la Práctica 3
-
-### 2. Lienzo Gráfico y Código HTML Base
+### 2. Objetivo Visual y Código HTML Base
 
 === "Lienzo Visual"
 
     !!! tip "Objetivo visual a replicar"
-        Observa con detenimiento las coordenadas, alineaciones y proporciones en el siguiente lienzo gráfico. Debes conseguir este resultado visual exacto escribiendo tu propia hoja de estilos CSS. **El código CSS no está expuesto en el código fuente de la página.**
+        Observa con detenimiento las coordenadas, alineaciones y proporciones en la siguiente imagen de referencia. Debes conseguir este resultado visual exacto escribiendo tu propia hoja de estilos CSS. **El código CSS no está expuesto en el código fuente de la página.**
 
     <div class="browser-preview">
       <div class="browser-preview-bar">
         <span class="browser-preview-dot red"></span>
         <span class="browser-preview-dot yellow"></span>
         <span class="browser-preview-dot green"></span>
-        <span style="font-family: monospace; font-size: 0.75rem; color: #64748b; margin-left: 0.5rem;">canvas://practica-03-objetivo-visual</span>
+        <span style="font-family: monospace; font-size: 0.75rem; color: #64748b; margin-left: 0.5rem;">img://practica-03-objetivo-visual.png</span>
       </div>
-      <div class="browser-preview-body" style="background: #0f172a; text-align: center; padding: 1.5rem 0.5rem; overflow-x: auto;">
-        <canva id="canva-practica-3" style="display:none;"></canva>
-        <canvas id="canvas-practica-3" width="760" height="480" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.4);" aria-label="Lienzo gráfico con la visualización esperada de la Práctica 3">
-          Tu navegador no soporta el elemento canvas de HTML5.
-        </canvas>
+      <div class="browser-preview-body" style="background: #f1f5f9; text-align: center; padding: 1.5rem 0.5rem; overflow-x: auto;">
+        <img src="../img/css/18/Practica03.png" alt="Objetivo visual a replicar - Práctica 3" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin: 0 auto; display: inline-block;">
       </div>
     </div>
 
@@ -1619,16 +1609,28 @@ Para consolidar la elección de la tecnología correcta al desarrollar cualquier
     drawRoundRect(ctx, bx + bw - 12, headY + 50, 6, 200, 3, '#cbd5e1');
     drawRoundRect(ctx, bx + bw - 12, headY + 80, 6, 70, 3, '#94a3b8');
 
-    const fabX = bx + bw - 45, fabY = by + bh - 100;
+    const fabX = bx + bw - 45, fabY = by + bh - 95;
     ctx.beginPath(); ctx.arc(fabX, fabY, 20, 0, Math.PI*2); ctx.fillStyle = '#2563eb'; ctx.fill();
-    ctx.fillStyle = '#ffffff'; ctx.font = 'bold 16px system-ui'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillText('↑', fabX, fabY);
+    
+    // Flecha vectorial perfectamente centrada en el círculo
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 2.5;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(fabX, fabY + 7);
+    ctx.lineTo(fabX, fabY - 7);
+    ctx.moveTo(fabX - 5, fabY - 2);
+    ctx.lineTo(fabX, fabY - 7);
+    ctx.lineTo(fabX + 5, fabY - 2);
+    ctx.stroke();
 
-    const cookH = 55, cookY = by + bh - cookH;
+    // Banner de cookies con proporciones equilibradas y centrado vertical
+    const cookH = 50, cookY = by + bh - cookH;
     drawRoundRect(ctx, bx, cookY, bw, cookH, [0, 0, 10, 10], '#1e293b');
-    drawText(ctx, '🍪 Utilizamos cookies técnicas para garantizar el funcionamiento del aula.', bx + 20, cookY + 32, '11px system-ui', '#f1f5f9');
-    drawRoundRect(ctx, bx + bw - 110, cookY + 15, 90, 26, 6, '#10b981');
-    drawText(ctx, 'Aceptar todas', bx + bw - 65, cookY + 31, 'bold 11px system-ui', '#ffffff', 'center');
+    drawText(ctx, '🍪 Utilizamos cookies técnicas para garantizar el funcionamiento del aula.', bx + 20, cookY + 28, '11px system-ui', '#f1f5f9');
+    drawRoundRect(ctx, bx + bw - 115, cookY + 12, 95, 26, 6, '#10b981');
+    drawText(ctx, 'Aceptar todas', bx + bw - 67, cookY + 28, 'bold 11px system-ui', '#ffffff', 'center');
 
     drawAnnotation(ctx, 'position: sticky; top: 0;', bx + bw - 120, headY + 12, bx + bw - 60, headY + 12, '#38bdf8');
     drawAnnotation(ctx, 'position: fixed (bottom: 5rem)', fabX - 25, fabY, fabX, fabY, '#60a5fa');

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyecto 04: Centro de Ajustes y Soporte — DaisyUI</title>
+  <!-- DaisyUI CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-base-200 text-base-content min-h-screen flex flex-col font-sans transition-colors duration-200">
+
+  <!-- NAVBAR CON SELECTOR DE TEMA -->
+  <header class="navbar bg-base-100 shadow-sm border-b border-base-300 px-4 lg:px-8">
+    <div class="flex-1">
+      <span class="text-xl font-black text-primary">Ajustes & Soporte</span>
+      <span class="badge badge-primary badge-outline text-xs ml-2 hidden sm:inline-flex">DaisyUI Overlays</span>
+    </div>
+    <div class="flex-none gap-3">
+      <select class="select select-bordered select-xs" onchange="document.documentElement.setAttribute('data-theme', this.value)">
+        <option value="light">Tema: Claro</option>
+        <option value="dark">Tema: Oscuro</option>
+        <option value="corporate">Tema: Corporate</option>
+        <option value="synthwave">Tema: Synthwave</option>
+      </select>
+    </div>
+  </header>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="container mx-auto px-4 py-8 flex-1 max-w-4xl">
+
+    <!-- CABECERA -->
+    <div class="mb-6">
+      <h1 class="text-3xl font-extrabold tracking-tight">Centro de Preferencias</h1>
+      <p class="text-sm opacity-70 mt-1">Explora componentes con interacción: Tabs, Acordeones colapsables y Modales nativos.</p>
+    </div>
+
+    <!-- SISTEMA DE PESTAÑAS (TABS) -->
+    <div role="tablist" class="tabs tabs-boxed bg-base-100 p-1.5 shadow-sm border border-base-300 mb-8 max-w-lg">
+      <a role="tab" id="tab-btn-1" class="tab tab-active font-bold" onclick="showTab(1)">
+        👤 Perfil General
+      </a>
+      <a role="tab" id="tab-btn-2" class="tab font-bold" onclick="showTab(2)">
+        🔒 Seguridad
+      </a>
+      <a role="tab" id="tab-btn-3" class="tab font-bold" onclick="showTab(3)">
+        ❓ Ayuda & FAQ
+      </a>
+    </div>
+
+    <!-- CONTENIDO DE LAS PESTAÑAS -->
+    
+    <!-- PESTAÑA 1: PERFIL GENERAL -->
+    <section id="tab-panel-1" class="card bg-base-100 shadow-md border border-base-300 p-6 sm:p-8 space-y-6">
+      <div class="border-b border-base-300 pb-4">
+        <h2 class="text-xl font-bold">Información de la Cuenta</h2>
+        <p class="text-xs opacity-70">Actualiza tus datos públicos y de contacto en el aula virtual.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="form-control">
+          <label class="label"><span class="label-text font-semibold">Nombre</span></label>
+          <input type="text" value="María" class="input input-bordered" />
+        </div>
+        <div class="form-control">
+          <label class="label"><span class="label-text font-semibold">Apellidos</span></label>
+          <input type="text" value="García López" class="input input-bordered" />
+        </div>
+        <div class="form-control sm:col-span-2">
+          <label class="label"><span class="label-text font-semibold">Biografía del Estudiante</span></label>
+          <textarea class="textarea textarea-bordered h-24" placeholder="Cuéntanos tus intereses en desarrollo web...">Apasionada por la arquitectura CSS moderna, accesibilidad web y los sistemas de diseño.</textarea>
+        </div>
+      </div>
+
+      <div class="flex justify-end pt-4 border-t border-base-300">
+        <button class="btn btn-primary btn-sm" onclick="showToast('Datos de perfil guardados correctamente.')">
+          Guardar Cambios
+        </button>
+      </div>
+    </section>
+
+    <!-- PESTAÑA 2: SEGURIDAD (CON BOTÓN DE MODAL CRÍTICO) -->
+    <section id="tab-panel-2" class="card bg-base-100 shadow-md border border-base-300 p-6 sm:p-8 space-y-6 hidden">
+      <div class="border-b border-base-300 pb-4">
+        <h2 class="text-xl font-bold">Opciones de Seguridad</h2>
+        <p class="text-xs opacity-70">Administra tus claves de acceso y la privacidad del expediente.</p>
+      </div>
+
+      <div class="space-y-4">
+        <div class="form-control">
+          <label class="label"><span class="label-text font-semibold">Contraseña Actual</span></label>
+          <input type="password" value="••••••••" class="input input-bordered max-w-md" />
+        </div>
+        <div class="form-control">
+          <label class="label"><span class="label-text font-semibold">Nueva Contraseña</span></label>
+          <input type="password" placeholder="Mínimo 8 caracteres" class="input input-bordered max-w-md" />
+        </div>
+      </div>
+
+      <!-- ZONA DE PELIGRO (DANGER ZONE) -->
+      <div class="mt-8 p-4 rounded-box bg-error/10 border border-error/20 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h3 class="text-sm font-black text-error">Zona de Peligro: Cancelación de Matrícula</h3>
+          <p class="text-xs opacity-70 mt-1">Borra irreversiblemente tu usuario, proyectos y registros de evaluación.</p>
+        </div>
+        <!-- BOTÓN QUE DISPARA EL MODAL NATIVO -->
+        <button class="btn btn-error btn-sm text-white" onclick="delete_modal.showModal()">
+          Eliminar Cuenta
+        </button>
+      </div>
+    </section>
+
+    <!-- PESTAÑA 3: AYUDA Y PREGUNTAS FRECUENTES (ACORDEÓN DAISYUI) -->
+    <section id="tab-panel-3" class="card bg-base-100 shadow-md border border-base-300 p-6 sm:p-8 space-y-6 hidden">
+      <div class="border-b border-base-300 pb-4">
+        <h2 class="text-xl font-bold">Preguntas Frecuentes (FAQ)</h2>
+        <p class="text-xs opacity-70">Respuestas rápidas a las dudas comunes del curso de desarrollo frontend.</p>
+      </div>
+
+      <!-- ACORDEÓN CON CSS PURO (COLLAPSE ARROW) -->
+      <div class="space-y-3">
+        <div class="collapse collapse-arrow bg-base-200 border border-base-300">
+          <input type="radio" name="my-accordion-4" checked="checked" />
+          <div class="collapse-title text-base font-bold">
+            ¿Cuál es la diferencia principal entre DaisyUI y Flowbite?
+          </div>
+          <div class="collapse-content text-sm opacity-80 leading-relaxed">
+            <p>DaisyUI utiliza clases semánticas de CSS puro inyectadas en Tailwind y no requiere JavaScript para componentes como modales o menús. Flowbite mantiene clases utilitarias explícitas de Tailwind y se apoya en un script JavaScript que gobierna atributos <code>data-*</code> y accesibilidad WAI-ARIA.</p>
+          </div>
+        </div>
+
+        <div class="collapse collapse-arrow bg-base-200 border border-base-300">
+          <input type="radio" name="my-accordion-4" />
+          <div class="collapse-title text-base font-bold">
+            ¿Por qué DaisyUI usa la etiqueta HTML5 &lt;dialog&gt;?
+          </div>
+          <div class="collapse-content text-sm opacity-80 leading-relaxed">
+            <p>Porque <code>&lt;dialog&gt;</code> es el estándar web oficial de los navegadores. Proporciona aislamiento visual en la capa superior (Top Layer), atrapamiento de foco automático para accesibilidad, oscurecimiento de fondo con <code>::backdrop</code> y cierre nativo con la tecla Escape.</p>
+          </div>
+        </div>
+
+        <div class="collapse collapse-arrow bg-base-200 border border-base-300">
+          <input type="radio" name="my-accordion-4" />
+          <div class="collapse-title text-base font-bold">
+            ¿Cómo se entregan las prácticas de interfaces?
+          </div>
+          <div class="collapse-content text-sm opacity-80 leading-relaxed">
+            <p>Mediante repositorios Git alojados en GitHub o GitLab, asegurando que la consola de desarrollo no presente advertencias y que el HTML sea validado según las directrices del W3C.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL DE DIÁLOGO NATIVO HTML5 (DAISYUI .modal) -->
+  <dialog id="delete_modal" class="modal modal-bottom sm:modal-middle">
+    <div class="modal-box">
+      <!-- Botón de cierre superior X -->
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <div class="flex items-center gap-3 text-error mb-3">
+        <div class="p-2 rounded-full bg-error/10">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+        </div>
+        <h3 class="font-black text-lg">¿Eliminar cuenta permanentemente?</h3>
+      </div>
+      <p class="text-sm opacity-70">
+        Esta acción es irreversible. Se eliminarán de forma definitiva todas tus notas, proyectos presentados y accesos a la plataforma de FP.
+      </p>
+      <div class="modal-action">
+        <form method="dialog" class="flex gap-2">
+          <button class="btn btn-ghost btn-sm">Cancelar</button>
+          <button class="btn btn-error btn-sm text-white" onclick="executeDelete()">
+            Sí, Eliminar Cuenta
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- Backdrop con clic fuera para cerrar -->
+    <form method="dialog" class="modal-backdrop">
+      <button>cerrar</button>
+    </form>
+  </dialog>
+
+  <!-- TOAST DE NOTIFICACIÓN FLOTANTE -->
+  <div id="toast" class="toast toast-end toast-bottom z-50 hidden">
+    <div class="alert alert-success shadow-lg text-white">
+      <span id="toast-msg">Mensaje de notificación</span>
+    </div>
+  </div>
+
+  <footer class="p-4 bg-base-100 text-center text-xs opacity-60 border-t border-base-300 mt-8">
+    Proyecto 04: Componentes Interactivos y Modales · DaisyUI 4.x
+  </footer>
+
+  <script>
+    function showTab(tabIndex) {
+      // Alternar clases de botón activo
+      for (let i = 1; i <= 3; i++) {
+        const btn = document.getElementById(`tab-btn-${i}`);
+        const panel = document.getElementById(`tab-panel-${i}`);
+        if (i === tabIndex) {
+          btn.classList.add('tab-active');
+          panel.classList.remove('hidden');
+        } else {
+          btn.classList.remove('tab-active');
+          panel.classList.add('hidden');
+        }
+      }
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-msg').textContent = message;
+      toast.classList.remove('hidden');
+      setTimeout(() => toast.classList.add('hidden'), 3500);
+    }
+
+    function executeDelete() {
+      showToast('⚠️ Solicitud de baja procesada con éxito.');
+    }
+  </script>
+</body>
+</html>

@@ -518,7 +518,10 @@ Maquetarás la vista de lectura y documentación de una academia online:
 
       <!-- 3. BOTÓN FLOTANTE FIJO (POSITION: FIXED) -->
       <a href="#" class="btn-scroll-top" title="Volver al principio" aria-label="Volver al principio">
-        ↑
+        <svg class="icon-arrow-up" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="12" y1="19" x2="12" y2="5"></line>
+          <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
       </a>
 
       <!-- 4. BANNER DE CONSENTIMIENTO FIJO INFERIOR (POSITION: FIXED) -->
@@ -799,10 +802,9 @@ Maquetarás la vista de lectura y documentación de una academia online:
       border-radius: 50%;
       background-color: var(--color-primary);
       color: #ffffff;
-      display: grid;
-      place-items: center;
-      font-size: 1.25rem;
-      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-decoration: none;
       box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
       transition: transform 0.15s ease, background-color 0.15s ease;
@@ -811,6 +813,12 @@ Maquetarás la vista de lectura y documentación de una academia online:
     .btn-scroll-top:hover {
       transform: translateY(-3px);
       background-color: var(--color-primary-hover);
+    }
+
+    .btn-scroll-top svg {
+      display: block;
+      width: 20px;
+      height: 20px;
     }
 
     /* 4. BANNER DE CONSENTIMIENTO FIJO INFERIOR (POSITION: FIXED) */
@@ -823,7 +831,7 @@ Maquetarás la vista de lectura y documentación de una academia online:
       z-index: 95;
       background-color: #1e293b;
       border-top: 1px solid #334155;
-      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.25);
     }
 
     .cookie-content {
@@ -833,29 +841,52 @@ Maquetarás la vista de lectura y documentación de una academia online:
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
+      gap: 1.5rem;
     }
 
     .cookie-text {
       color: #f1f5f9;
       font-size: 0.9rem;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .cookie-actions {
+      flex-shrink: 0;
     }
 
     .btn-cookie {
       background-color: var(--color-success);
       color: #ffffff;
       border: none;
-      padding: 0.45rem 1.15rem;
+      padding: 0.5rem 1.25rem;
       border-radius: var(--radius-sm);
       font-size: 0.85rem;
       font-weight: 700;
       cursor: pointer;
-      transition: opacity 0.15s ease;
+      white-space: nowrap;
+      transition: opacity 0.15s ease, background-color 0.15s ease;
     }
 
     .btn-cookie:hover {
       opacity: 0.9;
+    }
+
+    @media (max-width: 640px) {
+      .cookie-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        padding: 1rem 1.25rem;
+      }
+
+      .cookie-actions {
+        width: 100%;
+      }
+
+      .btn-cookie {
+        width: 100%;
+      }
     }
     ```
 

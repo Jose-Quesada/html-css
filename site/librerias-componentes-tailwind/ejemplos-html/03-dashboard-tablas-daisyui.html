@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyecto 03: Dashboard Administrativo — DaisyUI</title>
+  <!-- DaisyUI CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-base-200 text-base-content min-h-screen font-sans">
+
+  <!-- DRAWER PRINCIPAL DE DAISYUI (RESPONSIVE SIN JAVASCRIPT) -->
+  <div class="drawer lg:drawer-open min-h-screen">
+    <!-- Checkbox que controla el estado del drawer en pantallas móviles -->
+    <input id="main-drawer" type="checkbox" class="drawer-toggle" />
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="drawer-content flex flex-col">
+
+      <!-- NAVBAR SUPERIOR -->
+      <header class="navbar bg-base-100 shadow-sm border-b border-base-300 px-4 lg:px-8 sticky top-0 z-20">
+        <!-- Botón para abrir el drawer en móviles -->
+        <div class="flex-none lg:hidden">
+          <label for="main-drawer" class="btn btn-square btn-ghost" aria-label="Abrir menú de navegación">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-6 h-6 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          </label>
+        </div>
+
+        <div class="flex-1 gap-4">
+          <h1 class="text-xl font-bold hidden sm:block">Gestión Académica</h1>
+          <div class="form-control w-full max-w-xs">
+            <input type="text" placeholder="Buscar alumnos o módulos..." class="input input-bordered input-sm w-full" />
+          </div>
+        </div>
+
+        <div class="flex-none gap-3">
+          <!-- Conmutador de tema -->
+          <select class="select select-bordered select-xs" onchange="document.documentElement.setAttribute('data-theme', this.value)">
+            <option value="light">Tema: Claro</option>
+            <option value="dark">Tema: Oscuro</option>
+            <option value="corporate">Tema: Corporate</option>
+            <option value="synthwave">Tema: Synthwave</option>
+          </select>
+
+          <!-- Notificaciones con badge -->
+          <button class="btn btn-ghost btn-circle btn-sm" aria-label="Notificaciones">
+            <div class="indicator">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+              <span class="badge badge-xs badge-error indicator-item"></span>
+            </div>
+          </button>
+
+          <!-- Avatar del usuario -->
+          <div class="avatar placeholder cursor-pointer">
+            <div class="bg-primary text-primary-content rounded-full w-8">
+              <span class="text-xs font-bold">PR</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ZONA DE CONTENIDO Y TABLAS -->
+      <main class="p-4 lg:p-8 flex-1 max-w-7xl w-full mx-auto space-y-8">
+
+        <!-- CABECERA DE SECCIÓN -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div>
+            <h2 class="text-2xl font-black tracking-tight">Expedientes de Alumnos</h2>
+            <p class="text-xs opacity-70 mt-1">Curso académico 2026/2027 · Formación Profesional</p>
+          </div>
+          <button class="btn btn-primary btn-sm gap-2" onclick="alert('Funcionalidad: Alta de Alumno')">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            Nuevo Alumno
+          </button>
+        </div>
+
+        <!-- KPI STATS CARDS (DAISYUI STATS) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="stats shadow bg-base-100 border border-base-300">
+            <div class="stat">
+              <div class="stat-figure text-primary">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+              </div>
+              <div class="stat-title text-xs font-semibold">Total Matriculados</div>
+              <div class="stat-value text-primary text-3xl">128</div>
+              <div class="stat-desc text-success font-semibold">↗︎ +8% respecto al mes pasado</div>
+            </div>
+          </div>
+
+          <div class="stats shadow bg-base-100 border border-base-300">
+            <div class="stat">
+              <div class="stat-figure text-secondary">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <div class="stat-title text-xs font-semibold">Tasa de Superación</div>
+              <div class="stat-value text-secondary text-3xl">92.4%</div>
+              <div class="stat-desc text-success font-semibold">↗︎ +3.2% en RA evaluados</div>
+            </div>
+          </div>
+
+          <div class="stats shadow bg-base-100 border border-base-300">
+            <div class="stat">
+              <div class="stat-figure text-accent">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+              </div>
+              <div class="stat-title text-xs font-semibold">Prácticas Entregadas</div>
+              <div class="stat-value text-accent text-3xl">540</div>
+              <div class="stat-desc text-warning font-semibold">12 pendientes de corrección</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TABLA DE DATOS RESPONSIVA -->
+        <div class="overflow-x-auto bg-base-100 rounded-box shadow-md border border-base-300">
+          <table class="table table-zebra w-full text-sm">
+            <thead class="bg-base-200/60 text-xs uppercase font-bold">
+              <tr>
+                <th class="w-12">
+                  <label><input type="checkbox" id="select-all" class="checkbox checkbox-sm checkbox-primary" onchange="toggleAllRows(this)" /></label>
+                </th>
+                <th>Alumno</th>
+                <th>Ciclo y Módulo</th>
+                <th>Estado</th>
+                <th>Progreso RA</th>
+                <th class="text-end">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- FILA 1 -->
+              <tr class="hover">
+                <th><label><input type="checkbox" class="checkbox checkbox-sm row-checkbox" /></label></th>
+                <td>
+                  <div class="flex items-center gap-3">
+                    <div class="avatar placeholder">
+                      <div class="bg-primary text-primary-content rounded-full w-9">
+                        <span class="text-xs font-bold">MG</span>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="font-bold">María García López</div>
+                      <div class="text-xs opacity-50">mgarcia@alumnado.fp.es</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="font-medium">2º DAW</div>
+                  <div class="text-xs opacity-60">DIW (0615)</div>
+                </td>
+                <td><span class="badge badge-success badge-sm font-semibold text-white">Activo</span></td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <progress class="progress progress-primary w-24" value="90" max="100"></progress>
+                    <span class="text-xs font-bold">90%</span>
+                  </div>
+                </td>
+                <td class="text-end">
+                  <button class="btn btn-ghost btn-xs text-primary font-semibold">Editar</button>
+                  <button class="btn btn-ghost btn-xs text-error font-semibold" onclick="confirm('¿Dar de baja?')">Baja</button>
+                </td>
+              </tr>
+
+              <!-- FILA 2 -->
+              <tr class="hover">
+                <th><label><input type="checkbox" class="checkbox checkbox-sm row-checkbox" /></label></th>
+                <td>
+                  <div class="flex items-center gap-3">
+                    <div class="avatar placeholder">
+                      <div class="bg-secondary text-secondary-content rounded-full w-9">
+                        <span class="text-xs font-bold">AR</span>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="font-bold">Alejandro Ruiz Santos</div>
+                      <div class="text-xs opacity-50">aruiz@alumnado.fp.es</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="font-medium">1º DAW</div>
+                  <div class="text-xs opacity-60">LMH (0373)</div>
+                </td>
+                <td><span class="badge badge-warning badge-sm font-semibold">Pendiente</span></td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <progress class="progress progress-warning w-24" value="55" max="100"></progress>
+                    <span class="text-xs font-bold">55%</span>
+                  </div>
+                </td>
+                <td class="text-end">
+                  <button class="btn btn-ghost btn-xs text-primary font-semibold">Editar</button>
+                  <button class="btn btn-ghost btn-xs text-error font-semibold" onclick="confirm('¿Dar de baja?')">Baja</button>
+                </td>
+              </tr>
+
+              <!-- FILA 3 -->
+              <tr class="hover">
+                <th><label><input type="checkbox" class="checkbox checkbox-sm row-checkbox" /></label></th>
+                <td>
+                  <div class="flex items-center gap-3">
+                    <div class="avatar placeholder">
+                      <div class="bg-accent text-accent-content rounded-full w-9">
+                        <span class="text-xs font-bold">CP</span>
+                      </div>
+                    </div>
+                    <div>
+                      <div class="font-bold">Carmen Pérez Molina</div>
+                      <div class="text-xs opacity-50">cperez@alumnado.fp.es</div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="font-medium">2º DAM</div>
+                  <div class="text-xs opacity-60">DI (0488)</div>
+                </td>
+                <td><span class="badge badge-info badge-sm font-semibold text-white">Graduado</span></td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <progress class="progress progress-info w-24" value="100" max="100"></progress>
+                    <span class="text-xs font-bold">100%</span>
+                  </div>
+                </td>
+                <td class="text-end">
+                  <button class="btn btn-ghost btn-xs text-primary font-semibold">Ver</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- BARRA DE PAGINACIÓN -->
+          <div class="flex flex-col sm:flex-row justify-between items-center p-4 border-t border-base-300 gap-4">
+            <span class="text-xs opacity-70">Mostrando 3 de 128 alumnos matriculados</span>
+            <div class="join">
+              <button class="join-item btn btn-sm">«</button>
+              <button class="join-item btn btn-sm btn-active">1</button>
+              <button class="join-item btn btn-sm">2</button>
+              <button class="join-item btn btn-sm">3</button>
+              <button class="join-item btn btn-sm">»</button>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+      <footer class="p-4 bg-base-100 text-center text-xs opacity-60 border-t border-base-300">
+        Proyecto 03: Dashboard Administrativo · DaisyUI 4.x
+      </footer>
+    </div>
+
+    <!-- SIDEBAR LATERAL (DRAWER-SIDE) -->
+    <aside class="drawer-side z-40">
+      <label for="main-drawer" aria-label="Cerrar menú" class="drawer-overlay"></label>
+      <div class="p-4 w-72 min-h-full bg-base-100 border-r border-base-300 text-base-content flex flex-col justify-between">
+        <div>
+          <!-- Logotipo / Cabecera Sidebar -->
+          <div class="flex items-center gap-3 px-2 py-4 mb-4 border-b border-base-300">
+            <div class="w-10 h-10 rounded-xl bg-primary text-primary-content flex items-center justify-center font-black text-xl">
+              FP
+            </div>
+            <div>
+              <div class="font-extrabold text-base">Portal Docente</div>
+              <div class="text-xs opacity-60">Junta de Andalucía</div>
+            </div>
+          </div>
+
+          <!-- Enlaces de navegación -->
+          <ul class="menu menu-md font-medium gap-1">
+            <li><a class="active bg-primary text-primary-content">📊 Resumen General</a></li>
+            <li><a>👥 Alumnos</a></li>
+            <li><a>📚 Cursos y Módulos</a></li>
+            <li><a>📝 Calificaciones</a></li>
+            <li><a>📈 Estadísticas</a></li>
+            <li class="menu-title mt-4 text-xs font-bold uppercase opacity-50">Ajustes</li>
+            <li><a>⚙️ Configuración</a></li>
+            <li><a>🔒 Seguridad</a></li>
+          </ul>
+        </div>
+
+        <div class="p-2 border-t border-base-300 text-xs opacity-50 text-center">
+          Versión 2.4.0 · DaisyUI Drawer
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    function toggleAllRows(masterCheckbox) {
+      const checkboxes = document.querySelectorAll('.row-checkbox');
+      checkboxes.forEach(cb => cb.checked = masterCheckbox.checked);
+    }
+  </script>
+</body>
+</html>

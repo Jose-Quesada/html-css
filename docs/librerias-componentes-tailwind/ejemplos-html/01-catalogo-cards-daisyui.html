@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyecto 01: Catálogo de Productos — DaisyUI</title>
+  <!-- DaisyUI CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-base-200 text-base-content min-h-screen flex flex-col font-sans transition-colors duration-200">
+
+  <!-- NAVBAR CON INDICADOR DE CARRITO -->
+  <header class="navbar bg-base-100 shadow-md sticky top-0 z-30 px-4 lg:px-8">
+    <div class="flex-1 gap-2">
+      <span class="text-2xl font-black tracking-tight text-primary">TechStore</span>
+      <span class="badge badge-primary badge-outline text-xs hidden sm:inline-flex">DaisyUI Edition</span>
+    </div>
+    <div class="flex-none gap-4">
+      <!-- Selector rápido de tema para ver la reactividad de DaisyUI -->
+      <select class="select select-bordered select-sm" onchange="document.documentElement.setAttribute('data-theme', this.value)">
+        <option value="light">Tema: Claro</option>
+        <option value="dark">Tema: Oscuro</option>
+        <option value="corporate">Tema: Corporate</option>
+        <option value="synthwave">Tema: Synthwave</option>
+        <option value="cupcake">Tema: Cupcake</option>
+      </select>
+
+      <!-- Botón de carrito con indicador flotante -->
+      <button class="btn btn-ghost btn-circle" aria-label="Carrito de compras">
+        <div class="indicator">
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+          <span class="badge badge-sm badge-secondary indicator-item font-bold" id="cart-count">3</span>
+        </div>
+      </button>
+    </div>
+  </header>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="container mx-auto px-4 py-8 flex-1 max-w-7xl">
+
+    <!-- CABECERA Y FILTROS -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+      <div>
+        <h1 class="text-3xl font-extrabold tracking-tight">Catálogo de Productos</h1>
+        <p class="text-sm opacity-70 mt-1">Explora componentes atómicos: tarjetas, insignias, botones y estados de carga.</p>
+      </div>
+      <!-- Badges de filtro -->
+      <div class="flex flex-wrap gap-2">
+        <button class="badge badge-primary badge-lg cursor-pointer">Todos</button>
+        <button class="badge badge-ghost badge-lg cursor-pointer hover:badge-primary">Audio</button>
+        <button class="badge badge-ghost badge-lg cursor-pointer hover:badge-primary">Gaming</button>
+        <button class="badge badge-ghost badge-lg cursor-pointer hover:badge-primary">Wearables</button>
+      </div>
+    </div>
+
+    <!-- ALERTA DE NOTIFICACIÓN FLOTANTE (Toast interactivo) -->
+    <div id="toast-notification" class="toast toast-top toast-end z-50 hidden">
+      <div class="alert alert-success shadow-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <span id="toast-text">¡Producto añadido al carrito con éxito!</span>
+      </div>
+    </div>
+
+    <!-- GRID DE PRODUCTOS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- CARD 1: PRODUCTO ESTÁNDAR DISPONIBLE -->
+      <article class="card bg-base-100 shadow-xl border border-base-300 hover:shadow-2xl transition-all duration-300 flex flex-col justify-between">
+        <figure class="relative aspect-video overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80" alt="Auriculares Pro" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+          <span class="badge badge-accent absolute top-3 right-3 font-semibold">-25% OFF</span>
+        </figure>
+        <div class="card-body p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="badge badge-outline badge-primary text-xs">Audio Pro</span>
+              <div class="flex items-center text-xs gap-1 text-warning font-semibold">
+                ★ <span>4.9</span>
+              </div>
+            </div>
+            <h2 class="card-title text-base font-bold line-clamp-1" title="Auriculares Wireless Studio Pro">
+              Auriculares Wireless Studio Pro
+            </h2>
+            <p class="text-xs opacity-70 line-clamp-2 mt-1">
+              Cancelación activa de ruido ambiental, drivers de 40mm y batería para 35 horas de reproducción continua.
+            </p>
+          </div>
+          <div class="card-actions justify-between items-center mt-4 pt-3 border-t border-base-200">
+            <div>
+              <span class="text-xs opacity-50 block line-through">199,99 €</span>
+              <span class="text-lg font-black text-primary">149,99 €</span>
+            </div>
+            <button class="btn btn-primary btn-sm gap-1" onclick="addToCart('Auriculares Pro')">
+              Añadir
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 2: PRODUCTO AGOTADO (DISABLED STATE) -->
+      <article class="card bg-base-100 shadow-xl border border-base-300 opacity-80 flex flex-col justify-between">
+        <figure class="relative aspect-video overflow-hidden grayscale">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80" alt="Smartwatch Pulse" class="w-full h-full object-cover" />
+          <span class="badge badge-error absolute top-3 right-3 font-semibold text-white">Agotado</span>
+        </figure>
+        <div class="card-body p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="badge badge-ghost text-xs">Wearables</span>
+              <div class="flex items-center text-xs gap-1 text-warning font-semibold">
+                ★ <span>4.5</span>
+              </div>
+            </div>
+            <h2 class="card-title text-base font-bold line-clamp-1" title="Smartwatch BioFit Pulse 4">
+              Smartwatch BioFit Pulse 4
+            </h2>
+            <p class="text-xs opacity-70 line-clamp-2 mt-1">
+              Monitor de frecuencia cardíaca continuo, sensor SpO2, GPS integrado y resistencia al agua 5 ATM.
+            </p>
+          </div>
+          <div class="card-actions justify-between items-center mt-4 pt-3 border-t border-base-200">
+            <div>
+              <span class="text-lg font-black opacity-50">129,00 €</span>
+            </div>
+            <button class="btn btn-disabled btn-sm" disabled>
+              Sin stock
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 3: PRODUCTO CON ESTADO EN CARGA (LOADING STATE) -->
+      <article class="card bg-base-100 shadow-xl border border-base-300 flex flex-col justify-between">
+        <figure class="relative aspect-video overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500&q=80" alt="Mando Pro Gaming" class="w-full h-full object-cover" />
+          <span class="badge badge-secondary absolute top-3 right-3 font-semibold">Novedad</span>
+        </figure>
+        <div class="card-body p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="badge badge-outline badge-secondary text-xs">Gaming</span>
+              <div class="flex items-center text-xs gap-1 text-warning font-semibold">
+                ★ <span>5.0</span>
+              </div>
+            </div>
+            <h2 class="card-title text-base font-bold line-clamp-1" title="Controlador Inalámbrico Apex Pro">
+              Controlador Inalámbrico Apex Pro
+            </h2>
+            <p class="text-xs opacity-70 line-clamp-2 mt-1">
+              Gatillos de efecto Hall magnéticos, conexión dual 2.4GHz/Bluetooth y batería de alta capacidad.
+            </p>
+          </div>
+          <div class="card-actions justify-between items-center mt-4 pt-3 border-t border-base-200">
+            <div>
+              <span class="text-lg font-black text-primary">69,99 €</span>
+            </div>
+            <!-- Botón con spinner de DaisyUI -->
+            <button class="btn btn-secondary btn-sm gap-2" disabled>
+              <span class="loading loading-spinner loading-xs"></span>
+              Añadiendo...
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 4: SKELETON LOADER (ASYNCHRONOUS LOADING RESILIENCE) -->
+      <article class="card bg-base-100 shadow-xl border border-base-300 flex flex-col justify-between">
+        <div class="skeleton aspect-video w-full rounded-b-none"></div>
+        <div class="card-body p-5 gap-3">
+          <div class="flex justify-between items-center">
+            <div class="skeleton h-4 w-20"></div>
+            <div class="skeleton h-4 w-10"></div>
+          </div>
+          <div class="skeleton h-5 w-4/5"></div>
+          <div class="skeleton h-3 w-full"></div>
+          <div class="skeleton h-3 w-3/4"></div>
+          <div class="flex justify-between items-center mt-4 pt-3 border-t border-base-200">
+            <div class="skeleton h-6 w-16"></div>
+            <div class="skeleton h-8 w-20 rounded-btn"></div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- SECCIÓN DE RESILIENCIA: EMPTY STATE (ESTADO VACÍO) -->
+    <section class="mt-12 py-12 px-4 text-center bg-base-100 rounded-box border-2 border-dashed border-base-300">
+      <div class="max-w-md mx-auto">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-base-200 text-3xl mb-4">
+          📦
+        </div>
+        <h3 class="text-xl font-bold">Resiliencia: Ejemplo de Estado Vacío (Empty State)</h3>
+        <p class="text-sm opacity-70 mt-2">
+          Cuando el usuario busca un producto o filtra por una categoría sin existencias, la interfaz nunca debe quedar en blanco o rota.
+        </p>
+        <button class="btn btn-outline btn-sm mt-4" onclick="alert('Filtros restablecidos')">
+          Limpiar búsqueda y filtros
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer footer-center p-4 bg-base-100 text-base-content border-t border-base-300 mt-12">
+    <div>
+      <p class="text-xs opacity-70">Proyecto de Clase · Módulos LMH/DIW/DI · Ejemplos con DaisyUI 4.x</p>
+    </div>
+  </footer>
+
+  <script>
+    let count = 3;
+    function addToCart(product) {
+      count++;
+      document.getElementById('cart-count').textContent = count;
+      const toast = document.getElementById('toast-notification');
+      document.getElementById('toast-text').textContent = `¡"${product}" añadido al carrito! Total: ${count}`;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

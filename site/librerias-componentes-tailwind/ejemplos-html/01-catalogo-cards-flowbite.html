@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyecto 01: Catálogo de Productos — Flowbite</title>
+  <!-- Flowbite CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-white min-h-screen flex flex-col font-sans transition-colors duration-200">
+
+  <!-- NAVBAR CON INDICADOR DE CARRITO (FLOWBITE) -->
+  <header class="bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 sticky top-0 z-30 px-4 lg:px-8 py-3">
+    <div class="flex justify-between items-center max-w-7xl mx-auto">
+      <div class="flex items-center gap-3">
+        <span class="text-2xl font-black tracking-tight text-blue-600 dark:text-blue-400">TechStore</span>
+        <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm dark:bg-blue-900 dark:text-blue-300 hidden sm:inline-flex">
+          Flowbite Edition
+        </span>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <!-- Selector rápido de Dark Mode -->
+        <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2">
+          <span id="theme-toggle-icon" class="text-lg">🌙</span>
+        </button>
+
+        <!-- Botón de carrito con badge absoluto -->
+        <button type="button" class="relative inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-700" aria-label="Carrito de compras">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
+          <span id="cart-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-red-600 rounded-full">
+            3
+          </span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="container mx-auto px-4 py-8 flex-1 max-w-7xl">
+
+    <!-- CABECERA Y FILTROS -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+      <div>
+        <h1 class="text-3xl font-extrabold tracking-tight">Catálogo de Productos</h1>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Explora componentes atómicos: tarjetas, insignias, botones y estados de carga.</p>
+      </div>
+      <!-- Badges / Pill buttons de filtro -->
+      <div class="flex flex-wrap gap-2">
+        <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-full text-xs px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700">Todos</button>
+        <button type="button" class="text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 font-medium rounded-full text-xs px-4 py-2 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-700">Audio</button>
+        <button type="button" class="text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 font-medium rounded-full text-xs px-4 py-2 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-700">Gaming</button>
+        <button type="button" class="text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 font-medium rounded-full text-xs px-4 py-2 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 dark:hover:bg-gray-700">Wearables</button>
+      </div>
+    </div>
+
+    <!-- NOTIFICACIÓN FLOTANTE (Toast interactivo Flowbite) -->
+    <div id="toast-notification" class="fixed top-20 right-5 z-50 hidden flex items-center w-full max-w-xs p-4 text-gray-700 bg-white rounded-lg shadow-xl dark:text-gray-300 dark:bg-gray-800 border border-green-200 dark:border-green-800" role="alert">
+      <div class="inline-flex items-center justify-center shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+      </div>
+      <div id="toast-text" class="ms-3 text-sm font-medium">¡Producto añadido al carrito con éxito!</div>
+    </div>
+
+    <!-- GRID DE PRODUCTOS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- CARD 1: PRODUCTO ESTÁNDAR DISPONIBLE -->
+      <article class="bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 dark:bg-gray-800 dark:border-gray-700 overflow-hidden flex flex-col justify-between">
+        <div class="relative aspect-video overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&q=80" alt="Auriculares Pro" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+          <span class="absolute top-3 right-3 bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm dark:bg-red-900 dark:text-red-300">
+            -25% OFF
+          </span>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-sm dark:bg-blue-900 dark:text-blue-300">
+                Audio Pro
+              </span>
+              <div class="flex items-center text-yellow-400 text-xs font-bold">
+                ★ <span class="ms-1 text-gray-500 dark:text-gray-400 font-semibold">4.9</span>
+              </div>
+            </div>
+            <h5 class="text-base font-bold tracking-tight text-gray-900 dark:text-white line-clamp-1" title="Auriculares Wireless Studio Pro">
+              Auriculares Wireless Studio Pro
+            </h5>
+            <p class="font-normal text-xs text-gray-700 dark:text-gray-400 line-clamp-2 mt-1">
+              Cancelación activa de ruido ambiental, drivers de 40mm y batería para 35 horas de reproducción continua.
+            </p>
+          </div>
+          <div class="flex items-center justify-between pt-3 mt-4 border-t border-gray-100 dark:border-gray-700">
+            <div>
+              <span class="text-xs text-gray-400 block line-through">199,99 €</span>
+              <span class="text-lg font-bold text-gray-900 dark:text-white">149,99 €</span>
+            </div>
+            <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 inline-flex items-center gap-1" onclick="addToCart('Auriculares Pro')">
+              Añadir
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 2: PRODUCTO AGOTADO (DISABLED STATE) -->
+      <article class="bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 overflow-hidden opacity-75 flex flex-col justify-between">
+        <div class="relative aspect-video overflow-hidden grayscale">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500&q=80" alt="Smartwatch Pulse" class="w-full h-full object-cover" />
+          <span class="absolute top-3 right-3 bg-red-600 text-white text-xs font-bold px-2.5 py-0.5 rounded-sm">
+            Agotado
+          </span>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded-sm dark:bg-gray-700 dark:text-gray-300">
+                Wearables
+              </span>
+              <div class="flex items-center text-yellow-400 text-xs font-bold">
+                ★ <span class="ms-1 text-gray-500 dark:text-gray-400 font-semibold">4.5</span>
+              </div>
+            </div>
+            <h5 class="text-base font-bold tracking-tight text-gray-900 dark:text-white line-clamp-1" title="Smartwatch BioFit Pulse 4">
+              Smartwatch BioFit Pulse 4
+            </h5>
+            <p class="font-normal text-xs text-gray-700 dark:text-gray-400 line-clamp-2 mt-1">
+              Monitor de frecuencia cardíaca continuo, sensor SpO2, GPS integrado y resistencia al agua 5 ATM.
+            </p>
+          </div>
+          <div class="flex items-center justify-between pt-3 mt-4 border-t border-gray-100 dark:border-gray-700">
+            <div>
+              <span class="text-lg font-bold text-gray-400">129,00 €</span>
+            </div>
+            <button type="button" disabled class="py-2 px-3 text-xs font-medium text-gray-400 bg-gray-200 rounded-lg cursor-not-allowed dark:bg-gray-700 dark:text-gray-500">
+              Sin stock
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 3: PRODUCTO CON ESTADO EN CARGA (LOADING STATE) -->
+      <article class="bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 overflow-hidden flex flex-col justify-between">
+        <div class="relative aspect-video overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500&q=80" alt="Mando Pro Gaming" class="w-full h-full object-cover" />
+          <span class="absolute top-3 right-3 bg-purple-100 text-purple-800 text-xs font-semibold px-2.5 py-0.5 rounded-sm dark:bg-purple-900 dark:text-purple-300">
+            Novedad
+          </span>
+        </div>
+        <div class="p-5 flex-1 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-sm dark:bg-purple-900 dark:text-purple-300">
+                Gaming
+              </span>
+              <div class="flex items-center text-yellow-400 text-xs font-bold">
+                ★ <span class="ms-1 text-gray-500 dark:text-gray-400 font-semibold">5.0</span>
+              </div>
+            </div>
+            <h5 class="text-base font-bold tracking-tight text-gray-900 dark:text-white line-clamp-1" title="Controlador Inalámbrico Apex Pro">
+              Controlador Inalámbrico Apex Pro
+            </h5>
+            <p class="font-normal text-xs text-gray-700 dark:text-gray-400 line-clamp-2 mt-1">
+              Gatillos de efecto Hall magnéticos, conexión dual 2.4GHz/Bluetooth y batería de alta capacidad.
+            </p>
+          </div>
+          <div class="flex items-center justify-between pt-3 mt-4 border-t border-gray-100 dark:border-gray-700">
+            <div>
+              <span class="text-lg font-bold text-gray-900 dark:text-white">69,99 €</span>
+            </div>
+            <!-- Botón con spinner explícito de Flowbite -->
+            <button type="button" disabled class="text-white bg-purple-600 font-medium rounded-lg text-xs px-3 py-2 text-center inline-flex items-center gap-1.5 cursor-wait">
+              <svg aria-hidden="true" role="status" class="inline w-3.5 h-3.5 text-white animate-spin" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="#E5E7EB"/>
+                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentColor"/>
+              </svg>
+              Añadiendo...
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 4: SKELETON LOADER (FLOWBITE ANIMATE-PULSE) -->
+      <article role="status" class="bg-white border border-gray-200 rounded-lg p-5 shadow-sm dark:bg-gray-800 dark:border-gray-700 animate-pulse flex flex-col justify-between">
+        <div class="flex items-center justify-center aspect-video mb-4 bg-gray-200 rounded-lg dark:bg-gray-700">
+          <svg class="w-10 h-10 text-gray-300 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18"><path d="M18 0H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm4.376 10.481A1 1 0 0 1 16 15H4a1 1 0 0 1-.895-1.447l3.5-7A1 1 0 0 1 7.468 6a.965.965 0 0 1 .9.5l2.175 4.35 1.473-2.946a1 1 0 0 1 1.764-.029l3.5 7a1 1 0 0 1 .066.526Z"/></svg>
+        </div>
+        <div class="space-y-2.5">
+          <div class="flex justify-between">
+            <div class="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-20"></div>
+            <div class="h-3 bg-gray-200 rounded-full dark:bg-gray-700 w-10"></div>
+          </div>
+          <div class="h-4 bg-gray-200 rounded-full dark:bg-gray-700 w-4/5"></div>
+          <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-full"></div>
+          <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-3/4"></div>
+          <div class="flex justify-between items-center pt-3 mt-4 border-t border-gray-100 dark:border-gray-700">
+            <div class="h-5 bg-gray-200 rounded-full dark:bg-gray-700 w-16"></div>
+            <div class="h-7 bg-gray-200 rounded-lg dark:bg-gray-700 w-20"></div>
+          </div>
+        </div>
+        <span class="sr-only">Cargando elemento...</span>
+      </article>
+
+    </div>
+
+    <!-- SECCIÓN DE RESILIENCIA: EMPTY STATE (ESTADO VACÍO) -->
+    <section class="mt-12 py-12 px-4 text-center bg-white dark:bg-gray-800 rounded-lg border-2 border-dashed border-gray-200 dark:border-gray-700">
+      <div class="max-w-md mx-auto">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-700 text-3xl mb-4">
+          📦
+        </div>
+        <h3 class="text-xl font-bold">Resiliencia: Ejemplo de Estado Vacío (Empty State)</h3>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
+          Cuando el usuario busca un producto o filtra por una categoría sin existencias, la interfaz nunca debe quedar en blanco o rota.
+        </p>
+        <button type="button" class="mt-4 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-xs px-4 py-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" onclick="alert('Filtros restablecidos')">
+          Limpiar búsqueda y filtros
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="p-4 bg-white md:p-6 dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 text-center">
+    <p class="text-xs text-gray-500 dark:text-gray-400">Proyecto de Clase · Módulos LMH/DIW/DI · Ejemplos con Flowbite 2.x</p>
+  </footer>
+
+  <!-- Flowbite JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+
+  <script>
+    // Conmutador de modo oscuro
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-toggle-icon');
+    themeToggleBtn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      themeIcon.textContent = document.documentElement.classList.contains('dark') ? '☀️' : '🌙';
+    });
+
+    let count = 3;
+    function addToCart(product) {
+      count++;
+      document.getElementById('cart-count').textContent = count;
+      const toast = document.getElementById('toast-notification');
+      document.getElementById('toast-text').textContent = `¡"${product}" añadido al carrito! Total: ${count}`;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3000);
+    }
+  </script>
+</body>
+</html>

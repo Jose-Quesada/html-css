@@ -170,16 +170,28 @@
     drawRoundRect(ctx, bx + bw - 12, headY + 50, 6, 200, 3, '#cbd5e1');
     drawRoundRect(ctx, bx + bw - 12, headY + 80, 6, 70, 3, '#94a3b8');
 
-    const fabX = bx + bw - 45, fabY = by + bh - 100;
+    const fabX = bx + bw - 45, fabY = by + bh - 95;
     ctx.beginPath(); ctx.arc(fabX, fabY, 20, 0, Math.PI*2); ctx.fillStyle = '#2563eb'; ctx.fill();
-    ctx.fillStyle = '#ffffff'; ctx.font = 'bold 16px system-ui'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillText('↑', fabX, fabY);
+    
+    // Flecha vectorial perfectamente centrada en el círculo
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 2.5;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(fabX, fabY + 7);
+    ctx.lineTo(fabX, fabY - 7);
+    ctx.moveTo(fabX - 5, fabY - 2);
+    ctx.lineTo(fabX, fabY - 7);
+    ctx.lineTo(fabX + 5, fabY - 2);
+    ctx.stroke();
 
-    const cookH = 55, cookY = by + bh - cookH;
+    // Banner de cookies con proporciones equilibradas y centrado vertical
+    const cookH = 50, cookY = by + bh - cookH;
     drawRoundRect(ctx, bx, cookY, bw, cookH, [0, 0, 10, 10], '#1e293b');
-    drawText(ctx, '🍪 Utilizamos cookies técnicas para garantizar el funcionamiento del aula.', bx + 20, cookY + 32, '11px system-ui', '#f1f5f9');
-    drawRoundRect(ctx, bx + bw - 110, cookY + 15, 90, 26, 6, '#10b981');
-    drawText(ctx, 'Aceptar todas', bx + bw - 65, cookY + 31, 'bold 11px system-ui', '#ffffff', 'center');
+    drawText(ctx, '🍪 Utilizamos cookies técnicas para garantizar el funcionamiento del aula.', bx + 20, cookY + 28, '11px system-ui', '#f1f5f9');
+    drawRoundRect(ctx, bx + bw - 115, cookY + 12, 95, 26, 6, '#10b981');
+    drawText(ctx, 'Aceptar todas', bx + bw - 67, cookY + 28, 'bold 11px system-ui', '#ffffff', 'center');
 
     drawAnnotation(ctx, 'position: sticky; top: 0;', bx + bw - 120, headY + 12, bx + bw - 60, headY + 12, '#38bdf8');
     drawAnnotation(ctx, 'position: fixed (bottom: 5rem)', fabX - 25, fabY, fabX, fabY, '#60a5fa');

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyecto 05: Plataforma SaaS — DaisyUI Multitema</title>
+  <!-- DaisyUI CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-base-200 text-base-content min-h-screen flex flex-col font-sans transition-colors duration-300">
+
+  <!-- APP SHELL TOPBAR -->
+  <header class="navbar bg-base-100 shadow-md border-b border-base-300 px-4 lg:px-8 sticky top-0 z-30">
+    <div class="flex-1 gap-4 items-center">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-primary text-primary-content flex items-center justify-center font-black">
+          ⚡
+        </div>
+        <span class="text-xl font-black tracking-tight text-primary">DevPortal</span>
+      </div>
+
+      <!-- BUSCADOR CON ATRIBUTO KBD -->
+      <label class="input input-bordered input-sm hidden md:flex items-center gap-2 w-72">
+        <svg class="w-4 h-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input id="global-search" type="text" placeholder="Buscar repositorio..." class="grow text-xs" />
+        <kbd class="kbd kbd-xs">⌘K</kbd>
+      </label>
+    </div>
+
+    <!-- ACCIONES Y MULTITEMA SELECTOR -->
+    <div class="flex-none gap-3 items-center">
+      <!-- SELECTOR DINÁMICO DE 6 TEMAS DAISYUI -->
+      <div class="flex items-center gap-1.5 bg-base-200 px-2 py-1 rounded-box border border-base-300">
+        <span class="text-xs font-semibold">🎨</span>
+        <select id="theme-selector" class="select select-ghost select-xs font-medium" onchange="changeTheme(this.value)">
+          <option value="dark" selected>Dark (Nativo)</option>
+          <option value="light">Light</option>
+          <option value="corporate">Corporate</option>
+          <option value="synthwave">Synthwave</option>
+          <option value="cyberpunk">Cyberpunk</option>
+          <option value="emerald">Emerald</option>
+          <option value="cupcake">Cupcake</option>
+        </select>
+      </div>
+
+      <!-- NOTIFICACIONES CON INDICADOR -->
+      <button class="btn btn-ghost btn-circle btn-sm" aria-label="Notificaciones">
+        <div class="indicator">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+          <span class="badge badge-xs badge-secondary indicator-item"></span>
+        </div>
+      </button>
+
+      <!-- AVATAR DROPDOWN -->
+      <div class="avatar">
+        <div class="w-8 rounded-full ring-2 ring-primary ring-offset-base-100 ring-offset-2">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100" alt="Usuario" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="container mx-auto px-4 py-8 flex-1 max-w-7xl space-y-6">
+
+    <!-- BREADCRUMBS SEMÁNTICOS -->
+    <div class="breadcrumbs text-xs opacity-75">
+      <ul>
+        <li><a class="text-primary font-bold">Workspace</a></li>
+        <li><a>Ciclo Formativo DAW</a></li>
+        <li><a>Proyectos Integrados</a></li>
+        <li class="font-semibold text-base-content">Sprint 24 · Pasarela de Pagos</li>
+      </ul>
+    </div>
+
+    <!-- BANNER DE ALERTA DESCARTABLE -->
+    <div id="banner-alert" class="alert alert-info shadow-lg flex justify-between items-center py-3">
+      <div class="flex items-center gap-3">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <div>
+          <h4 class="font-bold text-sm">Nueva Versión del Entorno (v3.0)</h4>
+          <p class="text-xs opacity-80">Se ha habilitado el soporte para Tailwind v4 y Vite 6 en los servidores del aula.</p>
+        </div>
+      </div>
+      <button class="btn btn-ghost btn-xs text-white" onclick="document.getElementById('banner-alert').remove()">Descartar</button>
+    </div>
+
+    <!-- GRID DE TRABAJO PRINCIPAL: PROYECTOS ACTIVOS Y AUDITORÍA -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- COLUMNA 1 Y 2: TARJETAS DE PROYECTO CON GRUPOS DE AVATARES Y PROGRESO -->
+      <div class="lg:col-span-2 space-y-6">
+
+        <div class="flex justify-between items-center">
+          <h2 class="text-2xl font-black tracking-tight">Sprints en Desarrollo</h2>
+          <button class="btn btn-primary btn-sm gap-2">
+            <span>+</span> Nuevo Repositorio
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+          <!-- PROYECTO 1 -->
+          <article class="card bg-base-100 shadow-md border border-base-300 hover:shadow-xl transition-all p-5 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-3">
+                <span class="badge badge-primary font-bold text-xs">Producción</span>
+                <span class="text-xs opacity-50 font-mono">v1.8.4</span>
+              </div>
+              <h3 class="font-extrabold text-base mb-1">API GraphQL & Autenticación OAuth</h3>
+              <p class="text-xs opacity-70 line-clamp-2">
+                Microservicio en Node.js y NestJS con autenticación multifactor y tokens JWT asimétricos.
+              </p>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-base-300 space-y-3">
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span>Progreso de Tareas</span>
+                  <span class="text-primary">85%</span>
+                </div>
+                <progress class="progress progress-primary w-full" value="85" max="100"></progress>
+              </div>
+
+              <div class="flex justify-between items-center">
+                <!-- AVATAR GROUP -->
+                <div class="avatar-group -space-x-4 rtl:space-x-reverse">
+                  <div class="avatar"><div class="w-7"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100" alt="Dev" /></div></div>
+                  <div class="avatar"><div class="w-7"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100" alt="Dev" /></div></div>
+                  <div class="avatar placeholder"><div class="w-7 bg-neutral text-neutral-content text-[10px] font-bold"><span>+2</span></div></div>
+                </div>
+                <button class="btn btn-ghost btn-xs text-primary font-bold">Ver Detalles →</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROYECTO 2 -->
+          <article class="card bg-base-100 shadow-md border border-base-300 hover:shadow-xl transition-all p-5 flex flex-col justify-between">
+            <div>
+              <div class="flex justify-between items-start mb-3">
+                <span class="badge badge-secondary font-bold text-xs">Testing QA</span>
+                <span class="text-xs opacity-50 font-mono">v2.1.0-rc</span>
+              </div>
+              <h3 class="font-extrabold text-base mb-1">Frontend SPA con DaisyUI & Tailwind</h3>
+              <p class="text-xs opacity-70 line-clamp-2">
+                Panel administrativo de gestión de almacén con exportación a PDF y soporte multitema nativo.
+              </p>
+            </div>
+
+            <div class="mt-4 pt-3 border-t border-base-300 space-y-3">
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span>Progreso de Tareas</span>
+                  <span class="text-secondary">60%</span>
+                </div>
+                <progress class="progress progress-secondary w-full" value="60" max="100"></progress>
+              </div>
+
+              <div class="flex justify-between items-center">
+                <div class="avatar-group -space-x-4 rtl:space-x-reverse">
+                  <div class="avatar"><div class="w-7"><img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=100" alt="Dev" /></div></div>
+                  <div class="avatar"><div class="w-7"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100" alt="Dev" /></div></div>
+                </div>
+                <button class="btn btn-ghost btn-xs text-secondary font-bold">Ver Detalles →</button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+
+      <!-- COLUMNA 3: TIMELINE DE AUDITORÍA Y ACTIVIDAD RECIENTE -->
+      <div class="card bg-base-100 shadow-md border border-base-300 p-6 space-y-4">
+        <div class="flex justify-between items-center border-b border-base-300 pb-3">
+          <h3 class="font-extrabold text-base">Registro de Actividad (Git)</h3>
+          <span class="badge badge-ghost badge-sm text-[10px]">En vivo</span>
+        </div>
+
+        <!-- DAISYUI TIMELINE VERTICAL COMPACTO -->
+        <ul class="timeline timeline-vertical timeline-compact text-xs">
+          <li>
+            <div class="timeline-middle text-success">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            </div>
+            <div class="timeline-end timeline-box">
+              <span class="font-bold text-primary">Despliegue #149</span> completado con éxito a las 13:10.
+            </div>
+            <hr class="bg-success"/>
+          </li>
+          <li>
+            <hr class="bg-success"/>
+            <div class="timeline-middle text-primary">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+            </div>
+            <div class="timeline-end timeline-box">
+              <span class="font-bold">Merge branch 'feat/auth'</span> por Alejandro Ruiz.
+            </div>
+            <hr class="bg-primary"/>
+          </li>
+          <li>
+            <hr class="bg-primary"/>
+            <div class="timeline-middle text-warning">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+            </div>
+            <div class="timeline-end timeline-box">
+              <span class="font-bold text-warning">Alerta SonarQube:</span> 2 vulnerabilidades detectadas.
+            </div>
+          </li>
+        </ul>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="p-4 bg-base-100 text-center text-xs opacity-60 border-t border-base-300">
+    Proyecto 05: Plataforma SaaS Multitema · DaisyUI 4.x
+  </footer>
+
+  <script>
+    function changeTheme(themeName) {
+      document.documentElement.setAttribute('data-theme', themeName);
+      localStorage.setItem('saved-theme-daisy', themeName);
+    }
+
+    // Atajo de teclado Cmd+K o Ctrl+K
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        document.getElementById('global-search').focus();
+      }
+    });
+
+    // Cargar tema guardado si existe
+    const savedTheme = localStorage.getItem('saved-theme-daisy');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      document.getElementById('theme-selector').value = savedTheme;
+    }
+  </script>
+</body>
+</html>
